@@ -1,17 +1,36 @@
 name: "Robustez-Predicao-Genomica-n-p"
 output_dir: ../docs
+
 navbar:
-  title: "Robustez-Predicao-Genomica-n-p"
+  title: "Robustez da Predição Genômica"
+
   left:
-  - text: Home
+  - text: "Início"
     href: index.html
-  - text: About
-    href: about.html
-  - text: License
+
+  - text: "Dados e desenho"
+    href: 01_dados_desenho.html
+
+  - text: "GBLUP-ADE"
+    href: 02_gblup.html
+
+  - text: "Aprendizado de máquina"
+    href: 03_aprendizado_maquina.html
+
+  - text: "Comparação e robustez"
+    href: 04_comparacao_robustez.html
+
+  right:
+  - text: "Sobre"
+    href: sobre.html
+
+  - text: "Licença"
     href: license.html
+
 output:
   workflowr::wflow_html:
     toc: yes
     toc_float: yes
     theme: cosmo
     highlight: textmate
+    code_folding: show

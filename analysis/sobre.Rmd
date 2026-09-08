@@ -1,0 +1,19 @@
+---
+title: "Sobre"
+author:
+  - Weverton Gomes da Costa
+date: "`r Sys.Date()`"
+site: workflowr::wflow_site
+output:
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+Este projeto foi desenvolvido como um tutorial reprodutível sobre robustez de
+métodos de predição genômica em diferentes dimensões de indivíduos (`n`) e
+marcadores (`p`).
+
+A análise combina um modelo genômico estatístico e métodos de aprendizado de
+máquina utilizando dados simulados com valores genéticos verdadeiros conhecidos.

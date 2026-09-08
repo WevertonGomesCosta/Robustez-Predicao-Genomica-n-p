@@ -1,0 +1,20 @@
+---
+title: "Dados Simulados e Desenho da Análise"
+author:
+  - Weverton Gomes da Costa
+date: "`r Sys.Date()`"
+site: workflowr::wflow_site
+output:
+  workflowr::wflow_html:
+    toc: true
+    toc_float: true
+editor_options:
+  chunk_output_type: console
+---
+
+# Objetivo
+
+Apresentar os dados simulados e definir o desenho utilizado para avaliar a
+redução do número de indivíduos (`n`) e do número de marcadores (`p`).
+
+Este módulo será desenvolvido antes do ajuste dos modelos preditivos.

@@ -1,5 +1,9 @@
 ---
-title: "License"
+title: "Licença"
+author:
+  - Weverton Gomes da Costa
+date: "`r Sys.Date()`"
+site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
     toc: false
@@ -7,15 +11,13 @@ editor_options:
   chunk_output_type: console
 ---
 
-What license are you using for your code? See [choosealicense.com][choose] for
-help deciding. It's a convention to save a file `LICENSE` in the root of your
-Git repo that contains the license text.
+Este material está licenciado sob a licença Creative Commons
+Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).
 
-What license are you using for the written content on your site? It is
-traditional to choose a [Creative Commons][cc] license for this type of content.
+O material pode ser compartilhado e adaptado desde que seja atribuída a autoria,
+não seja utilizado para fins comerciais e trabalhos derivados sejam distribuídos
+sob a mesma licença.
 
-[choose]: https://choosealicense.com/
-[cc]: https://creativecommons.org/choose/
+Os termos completos estão disponíveis em:
 
-How should others cite your work? It's a convention to save a file `CITATION`
-in the root of your Git repo that contains the citation information.
+<https://creativecommons.org/licenses/by-nc-sa/4.0/>

@@ -1,3 +1,23 @@
-# Classify R Markdown files as R code for GitHub language statistics
-# https://github.com/github-linguist/linguist/blob/master/docs/overrides.md
-*.[Rr]md linguist-language=R
+# Arquivos de texto
+* text=auto
+
+# R e documentação
+*.[Rr]md text eol=lf linguist-language=R
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.R text eol=lf
+*.Rproj text eol=lf
+
+# Dados textuais produzidos pelo GENES
+*.txt text eol=lf
+*.dat text eol=lf
+
+# Arquivos binários
+*.rds binary
+*.RData binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tif binary
+*.tiff binary

@@ -1,0 +1,19 @@
+---
+title: "Comparação dos Métodos e Robustez"
+author:
+  - Weverton Gomes da Costa
+date: "`r Sys.Date()`"
+site: workflowr::wflow_site
+output:
+  workflowr::wflow_html:
+    toc: true
+    toc_float: true
+editor_options:
+  chunk_output_type: console
+---
+
+# Objetivo
+
+Comparar o desempenho preditivo dos métodos e avaliar sua robustez diante da
+redução do número de indivíduos (`n`), do número de marcadores (`p`) e de ambos
+simultaneamente.

@@ -1,5 +1,8 @@
 ---
-title: "Home"
+title: "Robustez da Predição Genômica em Diferentes Dimensões de n e p"
+author:
+  - Weverton Gomes da Costa
+date: "`r Sys.Date()`"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
@@ -8,4 +11,43 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+# Visão geral
+
+Este projeto avalia a robustez de métodos estatísticos e de aprendizado de
+máquina para predição genômica quando o número de indivíduos (`n`) e o número de
+marcadores (`p`) são reduzidos.
+
+As análises utilizam dados simulados previamente gerados no software GENES para
+uma população F2 com 1.000 indivíduos e 4.010 marcadores.
+
+São consideradas seis características com diferentes arquiteturas genéticas.
+
+## Pergunta científica
+
+O objetivo é determinar como a redução de indivíduos e marcadores afeta o
+desempenho preditivo dos métodos e identificar quais abordagens mantêm maior
+estabilidade quando a quantidade de informação disponível diminui.
+
+## Métodos
+
+O **GBLUP-ADE** será utilizado como modelo estatístico de referência.
+
+O bloco de **aprendizado de máquina** será composto por:
+
+- MARS;
+- árvore de regressão;
+- Bagging;
+- Random Forest;
+- Boosting.
+
+## Fluxo do tutorial
+
+A análise é organizada em quatro módulos:
+
+1. [Dados e desenho](01_dados_desenho.html)
+2. [GBLUP-ADE](02_gblup.html)
+3. [Aprendizado de máquina](03_aprendizado_maquina.html)
+4. [Comparação e robustez](04_comparacao_robustez.html)
+
+Cada módulo apresenta a fundamentação necessária, a implementação em R e a
+interpretação dos resultados produzidos.
