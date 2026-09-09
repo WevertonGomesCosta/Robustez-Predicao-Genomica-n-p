@@ -14,7 +14,573 @@ editor_options:
 
 # Objetivo
 
-Apresentar os dados simulados e definir o desenho utilizado para avaliar a
-redução do número de indivíduos (`n`) e do número de marcadores (`p`).
+Apresentar os dados simulados utilizados no projeto e definir o desenho comum
+que será empregado pelos métodos de predição genômica.
 
-Este módulo será desenvolvido antes do ajuste dos modelos preditivos.
+A primeira etapa do projeto mantém os 1.000 indivíduos disponíveis e avalia a
+redução do número de marcadores (`p`). Os subconjuntos de marcadores serão
+definidos posteriormente a partir dos rankings de importância produzidos pelos
+modelos usando exclusivamente os indivíduos de treinamento.
+
+Neste módulo são definidos:
+
+- os dados fenotípicos e genotípicos;
+- os valores genéticos verdadeiros;
+- os seis cenários simulados;
+- o mapa genético;
+- os níveis de redução de `p`;
+- uma única validação cruzada de cinco folds, fixa e comum a todos os métodos.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  cache = FALSE
+)
+
+options(stringsAsFactors = FALSE)
+```
+
+# 1. Dados simulados
+
+Os dados foram previamente simulados no software GENES para uma população F2
+com 1.000 indivíduos e 4.010 marcadores distribuídos em 10 grupos de ligação.
+
+Cinco arquivos são utilizados diretamente nesta análise:
+
+- `DG#gen_F2_Vfen.txt`: fenótipos;
+- `DG#gen_F2_Vgen.dat`: valores genéticos verdadeiros;
+- `genoma_mapa.txt`: genótipos;
+- `genoma.txt`: mapa genético;
+- `controlegenetico#1.dat`: parâmetros dos seis cenários e posições dos QTL.
+
+Os demais arquivos originais são preservados em `data/dados_simulados/`, mas
+não são necessários para construir o objeto analítico utilizado pelos modelos.
+
+## 1.1 Fenótipos, valores genéticos e genótipos
+
+```{r leitura-dados}
+dados_dir <- "data/dados_simulados"
+
+fenotipo <- as.matrix(
+  read.table(
+    file.path(dados_dir, "DG#gen_F2_Vfen.txt"),
+    header = FALSE
+  )
+)
+
+valor_genetico <- as.matrix(
+  read.table(
+    file.path(dados_dir, "DG#gen_F2_Vgen.dat"),
+    header = FALSE
+  )
+)
+
+colnames(fenotipo) <- paste0("C", seq_len(ncol(fenotipo)))
+colnames(valor_genetico) <- colnames(fenotipo)
+
+n_individuos <- nrow(fenotipo)
+n_marcadores <- 4010L
+
+valores_genotipos <- scan(
+  file.path(dados_dir, "genoma_mapa.txt"),
+  what = integer(),
+  quiet = TRUE
+)
+
+stopifnot(
+  n_individuos == 1000L,
+  ncol(fenotipo) == 6L,
+  identical(dim(fenotipo), dim(valor_genetico)),
+  !anyNA(fenotipo),
+  !anyNA(valor_genetico),
+  length(valores_genotipos) == n_marcadores * n_individuos
+)
+
+genotipo_012 <- matrix(
+  valores_genotipos,
+  nrow = n_marcadores,
+  ncol = n_individuos,
+  byrow = TRUE
+)
+
+genotipo_012 <- t(genotipo_012)
+
+stopifnot(
+  identical(dim(genotipo_012), c(1000L, 4010L)),
+  identical(sort(unique(as.vector(genotipo_012))), 0:2)
+)
+
+genotipo <- genotipo_012 - 1L
+
+ids <- seq_len(n_individuos)
+id_individuo <- sprintf("ID%04d", ids)
+id_marcador <- paste0("M", seq_len(n_marcadores))
+
+rownames(fenotipo) <- id_individuo
+rownames(valor_genetico) <- id_individuo
+rownames(genotipo) <- id_individuo
+colnames(genotipo) <- id_marcador
+
+rm(valores_genotipos, genotipo_012)
+invisible(gc())
+```
+
+A matriz genotípica original apresenta os estados `0`, `1` e `2`. Para a
+modelagem, esses estados são recodificados como `-1`, `0` e `1`.
+
+```{r resumo-dados}
+resumo_dados <- data.frame(
+  Objeto = c(
+    "Fenótipos",
+    "Valores genéticos verdadeiros",
+    "Genótipos"
+  ),
+  Individuos = c(
+    nrow(fenotipo),
+    nrow(valor_genetico),
+    nrow(genotipo)
+  ),
+  Colunas = c(
+    ncol(fenotipo),
+    ncol(valor_genetico),
+    ncol(genotipo)
+  ),
+  Uso = c(
+    "Resposta utilizada no treinamento",
+    "Avaliação preditiva após a predição",
+    "Preditores genômicos"
+  )
+)
+
+knitr::kable(
+  resumo_dados,
+  caption = "Estrutura dos principais objetos analíticos",
+  row.names = FALSE
+)
+```
+
+O valor genético verdadeiro não será utilizado na formação dos folds, na
+seleção de marcadores ou no ajuste dos modelos. Ele será acessado somente para
+avaliar as predições produzidas para indivíduos mantidos fora do treinamento.
+
+# 2. Mapa genético
+
+O mapa genético é lido diretamente do arquivo produzido pelo GENES. A ordem das
+linhas corresponde à ordem dos marcadores da matriz genotípica.
+
+```{r mapa-genetico}
+mapa_bruto <- read.table(
+  file.path(dados_dir, "genoma.txt"),
+  header = FALSE,
+  sep = ",",
+  skip = 12,
+  fill = TRUE,
+  strip.white = TRUE,
+  fileEncoding = "latin1",
+  stringsAsFactors = FALSE
+)
+
+mapa_bruto <- mapa_bruto[, 1:5]
+
+mapa <- data.frame(
+  marcador = seq_len(nrow(mapa_bruto)),
+  id_marcador = paste0("M", seq_len(nrow(mapa_bruto))),
+  LG = as.integer(mapa_bruto[, 1]),
+  marcador_no_LG = as.integer(mapa_bruto[, 2]),
+  posicao_cM = as.numeric(mapa_bruto[, 5]),
+  stringsAsFactors = FALSE
+)
+
+stopifnot(
+  nrow(mapa) == n_marcadores,
+  identical(sort(unique(mapa$LG)), 1:10),
+  all(table(mapa$LG) == 401L)
+)
+
+resumo_mapa <- do.call(
+  rbind,
+  lapply(
+    split(mapa, mapa$LG),
+    function(x) {
+      data.frame(
+        LG = x$LG[1],
+        Marcadores = nrow(x),
+        Inicio_cM = min(x$posicao_cM),
+        Fim_cM = max(x$posicao_cM),
+        Espacamento_cM = unique(diff(x$posicao_cM))[1]
+      )
+    }
+  )
+)
+
+rownames(resumo_mapa) <- NULL
+
+knitr::kable(
+  resumo_mapa,
+  caption = "Estrutura do mapa genético por grupo de ligação",
+  row.names = FALSE
+)
+```
+
+Cada grupo de ligação contém 401 marcadores distribuídos de 0 a 200 cM, com
+espaçamento de 0,5 cM, totalizando 4.010 marcadores.
+
+# 3. Cenários genéticos
+
+O arquivo de controle registra os parâmetros utilizados na simulação. Cada bloco
+corresponde a uma das seis características analisadas.
+
+```{r cenarios}
+controle_linhas <- readLines(
+  file.path(dados_dir, "controlegenetico#1.dat"),
+  warn = FALSE,
+  encoding = "latin1"
+)
+
+inicio_blocos <- grep("^Variavel", controle_linhas)
+
+valor_campo <- function(linha) {
+  partes <- strsplit(linha, ",", fixed = TRUE)[[1]]
+  as.numeric(trimws(partes[length(partes)]))
+}
+
+qtl_por_cenario <- setNames(
+  lapply(
+    inicio_blocos,
+    function(inicio) {
+      scan(
+        text = controle_linhas[inicio + 3L],
+        what = integer(),
+        quiet = TRUE
+      )
+    }
+  ),
+  paste0("C", seq_along(inicio_blocos))
+)
+
+controle_cenarios <- do.call(
+  rbind,
+  lapply(
+    seq_along(inicio_blocos),
+    function(i) {
+      inicio <- inicio_blocos[i]
+
+      data.frame(
+        cenario = paste0("C", i),
+        variavel = as.integer(valor_campo(controle_linhas[inicio])),
+        total_loci = as.integer(valor_campo(controle_linhas[inicio + 1L])),
+        n_qtl = as.integer(valor_campo(controle_linhas[inicio + 2L])),
+        gmd = valor_campo(controle_linhas[inicio + 5L]),
+        modelo = as.integer(valor_campo(controle_linhas[inicio + 6L])),
+        h2 = valor_campo(controle_linhas[inicio + 7L]),
+        constante = valor_campo(controle_linhas[inicio + 8L]),
+        escala = valor_campo(controle_linhas[inicio + 9L]),
+        CV = valor_campo(controle_linhas[inicio + 10L])
+      )
+    }
+  )
+)
+
+rownames(controle_cenarios) <- NULL
+
+stopifnot(
+  length(inicio_blocos) == 6L,
+  all(controle_cenarios$total_loci == 4010L),
+  all(controle_cenarios$n_qtl == lengths(qtl_por_cenario)),
+  all(unlist(qtl_por_cenario) %in% seq_len(n_marcadores))
+)
+
+knitr::kable(
+  controle_cenarios[
+    ,
+    c(
+      "cenario",
+      "n_qtl",
+      "h2",
+      "gmd",
+      "modelo",
+      "constante",
+      "escala",
+      "CV"
+    )
+  ],
+  caption = "Parâmetros dos seis cenários simulados",
+  row.names = FALSE,
+  digits = 2
+)
+```
+
+Os seis cenários combinam diferentes níveis de complexidade genética e
+herdabilidade:
+
+- C1: 8 QTL e $h^2=0{,}7$;
+- C2: 40 QTL e $h^2=0{,}7$;
+- C3: 80 QTL e $h^2=0{,}5$;
+- C4: 120 QTL e $h^2=0{,}5$;
+- C5: 240 QTL e $h^2=0{,}3$;
+- C6: 480 QTL e $h^2=0{,}3$.
+
+As posições verdadeiras dos QTL são armazenadas no objeto de desenho para
+avaliações posteriores, mas não participam da seleção de marcadores.
+
+# 4. Redução inicial do número de marcadores
+
+Nesta primeira etapa do projeto, todos os 1.000 indivíduos são mantidos. A
+dimensão reduzida é apenas `p`.
+
+O conjunto completo de 4.010 marcadores representa a condição de referência.
+Os demais tamanhos correspondem aos percentuais de marcadores mais importantes
+segundo cada método.
+
+```{r niveis-p}
+proporcoes_p <- c(1, 0.50, 0.25, 0.10, 0.05, 0.01)
+
+niveis_p <- data.frame(
+  proporcao = proporcoes_p,
+  percentual = paste0(proporcoes_p * 100, "%"),
+  n_marcadores = floor(n_marcadores * proporcoes_p + 0.5),
+  stringsAsFactors = FALSE
+)
+
+stopifnot(
+  identical(
+    niveis_p$n_marcadores,
+    c(4010, 2005, 1003, 401, 201, 40)
+  )
+)
+
+knitr::kable(
+  niveis_p,
+  caption = "Níveis de redução do número de marcadores",
+  row.names = FALSE
+)
+```
+
+O M01 não seleciona marcadores. Para cada cenário, método e fold, o modelo será
+primeiro ajustado com os 4.010 marcadores disponíveis no treinamento. O ranking
+de importância produzido nesse ajuste definirá os painéis reduzidos.
+
+Assim, para um mesmo ranking:
+
+$$
+P_{1\%}
+\subset
+P_{5\%}
+\subset
+P_{10\%}
+\subset
+P_{25\%}
+\subset
+P_{50\%}
+\subset
+P_{100\%}.
+$$
+
+Os rankings serão específicos para cada combinação de cenário, método e fold.
+
+# 5. Validação cruzada comum
+
+Todos os métodos utilizarão a mesma partição dos indivíduos. Será empregada uma
+única validação cruzada de cinco folds.
+
+A formação dos folds depende somente do identificador dos indivíduos e de uma
+semente fixa. Fenótipos, valores genéticos verdadeiros, genótipos e posições de
+QTL não participam da geração das partições.
+
+```{r validacao-cruzada}
+SEED_DESENHO <- 20260908L
+N_FOLDS <- 5L
+
+set.seed(SEED_DESENHO)
+
+ordem_individuos <- sample(
+  ids,
+  size = length(ids),
+  replace = FALSE
+)
+
+fold_na_ordem <- rep(
+  seq_len(N_FOLDS),
+  length.out = n_individuos
+)
+
+fold_individuo <- integer(n_individuos)
+fold_individuo[ordem_individuos] <- fold_na_ordem
+
+atribuicao_folds <- data.frame(
+  id = ids,
+  individuo = id_individuo,
+  fold = fold_individuo,
+  stringsAsFactors = FALSE
+)
+
+folds <- setNames(
+  lapply(
+    seq_len(N_FOLDS),
+    function(k) {
+      list(
+        fold = k,
+        treino = ids[fold_individuo != k],
+        teste = ids[fold_individuo == k]
+      )
+    }
+  ),
+  paste0("Fold", seq_len(N_FOLDS))
+)
+
+stopifnot(
+  all(table(atribuicao_folds$fold) == 200L),
+  all(vapply(folds, function(x) length(x$treino) == 800L, logical(1))),
+  all(vapply(folds, function(x) length(x$teste) == 200L, logical(1))),
+  all(vapply(
+    folds,
+    function(x) length(intersect(x$treino, x$teste)) == 0L,
+    logical(1)
+  ))
+)
+
+resumo_folds <- data.frame(
+  Fold = seq_len(N_FOLDS),
+  Treinamento = vapply(folds, function(x) length(x$treino), integer(1)),
+  Teste = vapply(folds, function(x) length(x$teste), integer(1))
+)
+
+knitr::kable(
+  resumo_folds,
+  caption = "Tamanho dos conjuntos de treinamento e teste",
+  row.names = FALSE
+)
+```
+
+Cada indivíduo participa uma vez do conjunto de teste e quatro vezes do conjunto
+de treinamento.
+
+Para qualquer cenário e método, o fold $k$ utilizará exatamente os mesmos
+800 indivíduos para treinamento e os mesmos 200 indivíduos para avaliação.
+
+# 6. Preparação para a futura redução de n
+
+A redução de `n` não faz parte da etapa inicial. Entretanto, a permutação
+`ordem_individuos` é armazenada para que a expansão futura do projeto possa
+construir tamanhos amostrais aninhados sem gerar uma nova ordem de indivíduos.
+
+Dessa forma, a futura análise de `n x p` poderá reutilizar o mesmo desenho
+experimental em vez de redefinir as amostras após os primeiros resultados.
+
+# 7. Objeto canônico do desenho
+
+Os objetos necessários aos módulos seguintes são reunidos em um único arquivo.
+O GBLUP e os métodos de aprendizado de máquina deverão ler este objeto em vez de
+repetir a preparação dos dados e a geração dos folds.
+
+```{r salvar-desenho}
+protocolo <- list(
+  etapa = "reducao_p_inicial",
+  seed_desenho = SEED_DESENHO,
+  n_individuos = n_individuos,
+  p_total = n_marcadores,
+  n_folds = N_FOLDS,
+  unidade_ranking = c("cenario", "metodo", "fold"),
+  importancia_somente_treinamento = TRUE,
+  paineis_p_aninhados = TRUE,
+  valor_genetico_somente_avaliacao = TRUE
+)
+
+arquivos_fonte <- c(
+  fenotipo = "DG#gen_F2_Vfen.txt",
+  valor_genetico = "DG#gen_F2_Vgen.dat",
+  genotipo = "genoma_mapa.txt",
+  mapa = "genoma.txt",
+  controle = "controlegenetico#1.dat"
+)
+
+desenho_analise <- list(
+  versao = "M01-p-v1",
+  protocolo = protocolo,
+  arquivos_fonte = arquivos_fonte,
+  fenotipo = fenotipo,
+  valor_genetico = valor_genetico,
+  genotipo = genotipo,
+  mapa = mapa,
+  controle_cenarios = controle_cenarios,
+  qtl_por_cenario = qtl_por_cenario,
+  niveis_p = niveis_p,
+  ordem_individuos = ordem_individuos,
+  atribuicao_folds = atribuicao_folds,
+  folds = folds
+)
+
+dir.create(
+  "output/dados_desenho",
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+
+arquivo_desenho <- "output/dados_desenho/desenho_analise.rds"
+
+saveRDS(
+  desenho_analise,
+  arquivo_desenho,
+  compress = "gzip"
+)
+```
+
+O objeto salvo contém os dados preparados, o mapa, os cenários, os QTL
+verdadeiros, os níveis de `p` e a validação cruzada comum.
+
+```{r resumo-objeto}
+resumo_objeto <- data.frame(
+  Componente = c(
+    "Fenótipo",
+    "Valor genético verdadeiro",
+    "Genótipo",
+    "Mapa",
+    "Cenários",
+    "Níveis de p",
+    "Folds"
+  ),
+  Estrutura = c(
+    paste(dim(desenho_analise$fenotipo), collapse = " x "),
+    paste(dim(desenho_analise$valor_genetico), collapse = " x "),
+    paste(dim(desenho_analise$genotipo), collapse = " x "),
+    paste(dim(desenho_analise$mapa), collapse = " x "),
+    nrow(desenho_analise$controle_cenarios),
+    nrow(desenho_analise$niveis_p),
+    length(desenho_analise$folds)
+  ),
+  stringsAsFactors = FALSE
+)
+
+knitr::kable(
+  resumo_objeto,
+  caption = "Conteúdo principal do objeto canônico do M01",
+  row.names = FALSE
+)
+```
+
+# 8. Síntese do desenho inicial
+
+A etapa inicial do projeto fica definida por:
+
+$$
+n=1000
+$$
+
+e
+
+$$
+p\in\{4010,2005,1003,401,201,40\}.
+$$
+
+A avaliação será realizada por uma única validação cruzada de cinco folds,
+mantendo 800 indivíduos para treinamento e 200 para teste em cada fold.
+
+Os mesmos folds serão usados por todos os métodos e cenários. A seleção dos
+marcadores será realizada posteriormente dentro de cada conjunto de treinamento,
+sem acesso ao fenótipo do conjunto de teste, ao valor genético verdadeiro ou às
+posições conhecidas dos QTL.
+
+Esse objeto constitui a entrada comum dos módulos de GBLUP e aprendizado de
+máquina.
