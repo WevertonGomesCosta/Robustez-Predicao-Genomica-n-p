@@ -7,30 +7,29 @@ navbar:
   left:
   - text: "Início"
     href: index.html
-
   - text: "Dados e desenho"
     href: 01_dados_desenho.html
-
   - text: "GBLUP"
     href: 02_gblup.html
-
   - text: "Aprendizado de máquina"
     href: 03_aprendizado_maquina.html
-
   - text: "Comparação e robustez"
     href: 04_comparacao_robustez.html
 
   right:
   - text: "Sobre"
     href: sobre.html
-
   - text: "Licença"
     href: license.html
+  - icon: fa-github
+    href: https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p
 
 output:
   workflowr::wflow_html:
     toc: yes
+    toc_depth: 3
     toc_float: yes
     theme: cosmo
     highlight: textmate
     code_folding: show
+    code_download: true

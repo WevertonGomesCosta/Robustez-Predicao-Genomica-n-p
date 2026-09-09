@@ -11,9 +11,9 @@
 
 <meta name="author" content="Weverton Gomes da Costa" />
 
-<meta name="date" content="2026-09-08" />
+<meta name="date" content="2026-09-09" />
 
-<title>Dados Simulados e Desenho da Análise</title>
+<title>1. Dados Simulados e Desenho da Análise</title>
 
 <script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -36,8 +36,13 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -72,6 +77,11 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
 
 
 
@@ -357,6 +367,12 @@ div.tocify {
 <li>
   <a href="license.html">Licença</a>
 </li>
+<li>
+  <a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -369,14 +385,17 @@ div.tocify {
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
 </ul>
 </div>
 
 
 
-<h1 class="title toc-ignore">Dados Simulados e Desenho da Análise</h1>
+<h1 class="title toc-ignore">1. Dados Simulados e Desenho da
+Análise</h1>
 <h4 class="author">Weverton Gomes da Costa</h4>
-<h4 class="date">2026-09-08</h4>
+<h4 class="date">2026-09-09</h4>
 
 </div>
 
@@ -384,7 +403,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -395,8 +414,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -405,13 +424,13 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-09-08
+<strong>Last updated:</strong> 2026-09-09
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong>
@@ -435,18 +454,21 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
@@ -537,15 +559,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptree716ee8bce025045ae4fe47f3a720085370648a30targetblank716ee8ba">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreeeb6c91a5d5ee4205be89774a8a9b6e9cb9e43e63targetblankeb6c91aa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/716ee8bce025045ae4fe47f3a720085370648a30" target="_blank">716ee8b</a>
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/eb6c91a5d5ee4205be89774a8a9b6e9cb9e43e63" target="_blank">eb6c91a</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptree716ee8bce025045ae4fe47f3a720085370648a30targetblank716ee8ba"
+id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreeeb6c91a5d5ee4205be89774a8a9b6e9cb9e43e63targetblankeb6c91aa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -555,7 +577,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/716ee8bce025045ae4fe47f3a720085370648a30" target="_blank">716ee8b</a>.
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/eb6c91a5d5ee4205be89774a8a9b6e9cb9e43e63" target="_blank">eb6c91a</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -571,7 +593,15 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
+    Ignored:    .local/
     Ignored:    renv/library/
+    Ignored:    renv/staging/
+
+Unstaged changes:
+    Modified:   _dependencies.R
+    Modified:   analysis/01_dados_desenho.Rmd
+    Modified:   analysis/_site.yml
+    Modified:   renv.lock
 
 </code></pre>
 <p>
@@ -616,6 +646,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/6b24a8bbccca2d6628ae9045afc72dfc1e3aa44f/docs/01_dados_desenho.html" target="_blank">6b24a8b</a>
+</td>
+<td>
+WevertonGomesCosta
+</td>
+<td>
+2026-09-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -693,79 +740,185 @@ Configure initial tutorial structure and simulated data
 </div>
 <div id="objetivo" class="section level1">
 <h1>Objetivo</h1>
-<p>Apresentar os dados simulados utilizados no projeto e definir o
-desenho comum que será empregado pelos métodos de predição genômica.</p>
-<p>A primeira etapa do projeto mantém os 1.000 indivíduos disponíveis e
-avalia a redução do número de marcadores (<code>p</code>). Os
-subconjuntos de marcadores serão definidos posteriormente a partir dos
-rankings de importância produzidos pelos modelos usando exclusivamente
-os indivíduos de treinamento.</p>
-<p>Neste módulo são definidos:</p>
+<p>Este é o primeiro módulo do tutorial. Antes de ajustar qualquer
+modelo de predição genômica, precisamos conhecer os dados e definir uma
+regra de comparação que seja exatamente a mesma para todos os
+métodos.</p>
+<p>A primeira fase do projeto mantém os 1.000 indivíduos disponíveis e
+investiga somente a redução do número de marcadores, representado por
+<code>p</code>. Em outras palavras, queremos verificar quanto da
+capacidade preditiva é preservada quando passamos de 4.010 SNPs para
+painéis progressivamente menores.</p>
+<p>Ao final desta página teremos um único objeto, salvo em
+<code>output/dados_desenho/desenho_analise.rds</code>, contendo:</p>
 <ul>
-<li>os dados fenotípicos e genotípicos;</li>
-<li>os valores genéticos verdadeiros;</li>
-<li>os seis cenários simulados;</li>
-<li>o mapa genético;</li>
-<li>os níveis de redução de <code>p</code>;</li>
-<li>uma única validação cruzada de cinco folds, fixa e comum a todos os
-métodos.</li>
+<li>fenótipos;</li>
+<li>valores genéticos verdadeiros;</li>
+<li>genótipos;</li>
+<li>mapa genético;</li>
+<li>seis cenários simulados;</li>
+<li>posições verdadeiras dos QTL;</li>
+<li>níveis de redução de <code>p</code>;</li>
+<li>cinco folds fixos de validação cruzada.</li>
 </ul>
+<p>Esse objeto será a entrada comum dos módulos de GBLUP e aprendizado
+de máquina.</p>
 </div>
-<div id="dados-simulados" class="section level1">
-<h1>1. Dados simulados</h1>
+<div id="conhecendo-os-dados-simulados" class="section level1">
+<h1>1. Conhecendo os dados simulados</h1>
 <p>Os dados foram previamente simulados no software GENES para uma
-população F2 com 1.000 indivíduos e 4.010 marcadores distribuídos em 10
-grupos de ligação.</p>
-<p>Cinco arquivos são utilizados diretamente nesta análise:</p>
+população F2. Uma população F2 é obtida após o cruzamento entre
+indivíduos da geração F1 e é frequentemente utilizada em estudos
+genéticos porque apresenta segregação dos alelos herdados dos
+genitores.</p>
+<p>Neste conjunto existem:</p>
 <ul>
-<li><code>DG#gen_F2_Vfen.txt</code>: fenótipos;</li>
-<li><code>DG#gen_F2_Vgen.dat</code>: valores genéticos verdadeiros;</li>
-<li><code>genoma_mapa.txt</code>: genótipos;</li>
-<li><code>genoma.txt</code>: mapa genético;</li>
-<li><code>controlegenetico#1.dat</code>: parâmetros dos seis cenários e
-posições dos QTL.</li>
+<li>1.000 indivíduos;</li>
+<li>4.010 SNPs;</li>
+<li>10 grupos de ligação;</li>
+<li>6 características simuladas.</li>
 </ul>
-<p>Os demais arquivos originais são preservados em
-<code>data/dados_simulados/</code>, mas não são necessários para
-construir o objeto analítico utilizado pelos modelos.</p>
-<div id="fenótipos-valores-genéticos-e-genótipos"
-class="section level2">
-<h2>1.1 Fenótipos, valores genéticos e genótipos</h2>
+<p>Um <strong>SNP</strong> é uma posição do genoma em que os indivíduos
+podem apresentar diferentes variantes de DNA. Neste tutorial, os SNPs
+serão utilizados como preditores dos valores genéticos.</p>
+<p>Cinco arquivos da pasta <code>data/dados_simulados/</code> são
+utilizados diretamente:</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Arquivo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>DG#gen_F2_Vfen.txt</code></td>
+<td>fenótipos observados</td>
+</tr>
+<tr class="even">
+<td><code>DG#gen_F2_Vgen.dat</code></td>
+<td>valores genéticos verdadeiros</td>
+</tr>
+<tr class="odd">
+<td><code>genoma_mapa.txt</code></td>
+<td>genótipos dos 4.010 SNPs</td>
+</tr>
+<tr class="even">
+<td><code>genoma.txt</code></td>
+<td>mapa genético</td>
+</tr>
+<tr class="odd">
+<td><code>controlegenetico#1.dat</code></td>
+<td>parâmetros dos cenários e posições dos QTL</td>
+</tr>
+</tbody>
+</table>
+<p>A tabela identifica a função de cada arquivo antes da leitura. Os
+demais arquivos originais são preservados para rastreabilidade, mas não
+são necessários para construir o objeto analítico usado nesta primeira
+fase.</p>
+<div id="definindo-a-pasta-dos-arquivos" class="section level2">
+<h2>1.1 Definindo a pasta dos arquivos</h2>
+<p>Primeiro indicamos onde estão os arquivos simulados. Manter esse
+caminho em um único objeto facilita a leitura dos arquivos seguintes sem
+repetir o nome da pasta.</p>
 <pre class="r"><code>dados_dir &lt;- &quot;data/dados_simulados&quot;
 
-fenotipo &lt;- as.matrix(
+stopifnot(
+  dir.exists(dados_dir)
+)</code></pre>
+<p>O <code>stopifnot()</code> interrompe a execução se a pasta não
+existir. Esse tipo de verificação ajuda a identificar rapidamente
+problemas de estrutura ao reproduzir o tutorial em outro computador.</p>
+</div>
+<div id="lendo-os-fenótipos" class="section level2">
+<h2>1.2 Lendo os fenótipos</h2>
+<p>O fenótipo é a característica observada em cada indivíduo. O arquivo
+possui seis colunas, uma para cada cenário genético simulado. Depois da
+leitura, nomeamos essas colunas como <code>C1</code> até
+<code>C6</code>.</p>
+<pre class="r"><code>fenotipo &lt;- as.matrix(
   read.table(
-    file.path(dados_dir, &quot;DG#gen_F2_Vfen.txt&quot;),
+    file.path(
+      dados_dir,
+      &quot;DG#gen_F2_Vfen.txt&quot;
+    ),
     header = FALSE
   )
 )
 
-valor_genetico &lt;- as.matrix(
-  read.table(
-    file.path(dados_dir, &quot;DG#gen_F2_Vgen.dat&quot;),
-    header = FALSE
+colnames(fenotipo) &lt;- paste0(
+  &quot;C&quot;,
+  seq_len(
+    ncol(fenotipo)
   )
 )
-
-colnames(fenotipo) &lt;- paste0(&quot;C&quot;, seq_len(ncol(fenotipo)))
-colnames(valor_genetico) &lt;- colnames(fenotipo)
 
 n_individuos &lt;- nrow(fenotipo)
-n_marcadores &lt;- 4010L
+
+stopifnot(
+  n_individuos == 1000L,
+  ncol(fenotipo) == 6L,
+  !anyNA(fenotipo)
+)</code></pre>
+<p>Ao final do bloco, <code>fenotipo</code> é uma matriz com 1.000
+linhas e seis colunas. Cada linha representa um indivíduo e cada coluna
+representa uma característica simulada.</p>
+</div>
+<div id="lendo-os-valores-genéticos-verdadeiros" class="section level2">
+<h2>1.3 Lendo os valores genéticos verdadeiros</h2>
+<p>Como os dados são simulados, conhecemos também o valor genético
+verdadeiro de cada indivíduo. Essa informação é muito útil para avaliar
+as predições, mas não pode ser usada para treinar os modelos ou
+selecionar marcadores.</p>
+<pre class="r"><code>valor_genetico &lt;- as.matrix(
+  read.table(
+    file.path(
+      dados_dir,
+      &quot;DG#gen_F2_Vgen.dat&quot;
+    ),
+    header = FALSE
+  )
+)
+
+colnames(valor_genetico) &lt;- colnames(fenotipo)
+
+stopifnot(
+  identical(
+    dim(fenotipo),
+    dim(valor_genetico)
+  ),
+  !anyNA(valor_genetico)
+)</code></pre>
+<p>As matrizes <code>fenotipo</code> e <code>valor_genetico</code>
+possuem exatamente a mesma dimensão. Isso garante que cada valor
+genético verdadeiro possa ser associado ao indivíduo e à característica
+correspondentes.</p>
+</div>
+<div id="lendo-e-organizando-os-genótipos" class="section level2">
+<h2>1.4 Lendo e organizando os genótipos</h2>
+<p>O arquivo genotípico contém os estados <code>0</code>, <code>1</code>
+e <code>2</code> para os 4.010 SNPs dos 1.000 indivíduos. Como o arquivo
+é armazenado de forma linear, primeiro lemos todos os valores e depois
+reconstruímos a matriz de indivíduos por marcadores.</p>
+<pre class="r"><code>n_marcadores &lt;- 4010L
 
 valores_genotipos &lt;- scan(
-  file.path(dados_dir, &quot;genoma_mapa.txt&quot;),
+  file.path(
+    dados_dir,
+    &quot;genoma_mapa.txt&quot;
+  ),
   what = integer(),
   quiet = TRUE
 )
 
 stopifnot(
-  n_individuos == 1000L,
-  ncol(fenotipo) == 6L,
-  identical(dim(fenotipo), dim(valor_genetico)),
-  !anyNA(fenotipo),
-  !anyNA(valor_genetico),
-  length(valores_genotipos) == n_marcadores * n_individuos
+  length(valores_genotipos) ==
+    n_marcadores * n_individuos
 )
 
 genotipo_012 &lt;- matrix(
@@ -778,26 +931,67 @@ genotipo_012 &lt;- matrix(
 genotipo_012 &lt;- t(genotipo_012)
 
 stopifnot(
-  identical(dim(genotipo_012), c(1000L, 4010L)),
-  identical(sort(unique(as.vector(genotipo_012))), 0:2)
-)
-
-genotipo &lt;- genotipo_012 - 1L
+  identical(
+    dim(genotipo_012),
+    c(1000L, 4010L)
+  ),
+  identical(
+    sort(
+      unique(
+        as.vector(genotipo_012)
+      )
+    ),
+    0:2
+  )
+)</code></pre>
+<p>A matriz <code>genotipo_012</code> possui 1.000 linhas e 4.010
+colunas. Portanto, cada linha representa um indivíduo e cada coluna
+representa um SNP.</p>
+</div>
+<div id="recodificando-os-snps-e-criando-identificadores"
+class="section level2">
+<h2>1.5 Recodificando os SNPs e criando identificadores</h2>
+<p>Para a modelagem, recodificamos <code>0</code>, <code>1</code> e
+<code>2</code> como <code>-1</code>, <code>0</code> e <code>1</code>.
+Essa transformação apenas muda a escala numérica usada para representar
+os três genótipos; ela não altera quais indivíduos pertencem a cada
+classe genotípica.</p>
+<p>Também criamos nomes padronizados para indivíduos e marcadores.</p>
+<pre class="r"><code>genotipo &lt;- genotipo_012 - 1L
 
 ids &lt;- seq_len(n_individuos)
-id_individuo &lt;- sprintf(&quot;ID%04d&quot;, ids)
-id_marcador &lt;- paste0(&quot;M&quot;, seq_len(n_marcadores))
+
+id_individuo &lt;- sprintf(
+  &quot;ID%04d&quot;,
+  ids
+)
+
+id_marcador &lt;- paste0(
+  &quot;M&quot;,
+  seq_len(n_marcadores)
+)
 
 rownames(fenotipo) &lt;- id_individuo
 rownames(valor_genetico) &lt;- id_individuo
 rownames(genotipo) &lt;- id_individuo
 colnames(genotipo) &lt;- id_marcador
 
-rm(valores_genotipos, genotipo_012)
-invisible(gc())</code></pre>
-<p>A matriz genotípica original apresenta os estados <code>0</code>,
-<code>1</code> e <code>2</code>. Para a modelagem, esses estados são
-recodificados como <code>-1</code>, <code>0</code> e <code>1</code>.</p>
+rm(
+  valores_genotipos,
+  genotipo_012
+)
+
+invisible(
+  gc()
+)</code></pre>
+<p>Depois dessa etapa, os genótipos estão prontos para os modelos e
+todos os objetos utilizam os mesmos identificadores de indivíduos.</p>
+</div>
+<div id="resumindo-os-objetos-principais" class="section level2">
+<h2>1.6 Resumindo os objetos principais</h2>
+<p>Agora reunimos as dimensões dos três objetos centrais. Essa tabela é
+uma conferência rápida antes de avançarmos para o mapa e o desenho
+experimental.</p>
 <pre class="r"><code>resumo_dados &lt;- data.frame(
   Objeto = c(
     &quot;Fenótipos&quot;,
@@ -821,61 +1015,111 @@ recodificados como <code>-1</code>, <code>0</code> e <code>1</code>.</p>
   )
 )
 
-knitr::kable(
+kableExtra::kbl(
   resumo_dados,
   caption = &quot;Estrutura dos principais objetos analíticos&quot;,
-  row.names = FALSE
-)</code></pre>
-<table>
-<caption>Estrutura dos principais objetos analíticos</caption>
-<colgroup>
-<col width="35%" />
-<col width="12%" />
-<col width="9%" />
-<col width="42%" />
-</colgroup>
+  align = c(
+    &quot;l&quot;,
+    &quot;r&quot;,
+    &quot;r&quot;,
+    &quot;l&quot;
+  )
+) |&gt;
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;striped&quot;,
+      &quot;hover&quot;,
+      &quot;condensed&quot;,
+      &quot;responsive&quot;
+    ),
+    full_width = FALSE
+  )</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Estrutura dos principais objetos analíticos
+</caption>
 <thead>
-<tr class="header">
-<th align="left">Objeto</th>
-<th align="right">Individuos</th>
-<th align="right">Colunas</th>
-<th align="left">Uso</th>
+<tr>
+<th style="text-align:left;">
+Objeto
+</th>
+<th style="text-align:right;">
+Individuos
+</th>
+<th style="text-align:right;">
+Colunas
+</th>
+<th style="text-align:left;">
+Uso
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Fenótipos</td>
-<td align="right">1000</td>
-<td align="right">6</td>
-<td align="left">Resposta utilizada no treinamento</td>
+<tr>
+<td style="text-align:left;">
+Fenótipos
+</td>
+<td style="text-align:right;">
+1000
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+Resposta utilizada no treinamento
+</td>
 </tr>
-<tr class="even">
-<td align="left">Valores genéticos verdadeiros</td>
-<td align="right">1000</td>
-<td align="right">6</td>
-<td align="left">Avaliação preditiva após a predição</td>
+<tr>
+<td style="text-align:left;">
+Valores genéticos verdadeiros
+</td>
+<td style="text-align:right;">
+1000
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+Avaliação preditiva após a predição
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Genótipos</td>
-<td align="right">1000</td>
-<td align="right">4010</td>
-<td align="left">Preditores genômicos</td>
+<tr>
+<td style="text-align:left;">
+Genótipos
+</td>
+<td style="text-align:right;">
+1000
+</td>
+<td style="text-align:right;">
+4010
+</td>
+<td style="text-align:left;">
+Preditores genômicos
+</td>
 </tr>
 </tbody>
 </table>
-<p>O valor genético verdadeiro não será utilizado na formação dos folds,
-na seleção de marcadores ou no ajuste dos modelos. Ele será acessado
-somente para avaliar as predições produzidas para indivíduos mantidos
-fora do treinamento.</p>
+<p>Os fenótipos e os valores genéticos verdadeiros possuem seis colunas,
+enquanto a matriz genotípica possui 4.010. O valor genético verdadeiro
+será reservado exclusivamente para avaliar as predições produzidas nos
+indivíduos de teste.</p>
 </div>
 </div>
 <div id="mapa-genético" class="section level1">
 <h1>2. Mapa genético</h1>
-<p>O mapa genético é lido diretamente do arquivo produzido pelo GENES. A
-ordem das linhas corresponde à ordem dos marcadores da matriz
-genotípica.</p>
+<p>Um grupo de ligação representa um conjunto de marcadores pertencentes
+ao mesmo segmento cromossômico simulado. O mapa informa a ordem e a
+posição dos SNPs em cada um desses grupos.</p>
+<div id="lendo-o-mapa" class="section level2">
+<h2>2.1 Lendo o mapa</h2>
+<p>O arquivo <code>genoma.txt</code> possui informações adicionais nas
+primeiras linhas. Por isso usamos <code>skip = 12</code> para começar a
+leitura diretamente na parte que contém os marcadores.</p>
 <pre class="r"><code>mapa_bruto &lt;- read.table(
-  file.path(dados_dir, &quot;genoma.txt&quot;),
+  file.path(
+    dados_dir,
+    &quot;genoma.txt&quot;
+  ),
   header = FALSE,
   sep = &quot;,&quot;,
   skip = 12,
@@ -885,381 +1129,892 @@ genotípica.</p>
   stringsAsFactors = FALSE
 )
 
-mapa_bruto &lt;- mapa_bruto[, 1:5]
+mapa_bruto &lt;- mapa_bruto[
+  ,
+  1:5
+]
 
 mapa &lt;- data.frame(
-  marcador = seq_len(nrow(mapa_bruto)),
-  id_marcador = paste0(&quot;M&quot;, seq_len(nrow(mapa_bruto))),
-  LG = as.integer(mapa_bruto[, 1]),
-  marcador_no_LG = as.integer(mapa_bruto[, 2]),
-  posicao_cM = as.numeric(mapa_bruto[, 5]),
+  marcador = seq_len(
+    nrow(mapa_bruto)
+  ),
+  id_marcador = paste0(
+    &quot;M&quot;,
+    seq_len(
+      nrow(mapa_bruto)
+    )
+  ),
+  LG = as.integer(
+    mapa_bruto[
+      ,
+      1
+    ]
+  ),
+  marcador_no_LG = as.integer(
+    mapa_bruto[
+      ,
+      2
+    ]
+  ),
+  posicao_cM = as.numeric(
+    mapa_bruto[
+      ,
+      5
+    ]
+  ),
   stringsAsFactors = FALSE
 )
 
 stopifnot(
   nrow(mapa) == n_marcadores,
-  identical(sort(unique(mapa$LG)), 1:10),
-  all(table(mapa$LG) == 401L)
-)
-
-resumo_mapa &lt;- do.call(
-  rbind,
-  lapply(
-    split(mapa, mapa$LG),
-    function(x) {
-      data.frame(
-        LG = x$LG[1],
-        Marcadores = nrow(x),
-        Inicio_cM = min(x$posicao_cM),
-        Fim_cM = max(x$posicao_cM),
-        Espacamento_cM = unique(diff(x$posicao_cM))[1]
-      )
-    }
+  identical(
+    sort(
+      unique(mapa$LG)
+    ),
+    1:10
+  ),
+  all(
+    table(mapa$LG) == 401L
   )
+)</code></pre>
+<p>A leitura confirma 4.010 marcadores distribuídos entre dez grupos de
+ligação.</p>
+</div>
+<div id="resumindo-cada-grupo-de-ligação" class="section level2">
+<h2>2.2 Resumindo cada grupo de ligação</h2>
+<p>Para deixar o código transparente, percorremos os dez grupos de
+ligação com um <code>for</code>. Em cada grupo contamos os SNPs e
+registramos as posições inicial, final e o espaçamento entre
+marcadores.</p>
+<pre class="r"><code>resumo_mapa &lt;- data.frame(
+  LG = 1:10,
+  Marcadores = integer(10),
+  Inicio_cM = numeric(10),
+  Fim_cM = numeric(10),
+  Espacamento_cM = numeric(10)
 )
 
-rownames(resumo_mapa) &lt;- NULL
+for (lg in 1:10) {
 
-knitr::kable(
+  mapa_lg &lt;- mapa[
+    mapa$LG == lg,
+    ,
+    drop = FALSE
+  ]
+
+  resumo_mapa$Marcadores[lg] &lt;- nrow(mapa_lg)
+  resumo_mapa$Inicio_cM[lg] &lt;- min(mapa_lg$posicao_cM)
+  resumo_mapa$Fim_cM[lg] &lt;- max(mapa_lg$posicao_cM)
+  resumo_mapa$Espacamento_cM[lg] &lt;-
+    unique(
+      diff(
+        mapa_lg$posicao_cM
+      )
+    )[1]
+}
+
+kableExtra::kbl(
   resumo_mapa,
   caption = &quot;Estrutura do mapa genético por grupo de ligação&quot;,
-  row.names = FALSE
-)</code></pre>
-<table>
-<caption>Estrutura do mapa genético por grupo de ligação</caption>
+  digits = 1
+) |&gt;
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;striped&quot;,
+      &quot;hover&quot;,
+      &quot;condensed&quot;,
+      &quot;responsive&quot;
+    ),
+    full_width = FALSE
+  )</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Estrutura do mapa genético por grupo de ligação
+</caption>
 <thead>
-<tr class="header">
-<th align="right">LG</th>
-<th align="right">Marcadores</th>
-<th align="right">Inicio_cM</th>
-<th align="right">Fim_cM</th>
-<th align="right">Espacamento_cM</th>
+<tr>
+<th style="text-align:right;">
+LG
+</th>
+<th style="text-align:right;">
+Marcadores
+</th>
+<th style="text-align:right;">
+Inicio_cM
+</th>
+<th style="text-align:right;">
+Fim_cM
+</th>
+<th style="text-align:right;">
+Espacamento_cM
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="right">401</td>
-<td align="right">0</td>
-<td align="right">200</td>
-<td align="right">0.5</td>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+401
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0.5
+</td>
 </tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="right">401</td>
-<td align="right">0</td>
-<td align="right">200</td>
-<td align="right">0.5</td>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+401
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0.5
+</td>
 </tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="right">401</td>
-<td align="right">0</td>
-<td align="right">200</td>
-<td align="right">0.5</td>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+401
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0.5
+</td>
 </tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="right">401</td>
-<td align="right">0</td>
-<td align="right">200</td>
-<td align="right">0.5</td>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+401
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0.5
+</td>
 </tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="right">401</td>
-<td align="right">0</td>
-<td align="right">200</td>
-<td align="right">0.5</td>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+401
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0.5
+</td>
 </tr>
-<tr class="even">
-<td align="right">6</td>
-<td align="right">401</td>
-<td align="right">0</td>
-<td align="right">200</td>
-<td align="right">0.5</td>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+401
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0.5
+</td>
 </tr>
-<tr class="odd">
-<td align="right">7</td>
-<td align="right">401</td>
-<td align="right">0</td>
-<td align="right">200</td>
-<td align="right">0.5</td>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+401
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0.5
+</td>
 </tr>
-<tr class="even">
-<td align="right">8</td>
-<td align="right">401</td>
-<td align="right">0</td>
-<td align="right">200</td>
-<td align="right">0.5</td>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+401
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0.5
+</td>
 </tr>
-<tr class="odd">
-<td align="right">9</td>
-<td align="right">401</td>
-<td align="right">0</td>
-<td align="right">200</td>
-<td align="right">0.5</td>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+401
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0.5
+</td>
 </tr>
-<tr class="even">
-<td align="right">10</td>
-<td align="right">401</td>
-<td align="right">0</td>
-<td align="right">200</td>
-<td align="right">0.5</td>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+401
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0.5
+</td>
 </tr>
 </tbody>
 </table>
-<p>Cada grupo de ligação contém 401 marcadores distribuídos de 0 a 200
-cM, com espaçamento de 0,5 cM, totalizando 4.010 marcadores.</p>
+<p>Todos os grupos possuem 401 SNPs distribuídos de 0 a 200 cM, com
+espaçamento de 0,5 cM. A distribuição regular é uma característica do
+esquema de simulação usado para gerar esses dados.</p>
+</div>
 </div>
 <div id="cenários-genéticos" class="section level1">
 <h1>3. Cenários genéticos</h1>
-<p>O arquivo de controle registra os parâmetros utilizados na simulação.
-Cada bloco corresponde a uma das seis características analisadas.</p>
+<p>Um <strong>QTL</strong> (<em>quantitative trait locus</em>) é uma
+região do genoma que contribui para a variação de uma característica
+quantitativa. Os seis cenários simulados diferem principalmente no
+número de QTL e na herdabilidade.</p>
+<p>A herdabilidade, representada por <span
+class="math inline">\(h^2\)</span>, descreve a proporção da variação
+fenotípica associada à variação genética no cenário simulado.</p>
+<div id="lendo-o-arquivo-de-controle" class="section level2">
+<h2>3.1 Lendo o arquivo de controle</h2>
+<p>O arquivo de controle é organizado em seis blocos, um para cada
+característica. Primeiro lemos todas as linhas e identificamos onde cada
+bloco começa.</p>
 <pre class="r"><code>controle_linhas &lt;- readLines(
-  file.path(dados_dir, &quot;controlegenetico#1.dat&quot;),
+  file.path(
+    dados_dir,
+    &quot;controlegenetico#1.dat&quot;
+  ),
   warn = FALSE,
   encoding = &quot;latin1&quot;
 )
 
-inicio_blocos &lt;- grep(&quot;^Variavel&quot;, controle_linhas)
-
-valor_campo &lt;- function(linha) {
-  partes &lt;- strsplit(linha, &quot;,&quot;, fixed = TRUE)[[1]]
-  as.numeric(trimws(partes[length(partes)]))
-}
-
-qtl_por_cenario &lt;- setNames(
-  lapply(
-    inicio_blocos,
-    function(inicio) {
-      scan(
-        text = controle_linhas[inicio + 3L],
-        what = integer(),
-        quiet = TRUE
-      )
-    }
-  ),
-  paste0(&quot;C&quot;, seq_along(inicio_blocos))
+inicio_blocos &lt;- grep(
+  &quot;^Variavel&quot;,
+  controle_linhas
 )
-
-controle_cenarios &lt;- do.call(
-  rbind,
-  lapply(
-    seq_along(inicio_blocos),
-    function(i) {
-      inicio &lt;- inicio_blocos[i]
-
-      data.frame(
-        cenario = paste0(&quot;C&quot;, i),
-        variavel = as.integer(valor_campo(controle_linhas[inicio])),
-        total_loci = as.integer(valor_campo(controle_linhas[inicio + 1L])),
-        n_qtl = as.integer(valor_campo(controle_linhas[inicio + 2L])),
-        gmd = valor_campo(controle_linhas[inicio + 5L]),
-        modelo = as.integer(valor_campo(controle_linhas[inicio + 6L])),
-        h2 = valor_campo(controle_linhas[inicio + 7L]),
-        constante = valor_campo(controle_linhas[inicio + 8L]),
-        escala = valor_campo(controle_linhas[inicio + 9L]),
-        CV = valor_campo(controle_linhas[inicio + 10L])
-      )
-    }
-  )
-)
-
-rownames(controle_cenarios) &lt;- NULL
 
 stopifnot(
-  length(inicio_blocos) == 6L,
-  all(controle_cenarios$total_loci == 4010L),
-  all(controle_cenarios$n_qtl == lengths(qtl_por_cenario)),
-  all(unlist(qtl_por_cenario) %in% seq_len(n_marcadores))
+  length(inicio_blocos) == 6L
+)</code></pre>
+<p>As seis posições encontradas em <code>inicio_blocos</code> indicam
+onde começam as informações de C1 até C6.</p>
+</div>
+<div id="extraindo-os-parâmetros-sem-funções-auxiliares"
+class="section level2">
+<h2>3.2 Extraindo os parâmetros sem funções auxiliares</h2>
+<p>Para um tutorial, é mais útil enxergar explicitamente como cada campo
+é extraído. Por isso percorremos os seis blocos com um <code>for</code>,
+sem criar uma função auxiliar para esconder a leitura das linhas.</p>
+<pre class="r"><code>n_cenarios &lt;- length(inicio_blocos)
+
+controle_cenarios &lt;- data.frame(
+  cenario = paste0(
+    &quot;C&quot;,
+    seq_len(n_cenarios)
+  ),
+  variavel = integer(n_cenarios),
+  total_loci = integer(n_cenarios),
+  n_qtl = integer(n_cenarios),
+  gmd = numeric(n_cenarios),
+  modelo = integer(n_cenarios),
+  h2 = numeric(n_cenarios),
+  constante = numeric(n_cenarios),
+  escala = numeric(n_cenarios),
+  CV = numeric(n_cenarios),
+  stringsAsFactors = FALSE
 )
 
-knitr::kable(
-  controle_cenarios[
-    ,
-    c(
-      &quot;cenario&quot;,
-      &quot;n_qtl&quot;,
-      &quot;h2&quot;,
-      &quot;gmd&quot;,
-      &quot;modelo&quot;,
-      &quot;constante&quot;,
-      &quot;escala&quot;,
-      &quot;CV&quot;
+qtl_por_cenario &lt;- vector(
+  &quot;list&quot;,
+  n_cenarios
+)
+
+names(qtl_por_cenario) &lt;- controle_cenarios$cenario
+
+for (i in seq_len(n_cenarios)) {
+
+  inicio &lt;- inicio_blocos[i]
+
+  partes &lt;- strsplit(
+    controle_linhas[inicio],
+    &quot;,&quot;,
+    fixed = TRUE
+  )[[1]]
+
+  controle_cenarios$variavel[i] &lt;-
+    as.integer(
+      trimws(
+        partes[
+          length(partes)
+        ]
+      )
     )
-  ],
-  caption = &quot;Parâmetros dos seis cenários simulados&quot;,
-  row.names = FALSE,
-  digits = 2
+
+  partes &lt;- strsplit(
+    controle_linhas[inicio + 1L],
+    &quot;,&quot;,
+    fixed = TRUE
+  )[[1]]
+
+  controle_cenarios$total_loci[i] &lt;-
+    as.integer(
+      trimws(
+        partes[
+          length(partes)
+        ]
+      )
+    )
+
+  partes &lt;- strsplit(
+    controle_linhas[inicio + 2L],
+    &quot;,&quot;,
+    fixed = TRUE
+  )[[1]]
+
+  controle_cenarios$n_qtl[i] &lt;-
+    as.integer(
+      trimws(
+        partes[
+          length(partes)
+        ]
+      )
+    )
+
+  qtl_por_cenario[[i]] &lt;- scan(
+    text = controle_linhas[
+      inicio + 3L
+    ],
+    what = integer(),
+    quiet = TRUE
+  )
+
+  partes &lt;- strsplit(
+    controle_linhas[inicio + 5L],
+    &quot;,&quot;,
+    fixed = TRUE
+  )[[1]]
+
+  controle_cenarios$gmd[i] &lt;-
+    as.numeric(
+      trimws(
+        partes[
+          length(partes)
+        ]
+      )
+    )
+
+  partes &lt;- strsplit(
+    controle_linhas[inicio + 6L],
+    &quot;,&quot;,
+    fixed = TRUE
+  )[[1]]
+
+  controle_cenarios$modelo[i] &lt;-
+    as.integer(
+      trimws(
+        partes[
+          length(partes)
+        ]
+      )
+    )
+
+  partes &lt;- strsplit(
+    controle_linhas[inicio + 7L],
+    &quot;,&quot;,
+    fixed = TRUE
+  )[[1]]
+
+  controle_cenarios$h2[i] &lt;-
+    as.numeric(
+      trimws(
+        partes[
+          length(partes)
+        ]
+      )
+    )
+
+  partes &lt;- strsplit(
+    controle_linhas[inicio + 8L],
+    &quot;,&quot;,
+    fixed = TRUE
+  )[[1]]
+
+  controle_cenarios$constante[i] &lt;-
+    as.numeric(
+      trimws(
+        partes[
+          length(partes)
+        ]
+      )
+    )
+
+  partes &lt;- strsplit(
+    controle_linhas[inicio + 9L],
+    &quot;,&quot;,
+    fixed = TRUE
+  )[[1]]
+
+  controle_cenarios$escala[i] &lt;-
+    as.numeric(
+      trimws(
+        partes[
+          length(partes)
+        ]
+      )
+    )
+
+  partes &lt;- strsplit(
+    controle_linhas[inicio + 10L],
+    &quot;,&quot;,
+    fixed = TRUE
+  )[[1]]
+
+  controle_cenarios$CV[i] &lt;-
+    as.numeric(
+      trimws(
+        partes[
+          length(partes)
+        ]
+      )
+    )
+}
+
+stopifnot(
+  all(
+    controle_cenarios$total_loci == 4010L
+  ),
+  all(
+    controle_cenarios$n_qtl ==
+      lengths(qtl_por_cenario)
+  ),
+  all(
+    unlist(qtl_por_cenario) %in%
+      seq_len(n_marcadores)
+  )
 )</code></pre>
-<table>
-<caption>Parâmetros dos seis cenários simulados</caption>
+<p>O objeto <code>controle_cenarios</code> agora possui uma linha para
+cada cenário. A lista <code>qtl_por_cenario</code> guarda as posições
+verdadeiras dos QTL e será preservada somente para avaliações
+posteriores.</p>
+</div>
+<div id="comparando-os-seis-cenários" class="section level2">
+<h2>3.3 Comparando os seis cenários</h2>
+<p>A tabela abaixo reúne as informações necessárias para interpretar os
+cenários genéticos antes de comparar os métodos de predição.</p>
+<pre class="r"><code>tabela_cenarios &lt;- controle_cenarios[
+  ,
+  c(
+    &quot;cenario&quot;,
+    &quot;n_qtl&quot;,
+    &quot;h2&quot;
+  )
+]
+
+kableExtra::kbl(
+  tabela_cenarios,
+  caption = &quot;Arquitetura genética dos seis cenários simulados&quot;,
+  digits = 2,
+  col.names = c(
+    &quot;Cenário&quot;,
+    &quot;Número de QTL&quot;,
+    &quot;Herdabilidade (h²)&quot;
+  )
+) |&gt;
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;striped&quot;,
+      &quot;hover&quot;,
+      &quot;condensed&quot;,
+      &quot;responsive&quot;
+    ),
+    full_width = FALSE
+  )</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Arquitetura genética dos seis cenários simulados
+</caption>
 <thead>
-<tr class="header">
-<th align="left">cenario</th>
-<th align="right">n_qtl</th>
-<th align="right">h2</th>
-<th align="right">gmd</th>
-<th align="right">modelo</th>
-<th align="right">constante</th>
-<th align="right">escala</th>
-<th align="right">CV</th>
+<tr>
+<th style="text-align:left;">
+Cenário
+</th>
+<th style="text-align:right;">
+Número de QTL
+</th>
+<th style="text-align:right;">
+Herdabilidade (h²)
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">C1</td>
-<td align="right">8</td>
-<td align="right">0.7</td>
-<td align="right">0.5</td>
-<td align="right">2</td>
-<td align="right">100</td>
-<td align="right">1</td>
-<td align="right">12</td>
+<tr>
+<td style="text-align:left;">
+C1
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0.7
+</td>
 </tr>
-<tr class="even">
-<td align="left">C2</td>
-<td align="right">40</td>
-<td align="right">0.7</td>
-<td align="right">0.5</td>
-<td align="right">2</td>
-<td align="right">100</td>
-<td align="right">1</td>
-<td align="right">12</td>
+<tr>
+<td style="text-align:left;">
+C2
+</td>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:right;">
+0.7
+</td>
 </tr>
-<tr class="odd">
-<td align="left">C3</td>
-<td align="right">80</td>
-<td align="right">0.5</td>
-<td align="right">0.5</td>
-<td align="right">2</td>
-<td align="right">100</td>
-<td align="right">1</td>
-<td align="right">12</td>
+<tr>
+<td style="text-align:left;">
+C3
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+0.5
+</td>
 </tr>
-<tr class="even">
-<td align="left">C4</td>
-<td align="right">120</td>
-<td align="right">0.5</td>
-<td align="right">0.5</td>
-<td align="right">2</td>
-<td align="right">100</td>
-<td align="right">1</td>
-<td align="right">12</td>
+<tr>
+<td style="text-align:left;">
+C4
+</td>
+<td style="text-align:right;">
+120
+</td>
+<td style="text-align:right;">
+0.5
+</td>
 </tr>
-<tr class="odd">
-<td align="left">C5</td>
-<td align="right">240</td>
-<td align="right">0.3</td>
-<td align="right">0.5</td>
-<td align="right">2</td>
-<td align="right">100</td>
-<td align="right">1</td>
-<td align="right">12</td>
+<tr>
+<td style="text-align:left;">
+C5
+</td>
+<td style="text-align:right;">
+240
+</td>
+<td style="text-align:right;">
+0.3
+</td>
 </tr>
-<tr class="even">
-<td align="left">C6</td>
-<td align="right">480</td>
-<td align="right">0.3</td>
-<td align="right">0.5</td>
-<td align="right">2</td>
-<td align="right">100</td>
-<td align="right">1</td>
-<td align="right">12</td>
+<tr>
+<td style="text-align:left;">
+C6
+</td>
+<td style="text-align:right;">
+480
+</td>
+<td style="text-align:right;">
+0.3
+</td>
 </tr>
 </tbody>
 </table>
-<p>Os seis cenários combinam diferentes níveis de complexidade genética
-e herdabilidade:</p>
-<ul>
-<li>C1: 8 QTL e <span class="math inline">\(h^2=0{,}7\)</span>;</li>
-<li>C2: 40 QTL e <span class="math inline">\(h^2=0{,}7\)</span>;</li>
-<li>C3: 80 QTL e <span class="math inline">\(h^2=0{,}5\)</span>;</li>
-<li>C4: 120 QTL e <span class="math inline">\(h^2=0{,}5\)</span>;</li>
-<li>C5: 240 QTL e <span class="math inline">\(h^2=0{,}3\)</span>;</li>
-<li>C6: 480 QTL e <span class="math inline">\(h^2=0{,}3\)</span>.</li>
-</ul>
-<p>As posições verdadeiras dos QTL são armazenadas no objeto de desenho
-para avaliações posteriores, mas não participam da seleção de
-marcadores.</p>
+<p>C1 e C2 compartilham <span class="math inline">\(h^2=0{,}7\)</span>,
+C3 e C4 compartilham <span class="math inline">\(h^2=0{,}5\)</span>, e
+C5 e C6 compartilham <span class="math inline">\(h^2=0{,}3\)</span>.
+Dentro de cada par, o segundo cenário possui mais QTL. Essa organização
+permite descrever como os métodos se comportam em arquiteturas com
+diferentes números de QTL e herdabilidades, sem tratar o desenho como um
+fatorial completo.</p>
+<p>A quantidade de QTL também pode ser visualizada diretamente. A figura
+utiliza a paleta GDocs definida como padrão visual deste tutorial.</p>
+<pre class="r"><code>if (!requireNamespace(
+  &quot;ggplot2&quot;,
+  quietly = TRUE
+)) {
+  stop(
+    &quot;Instale o pacote ggplot2 para gerar as figuras do tutorial.&quot;
+  )
+}
+
+if (!requireNamespace(
+  &quot;ggthemes&quot;,
+  quietly = TRUE
+)) {
+  stop(
+    &quot;Instale o pacote ggthemes para usar o padrão gráfico GDocs.&quot;
+  )
+}
+
+figura_qtl &lt;- ggplot2::ggplot(
+  controle_cenarios,
+  ggplot2::aes(
+    x = cenario,
+    y = n_qtl
+  )
+) +
+  ggplot2::geom_col(
+    fill = ggthemes::gdocs_pal()(1),
+    width = 0.72
+  ) +
+  ggplot2::labs(
+    title = &quot;Complexidade dos cenários simulados&quot;,
+    x = &quot;Cenário&quot;,
+    y = &quot;Número de QTL&quot;
+  ) +
+  ggthemes::theme_gdocs(
+    base_size = 12
+  ) +
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(
+      face = &quot;bold&quot;
+    )
+  )
+
+figura_qtl</code></pre>
+<div class="figure" style="text-align: center">
+<img src="figure/01_dados_desenho.Rmd/figura-numero-qtl-1.png" alt="Número de QTL em cada cenário genético simulado." width="100%" />
+<p class="caption">
+Número de QTL em cada cenário genético simulado.
+</p>
 </div>
-<div id="redução-inicial-do-número-de-marcadores"
-class="section level1">
-<h1>4. Redução inicial do número de marcadores</h1>
-<p>Nesta primeira etapa do projeto, todos os 1.000 indivíduos são
-mantidos. A dimensão reduzida é apenas <code>p</code>.</p>
-<p>O conjunto completo de 4.010 marcadores representa a condição de
-referência. Os demais tamanhos correspondem aos percentuais de
-marcadores mais importantes segundo cada método.</p>
-<pre class="r"><code>proporcoes_p &lt;- c(1, 0.50, 0.25, 0.10, 0.05, 0.01)
+<p>A figura evidencia o aumento progressivo do número de QTL entre C1 e
+C6. Esse aumento não deve ser interpretado isoladamente como efeito
+causal da poligenicidade, porque a herdabilidade também varia entre
+grupos de cenários.</p>
+</div>
+</div>
+<div id="redução-do-número-de-marcadores" class="section level1">
+<h1>4. Redução do número de marcadores</h1>
+<p>Nesta primeira fase, o número de indivíduos permanece fixo em</p>
+<p><span class="math display">\[
+n=1000.
+\]</span></p>
+<p>A dimensão modificada é apenas o número de SNPs, representado por
+<code>p</code>.</p>
+<p>O painel completo com 4.010 marcadores é a referência. Depois, cada
+método construirá seu próprio ranking de importância e utilizará os
+primeiros SNPs desse ranking para formar painéis progressivamente
+menores.</p>
+<div id="definindo-os-níveis-de-p" class="section level2">
+<h2>4.1 Definindo os níveis de <code>p</code></h2>
+<p>A regra utilizada é a mesma para todos os métodos. Para transformar
+cada proporção em um número inteiro de SNPs usamos arredondamento
+<em>half-up</em>:</p>
+<p><span class="math display">\[
+p_q=\lfloor 4010q+0{,}5\rfloor,
+\]</span></p>
+<p>em que <span class="math inline">\(q\)</span> é a proporção de
+marcadores mantida.</p>
+<pre class="r"><code>proporcoes_p &lt;- c(
+  1,
+  0.50,
+  0.25,
+  0.10,
+  0.05,
+  0.01
+)
 
 niveis_p &lt;- data.frame(
   proporcao = proporcoes_p,
-  percentual = paste0(proporcoes_p * 100, &quot;%&quot;),
-  n_marcadores = floor(n_marcadores * proporcoes_p + 0.5),
+  percentual = paste0(
+    proporcoes_p * 100,
+    &quot;%&quot;
+  ),
+  n_marcadores = floor(
+    n_marcadores *
+      proporcoes_p +
+      0.5
+  ),
   stringsAsFactors = FALSE
 )
 
 stopifnot(
   identical(
     niveis_p$n_marcadores,
-    c(4010, 2005, 1003, 401, 201, 40)
+    c(
+      4010,
+      2005,
+      1003,
+      401,
+      201,
+      40
+    )
   )
 )
 
-knitr::kable(
+kableExtra::kbl(
   niveis_p,
   caption = &quot;Níveis de redução do número de marcadores&quot;,
-  row.names = FALSE
-)</code></pre>
-<table>
-<caption>Níveis de redução do número de marcadores</caption>
+  col.names = c(
+    &quot;Proporção&quot;,
+    &quot;Percentual&quot;,
+    &quot;Número de SNPs&quot;
+  )
+) |&gt;
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;striped&quot;,
+      &quot;hover&quot;,
+      &quot;condensed&quot;,
+      &quot;responsive&quot;
+    ),
+    full_width = FALSE
+  )</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Níveis de redução do número de marcadores
+</caption>
 <thead>
-<tr class="header">
-<th align="right">proporcao</th>
-<th align="left">percentual</th>
-<th align="right">n_marcadores</th>
+<tr>
+<th style="text-align:right;">
+Proporção
+</th>
+<th style="text-align:left;">
+Percentual
+</th>
+<th style="text-align:right;">
+Número de SNPs
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">1.00</td>
-<td align="left">100%</td>
-<td align="right">4010</td>
+<tr>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:left;">
+100%
+</td>
+<td style="text-align:right;">
+4010
+</td>
 </tr>
-<tr class="even">
-<td align="right">0.50</td>
-<td align="left">50%</td>
-<td align="right">2005</td>
+<tr>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:left;">
+50%
+</td>
+<td style="text-align:right;">
+2005
+</td>
 </tr>
-<tr class="odd">
-<td align="right">0.25</td>
-<td align="left">25%</td>
-<td align="right">1003</td>
+<tr>
+<td style="text-align:right;">
+0.25
+</td>
+<td style="text-align:left;">
+25%
+</td>
+<td style="text-align:right;">
+1003
+</td>
 </tr>
-<tr class="even">
-<td align="right">0.10</td>
-<td align="left">10%</td>
-<td align="right">401</td>
+<tr>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:left;">
+10%
+</td>
+<td style="text-align:right;">
+401
+</td>
 </tr>
-<tr class="odd">
-<td align="right">0.05</td>
-<td align="left">5%</td>
-<td align="right">201</td>
+<tr>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:left;">
+5%
+</td>
+<td style="text-align:right;">
+201
+</td>
 </tr>
-<tr class="even">
-<td align="right">0.01</td>
-<td align="left">1%</td>
-<td align="right">40</td>
+<tr>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:left;">
+1%
+</td>
+<td style="text-align:right;">
+40
+</td>
 </tr>
 </tbody>
 </table>
-<p>O M01 não seleciona marcadores. Para cada cenário, método e fold, o
-modelo será primeiro ajustado com os 4.010 marcadores disponíveis no
-treinamento. O ranking de importância produzido nesse ajuste definirá os
-painéis reduzidos.</p>
-<p>Assim, para um mesmo ranking:</p>
+<p>A redução mais moderada mantém 2.005 dos 4.010 SNPs, enquanto a
+condição mais extrema mantém apenas 40. Esses mesmos seis tamanhos serão
+usados para todos os métodos.</p>
+</div>
+<div id="painéis-aninhados" class="section level2">
+<h2>4.2 Painéis aninhados</h2>
+<p>O M01 ainda não seleciona SNPs. A seleção ocorrerá dentro de cada
+método, cenário e fold. Uma vez obtido o ranking, os painéis serão
+aninhados:</p>
 <p><span class="math display">\[
 P_{1\%}
 \subset
@@ -1273,16 +2028,30 @@ P_{50\%}
 \subset
 P_{100\%}.
 \]</span></p>
-<p>Os rankings serão específicos para cada combinação de cenário, método
-e fold.</p>
+<p>Isso significa, por exemplo, que os 40 SNPs do painel de 1% também
+estarão presentes nos painéis de 5%, 10%, 25%, 50% e 100%.</p>
+</div>
 </div>
 <div id="validação-cruzada-comum" class="section level1">
 <h1>5. Validação cruzada comum</h1>
-<p>Todos os métodos utilizarão a mesma partição dos indivíduos. Será
-empregada uma única validação cruzada de cinco folds.</p>
-<p>A formação dos folds depende somente do identificador dos indivíduos
-e de uma semente fixa. Fenótipos, valores genéticos verdadeiros,
-genótipos e posições de QTL não participam da geração das partições.</p>
+<p>Para comparar os métodos de forma justa, todos devem prever
+exatamente os mesmos indivíduos. Utilizamos validação cruzada com cinco
+folds.</p>
+<p>Um <strong>fold</strong> é uma parte dos dados reservada
+temporariamente para teste. Em cada rodada:</p>
+<ul>
+<li>800 indivíduos ficam no treinamento;</li>
+<li>200 indivíduos ficam no teste;</li>
+<li>o modelo é ajustado sem os fenótipos desses 200 indivíduos;</li>
+<li>depois avaliamos as predições produzidas para eles.</li>
+</ul>
+<p>Ao final das cinco rodadas, todos os 1.000 indivíduos participaram
+uma vez do teste.</p>
+<div id="criando-os-cinco-folds" class="section level2">
+<h2>5.1 Criando os cinco folds</h2>
+<p>A separação depende somente dos identificadores dos indivíduos e de
+uma semente fixa. Fenótipos, valores genéticos, genótipos e posições dos
+QTL não participam do sorteio.</p>
 <pre class="r"><code>SEED_DESENHO &lt;- 20260908L
 N_FOLDS &lt;- 5L
 
@@ -1299,8 +2068,13 @@ fold_na_ordem &lt;- rep(
   length.out = n_individuos
 )
 
-fold_individuo &lt;- integer(n_individuos)
-fold_individuo[ordem_individuos] &lt;- fold_na_ordem
+fold_individuo &lt;- integer(
+  n_individuos
+)
+
+fold_individuo[
+  ordem_individuos
+] &lt;- fold_na_ordem
 
 atribuicao_folds &lt;- data.frame(
   id = ids,
@@ -1309,109 +2083,248 @@ atribuicao_folds &lt;- data.frame(
   stringsAsFactors = FALSE
 )
 
-folds &lt;- setNames(
-  lapply(
-    seq_len(N_FOLDS),
-    function(k) {
-      list(
-        fold = k,
-        treino = ids[fold_individuo != k],
-        teste = ids[fold_individuo == k]
-      )
-    }
-  ),
-  paste0(&quot;Fold&quot;, seq_len(N_FOLDS))
+folds &lt;- vector(
+  &quot;list&quot;,
+  N_FOLDS
 )
 
+names(folds) &lt;- paste0(
+  &quot;Fold&quot;,
+  seq_len(N_FOLDS)
+)
+
+for (k in seq_len(N_FOLDS)) {
+
+  folds[[k]] &lt;- list(
+    fold = k,
+    treino = ids[
+      fold_individuo != k
+    ],
+    teste = ids[
+      fold_individuo == k
+    ]
+  )
+}</code></pre>
+<p>A semente fixa torna a divisão reproduzível. Qualquer pessoa que
+execute esse bloco com os mesmos dados obterá os mesmos indivíduos em
+cada fold.</p>
+</div>
+<div id="auditando-os-tamanhos-de-treino-e-teste"
+class="section level2">
+<h2>5.2 Auditando os tamanhos de treino e teste</h2>
+<p>Antes de usar os folds, verificamos se cada partição possui 800
+indivíduos no treinamento, 200 no teste e nenhuma sobreposição entre
+esses dois conjuntos.</p>
+<pre class="r"><code>tamanho_treino &lt;- integer(
+  N_FOLDS
+)
+
+tamanho_teste &lt;- integer(
+  N_FOLDS
+)
+
+sobreposicao &lt;- integer(
+  N_FOLDS
+)
+
+for (k in seq_len(N_FOLDS)) {
+
+  tamanho_treino[k] &lt;-
+    length(
+      folds[[k]]$treino
+    )
+
+  tamanho_teste[k] &lt;-
+    length(
+      folds[[k]]$teste
+    )
+
+  sobreposicao[k] &lt;-
+    length(
+      intersect(
+        folds[[k]]$treino,
+        folds[[k]]$teste
+      )
+    )
+}
+
 stopifnot(
-  all(table(atribuicao_folds$fold) == 200L),
-  all(vapply(folds, function(x) length(x$treino) == 800L, logical(1))),
-  all(vapply(folds, function(x) length(x$teste) == 200L, logical(1))),
-  all(vapply(
-    folds,
-    function(x) length(intersect(x$treino, x$teste)) == 0L,
-    logical(1)
-  ))
+  all(
+    table(
+      atribuicao_folds$fold
+    ) == 200L
+  ),
+  all(
+    tamanho_treino == 800L
+  ),
+  all(
+    tamanho_teste == 200L
+  ),
+  all(
+    sobreposicao == 0L
+  )
 )
 
 resumo_folds &lt;- data.frame(
   Fold = seq_len(N_FOLDS),
-  Treinamento = vapply(folds, function(x) length(x$treino), integer(1)),
-  Teste = vapply(folds, function(x) length(x$teste), integer(1))
+  Treinamento = tamanho_treino,
+  Teste = tamanho_teste,
+  Sobreposicao = sobreposicao
 )
 
-knitr::kable(
+kableExtra::kbl(
   resumo_folds,
   caption = &quot;Tamanho dos conjuntos de treinamento e teste&quot;,
-  row.names = FALSE
-)</code></pre>
-<table>
-<caption>Tamanho dos conjuntos de treinamento e teste</caption>
+  col.names = c(
+    &quot;Fold&quot;,
+    &quot;Treinamento&quot;,
+    &quot;Teste&quot;,
+    &quot;Sobreposição&quot;
+  )
+) |&gt;
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;striped&quot;,
+      &quot;hover&quot;,
+      &quot;condensed&quot;,
+      &quot;responsive&quot;
+    ),
+    full_width = FALSE
+  )</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Tamanho dos conjuntos de treinamento e teste
+</caption>
 <thead>
-<tr class="header">
-<th align="right">Fold</th>
-<th align="right">Treinamento</th>
-<th align="right">Teste</th>
+<tr>
+<th style="text-align:right;">
+Fold
+</th>
+<th style="text-align:right;">
+Treinamento
+</th>
+<th style="text-align:right;">
+Teste
+</th>
+<th style="text-align:right;">
+Sobreposição
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="right">800</td>
-<td align="right">200</td>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+800
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="right">800</td>
-<td align="right">200</td>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+800
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="right">800</td>
-<td align="right">200</td>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+800
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="right">800</td>
-<td align="right">200</td>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+800
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="right">800</td>
-<td align="right">200</td>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+800
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
 </tbody>
 </table>
-<p>Cada indivíduo participa uma vez do conjunto de teste e quatro vezes
-do conjunto de treinamento.</p>
-<p>Para qualquer cenário e método, o fold <span
-class="math inline">\(k\)</span> utilizará exatamente os mesmos 800
-indivíduos para treinamento e os mesmos 200 indivíduos para
-avaliação.</p>
+<p>Os cinco folds possuem exatamente a mesma dimensão: 800 indivíduos
+para treinamento e 200 para teste. A coluna “Sobreposição” é zero em
+todos os casos, confirmando que nenhum indivíduo pertence
+simultaneamente ao treino e ao teste dentro da mesma rodada.</p>
+</div>
 </div>
 <div id="preparação-para-a-futura-redução-de-n" class="section level1">
-<h1>6. Preparação para a futura redução de n</h1>
-<p>A redução de <code>n</code> não faz parte da etapa inicial.
-Entretanto, a permutação <code>ordem_individuos</code> é armazenada para
-que a expansão futura do projeto possa construir tamanhos amostrais
-aninhados sem gerar uma nova ordem de indivíduos.</p>
-<p>Dessa forma, a futura análise de <code>n x p</code> poderá reutilizar
-o mesmo desenho experimental em vez de redefinir as amostras após os
-primeiros resultados.</p>
+<h1>6. Preparação para a futura redução de <code>n</code></h1>
+<p>A redução do número de indivíduos ainda não faz parte desta fase.
+Mesmo assim, guardamos <code>ordem_individuos</code>, a permutação
+aleatória criada com a semente fixa.</p>
+<p>Essa decisão permitirá construir, futuramente, tamanhos amostrais
+aninhados sem sortear novamente os indivíduos depois de conhecer os
+resultados da redução de <code>p</code>.</p>
 </div>
-<div id="objeto-canônico-do-desenho" class="section level1">
-<h1>7. Objeto canônico do desenho</h1>
-<p>Os objetos necessários aos módulos seguintes são reunidos em um único
-arquivo. O GBLUP e os métodos de aprendizado de máquina deverão ler este
-objeto em vez de repetir a preparação dos dados e a geração dos
-folds.</p>
+<div id="salvando-o-objeto-comum-do-projeto" class="section level1">
+<h1>7. Salvando o objeto comum do projeto</h1>
+<p>Os módulos seguintes não precisam repetir toda a preparação realizada
+nesta página. Em vez disso, reunimos os objetos necessários em uma lista
+e a salvamos como um arquivo RDS.</p>
+<p>O campo <code>importancia_somente_treinamento = TRUE</code> registra
+a regra de que fenótipos de teste e valores genéticos verdadeiros não
+podem ser usados para selecionar marcadores. No GBLUP, os genótipos dos
+indivíduos de teste podem participar da matriz de relacionamento
+genômico; essa particularidade transdutiva é explicada no Módulo 2.</p>
+<div id="construindo-e-salvando-o-objeto" class="section level2">
+<h2>7.1 Construindo e salvando o objeto</h2>
+<p>O bloco abaixo reúne dados, parâmetros e folds sem recalcular nenhuma
+etapa científica. O conteúdo preserva o contrato <code>M01-p-v1</code>
+usado na Fase 1.</p>
 <pre class="r"><code>protocolo &lt;- list(
   etapa = &quot;reducao_p_inicial&quot;,
   seed_desenho = SEED_DESENHO,
   n_individuos = n_individuos,
   p_total = n_marcadores,
   n_folds = N_FOLDS,
-  unidade_ranking = c(&quot;cenario&quot;, &quot;metodo&quot;, &quot;fold&quot;),
+  unidade_ranking = c(
+    &quot;cenario&quot;,
+    &quot;metodo&quot;,
+    &quot;fold&quot;
+  ),
   importancia_somente_treinamento = TRUE,
   paineis_p_aninhados = TRUE,
   valor_genetico_somente_avaliacao = TRUE
@@ -1447,16 +2360,23 @@ dir.create(
   showWarnings = FALSE
 )
 
-arquivo_desenho &lt;- &quot;output/dados_desenho/desenho_analise.rds&quot;
+arquivo_desenho &lt;-
+  &quot;output/dados_desenho/desenho_analise.rds&quot;
 
 saveRDS(
   desenho_analise,
   arquivo_desenho,
   compress = &quot;gzip&quot;
 )</code></pre>
-<p>O objeto salvo contém os dados preparados, o mapa, os cenários, os
-QTL verdadeiros, os níveis de <code>p</code> e a validação cruzada
-comum.</p>
+<p>O arquivo RDS funciona como uma fotografia do desenho analítico
+depois de todas as verificações desta página. Isso reduz repetição e
+garante que M02 e M03 usem as mesmas entradas.</p>
+</div>
+<div id="conferindo-o-conteúdo-salvo" class="section level2">
+<h2>7.2 Conferindo o conteúdo salvo</h2>
+<p>Por fim, apresentamos os principais componentes do objeto. Essa é uma
+auditoria simples para confirmar que todos os elementos necessários
+foram armazenados.</p>
 <pre class="r"><code>resumo_objeto &lt;- data.frame(
   Componente = c(
     &quot;Fenótipo&quot;,
@@ -1468,65 +2388,142 @@ comum.</p>
     &quot;Folds&quot;
   ),
   Estrutura = c(
-    paste(dim(desenho_analise$fenotipo), collapse = &quot; x &quot;),
-    paste(dim(desenho_analise$valor_genetico), collapse = &quot; x &quot;),
-    paste(dim(desenho_analise$genotipo), collapse = &quot; x &quot;),
-    paste(dim(desenho_analise$mapa), collapse = &quot; x &quot;),
-    nrow(desenho_analise$controle_cenarios),
-    nrow(desenho_analise$niveis_p),
-    length(desenho_analise$folds)
+    paste(
+      dim(
+        desenho_analise$fenotipo
+      ),
+      collapse = &quot; x &quot;
+    ),
+    paste(
+      dim(
+        desenho_analise$valor_genetico
+      ),
+      collapse = &quot; x &quot;
+    ),
+    paste(
+      dim(
+        desenho_analise$genotipo
+      ),
+      collapse = &quot; x &quot;
+    ),
+    paste(
+      dim(
+        desenho_analise$mapa
+      ),
+      collapse = &quot; x &quot;
+    ),
+    nrow(
+      desenho_analise$controle_cenarios
+    ),
+    nrow(
+      desenho_analise$niveis_p
+    ),
+    length(
+      desenho_analise$folds
+    )
   ),
   stringsAsFactors = FALSE
 )
 
-knitr::kable(
+kableExtra::kbl(
   resumo_objeto,
   caption = &quot;Conteúdo principal do objeto canônico do M01&quot;,
-  row.names = FALSE
-)</code></pre>
-<table>
-<caption>Conteúdo principal do objeto canônico do M01</caption>
+  align = c(
+    &quot;l&quot;,
+    &quot;r&quot;
+  )
+) |&gt;
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;striped&quot;,
+      &quot;hover&quot;,
+      &quot;condensed&quot;,
+      &quot;responsive&quot;
+    ),
+    full_width = FALSE
+  )</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Conteúdo principal do objeto canônico do M01
+</caption>
 <thead>
-<tr class="header">
-<th align="left">Componente</th>
-<th align="left">Estrutura</th>
+<tr>
+<th style="text-align:left;">
+Componente
+</th>
+<th style="text-align:right;">
+Estrutura
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Fenótipo</td>
-<td align="left">1000 x 6</td>
+<tr>
+<td style="text-align:left;">
+Fenótipo
+</td>
+<td style="text-align:right;">
+1000 x 6
+</td>
 </tr>
-<tr class="even">
-<td align="left">Valor genético verdadeiro</td>
-<td align="left">1000 x 6</td>
+<tr>
+<td style="text-align:left;">
+Valor genético verdadeiro
+</td>
+<td style="text-align:right;">
+1000 x 6
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Genótipo</td>
-<td align="left">1000 x 4010</td>
+<tr>
+<td style="text-align:left;">
+Genótipo
+</td>
+<td style="text-align:right;">
+1000 x 4010
+</td>
 </tr>
-<tr class="even">
-<td align="left">Mapa</td>
-<td align="left">4010 x 5</td>
+<tr>
+<td style="text-align:left;">
+Mapa
+</td>
+<td style="text-align:right;">
+4010 x 5
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Cenários</td>
-<td align="left">6</td>
+<tr>
+<td style="text-align:left;">
+Cenários
+</td>
+<td style="text-align:right;">
+6
+</td>
 </tr>
-<tr class="even">
-<td align="left">Níveis de p</td>
-<td align="left">6</td>
+<tr>
+<td style="text-align:left;">
+Níveis de p
+</td>
+<td style="text-align:right;">
+6
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Folds</td>
-<td align="left">5</td>
+<tr>
+<td style="text-align:left;">
+Folds
+</td>
+<td style="text-align:right;">
+5
+</td>
 </tr>
 </tbody>
 </table>
+<p>O objeto final contém os três conjuntos de dados principais, o mapa,
+os seis cenários, os seis níveis de <code>p</code> e os cinco folds.
+Portanto, ele reúne tudo o que os próximos módulos precisam para iniciar
+os ajustes sem repetir a preparação dos dados.</p>
 </div>
-<div id="síntese-do-desenho-inicial" class="section level1">
-<h1>8. Síntese do desenho inicial</h1>
-<p>A etapa inicial do projeto fica definida por:</p>
+</div>
+<div id="o-que-aprendemos-neste-módulo" class="section level1">
+<h1>8. O que aprendemos neste módulo?</h1>
+<p>A primeira fase do projeto utiliza:</p>
 <p><span class="math display">\[
 n=1000
 \]</span></p>
@@ -1534,15 +2531,18 @@ n=1000
 <p><span class="math display">\[
 p\in\{4010,2005,1003,401,201,40\}.
 \]</span></p>
-<p>A avaliação será realizada por uma única validação cruzada de cinco
-folds, mantendo 800 indivíduos para treinamento e 200 para teste em cada
-fold.</p>
-<p>Os mesmos folds serão usados por todos os métodos e cenários. A
-seleção dos marcadores será realizada posteriormente dentro de cada
-conjunto de treinamento, sem acesso ao fenótipo do conjunto de teste, ao
-valor genético verdadeiro ou às posições conhecidas dos QTL.</p>
-<p>Esse objeto constitui a entrada comum dos módulos de GBLUP e
-aprendizado de máquina.</p>
+<p>A validação cruzada possui cinco folds de 800 indivíduos para
+treinamento e 200 para teste. Os mesmos folds serão usados por todos os
+métodos.</p>
+<p>A seleção dos SNPs será realizada posteriormente dentro de cada
+método e fold, sem usar o fenótipo do conjunto de teste, os valores
+genéticos verdadeiros ou as posições conhecidas dos QTL como informação
+de treinamento.</p>
+<p>O arquivo <code>desenho_analise.rds</code> é, portanto, o ponto de
+partida comum das próximas páginas.</p>
+<hr />
+<p><a href="index.html">← Início</a> | <a href="02_gblup.html">Próxima
+página: GBLUP aditivo →</a></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1574,16 +2574,22 @@ other attached packages:
 [1] workflowr_1.7.2
 
 loaded via a namespace (and not attached):
- [1] vctrs_0.7.1       httr_1.4.7        cli_3.6.5         knitr_1.50       
- [5] rlang_1.1.7       xfun_0.54         stringi_1.8.7     otel_0.2.0       
- [9] processx_3.8.6    renv_1.2.4        promises_1.5.0    jsonlite_2.0.0   
-[13] glue_1.8.0        rprojroot_2.1.1   git2r_0.36.2      htmltools_0.5.9  
-[17] httpuv_1.6.16     ps_1.9.1          sass_0.4.10       rmarkdown_2.30   
-[21] jquerylib_0.1.4   evaluate_1.0.5    fastmap_1.2.0     yaml_2.3.12      
-[25] lifecycle_1.0.5   whisker_0.4.1     stringr_1.6.0     compiler_4.5.1   
-[29] fs_1.6.6          Rcpp_1.1.2        rstudioapi_0.17.1 later_1.4.4      
-[33] digest_0.6.39     R6_2.6.1          callr_3.7.6       magrittr_2.0.4   
-[37] bslib_0.9.0       tools_4.5.1       cachem_1.1.0      getPass_0.2-4    </code></pre>
+ [1] sass_0.4.10        generics_0.1.4     renv_1.2.4         xml2_1.6.0        
+ [5] stringi_1.8.7      digest_0.6.39      magrittr_2.0.4     evaluate_1.0.5    
+ [9] grid_4.5.1         RColorBrewer_1.1-3 fastmap_1.2.0      rprojroot_2.1.1   
+[13] jsonlite_2.0.0     processx_3.8.6     whisker_0.4.1      ggthemes_6.0.0    
+[17] ps_1.9.1           promises_1.5.0     httr_1.4.7         purrr_1.2.2       
+[21] viridisLite_0.4.3  scales_1.4.0       textshaping_1.0.5  jquerylib_0.1.4   
+[25] cli_3.6.5          rlang_1.1.7        withr_3.0.3        cachem_1.1.0      
+[29] yaml_2.3.12        otel_0.2.0         tools_4.5.1        dplyr_1.2.1       
+[33] ggplot2_4.0.3      httpuv_1.6.16      kableExtra_1.4.1   vctrs_0.7.1       
+[37] R6_2.6.1           lifecycle_1.0.5    git2r_0.36.2       stringr_1.6.0     
+[41] fs_1.6.6           pkgconfig_2.0.3    callr_3.7.6        pillar_1.11.1     
+[45] bslib_0.9.0        later_1.4.4        gtable_0.3.6       glue_1.8.0        
+[49] Rcpp_1.1.2         systemfonts_1.3.2  tidyselect_1.2.1   xfun_0.54         
+[53] tibble_3.3.1       rstudioapi_0.17.1  knitr_1.50         farver_2.1.2      
+[57] htmltools_0.5.9    labeling_0.4.3     rmarkdown_2.30     svglite_2.2.2     
+[61] compiler_4.5.1     getPass_0.2-4      S7_0.2.2          </code></pre>
 </div>
 </div>
 </div>
@@ -1592,6 +2598,7 @@ loaded via a namespace (and not attached):
 </div>
 </div>
 
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIjEuIERhZG9zIFNpbXVsYWRvcyBlIERlc2VuaG8gZGEgQW7DoWxpc2UiDQphdXRob3I6DQogIC0gV2V2ZXJ0b24gR29tZXMgZGEgQ29zdGENCmRhdGU6ICJgciBTeXMuRGF0ZSgpYCINCnNpdGU6IHdvcmtmbG93cjo6d2Zsb3dfc2l0ZQ0Kb3V0cHV0Og0KICB3b3JrZmxvd3I6OndmbG93X2h0bWw6DQogICAgdG9jOiB0cnVlDQogICAgdG9jX2RlcHRoOiAzDQogICAgdG9jX2Zsb2F0OiB0cnVlDQogICAgY29kZV9kb3dubG9hZDogdHJ1ZQ0KICAgIGNvZGVfZm9sZGluZzogc2hvdw0KZWRpdG9yX29wdGlvbnM6DQogIGNodW5rX291dHB1dF90eXBlOiBjb25zb2xlDQotLS0NCg0KYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9DQprbml0cjo6b3B0c19jaHVuayRzZXQoDQogIGVjaG8gPSBUUlVFLA0KICB3YXJuaW5nID0gRkFMU0UsDQogIG1lc3NhZ2UgPSBGQUxTRSwNCiAgY2FjaGUgPSBGQUxTRSwNCiAgZmlnLmFsaWduID0gImNlbnRlciIsDQogIG91dC53aWR0aCA9ICIxMDAlIg0KKQ0KDQpvcHRpb25zKHN0cmluZ3NBc0ZhY3RvcnMgPSBGQUxTRSkNCmBgYA0KDQojIE9iamV0aXZvDQoNCkVzdGUgw6kgbyBwcmltZWlybyBtw7NkdWxvIGRvIHR1dG9yaWFsLiBBbnRlcyBkZSBhanVzdGFyIHF1YWxxdWVyIG1vZGVsbyBkZQ0KcHJlZGnDp8OjbyBnZW7DtG1pY2EsIHByZWNpc2Ftb3MgY29uaGVjZXIgb3MgZGFkb3MgZSBkZWZpbmlyIHVtYSByZWdyYSBkZQ0KY29tcGFyYcOnw6NvIHF1ZSBzZWphIGV4YXRhbWVudGUgYSBtZXNtYSBwYXJhIHRvZG9zIG9zIG3DqXRvZG9zLg0KDQpBIHByaW1laXJhIGZhc2UgZG8gcHJvamV0byBtYW50w6ltIG9zIDEuMDAwIGluZGl2w61kdW9zIGRpc3BvbsOtdmVpcyBlIGludmVzdGlnYQ0Kc29tZW50ZSBhIHJlZHXDp8OjbyBkbyBuw7ptZXJvIGRlIG1hcmNhZG9yZXMsIHJlcHJlc2VudGFkbyBwb3IgYHBgLiBFbSBvdXRyYXMNCnBhbGF2cmFzLCBxdWVyZW1vcyB2ZXJpZmljYXIgcXVhbnRvIGRhIGNhcGFjaWRhZGUgcHJlZGl0aXZhIMOpIHByZXNlcnZhZGEgcXVhbmRvDQpwYXNzYW1vcyBkZSA0LjAxMCBTTlBzIHBhcmEgcGFpbsOpaXMgcHJvZ3Jlc3NpdmFtZW50ZSBtZW5vcmVzLg0KDQpBbyBmaW5hbCBkZXN0YSBww6FnaW5hIHRlcmVtb3MgdW0gw7puaWNvIG9iamV0bywgc2Fsdm8gZW0NCmBvdXRwdXQvZGFkb3NfZGVzZW5oby9kZXNlbmhvX2FuYWxpc2UucmRzYCwgY29udGVuZG86DQoNCi0gZmVuw7N0aXBvczsNCi0gdmFsb3JlcyBnZW7DqXRpY29zIHZlcmRhZGVpcm9zOw0KLSBnZW7Ds3RpcG9zOw0KLSBtYXBhIGdlbsOpdGljbzsNCi0gc2VpcyBjZW7DoXJpb3Mgc2ltdWxhZG9zOw0KLSBwb3Npw6fDtWVzIHZlcmRhZGVpcmFzIGRvcyBRVEw7DQotIG7DrXZlaXMgZGUgcmVkdcOnw6NvIGRlIGBwYDsNCi0gY2luY28gZm9sZHMgZml4b3MgZGUgdmFsaWRhw6fDo28gY3J1emFkYS4NCg0KRXNzZSBvYmpldG8gc2Vyw6EgYSBlbnRyYWRhIGNvbXVtIGRvcyBtw7NkdWxvcyBkZSBHQkxVUCBlIGFwcmVuZGl6YWRvIGRlIG3DoXF1aW5hLg0KDQojIDEuIENvbmhlY2VuZG8gb3MgZGFkb3Mgc2ltdWxhZG9zDQoNCk9zIGRhZG9zIGZvcmFtIHByZXZpYW1lbnRlIHNpbXVsYWRvcyBubyBzb2Z0d2FyZSBHRU5FUyBwYXJhIHVtYSBwb3B1bGHDp8OjbyBGMi4NClVtYSBwb3B1bGHDp8OjbyBGMiDDqSBvYnRpZGEgYXDDs3MgbyBjcnV6YW1lbnRvIGVudHJlIGluZGl2w61kdW9zIGRhIGdlcmHDp8OjbyBGMSBlIMOpDQpmcmVxdWVudGVtZW50ZSB1dGlsaXphZGEgZW0gZXN0dWRvcyBnZW7DqXRpY29zIHBvcnF1ZSBhcHJlc2VudGEgc2VncmVnYcOnw6NvIGRvcw0KYWxlbG9zIGhlcmRhZG9zIGRvcyBnZW5pdG9yZXMuDQoNCk5lc3RlIGNvbmp1bnRvIGV4aXN0ZW06DQoNCi0gMS4wMDAgaW5kaXbDrWR1b3M7DQotIDQuMDEwIFNOUHM7DQotIDEwIGdydXBvcyBkZSBsaWdhw6fDo287DQotIDYgY2FyYWN0ZXLDrXN0aWNhcyBzaW11bGFkYXMuDQoNClVtICoqU05QKiogw6kgdW1hIHBvc2nDp8OjbyBkbyBnZW5vbWEgZW0gcXVlIG9zIGluZGl2w61kdW9zIHBvZGVtIGFwcmVzZW50YXINCmRpZmVyZW50ZXMgdmFyaWFudGVzIGRlIEROQS4gTmVzdGUgdHV0b3JpYWwsIG9zIFNOUHMgc2Vyw6NvIHV0aWxpemFkb3MgY29tbw0KcHJlZGl0b3JlcyBkb3MgdmFsb3JlcyBnZW7DqXRpY29zLg0KDQpDaW5jbyBhcnF1aXZvcyBkYSBwYXN0YSBgZGF0YS9kYWRvc19zaW11bGFkb3MvYCBzw6NvIHV0aWxpemFkb3MgZGlyZXRhbWVudGU6DQoNCnwgQXJxdWl2byB8IENvbnRlw7pkbyB8DQp8LS0tfC0tLXwNCnwgYERHI2dlbl9GMl9WZmVuLnR4dGAgfCBmZW7Ds3RpcG9zIG9ic2VydmFkb3MgfA0KfCBgREcjZ2VuX0YyX1ZnZW4uZGF0YCB8IHZhbG9yZXMgZ2Vuw6l0aWNvcyB2ZXJkYWRlaXJvcyB8DQp8IGBnZW5vbWFfbWFwYS50eHRgIHwgZ2Vuw7N0aXBvcyBkb3MgNC4wMTAgU05QcyB8DQp8IGBnZW5vbWEudHh0YCB8IG1hcGEgZ2Vuw6l0aWNvIHwNCnwgYGNvbnRyb2xlZ2VuZXRpY28jMS5kYXRgIHwgcGFyw6JtZXRyb3MgZG9zIGNlbsOhcmlvcyBlIHBvc2nDp8O1ZXMgZG9zIFFUTCB8DQoNCkEgdGFiZWxhIGlkZW50aWZpY2EgYSBmdW7Dp8OjbyBkZSBjYWRhIGFycXVpdm8gYW50ZXMgZGEgbGVpdHVyYS4gT3MgZGVtYWlzDQphcnF1aXZvcyBvcmlnaW5haXMgc8OjbyBwcmVzZXJ2YWRvcyBwYXJhIHJhc3RyZWFiaWxpZGFkZSwgbWFzIG7Do28gc8OjbyBuZWNlc3PDoXJpb3MNCnBhcmEgY29uc3RydWlyIG8gb2JqZXRvIGFuYWzDrXRpY28gdXNhZG8gbmVzdGEgcHJpbWVpcmEgZmFzZS4NCg0KIyMgMS4xIERlZmluaW5kbyBhIHBhc3RhIGRvcyBhcnF1aXZvcw0KDQpQcmltZWlybyBpbmRpY2Ftb3Mgb25kZSBlc3TDo28gb3MgYXJxdWl2b3Mgc2ltdWxhZG9zLiBNYW50ZXIgZXNzZSBjYW1pbmhvIGVtIHVtDQrDum5pY28gb2JqZXRvIGZhY2lsaXRhIGEgbGVpdHVyYSBkb3MgYXJxdWl2b3Mgc2VndWludGVzIHNlbSByZXBldGlyIG8gbm9tZSBkYQ0KcGFzdGEuDQoNCmBgYHtyIGRlZmluaXItcGFzdGEtZGFkb3N9DQpkYWRvc19kaXIgPC0gImRhdGEvZGFkb3Nfc2ltdWxhZG9zIg0KDQpzdG9waWZub3QoDQogIGRpci5leGlzdHMoZGFkb3NfZGlyKQ0KKQ0KYGBgDQoNCk8gYHN0b3BpZm5vdCgpYCBpbnRlcnJvbXBlIGEgZXhlY3XDp8OjbyBzZSBhIHBhc3RhIG7Do28gZXhpc3Rpci4gRXNzZSB0aXBvIGRlDQp2ZXJpZmljYcOnw6NvIGFqdWRhIGEgaWRlbnRpZmljYXIgcmFwaWRhbWVudGUgcHJvYmxlbWFzIGRlIGVzdHJ1dHVyYSBhbyByZXByb2R1emlyDQpvIHR1dG9yaWFsIGVtIG91dHJvIGNvbXB1dGFkb3IuDQoNCiMjIDEuMiBMZW5kbyBvcyBmZW7Ds3RpcG9zDQoNCk8gZmVuw7N0aXBvIMOpIGEgY2FyYWN0ZXLDrXN0aWNhIG9ic2VydmFkYSBlbSBjYWRhIGluZGl2w61kdW8uIE8gYXJxdWl2byBwb3NzdWkgc2Vpcw0KY29sdW5hcywgdW1hIHBhcmEgY2FkYSBjZW7DoXJpbyBnZW7DqXRpY28gc2ltdWxhZG8uIERlcG9pcyBkYSBsZWl0dXJhLCBub21lYW1vcw0KZXNzYXMgY29sdW5hcyBjb21vIGBDMWAgYXTDqSBgQzZgLg0KDQpgYGB7ciBsZXItZmVub3RpcG9zfQ0KZmVub3RpcG8gPC0gYXMubWF0cml4KA0KICByZWFkLnRhYmxlKA0KICAgIGZpbGUucGF0aCgNCiAgICAgIGRhZG9zX2RpciwNCiAgICAgICJERyNnZW5fRjJfVmZlbi50eHQiDQogICAgKSwNCiAgICBoZWFkZXIgPSBGQUxTRQ0KICApDQopDQoNCmNvbG5hbWVzKGZlbm90aXBvKSA8LSBwYXN0ZTAoDQogICJDIiwNCiAgc2VxX2xlbigNCiAgICBuY29sKGZlbm90aXBvKQ0KICApDQopDQoNCm5faW5kaXZpZHVvcyA8LSBucm93KGZlbm90aXBvKQ0KDQpzdG9waWZub3QoDQogIG5faW5kaXZpZHVvcyA9PSAxMDAwTCwNCiAgbmNvbChmZW5vdGlwbykgPT0gNkwsDQogICFhbnlOQShmZW5vdGlwbykNCikNCmBgYA0KDQpBbyBmaW5hbCBkbyBibG9jbywgYGZlbm90aXBvYCDDqSB1bWEgbWF0cml6IGNvbSAxLjAwMCBsaW5oYXMgZSBzZWlzIGNvbHVuYXMuIENhZGENCmxpbmhhIHJlcHJlc2VudGEgdW0gaW5kaXbDrWR1byBlIGNhZGEgY29sdW5hIHJlcHJlc2VudGEgdW1hIGNhcmFjdGVyw61zdGljYQ0Kc2ltdWxhZGEuDQoNCiMjIDEuMyBMZW5kbyBvcyB2YWxvcmVzIGdlbsOpdGljb3MgdmVyZGFkZWlyb3MNCg0KQ29tbyBvcyBkYWRvcyBzw6NvIHNpbXVsYWRvcywgY29uaGVjZW1vcyB0YW1iw6ltIG8gdmFsb3IgZ2Vuw6l0aWNvIHZlcmRhZGVpcm8gZGUNCmNhZGEgaW5kaXbDrWR1by4gRXNzYSBpbmZvcm1hw6fDo28gw6kgbXVpdG8gw7p0aWwgcGFyYSBhdmFsaWFyIGFzIHByZWRpw6fDtWVzLCBtYXMgbsOjbw0KcG9kZSBzZXIgdXNhZGEgcGFyYSB0cmVpbmFyIG9zIG1vZGVsb3Mgb3Ugc2VsZWNpb25hciBtYXJjYWRvcmVzLg0KDQpgYGB7ciBsZXItdmFsb3Jlcy1nZW5ldGljb3N9DQp2YWxvcl9nZW5ldGljbyA8LSBhcy5tYXRyaXgoDQogIHJlYWQudGFibGUoDQogICAgZmlsZS5wYXRoKA0KICAgICAgZGFkb3NfZGlyLA0KICAgICAgIkRHI2dlbl9GMl9WZ2VuLmRhdCINCiAgICApLA0KICAgIGhlYWRlciA9IEZBTFNFDQogICkNCikNCg0KY29sbmFtZXModmFsb3JfZ2VuZXRpY28pIDwtIGNvbG5hbWVzKGZlbm90aXBvKQ0KDQpzdG9waWZub3QoDQogIGlkZW50aWNhbCgNCiAgICBkaW0oZmVub3RpcG8pLA0KICAgIGRpbSh2YWxvcl9nZW5ldGljbykNCiAgKSwNCiAgIWFueU5BKHZhbG9yX2dlbmV0aWNvKQ0KKQ0KYGBgDQoNCkFzIG1hdHJpemVzIGBmZW5vdGlwb2AgZSBgdmFsb3JfZ2VuZXRpY29gIHBvc3N1ZW0gZXhhdGFtZW50ZSBhIG1lc21hIGRpbWVuc8Ojby4NCklzc28gZ2FyYW50ZSBxdWUgY2FkYSB2YWxvciBnZW7DqXRpY28gdmVyZGFkZWlybyBwb3NzYSBzZXIgYXNzb2NpYWRvIGFvDQppbmRpdsOtZHVvIGUgw6AgY2FyYWN0ZXLDrXN0aWNhIGNvcnJlc3BvbmRlbnRlcy4NCg0KIyMgMS40IExlbmRvIGUgb3JnYW5pemFuZG8gb3MgZ2Vuw7N0aXBvcw0KDQpPIGFycXVpdm8gZ2Vub3TDrXBpY28gY29udMOpbSBvcyBlc3RhZG9zIGAwYCwgYDFgIGUgYDJgIHBhcmEgb3MgNC4wMTAgU05QcyBkb3MNCjEuMDAwIGluZGl2w61kdW9zLiBDb21vIG8gYXJxdWl2byDDqSBhcm1hemVuYWRvIGRlIGZvcm1hIGxpbmVhciwgcHJpbWVpcm8gbGVtb3MNCnRvZG9zIG9zIHZhbG9yZXMgZSBkZXBvaXMgcmVjb25zdHJ1w61tb3MgYSBtYXRyaXogZGUgaW5kaXbDrWR1b3MgcG9yIG1hcmNhZG9yZXMuDQoNCmBgYHtyIGxlci1nZW5vdGlwb3N9DQpuX21hcmNhZG9yZXMgPC0gNDAxMEwNCg0KdmFsb3Jlc19nZW5vdGlwb3MgPC0gc2NhbigNCiAgZmlsZS5wYXRoKA0KICAgIGRhZG9zX2RpciwNCiAgICAiZ2Vub21hX21hcGEudHh0Ig0KICApLA0KICB3aGF0ID0gaW50ZWdlcigpLA0KICBxdWlldCA9IFRSVUUNCikNCg0Kc3RvcGlmbm90KA0KICBsZW5ndGgodmFsb3Jlc19nZW5vdGlwb3MpID09DQogICAgbl9tYXJjYWRvcmVzICogbl9pbmRpdmlkdW9zDQopDQoNCmdlbm90aXBvXzAxMiA8LSBtYXRyaXgoDQogIHZhbG9yZXNfZ2Vub3RpcG9zLA0KICBucm93ID0gbl9tYXJjYWRvcmVzLA0KICBuY29sID0gbl9pbmRpdmlkdW9zLA0KICBieXJvdyA9IFRSVUUNCikNCg0KZ2Vub3RpcG9fMDEyIDwtIHQoZ2Vub3RpcG9fMDEyKQ0KDQpzdG9waWZub3QoDQogIGlkZW50aWNhbCgNCiAgICBkaW0oZ2Vub3RpcG9fMDEyKSwNCiAgICBjKDEwMDBMLCA0MDEwTCkNCiAgKSwNCiAgaWRlbnRpY2FsKA0KICAgIHNvcnQoDQogICAgICB1bmlxdWUoDQogICAgICAgIGFzLnZlY3RvcihnZW5vdGlwb18wMTIpDQogICAgICApDQogICAgKSwNCiAgICAwOjINCiAgKQ0KKQ0KYGBgDQoNCkEgbWF0cml6IGBnZW5vdGlwb18wMTJgIHBvc3N1aSAxLjAwMCBsaW5oYXMgZSA0LjAxMCBjb2x1bmFzLiBQb3J0YW50bywgY2FkYQ0KbGluaGEgcmVwcmVzZW50YSB1bSBpbmRpdsOtZHVvIGUgY2FkYSBjb2x1bmEgcmVwcmVzZW50YSB1bSBTTlAuDQoNCiMjIDEuNSBSZWNvZGlmaWNhbmRvIG9zIFNOUHMgZSBjcmlhbmRvIGlkZW50aWZpY2Fkb3Jlcw0KDQpQYXJhIGEgbW9kZWxhZ2VtLCByZWNvZGlmaWNhbW9zIGAwYCwgYDFgIGUgYDJgIGNvbW8gYC0xYCwgYDBgIGUgYDFgLiBFc3NhDQp0cmFuc2Zvcm1hw6fDo28gYXBlbmFzIG11ZGEgYSBlc2NhbGEgbnVtw6lyaWNhIHVzYWRhIHBhcmEgcmVwcmVzZW50YXIgb3MgdHLDqnMNCmdlbsOzdGlwb3M7IGVsYSBuw6NvIGFsdGVyYSBxdWFpcyBpbmRpdsOtZHVvcyBwZXJ0ZW5jZW0gYSBjYWRhIGNsYXNzZSBnZW5vdMOtcGljYS4NCg0KVGFtYsOpbSBjcmlhbW9zIG5vbWVzIHBhZHJvbml6YWRvcyBwYXJhIGluZGl2w61kdW9zIGUgbWFyY2Fkb3Jlcy4NCg0KYGBge3IgcmVjb2RpZmljYXItZ2Vub3RpcG9zfQ0KZ2Vub3RpcG8gPC0gZ2Vub3RpcG9fMDEyIC0gMUwNCg0KaWRzIDwtIHNlcV9sZW4obl9pbmRpdmlkdW9zKQ0KDQppZF9pbmRpdmlkdW8gPC0gc3ByaW50ZigNCiAgIklEJTA0ZCIsDQogIGlkcw0KKQ0KDQppZF9tYXJjYWRvciA8LSBwYXN0ZTAoDQogICJNIiwNCiAgc2VxX2xlbihuX21hcmNhZG9yZXMpDQopDQoNCnJvd25hbWVzKGZlbm90aXBvKSA8LSBpZF9pbmRpdmlkdW8NCnJvd25hbWVzKHZhbG9yX2dlbmV0aWNvKSA8LSBpZF9pbmRpdmlkdW8NCnJvd25hbWVzKGdlbm90aXBvKSA8LSBpZF9pbmRpdmlkdW8NCmNvbG5hbWVzKGdlbm90aXBvKSA8LSBpZF9tYXJjYWRvcg0KDQpybSgNCiAgdmFsb3Jlc19nZW5vdGlwb3MsDQogIGdlbm90aXBvXzAxMg0KKQ0KDQppbnZpc2libGUoDQogIGdjKCkNCikNCmBgYA0KDQpEZXBvaXMgZGVzc2EgZXRhcGEsIG9zIGdlbsOzdGlwb3MgZXN0w6NvIHByb250b3MgcGFyYSBvcyBtb2RlbG9zIGUgdG9kb3Mgb3MNCm9iamV0b3MgdXRpbGl6YW0gb3MgbWVzbW9zIGlkZW50aWZpY2Fkb3JlcyBkZSBpbmRpdsOtZHVvcy4NCg0KIyMgMS42IFJlc3VtaW5kbyBvcyBvYmpldG9zIHByaW5jaXBhaXMNCg0KQWdvcmEgcmV1bmltb3MgYXMgZGltZW5zw7VlcyBkb3MgdHLDqnMgb2JqZXRvcyBjZW50cmFpcy4gRXNzYSB0YWJlbGEgw6kgdW1hDQpjb25mZXLDqm5jaWEgcsOhcGlkYSBhbnRlcyBkZSBhdmFuw6dhcm1vcyBwYXJhIG8gbWFwYSBlIG8gZGVzZW5obyBleHBlcmltZW50YWwuDQoNCmBgYHtyIHRhYmVsYS1yZXN1bW8tZGFkb3N9DQpyZXN1bW9fZGFkb3MgPC0gZGF0YS5mcmFtZSgNCiAgT2JqZXRvID0gYygNCiAgICAiRmVuw7N0aXBvcyIsDQogICAgIlZhbG9yZXMgZ2Vuw6l0aWNvcyB2ZXJkYWRlaXJvcyIsDQogICAgIkdlbsOzdGlwb3MiDQogICksDQogIEluZGl2aWR1b3MgPSBjKA0KICAgIG5yb3coZmVub3RpcG8pLA0KICAgIG5yb3codmFsb3JfZ2VuZXRpY28pLA0KICAgIG5yb3coZ2Vub3RpcG8pDQogICksDQogIENvbHVuYXMgPSBjKA0KICAgIG5jb2woZmVub3RpcG8pLA0KICAgIG5jb2wodmFsb3JfZ2VuZXRpY28pLA0KICAgIG5jb2woZ2Vub3RpcG8pDQogICksDQogIFVzbyA9IGMoDQogICAgIlJlc3Bvc3RhIHV0aWxpemFkYSBubyB0cmVpbmFtZW50byIsDQogICAgIkF2YWxpYcOnw6NvIHByZWRpdGl2YSBhcMOzcyBhIHByZWRpw6fDo28iLA0KICAgICJQcmVkaXRvcmVzIGdlbsO0bWljb3MiDQogICkNCikNCg0Ka2FibGVFeHRyYTo6a2JsKA0KICByZXN1bW9fZGFkb3MsDQogIGNhcHRpb24gPSAiRXN0cnV0dXJhIGRvcyBwcmluY2lwYWlzIG9iamV0b3MgYW5hbMOtdGljb3MiLA0KICBhbGlnbiA9IGMoDQogICAgImwiLA0KICAgICJyIiwNCiAgICAiciIsDQogICAgImwiDQogICkNCikgfD4NCiAga2FibGVFeHRyYTo6a2FibGVfc3R5bGluZygNCiAgICBib290c3RyYXBfb3B0aW9ucyA9IGMoDQogICAgICAic3RyaXBlZCIsDQogICAgICAiaG92ZXIiLA0KICAgICAgImNvbmRlbnNlZCIsDQogICAgICAicmVzcG9uc2l2ZSINCiAgICApLA0KICAgIGZ1bGxfd2lkdGggPSBGQUxTRQ0KICApDQpgYGANCg0KT3MgZmVuw7N0aXBvcyBlIG9zIHZhbG9yZXMgZ2Vuw6l0aWNvcyB2ZXJkYWRlaXJvcyBwb3NzdWVtIHNlaXMgY29sdW5hcywgZW5xdWFudG8NCmEgbWF0cml6IGdlbm90w61waWNhIHBvc3N1aSA0LjAxMC4gTyB2YWxvciBnZW7DqXRpY28gdmVyZGFkZWlybyBzZXLDoSByZXNlcnZhZG8NCmV4Y2x1c2l2YW1lbnRlIHBhcmEgYXZhbGlhciBhcyBwcmVkacOnw7VlcyBwcm9kdXppZGFzIG5vcyBpbmRpdsOtZHVvcyBkZSB0ZXN0ZS4NCg0KIyAyLiBNYXBhIGdlbsOpdGljbw0KDQpVbSBncnVwbyBkZSBsaWdhw6fDo28gcmVwcmVzZW50YSB1bSBjb25qdW50byBkZSBtYXJjYWRvcmVzIHBlcnRlbmNlbnRlcyBhbyBtZXNtbw0Kc2VnbWVudG8gY3JvbW9zc8O0bWljbyBzaW11bGFkby4gTyBtYXBhIGluZm9ybWEgYSBvcmRlbSBlIGEgcG9zacOnw6NvIGRvcyBTTlBzIGVtDQpjYWRhIHVtIGRlc3NlcyBncnVwb3MuDQoNCiMjIDIuMSBMZW5kbyBvIG1hcGENCg0KTyBhcnF1aXZvIGBnZW5vbWEudHh0YCBwb3NzdWkgaW5mb3JtYcOnw7VlcyBhZGljaW9uYWlzIG5hcyBwcmltZWlyYXMgbGluaGFzLiBQb3INCmlzc28gdXNhbW9zIGBza2lwID0gMTJgIHBhcmEgY29tZcOnYXIgYSBsZWl0dXJhIGRpcmV0YW1lbnRlIG5hIHBhcnRlIHF1ZSBjb250w6ltDQpvcyBtYXJjYWRvcmVzLg0KDQpgYGB7ciBsZXItbWFwYS1nZW5ldGljb30NCm1hcGFfYnJ1dG8gPC0gcmVhZC50YWJsZSgNCiAgZmlsZS5wYXRoKA0KICAgIGRhZG9zX2RpciwNCiAgICAiZ2Vub21hLnR4dCINCiAgKSwNCiAgaGVhZGVyID0gRkFMU0UsDQogIHNlcCA9ICIsIiwNCiAgc2tpcCA9IDEyLA0KICBmaWxsID0gVFJVRSwNCiAgc3RyaXAud2hpdGUgPSBUUlVFLA0KICBmaWxlRW5jb2RpbmcgPSAibGF0aW4xIiwNCiAgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFDQopDQoNCm1hcGFfYnJ1dG8gPC0gbWFwYV9icnV0b1sNCiAgLA0KICAxOjUNCl0NCg0KbWFwYSA8LSBkYXRhLmZyYW1lKA0KICBtYXJjYWRvciA9IHNlcV9sZW4oDQogICAgbnJvdyhtYXBhX2JydXRvKQ0KICApLA0KICBpZF9tYXJjYWRvciA9IHBhc3RlMCgNCiAgICAiTSIsDQogICAgc2VxX2xlbigNCiAgICAgIG5yb3cobWFwYV9icnV0bykNCiAgICApDQogICksDQogIExHID0gYXMuaW50ZWdlcigNCiAgICBtYXBhX2JydXRvWw0KICAgICAgLA0KICAgICAgMQ0KICAgIF0NCiAgKSwNCiAgbWFyY2Fkb3Jfbm9fTEcgPSBhcy5pbnRlZ2VyKA0KICAgIG1hcGFfYnJ1dG9bDQogICAgICAsDQogICAgICAyDQogICAgXQ0KICApLA0KICBwb3NpY2FvX2NNID0gYXMubnVtZXJpYygNCiAgICBtYXBhX2JydXRvWw0KICAgICAgLA0KICAgICAgNQ0KICAgIF0NCiAgKSwNCiAgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFDQopDQoNCnN0b3BpZm5vdCgNCiAgbnJvdyhtYXBhKSA9PSBuX21hcmNhZG9yZXMsDQogIGlkZW50aWNhbCgNCiAgICBzb3J0KA0KICAgICAgdW5pcXVlKG1hcGEkTEcpDQogICAgKSwNCiAgICAxOjEwDQogICksDQogIGFsbCgNCiAgICB0YWJsZShtYXBhJExHKSA9PSA0MDFMDQogICkNCikNCmBgYA0KDQpBIGxlaXR1cmEgY29uZmlybWEgNC4wMTAgbWFyY2Fkb3JlcyBkaXN0cmlidcOtZG9zIGVudHJlIGRleiBncnVwb3MgZGUgbGlnYcOnw6NvLg0KDQojIyAyLjIgUmVzdW1pbmRvIGNhZGEgZ3J1cG8gZGUgbGlnYcOnw6NvDQoNClBhcmEgZGVpeGFyIG8gY8OzZGlnbyB0cmFuc3BhcmVudGUsIHBlcmNvcnJlbW9zIG9zIGRleiBncnVwb3MgZGUgbGlnYcOnw6NvIGNvbSB1bQ0KYGZvcmAuIEVtIGNhZGEgZ3J1cG8gY29udGFtb3Mgb3MgU05QcyBlIHJlZ2lzdHJhbW9zIGFzIHBvc2nDp8O1ZXMgaW5pY2lhbCwgZmluYWwgZQ0KbyBlc3Bhw6dhbWVudG8gZW50cmUgbWFyY2Fkb3Jlcy4NCg0KYGBge3IgdGFiZWxhLXJlc3Vtby1tYXBhfQ0KcmVzdW1vX21hcGEgPC0gZGF0YS5mcmFtZSgNCiAgTEcgPSAxOjEwLA0KICBNYXJjYWRvcmVzID0gaW50ZWdlcigxMCksDQogIEluaWNpb19jTSA9IG51bWVyaWMoMTApLA0KICBGaW1fY00gPSBudW1lcmljKDEwKSwNCiAgRXNwYWNhbWVudG9fY00gPSBudW1lcmljKDEwKQ0KKQ0KDQpmb3IgKGxnIGluIDE6MTApIHsNCg0KICBtYXBhX2xnIDwtIG1hcGFbDQogICAgbWFwYSRMRyA9PSBsZywNCiAgICAsDQogICAgZHJvcCA9IEZBTFNFDQogIF0NCg0KICByZXN1bW9fbWFwYSRNYXJjYWRvcmVzW2xnXSA8LSBucm93KG1hcGFfbGcpDQogIHJlc3Vtb19tYXBhJEluaWNpb19jTVtsZ10gPC0gbWluKG1hcGFfbGckcG9zaWNhb19jTSkNCiAgcmVzdW1vX21hcGEkRmltX2NNW2xnXSA8LSBtYXgobWFwYV9sZyRwb3NpY2FvX2NNKQ0KICByZXN1bW9fbWFwYSRFc3BhY2FtZW50b19jTVtsZ10gPC0NCiAgICB1bmlxdWUoDQogICAgICBkaWZmKA0KICAgICAgICBtYXBhX2xnJHBvc2ljYW9fY00NCiAgICAgICkNCiAgICApWzFdDQp9DQoNCmthYmxlRXh0cmE6OmtibCgNCiAgcmVzdW1vX21hcGEsDQogIGNhcHRpb24gPSAiRXN0cnV0dXJhIGRvIG1hcGEgZ2Vuw6l0aWNvIHBvciBncnVwbyBkZSBsaWdhw6fDo28iLA0KICBkaWdpdHMgPSAxDQopIHw+DQogIGthYmxlRXh0cmE6OmthYmxlX3N0eWxpbmcoDQogICAgYm9vdHN0cmFwX29wdGlvbnMgPSBjKA0KICAgICAgInN0cmlwZWQiLA0KICAgICAgImhvdmVyIiwNCiAgICAgICJjb25kZW5zZWQiLA0KICAgICAgInJlc3BvbnNpdmUiDQogICAgKSwNCiAgICBmdWxsX3dpZHRoID0gRkFMU0UNCiAgKQ0KYGBgDQoNClRvZG9zIG9zIGdydXBvcyBwb3NzdWVtIDQwMSBTTlBzIGRpc3RyaWJ1w61kb3MgZGUgMCBhIDIwMCBjTSwgY29tIGVzcGHDp2FtZW50byBkZQ0KMCw1IGNNLiBBIGRpc3RyaWJ1acOnw6NvIHJlZ3VsYXIgw6kgdW1hIGNhcmFjdGVyw61zdGljYSBkbyBlc3F1ZW1hIGRlIHNpbXVsYcOnw6NvDQp1c2FkbyBwYXJhIGdlcmFyIGVzc2VzIGRhZG9zLg0KDQoNCiMgMy4gQ2Vuw6FyaW9zIGdlbsOpdGljb3MNCg0KVW0gKipRVEwqKiAoKnF1YW50aXRhdGl2ZSB0cmFpdCBsb2N1cyopIMOpIHVtYSByZWdpw6NvIGRvIGdlbm9tYSBxdWUgY29udHJpYnVpDQpwYXJhIGEgdmFyaWHDp8OjbyBkZSB1bWEgY2FyYWN0ZXLDrXN0aWNhIHF1YW50aXRhdGl2YS4gT3Mgc2VpcyBjZW7DoXJpb3Mgc2ltdWxhZG9zDQpkaWZlcmVtIHByaW5jaXBhbG1lbnRlIG5vIG7Dum1lcm8gZGUgUVRMIGUgbmEgaGVyZGFiaWxpZGFkZS4NCg0KQSBoZXJkYWJpbGlkYWRlLCByZXByZXNlbnRhZGEgcG9yICRoXjIkLCBkZXNjcmV2ZSBhIHByb3BvcsOnw6NvIGRhIHZhcmlhw6fDo28NCmZlbm90w61waWNhIGFzc29jaWFkYSDDoCB2YXJpYcOnw6NvIGdlbsOpdGljYSBubyBjZW7DoXJpbyBzaW11bGFkby4NCg0KIyMgMy4xIExlbmRvIG8gYXJxdWl2byBkZSBjb250cm9sZQ0KDQpPIGFycXVpdm8gZGUgY29udHJvbGUgw6kgb3JnYW5pemFkbyBlbSBzZWlzIGJsb2NvcywgdW0gcGFyYSBjYWRhIGNhcmFjdGVyw61zdGljYS4NClByaW1laXJvIGxlbW9zIHRvZGFzIGFzIGxpbmhhcyBlIGlkZW50aWZpY2Ftb3Mgb25kZSBjYWRhIGJsb2NvIGNvbWXDp2EuDQoNCmBgYHtyIGxlci1jb250cm9sZS1jZW5hcmlvc30NCmNvbnRyb2xlX2xpbmhhcyA8LSByZWFkTGluZXMoDQogIGZpbGUucGF0aCgNCiAgICBkYWRvc19kaXIsDQogICAgImNvbnRyb2xlZ2VuZXRpY28jMS5kYXQiDQogICksDQogIHdhcm4gPSBGQUxTRSwNCiAgZW5jb2RpbmcgPSAibGF0aW4xIg0KKQ0KDQppbmljaW9fYmxvY29zIDwtIGdyZXAoDQogICJeVmFyaWF2ZWwiLA0KICBjb250cm9sZV9saW5oYXMNCikNCg0Kc3RvcGlmbm90KA0KICBsZW5ndGgoaW5pY2lvX2Jsb2NvcykgPT0gNkwNCikNCmBgYA0KDQpBcyBzZWlzIHBvc2nDp8O1ZXMgZW5jb250cmFkYXMgZW0gYGluaWNpb19ibG9jb3NgIGluZGljYW0gb25kZSBjb21lw6dhbSBhcw0KaW5mb3JtYcOnw7VlcyBkZSBDMSBhdMOpIEM2Lg0KDQojIyAzLjIgRXh0cmFpbmRvIG9zIHBhcsOibWV0cm9zIHNlbSBmdW7Dp8O1ZXMgYXV4aWxpYXJlcw0KDQpQYXJhIHVtIHR1dG9yaWFsLCDDqSBtYWlzIMO6dGlsIGVueGVyZ2FyIGV4cGxpY2l0YW1lbnRlIGNvbW8gY2FkYSBjYW1wbyDDqQ0KZXh0cmHDrWRvLiBQb3IgaXNzbyBwZXJjb3JyZW1vcyBvcyBzZWlzIGJsb2NvcyBjb20gdW0gYGZvcmAsIHNlbSBjcmlhciB1bWEgZnVuw6fDo28NCmF1eGlsaWFyIHBhcmEgZXNjb25kZXIgYSBsZWl0dXJhIGRhcyBsaW5oYXMuDQoNCmBgYHtyIG9yZ2FuaXphci1jZW5hcmlvc30NCm5fY2VuYXJpb3MgPC0gbGVuZ3RoKGluaWNpb19ibG9jb3MpDQoNCmNvbnRyb2xlX2NlbmFyaW9zIDwtIGRhdGEuZnJhbWUoDQogIGNlbmFyaW8gPSBwYXN0ZTAoDQogICAgIkMiLA0KICAgIHNlcV9sZW4obl9jZW5hcmlvcykNCiAgKSwNCiAgdmFyaWF2ZWwgPSBpbnRlZ2VyKG5fY2VuYXJpb3MpLA0KICB0b3RhbF9sb2NpID0gaW50ZWdlcihuX2NlbmFyaW9zKSwNCiAgbl9xdGwgPSBpbnRlZ2VyKG5fY2VuYXJpb3MpLA0KICBnbWQgPSBudW1lcmljKG5fY2VuYXJpb3MpLA0KICBtb2RlbG8gPSBpbnRlZ2VyKG5fY2VuYXJpb3MpLA0KICBoMiA9IG51bWVyaWMobl9jZW5hcmlvcyksDQogIGNvbnN0YW50ZSA9IG51bWVyaWMobl9jZW5hcmlvcyksDQogIGVzY2FsYSA9IG51bWVyaWMobl9jZW5hcmlvcyksDQogIENWID0gbnVtZXJpYyhuX2NlbmFyaW9zKSwNCiAgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFDQopDQoNCnF0bF9wb3JfY2VuYXJpbyA8LSB2ZWN0b3IoDQogICJsaXN0IiwNCiAgbl9jZW5hcmlvcw0KKQ0KDQpuYW1lcyhxdGxfcG9yX2NlbmFyaW8pIDwtIGNvbnRyb2xlX2NlbmFyaW9zJGNlbmFyaW8NCg0KZm9yIChpIGluIHNlcV9sZW4obl9jZW5hcmlvcykpIHsNCg0KICBpbmljaW8gPC0gaW5pY2lvX2Jsb2Nvc1tpXQ0KDQogIHBhcnRlcyA8LSBzdHJzcGxpdCgNCiAgICBjb250cm9sZV9saW5oYXNbaW5pY2lvXSwNCiAgICAiLCIsDQogICAgZml4ZWQgPSBUUlVFDQogIClbWzFdXQ0KDQogIGNvbnRyb2xlX2NlbmFyaW9zJHZhcmlhdmVsW2ldIDwtDQogICAgYXMuaW50ZWdlcigNCiAgICAgIHRyaW13cygNCiAgICAgICAgcGFydGVzWw0KICAgICAgICAgIGxlbmd0aChwYXJ0ZXMpDQogICAgICAgIF0NCiAgICAgICkNCiAgICApDQoNCiAgcGFydGVzIDwtIHN0cnNwbGl0KA0KICAgIGNvbnRyb2xlX2xpbmhhc1tpbmljaW8gKyAxTF0sDQogICAgIiwiLA0KICAgIGZpeGVkID0gVFJVRQ0KICApW1sxXV0NCg0KICBjb250cm9sZV9jZW5hcmlvcyR0b3RhbF9sb2NpW2ldIDwtDQogICAgYXMuaW50ZWdlcigNCiAgICAgIHRyaW13cygNCiAgICAgICAgcGFydGVzWw0KICAgICAgICAgIGxlbmd0aChwYXJ0ZXMpDQogICAgICAgIF0NCiAgICAgICkNCiAgICApDQoNCiAgcGFydGVzIDwtIHN0cnNwbGl0KA0KICAgIGNvbnRyb2xlX2xpbmhhc1tpbmljaW8gKyAyTF0sDQogICAgIiwiLA0KICAgIGZpeGVkID0gVFJVRQ0KICApW1sxXV0NCg0KICBjb250cm9sZV9jZW5hcmlvcyRuX3F0bFtpXSA8LQ0KICAgIGFzLmludGVnZXIoDQogICAgICB0cmltd3MoDQogICAgICAgIHBhcnRlc1sNCiAgICAgICAgICBsZW5ndGgocGFydGVzKQ0KICAgICAgICBdDQogICAgICApDQogICAgKQ0KDQogIHF0bF9wb3JfY2VuYXJpb1tbaV1dIDwtIHNjYW4oDQogICAgdGV4dCA9IGNvbnRyb2xlX2xpbmhhc1sNCiAgICAgIGluaWNpbyArIDNMDQogICAgXSwNCiAgICB3aGF0ID0gaW50ZWdlcigpLA0KICAgIHF1aWV0ID0gVFJVRQ0KICApDQoNCiAgcGFydGVzIDwtIHN0cnNwbGl0KA0KICAgIGNvbnRyb2xlX2xpbmhhc1tpbmljaW8gKyA1TF0sDQogICAgIiwiLA0KICAgIGZpeGVkID0gVFJVRQ0KICApW1sxXV0NCg0KICBjb250cm9sZV9jZW5hcmlvcyRnbWRbaV0gPC0NCiAgICBhcy5udW1lcmljKA0KICAgICAgdHJpbXdzKA0KICAgICAgICBwYXJ0ZXNbDQogICAgICAgICAgbGVuZ3RoKHBhcnRlcykNCiAgICAgICAgXQ0KICAgICAgKQ0KICAgICkNCg0KICBwYXJ0ZXMgPC0gc3Ryc3BsaXQoDQogICAgY29udHJvbGVfbGluaGFzW2luaWNpbyArIDZMXSwNCiAgICAiLCIsDQogICAgZml4ZWQgPSBUUlVFDQogIClbWzFdXQ0KDQogIGNvbnRyb2xlX2NlbmFyaW9zJG1vZGVsb1tpXSA8LQ0KICAgIGFzLmludGVnZXIoDQogICAgICB0cmltd3MoDQogICAgICAgIHBhcnRlc1sNCiAgICAgICAgICBsZW5ndGgocGFydGVzKQ0KICAgICAgICBdDQogICAgICApDQogICAgKQ0KDQogIHBhcnRlcyA8LSBzdHJzcGxpdCgNCiAgICBjb250cm9sZV9saW5oYXNbaW5pY2lvICsgN0xdLA0KICAgICIsIiwNCiAgICBmaXhlZCA9IFRSVUUNCiAgKVtbMV1dDQoNCiAgY29udHJvbGVfY2VuYXJpb3MkaDJbaV0gPC0NCiAgICBhcy5udW1lcmljKA0KICAgICAgdHJpbXdzKA0KICAgICAgICBwYXJ0ZXNbDQogICAgICAgICAgbGVuZ3RoKHBhcnRlcykNCiAgICAgICAgXQ0KICAgICAgKQ0KICAgICkNCg0KICBwYXJ0ZXMgPC0gc3Ryc3BsaXQoDQogICAgY29udHJvbGVfbGluaGFzW2luaWNpbyArIDhMXSwNCiAgICAiLCIsDQogICAgZml4ZWQgPSBUUlVFDQogIClbWzFdXQ0KDQogIGNvbnRyb2xlX2NlbmFyaW9zJGNvbnN0YW50ZVtpXSA8LQ0KICAgIGFzLm51bWVyaWMoDQogICAgICB0cmltd3MoDQogICAgICAgIHBhcnRlc1sNCiAgICAgICAgICBsZW5ndGgocGFydGVzKQ0KICAgICAgICBdDQogICAgICApDQogICAgKQ0KDQogIHBhcnRlcyA8LSBzdHJzcGxpdCgNCiAgICBjb250cm9sZV9saW5oYXNbaW5pY2lvICsgOUxdLA0KICAgICIsIiwNCiAgICBmaXhlZCA9IFRSVUUNCiAgKVtbMV1dDQoNCiAgY29udHJvbGVfY2VuYXJpb3MkZXNjYWxhW2ldIDwtDQogICAgYXMubnVtZXJpYygNCiAgICAgIHRyaW13cygNCiAgICAgICAgcGFydGVzWw0KICAgICAgICAgIGxlbmd0aChwYXJ0ZXMpDQogICAgICAgIF0NCiAgICAgICkNCiAgICApDQoNCiAgcGFydGVzIDwtIHN0cnNwbGl0KA0KICAgIGNvbnRyb2xlX2xpbmhhc1tpbmljaW8gKyAxMExdLA0KICAgICIsIiwNCiAgICBmaXhlZCA9IFRSVUUNCiAgKVtbMV1dDQoNCiAgY29udHJvbGVfY2VuYXJpb3MkQ1ZbaV0gPC0NCiAgICBhcy5udW1lcmljKA0KICAgICAgdHJpbXdzKA0KICAgICAgICBwYXJ0ZXNbDQogICAgICAgICAgbGVuZ3RoKHBhcnRlcykNCiAgICAgICAgXQ0KICAgICAgKQ0KICAgICkNCn0NCg0Kc3RvcGlmbm90KA0KICBhbGwoDQogICAgY29udHJvbGVfY2VuYXJpb3MkdG90YWxfbG9jaSA9PSA0MDEwTA0KICApLA0KICBhbGwoDQogICAgY29udHJvbGVfY2VuYXJpb3Mkbl9xdGwgPT0NCiAgICAgIGxlbmd0aHMocXRsX3Bvcl9jZW5hcmlvKQ0KICApLA0KICBhbGwoDQogICAgdW5saXN0KHF0bF9wb3JfY2VuYXJpbykgJWluJQ0KICAgICAgc2VxX2xlbihuX21hcmNhZG9yZXMpDQogICkNCikNCmBgYA0KDQpPIG9iamV0byBgY29udHJvbGVfY2VuYXJpb3NgIGFnb3JhIHBvc3N1aSB1bWEgbGluaGEgcGFyYSBjYWRhIGNlbsOhcmlvLiBBIGxpc3RhDQpgcXRsX3Bvcl9jZW5hcmlvYCBndWFyZGEgYXMgcG9zacOnw7VlcyB2ZXJkYWRlaXJhcyBkb3MgUVRMIGUgc2Vyw6EgcHJlc2VydmFkYQ0Kc29tZW50ZSBwYXJhIGF2YWxpYcOnw7VlcyBwb3N0ZXJpb3Jlcy4NCg0KIyMgMy4zIENvbXBhcmFuZG8gb3Mgc2VpcyBjZW7DoXJpb3MNCg0KQSB0YWJlbGEgYWJhaXhvIHJlw7puZSBhcyBpbmZvcm1hw6fDtWVzIG5lY2Vzc8OhcmlhcyBwYXJhIGludGVycHJldGFyIG9zIGNlbsOhcmlvcw0KZ2Vuw6l0aWNvcyBhbnRlcyBkZSBjb21wYXJhciBvcyBtw6l0b2RvcyBkZSBwcmVkacOnw6NvLg0KDQpgYGB7ciB0YWJlbGEtY2VuYXJpb3N9DQp0YWJlbGFfY2VuYXJpb3MgPC0gY29udHJvbGVfY2VuYXJpb3NbDQogICwNCiAgYygNCiAgICAiY2VuYXJpbyIsDQogICAgIm5fcXRsIiwNCiAgICAiaDIiDQogICkNCl0NCg0Ka2FibGVFeHRyYTo6a2JsKA0KICB0YWJlbGFfY2VuYXJpb3MsDQogIGNhcHRpb24gPSAiQXJxdWl0ZXR1cmEgZ2Vuw6l0aWNhIGRvcyBzZWlzIGNlbsOhcmlvcyBzaW11bGFkb3MiLA0KICBkaWdpdHMgPSAyLA0KICBjb2wubmFtZXMgPSBjKA0KICAgICJDZW7DoXJpbyIsDQogICAgIk7Dum1lcm8gZGUgUVRMIiwNCiAgICAiSGVyZGFiaWxpZGFkZSAoaMKyKSINCiAgKQ0KKSB8Pg0KICBrYWJsZUV4dHJhOjprYWJsZV9zdHlsaW5nKA0KICAgIGJvb3RzdHJhcF9vcHRpb25zID0gYygNCiAgICAgICJzdHJpcGVkIiwNCiAgICAgICJob3ZlciIsDQogICAgICAiY29uZGVuc2VkIiwNCiAgICAgICJyZXNwb25zaXZlIg0KICAgICksDQogICAgZnVsbF93aWR0aCA9IEZBTFNFDQogICkNCmBgYA0KDQpDMSBlIEMyIGNvbXBhcnRpbGhhbSAkaF4yPTB7LH03JCwgQzMgZSBDNCBjb21wYXJ0aWxoYW0gJGheMj0weyx9NSQsIGUgQzUgZSBDNg0KY29tcGFydGlsaGFtICRoXjI9MHssfTMkLiBEZW50cm8gZGUgY2FkYSBwYXIsIG8gc2VndW5kbyBjZW7DoXJpbyBwb3NzdWkgbWFpcyBRVEwuDQpFc3NhIG9yZ2FuaXphw6fDo28gcGVybWl0ZSBkZXNjcmV2ZXIgY29tbyBvcyBtw6l0b2RvcyBzZSBjb21wb3J0YW0gZW0gYXJxdWl0ZXR1cmFzDQpjb20gZGlmZXJlbnRlcyBuw7ptZXJvcyBkZSBRVEwgZSBoZXJkYWJpbGlkYWRlcywgc2VtIHRyYXRhciBvIGRlc2VuaG8gY29tbyB1bQ0KZmF0b3JpYWwgY29tcGxldG8uDQoNCkEgcXVhbnRpZGFkZSBkZSBRVEwgdGFtYsOpbSBwb2RlIHNlciB2aXN1YWxpemFkYSBkaXJldGFtZW50ZS4gQSBmaWd1cmEgdXRpbGl6YSBhDQpwYWxldGEgR0RvY3MgZGVmaW5pZGEgY29tbyBwYWRyw6NvIHZpc3VhbCBkZXN0ZSB0dXRvcmlhbC4NCg0KYGBge3IgZmlndXJhLW51bWVyby1xdGwsIGZpZy5oZWlnaHQ9NC42LCBmaWcud2lkdGg9Ny41LCBmaWcuY2FwPSJOw7ptZXJvIGRlIFFUTCBlbSBjYWRhIGNlbsOhcmlvIGdlbsOpdGljbyBzaW11bGFkby4ifQ0KaWYgKCFyZXF1aXJlTmFtZXNwYWNlKA0KICAiZ2dwbG90MiIsDQogIHF1aWV0bHkgPSBUUlVFDQopKSB7DQogIHN0b3AoDQogICAgIkluc3RhbGUgbyBwYWNvdGUgZ2dwbG90MiBwYXJhIGdlcmFyIGFzIGZpZ3VyYXMgZG8gdHV0b3JpYWwuIg0KICApDQp9DQoNCmlmICghcmVxdWlyZU5hbWVzcGFjZSgNCiAgImdndGhlbWVzIiwNCiAgcXVpZXRseSA9IFRSVUUNCikpIHsNCiAgc3RvcCgNCiAgICAiSW5zdGFsZSBvIHBhY290ZSBnZ3RoZW1lcyBwYXJhIHVzYXIgbyBwYWRyw6NvIGdyw6FmaWNvIEdEb2NzLiINCiAgKQ0KfQ0KDQpmaWd1cmFfcXRsIDwtIGdncGxvdDI6OmdncGxvdCgNCiAgY29udHJvbGVfY2VuYXJpb3MsDQogIGdncGxvdDI6OmFlcygNCiAgICB4ID0gY2VuYXJpbywNCiAgICB5ID0gbl9xdGwNCiAgKQ0KKSArDQogIGdncGxvdDI6Omdlb21fY29sKA0KICAgIGZpbGwgPSBnZ3RoZW1lczo6Z2RvY3NfcGFsKCkoMSksDQogICAgd2lkdGggPSAwLjcyDQogICkgKw0KICBnZ3Bsb3QyOjpsYWJzKA0KICAgIHRpdGxlID0gIkNvbXBsZXhpZGFkZSBkb3MgY2Vuw6FyaW9zIHNpbXVsYWRvcyIsDQogICAgeCA9ICJDZW7DoXJpbyIsDQogICAgeSA9ICJOw7ptZXJvIGRlIFFUTCINCiAgKSArDQogIGdndGhlbWVzOjp0aGVtZV9nZG9jcygNCiAgICBiYXNlX3NpemUgPSAxMg0KICApICsNCiAgZ2dwbG90Mjo6dGhlbWUoDQogICAgcGxvdC50aXRsZSA9IGdncGxvdDI6OmVsZW1lbnRfdGV4dCgNCiAgICAgIGZhY2UgPSAiYm9sZCINCiAgICApDQogICkNCg0KZmlndXJhX3F0bA0KYGBgDQoNCkEgZmlndXJhIGV2aWRlbmNpYSBvIGF1bWVudG8gcHJvZ3Jlc3Npdm8gZG8gbsO6bWVybyBkZSBRVEwgZW50cmUgQzEgZSBDNi4gRXNzZQ0KYXVtZW50byBuw6NvIGRldmUgc2VyIGludGVycHJldGFkbyBpc29sYWRhbWVudGUgY29tbyBlZmVpdG8gY2F1c2FsIGRhDQpwb2xpZ2VuaWNpZGFkZSwgcG9ycXVlIGEgaGVyZGFiaWxpZGFkZSB0YW1iw6ltIHZhcmlhIGVudHJlIGdydXBvcyBkZSBjZW7DoXJpb3MuDQoNCiMgNC4gUmVkdcOnw6NvIGRvIG7Dum1lcm8gZGUgbWFyY2Fkb3Jlcw0KDQpOZXN0YSBwcmltZWlyYSBmYXNlLCBvIG7Dum1lcm8gZGUgaW5kaXbDrWR1b3MgcGVybWFuZWNlIGZpeG8gZW0NCg0KJCQNCm49MTAwMC4NCiQkDQoNCkEgZGltZW5zw6NvIG1vZGlmaWNhZGEgw6kgYXBlbmFzIG8gbsO6bWVybyBkZSBTTlBzLCByZXByZXNlbnRhZG8gcG9yIGBwYC4NCg0KTyBwYWluZWwgY29tcGxldG8gY29tIDQuMDEwIG1hcmNhZG9yZXMgw6kgYSByZWZlcsOqbmNpYS4gRGVwb2lzLCBjYWRhIG3DqXRvZG8NCmNvbnN0cnVpcsOhIHNldSBwcsOzcHJpbyByYW5raW5nIGRlIGltcG9ydMOibmNpYSBlIHV0aWxpemFyw6Egb3MgcHJpbWVpcm9zIFNOUHMNCmRlc3NlIHJhbmtpbmcgcGFyYSBmb3JtYXIgcGFpbsOpaXMgcHJvZ3Jlc3NpdmFtZW50ZSBtZW5vcmVzLg0KDQojIyA0LjEgRGVmaW5pbmRvIG9zIG7DrXZlaXMgZGUgYHBgDQoNCkEgcmVncmEgdXRpbGl6YWRhIMOpIGEgbWVzbWEgcGFyYSB0b2RvcyBvcyBtw6l0b2Rvcy4gUGFyYSB0cmFuc2Zvcm1hciBjYWRhDQpwcm9wb3LDp8OjbyBlbSB1bSBuw7ptZXJvIGludGVpcm8gZGUgU05QcyB1c2Ftb3MgYXJyZWRvbmRhbWVudG8gKmhhbGYtdXAqOg0KDQokJA0KcF9xPVxsZmxvb3IgNDAxMHErMHssfTVccmZsb29yLA0KJCQNCg0KZW0gcXVlICRxJCDDqSBhIHByb3BvcsOnw6NvIGRlIG1hcmNhZG9yZXMgbWFudGlkYS4NCg0KYGBge3IgdGFiZWxhLW5pdmVpcy1wfQ0KcHJvcG9yY29lc19wIDwtIGMoDQogIDEsDQogIDAuNTAsDQogIDAuMjUsDQogIDAuMTAsDQogIDAuMDUsDQogIDAuMDENCikNCg0Kbml2ZWlzX3AgPC0gZGF0YS5mcmFtZSgNCiAgcHJvcG9yY2FvID0gcHJvcG9yY29lc19wLA0KICBwZXJjZW50dWFsID0gcGFzdGUwKA0KICAgIHByb3BvcmNvZXNfcCAqIDEwMCwNCiAgICAiJSINCiAgKSwNCiAgbl9tYXJjYWRvcmVzID0gZmxvb3IoDQogICAgbl9tYXJjYWRvcmVzICoNCiAgICAgIHByb3BvcmNvZXNfcCArDQogICAgICAwLjUNCiAgKSwNCiAgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFDQopDQoNCnN0b3BpZm5vdCgNCiAgaWRlbnRpY2FsKA0KICAgIG5pdmVpc19wJG5fbWFyY2Fkb3JlcywNCiAgICBjKA0KICAgICAgNDAxMCwNCiAgICAgIDIwMDUsDQogICAgICAxMDAzLA0KICAgICAgNDAxLA0KICAgICAgMjAxLA0KICAgICAgNDANCiAgICApDQogICkNCikNCg0Ka2FibGVFeHRyYTo6a2JsKA0KICBuaXZlaXNfcCwNCiAgY2FwdGlvbiA9ICJOw612ZWlzIGRlIHJlZHXDp8OjbyBkbyBuw7ptZXJvIGRlIG1hcmNhZG9yZXMiLA0KICBjb2wubmFtZXMgPSBjKA0KICAgICJQcm9wb3LDp8OjbyIsDQogICAgIlBlcmNlbnR1YWwiLA0KICAgICJOw7ptZXJvIGRlIFNOUHMiDQogICkNCikgfD4NCiAga2FibGVFeHRyYTo6a2FibGVfc3R5bGluZygNCiAgICBib290c3RyYXBfb3B0aW9ucyA9IGMoDQogICAgICAic3RyaXBlZCIsDQogICAgICAiaG92ZXIiLA0KICAgICAgImNvbmRlbnNlZCIsDQogICAgICAicmVzcG9uc2l2ZSINCiAgICApLA0KICAgIGZ1bGxfd2lkdGggPSBGQUxTRQ0KICApDQpgYGANCg0KQSByZWR1w6fDo28gbWFpcyBtb2RlcmFkYSBtYW50w6ltIDIuMDA1IGRvcyA0LjAxMCBTTlBzLCBlbnF1YW50byBhIGNvbmRpw6fDo28gbWFpcw0KZXh0cmVtYSBtYW50w6ltIGFwZW5hcyA0MC4gRXNzZXMgbWVzbW9zIHNlaXMgdGFtYW5ob3Mgc2Vyw6NvIHVzYWRvcyBwYXJhIHRvZG9zIG9zDQptw6l0b2Rvcy4NCg0KIyMgNC4yIFBhaW7DqWlzIGFuaW5oYWRvcw0KDQpPIE0wMSBhaW5kYSBuw6NvIHNlbGVjaW9uYSBTTlBzLiBBIHNlbGXDp8OjbyBvY29ycmVyw6EgZGVudHJvIGRlIGNhZGEgbcOpdG9kbywNCmNlbsOhcmlvIGUgZm9sZC4gVW1hIHZleiBvYnRpZG8gbyByYW5raW5nLCBvcyBwYWluw6lpcyBzZXLDo28gYW5pbmhhZG9zOg0KDQokJA0KUF97MVwlfQ0KXHN1YnNldA0KUF97NVwlfQ0KXHN1YnNldA0KUF97MTBcJX0NClxzdWJzZXQNClBfezI1XCV9DQpcc3Vic2V0DQpQX3s1MFwlfQ0KXHN1YnNldA0KUF97MTAwXCV9Lg0KJCQNCg0KSXNzbyBzaWduaWZpY2EsIHBvciBleGVtcGxvLCBxdWUgb3MgNDAgU05QcyBkbyBwYWluZWwgZGUgMSUgdGFtYsOpbSBlc3RhcsOjbw0KcHJlc2VudGVzIG5vcyBwYWluw6lpcyBkZSA1JSwgMTAlLCAyNSUsIDUwJSBlIDEwMCUuDQoNCiMgNS4gVmFsaWRhw6fDo28gY3J1emFkYSBjb211bQ0KDQpQYXJhIGNvbXBhcmFyIG9zIG3DqXRvZG9zIGRlIGZvcm1hIGp1c3RhLCB0b2RvcyBkZXZlbSBwcmV2ZXIgZXhhdGFtZW50ZSBvcyBtZXNtb3MNCmluZGl2w61kdW9zLiBVdGlsaXphbW9zIHZhbGlkYcOnw6NvIGNydXphZGEgY29tIGNpbmNvIGZvbGRzLg0KDQpVbSAqKmZvbGQqKiDDqSB1bWEgcGFydGUgZG9zIGRhZG9zIHJlc2VydmFkYSB0ZW1wb3JhcmlhbWVudGUgcGFyYSB0ZXN0ZS4gRW0gY2FkYQ0Kcm9kYWRhOg0KDQotIDgwMCBpbmRpdsOtZHVvcyBmaWNhbSBubyB0cmVpbmFtZW50bzsNCi0gMjAwIGluZGl2w61kdW9zIGZpY2FtIG5vIHRlc3RlOw0KLSBvIG1vZGVsbyDDqSBhanVzdGFkbyBzZW0gb3MgZmVuw7N0aXBvcyBkZXNzZXMgMjAwIGluZGl2w61kdW9zOw0KLSBkZXBvaXMgYXZhbGlhbW9zIGFzIHByZWRpw6fDtWVzIHByb2R1emlkYXMgcGFyYSBlbGVzLg0KDQpBbyBmaW5hbCBkYXMgY2luY28gcm9kYWRhcywgdG9kb3Mgb3MgMS4wMDAgaW5kaXbDrWR1b3MgcGFydGljaXBhcmFtIHVtYSB2ZXogZG8NCnRlc3RlLg0KDQojIyA1LjEgQ3JpYW5kbyBvcyBjaW5jbyBmb2xkcw0KDQpBIHNlcGFyYcOnw6NvIGRlcGVuZGUgc29tZW50ZSBkb3MgaWRlbnRpZmljYWRvcmVzIGRvcyBpbmRpdsOtZHVvcyBlIGRlIHVtYSBzZW1lbnRlDQpmaXhhLiBGZW7Ds3RpcG9zLCB2YWxvcmVzIGdlbsOpdGljb3MsIGdlbsOzdGlwb3MgZSBwb3Npw6fDtWVzIGRvcyBRVEwgbsOjbyBwYXJ0aWNpcGFtDQpkbyBzb3J0ZWlvLg0KDQpgYGB7ciBjcmlhci1mb2xkc30NClNFRURfREVTRU5ITyA8LSAyMDI2MDkwOEwNCk5fRk9MRFMgPC0gNUwNCg0Kc2V0LnNlZWQoU0VFRF9ERVNFTkhPKQ0KDQpvcmRlbV9pbmRpdmlkdW9zIDwtIHNhbXBsZSgNCiAgaWRzLA0KICBzaXplID0gbGVuZ3RoKGlkcyksDQogIHJlcGxhY2UgPSBGQUxTRQ0KKQ0KDQpmb2xkX25hX29yZGVtIDwtIHJlcCgNCiAgc2VxX2xlbihOX0ZPTERTKSwNCiAgbGVuZ3RoLm91dCA9IG5faW5kaXZpZHVvcw0KKQ0KDQpmb2xkX2luZGl2aWR1byA8LSBpbnRlZ2VyKA0KICBuX2luZGl2aWR1b3MNCikNCg0KZm9sZF9pbmRpdmlkdW9bDQogIG9yZGVtX2luZGl2aWR1b3MNCl0gPC0gZm9sZF9uYV9vcmRlbQ0KDQphdHJpYnVpY2FvX2ZvbGRzIDwtIGRhdGEuZnJhbWUoDQogIGlkID0gaWRzLA0KICBpbmRpdmlkdW8gPSBpZF9pbmRpdmlkdW8sDQogIGZvbGQgPSBmb2xkX2luZGl2aWR1bywNCiAgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFDQopDQoNCmZvbGRzIDwtIHZlY3RvcigNCiAgImxpc3QiLA0KICBOX0ZPTERTDQopDQoNCm5hbWVzKGZvbGRzKSA8LSBwYXN0ZTAoDQogICJGb2xkIiwNCiAgc2VxX2xlbihOX0ZPTERTKQ0KKQ0KDQpmb3IgKGsgaW4gc2VxX2xlbihOX0ZPTERTKSkgew0KDQogIGZvbGRzW1trXV0gPC0gbGlzdCgNCiAgICBmb2xkID0gaywNCiAgICB0cmVpbm8gPSBpZHNbDQogICAgICBmb2xkX2luZGl2aWR1byAhPSBrDQogICAgXSwNCiAgICB0ZXN0ZSA9IGlkc1sNCiAgICAgIGZvbGRfaW5kaXZpZHVvID09IGsNCiAgICBdDQogICkNCn0NCmBgYA0KDQpBIHNlbWVudGUgZml4YSB0b3JuYSBhIGRpdmlzw6NvIHJlcHJvZHV6w612ZWwuIFF1YWxxdWVyIHBlc3NvYSBxdWUgZXhlY3V0ZSBlc3NlDQpibG9jbyBjb20gb3MgbWVzbW9zIGRhZG9zIG9idGVyw6Egb3MgbWVzbW9zIGluZGl2w61kdW9zIGVtIGNhZGEgZm9sZC4NCg0KIyMgNS4yIEF1ZGl0YW5kbyBvcyB0YW1hbmhvcyBkZSB0cmVpbm8gZSB0ZXN0ZQ0KDQpBbnRlcyBkZSB1c2FyIG9zIGZvbGRzLCB2ZXJpZmljYW1vcyBzZSBjYWRhIHBhcnRpw6fDo28gcG9zc3VpIDgwMCBpbmRpdsOtZHVvcyBubw0KdHJlaW5hbWVudG8sIDIwMCBubyB0ZXN0ZSBlIG5lbmh1bWEgc29icmVwb3Npw6fDo28gZW50cmUgZXNzZXMgZG9pcyBjb25qdW50b3MuDQoNCmBgYHtyIHRhYmVsYS1yZXN1bW8tZm9sZHN9DQp0YW1hbmhvX3RyZWlubyA8LSBpbnRlZ2VyKA0KICBOX0ZPTERTDQopDQoNCnRhbWFuaG9fdGVzdGUgPC0gaW50ZWdlcigNCiAgTl9GT0xEUw0KKQ0KDQpzb2JyZXBvc2ljYW8gPC0gaW50ZWdlcigNCiAgTl9GT0xEUw0KKQ0KDQpmb3IgKGsgaW4gc2VxX2xlbihOX0ZPTERTKSkgew0KDQogIHRhbWFuaG9fdHJlaW5vW2tdIDwtDQogICAgbGVuZ3RoKA0KICAgICAgZm9sZHNbW2tdXSR0cmVpbm8NCiAgICApDQoNCiAgdGFtYW5ob190ZXN0ZVtrXSA8LQ0KICAgIGxlbmd0aCgNCiAgICAgIGZvbGRzW1trXV0kdGVzdGUNCiAgICApDQoNCiAgc29icmVwb3NpY2FvW2tdIDwtDQogICAgbGVuZ3RoKA0KICAgICAgaW50ZXJzZWN0KA0KICAgICAgICBmb2xkc1tba11dJHRyZWlubywNCiAgICAgICAgZm9sZHNbW2tdXSR0ZXN0ZQ0KICAgICAgKQ0KICAgICkNCn0NCg0Kc3RvcGlmbm90KA0KICBhbGwoDQogICAgdGFibGUoDQogICAgICBhdHJpYnVpY2FvX2ZvbGRzJGZvbGQNCiAgICApID09IDIwMEwNCiAgKSwNCiAgYWxsKA0KICAgIHRhbWFuaG9fdHJlaW5vID09IDgwMEwNCiAgKSwNCiAgYWxsKA0KICAgIHRhbWFuaG9fdGVzdGUgPT0gMjAwTA0KICApLA0KICBhbGwoDQogICAgc29icmVwb3NpY2FvID09IDBMDQogICkNCikNCg0KcmVzdW1vX2ZvbGRzIDwtIGRhdGEuZnJhbWUoDQogIEZvbGQgPSBzZXFfbGVuKE5fRk9MRFMpLA0KICBUcmVpbmFtZW50byA9IHRhbWFuaG9fdHJlaW5vLA0KICBUZXN0ZSA9IHRhbWFuaG9fdGVzdGUsDQogIFNvYnJlcG9zaWNhbyA9IHNvYnJlcG9zaWNhbw0KKQ0KDQprYWJsZUV4dHJhOjprYmwoDQogIHJlc3Vtb19mb2xkcywNCiAgY2FwdGlvbiA9ICJUYW1hbmhvIGRvcyBjb25qdW50b3MgZGUgdHJlaW5hbWVudG8gZSB0ZXN0ZSIsDQogIGNvbC5uYW1lcyA9IGMoDQogICAgIkZvbGQiLA0KICAgICJUcmVpbmFtZW50byIsDQogICAgIlRlc3RlIiwNCiAgICAiU29icmVwb3Npw6fDo28iDQogICkNCikgfD4NCiAga2FibGVFeHRyYTo6a2FibGVfc3R5bGluZygNCiAgICBib290c3RyYXBfb3B0aW9ucyA9IGMoDQogICAgICAic3RyaXBlZCIsDQogICAgICAiaG92ZXIiLA0KICAgICAgImNvbmRlbnNlZCIsDQogICAgICAicmVzcG9uc2l2ZSINCiAgICApLA0KICAgIGZ1bGxfd2lkdGggPSBGQUxTRQ0KICApDQpgYGANCg0KT3MgY2luY28gZm9sZHMgcG9zc3VlbSBleGF0YW1lbnRlIGEgbWVzbWEgZGltZW5zw6NvOiA4MDAgaW5kaXbDrWR1b3MgcGFyYQ0KdHJlaW5hbWVudG8gZSAyMDAgcGFyYSB0ZXN0ZS4gQSBjb2x1bmEg4oCcU29icmVwb3Npw6fDo2/igJ0gw6kgemVybyBlbSB0b2RvcyBvcyBjYXNvcywNCmNvbmZpcm1hbmRvIHF1ZSBuZW5odW0gaW5kaXbDrWR1byBwZXJ0ZW5jZSBzaW11bHRhbmVhbWVudGUgYW8gdHJlaW5vIGUgYW8gdGVzdGUNCmRlbnRybyBkYSBtZXNtYSByb2RhZGEuDQoNCg0KIyA2LiBQcmVwYXJhw6fDo28gcGFyYSBhIGZ1dHVyYSByZWR1w6fDo28gZGUgYG5gDQoNCkEgcmVkdcOnw6NvIGRvIG7Dum1lcm8gZGUgaW5kaXbDrWR1b3MgYWluZGEgbsOjbyBmYXogcGFydGUgZGVzdGEgZmFzZS4gTWVzbW8gYXNzaW0sDQpndWFyZGFtb3MgYG9yZGVtX2luZGl2aWR1b3NgLCBhIHBlcm11dGHDp8OjbyBhbGVhdMOzcmlhIGNyaWFkYSBjb20gYSBzZW1lbnRlIGZpeGEuDQoNCkVzc2EgZGVjaXPDo28gcGVybWl0aXLDoSBjb25zdHJ1aXIsIGZ1dHVyYW1lbnRlLCB0YW1hbmhvcyBhbW9zdHJhaXMgYW5pbmhhZG9zIHNlbQ0Kc29ydGVhciBub3ZhbWVudGUgb3MgaW5kaXbDrWR1b3MgZGVwb2lzIGRlIGNvbmhlY2VyIG9zIHJlc3VsdGFkb3MgZGEgcmVkdcOnw6NvIGRlDQpgcGAuDQoNCiMgNy4gU2FsdmFuZG8gbyBvYmpldG8gY29tdW0gZG8gcHJvamV0bw0KDQpPcyBtw7NkdWxvcyBzZWd1aW50ZXMgbsOjbyBwcmVjaXNhbSByZXBldGlyIHRvZGEgYSBwcmVwYXJhw6fDo28gcmVhbGl6YWRhIG5lc3RhDQpww6FnaW5hLiBFbSB2ZXogZGlzc28sIHJldW5pbW9zIG9zIG9iamV0b3MgbmVjZXNzw6FyaW9zIGVtIHVtYSBsaXN0YSBlIGEgc2FsdmFtb3MNCmNvbW8gdW0gYXJxdWl2byBSRFMuDQoNCk8gY2FtcG8gYGltcG9ydGFuY2lhX3NvbWVudGVfdHJlaW5hbWVudG8gPSBUUlVFYCByZWdpc3RyYSBhIHJlZ3JhIGRlIHF1ZQ0KZmVuw7N0aXBvcyBkZSB0ZXN0ZSBlIHZhbG9yZXMgZ2Vuw6l0aWNvcyB2ZXJkYWRlaXJvcyBuw6NvIHBvZGVtIHNlciB1c2Fkb3MgcGFyYQ0Kc2VsZWNpb25hciBtYXJjYWRvcmVzLiBObyBHQkxVUCwgb3MgZ2Vuw7N0aXBvcyBkb3MgaW5kaXbDrWR1b3MgZGUgdGVzdGUgcG9kZW0NCnBhcnRpY2lwYXIgZGEgbWF0cml6IGRlIHJlbGFjaW9uYW1lbnRvIGdlbsO0bWljbzsgZXNzYSBwYXJ0aWN1bGFyaWRhZGUNCnRyYW5zZHV0aXZhIMOpIGV4cGxpY2FkYSBubyBNw7NkdWxvIDIuDQoNCiMjIDcuMSBDb25zdHJ1aW5kbyBlIHNhbHZhbmRvIG8gb2JqZXRvDQoNCk8gYmxvY28gYWJhaXhvIHJlw7puZSBkYWRvcywgcGFyw6JtZXRyb3MgZSBmb2xkcyBzZW0gcmVjYWxjdWxhciBuZW5odW1hIGV0YXBhDQpjaWVudMOtZmljYS4gTyBjb250ZcO6ZG8gcHJlc2VydmEgbyBjb250cmF0byBgTTAxLXAtdjFgIHVzYWRvIG5hIEZhc2UgMS4NCg0KYGBge3Igc2FsdmFyLWRlc2VuaG99DQpwcm90b2NvbG8gPC0gbGlzdCgNCiAgZXRhcGEgPSAicmVkdWNhb19wX2luaWNpYWwiLA0KICBzZWVkX2Rlc2VuaG8gPSBTRUVEX0RFU0VOSE8sDQogIG5faW5kaXZpZHVvcyA9IG5faW5kaXZpZHVvcywNCiAgcF90b3RhbCA9IG5fbWFyY2Fkb3JlcywNCiAgbl9mb2xkcyA9IE5fRk9MRFMsDQogIHVuaWRhZGVfcmFua2luZyA9IGMoDQogICAgImNlbmFyaW8iLA0KICAgICJtZXRvZG8iLA0KICAgICJmb2xkIg0KICApLA0KICBpbXBvcnRhbmNpYV9zb21lbnRlX3RyZWluYW1lbnRvID0gVFJVRSwNCiAgcGFpbmVpc19wX2FuaW5oYWRvcyA9IFRSVUUsDQogIHZhbG9yX2dlbmV0aWNvX3NvbWVudGVfYXZhbGlhY2FvID0gVFJVRQ0KKQ0KDQphcnF1aXZvc19mb250ZSA8LSBjKA0KICBmZW5vdGlwbyA9ICJERyNnZW5fRjJfVmZlbi50eHQiLA0KICB2YWxvcl9nZW5ldGljbyA9ICJERyNnZW5fRjJfVmdlbi5kYXQiLA0KICBnZW5vdGlwbyA9ICJnZW5vbWFfbWFwYS50eHQiLA0KICBtYXBhID0gImdlbm9tYS50eHQiLA0KICBjb250cm9sZSA9ICJjb250cm9sZWdlbmV0aWNvIzEuZGF0Ig0KKQ0KDQpkZXNlbmhvX2FuYWxpc2UgPC0gbGlzdCgNCiAgdmVyc2FvID0gIk0wMS1wLXYxIiwNCiAgcHJvdG9jb2xvID0gcHJvdG9jb2xvLA0KICBhcnF1aXZvc19mb250ZSA9IGFycXVpdm9zX2ZvbnRlLA0KICBmZW5vdGlwbyA9IGZlbm90aXBvLA0KICB2YWxvcl9nZW5ldGljbyA9IHZhbG9yX2dlbmV0aWNvLA0KICBnZW5vdGlwbyA9IGdlbm90aXBvLA0KICBtYXBhID0gbWFwYSwNCiAgY29udHJvbGVfY2VuYXJpb3MgPSBjb250cm9sZV9jZW5hcmlvcywNCiAgcXRsX3Bvcl9jZW5hcmlvID0gcXRsX3Bvcl9jZW5hcmlvLA0KICBuaXZlaXNfcCA9IG5pdmVpc19wLA0KICBvcmRlbV9pbmRpdmlkdW9zID0gb3JkZW1faW5kaXZpZHVvcywNCiAgYXRyaWJ1aWNhb19mb2xkcyA9IGF0cmlidWljYW9fZm9sZHMsDQogIGZvbGRzID0gZm9sZHMNCikNCg0KZGlyLmNyZWF0ZSgNCiAgIm91dHB1dC9kYWRvc19kZXNlbmhvIiwNCiAgcmVjdXJzaXZlID0gVFJVRSwNCiAgc2hvd1dhcm5pbmdzID0gRkFMU0UNCikNCg0KYXJxdWl2b19kZXNlbmhvIDwtDQogICJvdXRwdXQvZGFkb3NfZGVzZW5oby9kZXNlbmhvX2FuYWxpc2UucmRzIg0KDQpzYXZlUkRTKA0KICBkZXNlbmhvX2FuYWxpc2UsDQogIGFycXVpdm9fZGVzZW5obywNCiAgY29tcHJlc3MgPSAiZ3ppcCINCikNCmBgYA0KDQpPIGFycXVpdm8gUkRTIGZ1bmNpb25hIGNvbW8gdW1hIGZvdG9ncmFmaWEgZG8gZGVzZW5obyBhbmFsw610aWNvIGRlcG9pcyBkZSB0b2Rhcw0KYXMgdmVyaWZpY2HDp8O1ZXMgZGVzdGEgcMOhZ2luYS4gSXNzbyByZWR1eiByZXBldGnDp8OjbyBlIGdhcmFudGUgcXVlIE0wMiBlIE0wMyB1c2VtDQphcyBtZXNtYXMgZW50cmFkYXMuDQoNCiMjIDcuMiBDb25mZXJpbmRvIG8gY29udGXDumRvIHNhbHZvDQoNClBvciBmaW0sIGFwcmVzZW50YW1vcyBvcyBwcmluY2lwYWlzIGNvbXBvbmVudGVzIGRvIG9iamV0by4gRXNzYSDDqSB1bWEgYXVkaXRvcmlhDQpzaW1wbGVzIHBhcmEgY29uZmlybWFyIHF1ZSB0b2RvcyBvcyBlbGVtZW50b3MgbmVjZXNzw6FyaW9zIGZvcmFtIGFybWF6ZW5hZG9zLg0KDQpgYGB7ciB0YWJlbGEtcmVzdW1vLW9iamV0b30NCnJlc3Vtb19vYmpldG8gPC0gZGF0YS5mcmFtZSgNCiAgQ29tcG9uZW50ZSA9IGMoDQogICAgIkZlbsOzdGlwbyIsDQogICAgIlZhbG9yIGdlbsOpdGljbyB2ZXJkYWRlaXJvIiwNCiAgICAiR2Vuw7N0aXBvIiwNCiAgICAiTWFwYSIsDQogICAgIkNlbsOhcmlvcyIsDQogICAgIk7DrXZlaXMgZGUgcCIsDQogICAgIkZvbGRzIg0KICApLA0KICBFc3RydXR1cmEgPSBjKA0KICAgIHBhc3RlKA0KICAgICAgZGltKA0KICAgICAgICBkZXNlbmhvX2FuYWxpc2UkZmVub3RpcG8NCiAgICAgICksDQogICAgICBjb2xsYXBzZSA9ICIgeCAiDQogICAgKSwNCiAgICBwYXN0ZSgNCiAgICAgIGRpbSgNCiAgICAgICAgZGVzZW5ob19hbmFsaXNlJHZhbG9yX2dlbmV0aWNvDQogICAgICApLA0KICAgICAgY29sbGFwc2UgPSAiIHggIg0KICAgICksDQogICAgcGFzdGUoDQogICAgICBkaW0oDQogICAgICAgIGRlc2VuaG9fYW5hbGlzZSRnZW5vdGlwbw0KICAgICAgKSwNCiAgICAgIGNvbGxhcHNlID0gIiB4ICINCiAgICApLA0KICAgIHBhc3RlKA0KICAgICAgZGltKA0KICAgICAgICBkZXNlbmhvX2FuYWxpc2UkbWFwYQ0KICAgICAgKSwNCiAgICAgIGNvbGxhcHNlID0gIiB4ICINCiAgICApLA0KICAgIG5yb3coDQogICAgICBkZXNlbmhvX2FuYWxpc2UkY29udHJvbGVfY2VuYXJpb3MNCiAgICApLA0KICAgIG5yb3coDQogICAgICBkZXNlbmhvX2FuYWxpc2Ukbml2ZWlzX3ANCiAgICApLA0KICAgIGxlbmd0aCgNCiAgICAgIGRlc2VuaG9fYW5hbGlzZSRmb2xkcw0KICAgICkNCiAgKSwNCiAgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFDQopDQoNCmthYmxlRXh0cmE6OmtibCgNCiAgcmVzdW1vX29iamV0bywNCiAgY2FwdGlvbiA9ICJDb250ZcO6ZG8gcHJpbmNpcGFsIGRvIG9iamV0byBjYW7DtG5pY28gZG8gTTAxIiwNCiAgYWxpZ24gPSBjKA0KICAgICJsIiwNCiAgICAiciINCiAgKQ0KKSB8Pg0KICBrYWJsZUV4dHJhOjprYWJsZV9zdHlsaW5nKA0KICAgIGJvb3RzdHJhcF9vcHRpb25zID0gYygNCiAgICAgICJzdHJpcGVkIiwNCiAgICAgICJob3ZlciIsDQogICAgICAiY29uZGVuc2VkIiwNCiAgICAgICJyZXNwb25zaXZlIg0KICAgICksDQogICAgZnVsbF93aWR0aCA9IEZBTFNFDQogICkNCmBgYA0KDQpPIG9iamV0byBmaW5hbCBjb250w6ltIG9zIHRyw6pzIGNvbmp1bnRvcyBkZSBkYWRvcyBwcmluY2lwYWlzLCBvIG1hcGEsIG9zIHNlaXMNCmNlbsOhcmlvcywgb3Mgc2VpcyBuw612ZWlzIGRlIGBwYCBlIG9zIGNpbmNvIGZvbGRzLiBQb3J0YW50bywgZWxlIHJlw7puZSB0dWRvIG8gcXVlDQpvcyBwcsOzeGltb3MgbcOzZHVsb3MgcHJlY2lzYW0gcGFyYSBpbmljaWFyIG9zIGFqdXN0ZXMgc2VtIHJlcGV0aXIgYSBwcmVwYXJhw6fDo28NCmRvcyBkYWRvcy4NCg0KIyA4LiBPIHF1ZSBhcHJlbmRlbW9zIG5lc3RlIG3Ds2R1bG8/DQoNCkEgcHJpbWVpcmEgZmFzZSBkbyBwcm9qZXRvIHV0aWxpemE6DQoNCiQkDQpuPTEwMDANCiQkDQoNCmUNCg0KJCQNCnBcaW5cezQwMTAsMjAwNSwxMDAzLDQwMSwyMDEsNDBcfS4NCiQkDQoNCkEgdmFsaWRhw6fDo28gY3J1emFkYSBwb3NzdWkgY2luY28gZm9sZHMgZGUgODAwIGluZGl2w61kdW9zIHBhcmEgdHJlaW5hbWVudG8gZSAyMDANCnBhcmEgdGVzdGUuIE9zIG1lc21vcyBmb2xkcyBzZXLDo28gdXNhZG9zIHBvciB0b2RvcyBvcyBtw6l0b2Rvcy4NCg0KQSBzZWxlw6fDo28gZG9zIFNOUHMgc2Vyw6EgcmVhbGl6YWRhIHBvc3Rlcmlvcm1lbnRlIGRlbnRybyBkZSBjYWRhIG3DqXRvZG8gZSBmb2xkLA0Kc2VtIHVzYXIgbyBmZW7Ds3RpcG8gZG8gY29uanVudG8gZGUgdGVzdGUsIG9zIHZhbG9yZXMgZ2Vuw6l0aWNvcyB2ZXJkYWRlaXJvcyBvdSBhcw0KcG9zacOnw7VlcyBjb25oZWNpZGFzIGRvcyBRVEwgY29tbyBpbmZvcm1hw6fDo28gZGUgdHJlaW5hbWVudG8uDQoNCk8gYXJxdWl2byBgZGVzZW5ob19hbmFsaXNlLnJkc2Agw6ksIHBvcnRhbnRvLCBvIHBvbnRvIGRlIHBhcnRpZGEgY29tdW0gZGFzDQpwcsOzeGltYXMgcMOhZ2luYXMuDQoNCi0tLQ0KDQpb4oaQIEluw61jaW9dKGluZGV4Lmh0bWwpIHwgW1Byw7N4aW1hIHDDoWdpbmE6IEdCTFVQIGFkaXRpdm8g4oaSXSgwMl9nYmx1cC5odG1sKQ0K</div>
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
 TeX fonts only; see
@@ -1643,6 +2650,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
+  window.initializeSourceEmbed("01_dados_desenho.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
