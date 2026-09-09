@@ -1,5 +1,5 @@
 ---
-title: "Comparação dos Métodos e Robustez"
+title: "Comparação dos Métodos e Robustez à Redução de Marcadores"
 author:
   - Weverton Gomes da Costa
 date: "`r Sys.Date()`"
@@ -14,6 +14,2044 @@ editor_options:
 
 # Objetivo
 
-Comparar o desempenho preditivo dos métodos e avaliar sua robustez diante da
-redução do número de indivíduos (`n`), do número de marcadores (`p`) e de ambos
-simultaneamente.
+Comparar o desempenho preditivo dos seis métodos considerados no projeto e
+avaliar sua robustez à redução do número de marcadores (`p`), mantendo fixo o número total de 1.000 indivíduos.
+
+Nesta primeira fase são comparados:
+
+- GBLUP aditivo;
+- MARS;
+- árvore de regressão;
+- Bagging;
+- Random Forest;
+- Boosting.
+
+Para cada cenário, método e fold, o painel completo com 4.010 SNPs é utilizado
+como referência. O desempenho dos painéis contendo 50%, 25%, 10%, 5% e 1% dos
+marcadores é comparado ao respectivo desempenho com 100% dos SNPs.
+
+A redução do número de indivíduos (`n`) e a avaliação conjunta de `n` e `p`
+constituem fases posteriores do projeto e não são analisadas neste módulo.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  cache = FALSE
+)
+
+options(stringsAsFactors = FALSE)
+```
+
+# 1. Escopo da Fase 1
+
+A análise desta página responde a duas perguntas principais:
+
+1. qual método apresenta maior capacidade preditiva em cada cenário?
+2. quanto dessa capacidade é preservada quando o número de marcadores é
+   reduzido?
+
+O desenho permanece fixo em
+
+$$
+n = 1000
+$$
+
+indivíduos e seis níveis de `p`:
+
+$$
+p \in
+\{
+4010,\ 2005,\ 1003,\ 401,\ 201,\ 40
+\}.
+$$
+
+Os níveis correspondem, respectivamente, a
+
+$$
+100\%,\ 50\%,\ 25\%,\ 10\%,\ 5\%,\ 1\%.
+$$
+
+# 2. Desenho comum da comparação
+
+O desenho experimental e as partições de validação cruzada foram definidos em
+`01_dados_desenho.Rmd`.
+
+```{r carregar-desenho}
+arquivo_m01 <- "output/dados_desenho/desenho_analise.rds"
+
+stopifnot(
+  file.exists(arquivo_m01)
+)
+
+desenho <- readRDS(
+  arquivo_m01
+)
+
+stopifnot(
+  identical(
+    dim(desenho$genotipo),
+    c(1000L, 4010L)
+  ),
+  length(desenho$folds) == 5L
+)
+```
+
+Todos os métodos utilizam os mesmos cinco folds. Em cada fold:
+
+- 800 indivíduos possuem fenótipos disponíveis para treinamento;
+- 200 indivíduos possuem fenótipos ocultos e são utilizados no teste;
+- nos métodos de aprendizado de máquina, o ranking de marcadores é construído
+  apenas com os indivíduos de treinamento;
+- no GBLUP, os 1.000 indivíduos são considerados previamente genotipados e a
+  matriz de relacionamento genômico é construída de forma transdutiva, enquanto
+  os fenótipos dos 200 indivíduos de teste permanecem ocultos;
+- os valores genéticos verdadeiros são utilizados somente para avaliação.
+
+Assim, todos os métodos compartilham exatamente as mesmas partições
+treino-teste, embora o GBLUP utilize os genótipos dos indivíduos de teste na
+matriz de relacionamento, conforme documentado em `02_gblup.Rmd`.
+
+# 3. Resultados computacionais utilizados
+
+Os ajustes completos foram executados previamente e armazenados em
+`.local/grid_p/tasks/`.
+
+O grid esperado contém
+
+$$
+6
+\times
+5
+\times
+6
+\times
+6
+=
+1080
+$$
+
+células científicas, correspondentes a:
+
+- 6 cenários;
+- 5 folds;
+- 6 métodos;
+- 6 níveis de `p`.
+
+Essas 1.080 células são decompostas em
+
+$$
+180_{\mathrm{GBLUP}}
++
+900_{\mathrm{ML}}
+=
+1080,
+$$
+
+pois o GBLUP contribui com
+
+$$
+6
+\times
+5
+\times
+1
+\times
+6
+=
+180
+$$
+
+resultados, enquanto os cinco métodos de aprendizado de máquina contribuem com
+
+$$
+6
+\times
+5
+\times
+5
+\times
+6
+=
+900
+$$
+
+resultados.
+
+Os arquivos de `.local/` são checkpoints computacionais. Nesta página eles são
+lidos, auditados e consolidados em objetos oficiais versionáveis.
+
+# 4. Consolidação dos 1.080 resultados
+
+## 4.1 Definições do grid
+
+```{r definir-grid}
+root_grid <- ".local/grid_p/tasks"
+
+cenarios <- paste0(
+  "C",
+  1:6
+)
+
+folds <- 1:5
+
+metodos <- c(
+  "GBLUP",
+  "MARS",
+  "TREE",
+  "BAGGING",
+  "RF",
+  "BOOSTING"
+)
+
+p_files <- c(
+  `100` = "p100.rds",
+  `50`  = "p050.rds",
+  `25`  = "p025.rds",
+  `10`  = "p010.rds",
+  `5`   = "p005.rds",
+  `1`   = "p001.rds"
+)
+
+p_esperado <- c(
+  `100` = 4010L,
+  `50`  = 2005L,
+  `25`  = 1003L,
+  `10`  = 401L,
+  `5`   = 201L,
+  `1`   = 40L
+)
+
+stopifnot(
+  dir.exists(root_grid)
+)
+```
+
+## 4.2 Função de leitura
+
+Cada arquivo `p*.rds` contém metadados, configuração do método, métricas,
+predições e a informação necessária para identificar o painel utilizado.
+
+No painel completo (`p = 100%`), `selected_marker_indices = NULL` é a convenção
+do worker para indicar uso direto dos 4.010 SNPs de `X_full`. Nos painéis
+reduzidos, `selected_marker_indices` contém explicitamente os índices dos SNPs
+selecionados, na ordem do ranking de importância.
+
+Para a comparação global, as métricas e os principais metadados são
+transformados em uma tabela única.
+
+```{r funcao-ler-resultado}
+ler_resultado_grid <- function(
+  cenario,
+  fold,
+  metodo,
+  pct
+) {
+
+  arquivo <- file.path(
+    root_grid,
+    cenario,
+    sprintf(
+      "fold%02d",
+      fold
+    ),
+    metodo,
+    p_files[[pct]]
+  )
+
+  if (!file.exists(arquivo)) {
+    stop(
+      "Arquivo ausente: ",
+      arquivo
+    )
+  }
+
+  x <- readRDS(
+    arquivo
+  )
+
+  stopifnot(
+    is.list(x),
+    all(
+      c(
+        "meta",
+        "config",
+        "metrics",
+        "predictions",
+        "selected_marker_indices"
+      ) %in% names(x)
+    )
+  )
+
+  m <- x$metrics
+
+  data.frame(
+    cenario = cenario,
+    fold = as.integer(fold),
+    metodo = metodo,
+    percentual_p = as.integer(pct),
+    p = as.integer(
+      x$meta$p
+    ),
+    n_treino = as.integer(
+      x$meta$n_train
+    ),
+    n_teste = as.integer(
+      x$meta$n_test
+    ),
+    seed = as.integer(
+      x$meta$seed
+    ),
+    runtime_seconds = as.numeric(
+      x$meta$runtime_seconds
+    ),
+    r_true_g = as.numeric(
+      m$r_true_g
+    ),
+    rmse_true_g = as.numeric(
+      m$rmse_true_g
+    ),
+    mae_true_g = as.numeric(
+      m$mae_true_g
+    ),
+    bias_true_g = as.numeric(
+      m$bias_true_g
+    ),
+    slope_true_g = as.numeric(
+      m$slope_true_g
+    ),
+    r2_true_g = as.numeric(
+      m$r2_true_g
+    ),
+    r_phenotype = as.numeric(
+      m$r_phenotype
+    ),
+    rmse_phenotype = as.numeric(
+      m$rmse_phenotype
+    ),
+    stringsAsFactors = FALSE
+  )
+}
+```
+
+## 4.3 Leitura completa
+
+```{r consolidar-grid}
+linhas <- vector(
+  "list",
+  length(cenarios) *
+    length(folds) *
+    length(metodos) *
+    length(p_files)
+)
+
+k <- 0L
+
+for (cenario in cenarios) {
+
+  for (fold in folds) {
+
+    for (metodo in metodos) {
+
+      for (pct in names(p_files)) {
+
+        k <- k + 1L
+
+        linhas[[k]] <- ler_resultado_grid(
+          cenario = cenario,
+          fold = fold,
+          metodo = metodo,
+          pct = pct
+        )
+      }
+    }
+  }
+}
+
+resultados <- do.call(
+  rbind,
+  linhas
+)
+
+rownames(resultados) <- NULL
+
+stopifnot(
+  nrow(resultados) == 1080L
+)
+```
+
+# 5. Auditoria do consolidado
+
+A consolidação somente é aceita se todas as combinações esperadas estiverem
+presentes uma única vez e se as dimensões e métricas forem válidas.
+
+```{r auditar-consolidado}
+chave <- paste(
+  resultados$cenario,
+  resultados$fold,
+  resultados$metodo,
+  resultados$percentual_p,
+  sep = "::"
+)
+
+stopifnot(
+  !anyDuplicated(chave),
+  nrow(resultados) == 1080L,
+  all(resultados$n_treino == 800L),
+  all(resultados$n_teste == 200L),
+  all(
+    resultados$p ==
+      unname(
+        p_esperado[
+          as.character(
+            resultados$percentual_p
+          )
+        ]
+      )
+  )
+)
+
+metricas_numericas <- c(
+  "r_true_g",
+  "rmse_true_g",
+  "mae_true_g",
+  "bias_true_g",
+  "slope_true_g",
+  "r2_true_g",
+  "r_phenotype",
+  "rmse_phenotype"
+)
+
+stopifnot(
+  all(
+    vapply(
+      resultados[
+        metricas_numericas
+      ],
+      function(z) all(is.finite(z)),
+      logical(1)
+    )
+  )
+)
+
+contagem_metodo <- table(
+  resultados$metodo
+)
+
+contagem_cenario <- table(
+  resultados$cenario
+)
+
+contagem_p <- table(
+  resultados$p
+)
+
+stopifnot(
+  all(contagem_metodo == 180L),
+  all(contagem_cenario == 180L),
+  all(contagem_p == 180L)
+)
+
+cat(
+  "Resultados consolidados:",
+  nrow(resultados),
+  "\n"
+)
+
+cat(
+  "Chaves duplicadas:",
+  anyDuplicated(chave),
+  "\n"
+)
+
+cat(
+  "AUDITORIA DO CONSOLIDADO: PASS\n"
+)
+```
+
+# 6. Métricas de robustez
+
+A correlação entre o valor genético verdadeiro e a predição é a métrica
+principal:
+
+$$
+r
+=
+\operatorname{cor}
+\left(
+\mathbf{g},
+\widehat{\mathbf{g}}
+\right).
+$$
+
+Para cada combinação de cenário, método e fold, o painel com 4.010 SNPs é a
+referência.
+
+A perda em correlação é definida por
+
+$$
+\Delta r_q
+=
+r_{100\%}
+-
+r_q.
+$$
+
+A interpretação é:
+
+- $\Delta r_q > 0$: redução de desempenho;
+- $\Delta r_q = 0$: manutenção do desempenho;
+- $\Delta r_q < 0$: desempenho superior ao painel completo.
+
+Para o RMSE:
+
+$$
+\Delta RMSE_q
+=
+RMSE_q
+-
+RMSE_{100\%}.
+$$
+
+Valores positivos indicam aumento do erro.
+
+## 6.1 Cálculo dentro de cenário × método × fold
+
+```{r calcular-deltas}
+baseline <- resultados[
+  resultados$percentual_p == 100L,
+  c(
+    "cenario",
+    "fold",
+    "metodo",
+    "r_true_g",
+    "rmse_true_g"
+  )
+]
+
+names(baseline)[
+  names(baseline) == "r_true_g"
+] <- "r_baseline"
+
+names(baseline)[
+  names(baseline) == "rmse_true_g"
+] <- "rmse_baseline"
+
+resultados <- merge(
+  resultados,
+  baseline,
+  by = c(
+    "cenario",
+    "fold",
+    "metodo"
+  ),
+  all.x = TRUE,
+  sort = FALSE
+)
+
+stopifnot(
+  nrow(resultados) == 1080L,
+  all(is.finite(resultados$r_baseline)),
+  all(is.finite(resultados$rmse_baseline))
+)
+
+resultados$delta_r <-
+  resultados$r_baseline -
+  resultados$r_true_g
+
+resultados$delta_rmse <-
+  resultados$rmse_true_g -
+  resultados$rmse_baseline
+
+stopifnot(
+  all(
+    abs(
+      resultados$delta_r[
+        resultados$percentual_p == 100L
+      ]
+    ) < 1e-12
+  ),
+  all(
+    abs(
+      resultados$delta_rmse[
+        resultados$percentual_p == 100L
+      ]
+    ) < 1e-12
+  )
+)
+```
+
+# 7. Resumo entre folds
+
+Os resultados finais são sintetizados entre os cinco folds. O fold permanece a
+unidade de replicação da validação cruzada.
+
+```{r funcoes-resumo}
+media_segura <- function(x) {
+  mean(
+    x,
+    na.rm = TRUE
+  )
+}
+
+sd_seguro <- function(x) {
+  stats::sd(
+    x,
+    na.rm = TRUE
+  )
+}
+
+resumir_variavel <- function(
+  dados,
+  variavel
+) {
+
+  grupos <- interaction(
+    dados$cenario,
+    dados$metodo,
+    dados$percentual_p,
+    drop = TRUE,
+    lex.order = TRUE
+  )
+
+  media <- tapply(
+    dados[[variavel]],
+    grupos,
+    media_segura
+  )
+
+  desvio <- tapply(
+    dados[[variavel]],
+    grupos,
+    sd_seguro
+  )
+
+  n <- tapply(
+    dados[[variavel]],
+    grupos,
+    length
+  )
+
+  chave <- unique(
+    dados[
+      ,
+      c(
+        "cenario",
+        "metodo",
+        "percentual_p"
+      )
+    ]
+  )
+
+  chave$grupo <- interaction(
+    chave$cenario,
+    chave$metodo,
+    chave$percentual_p,
+    drop = TRUE,
+    lex.order = TRUE
+  )
+
+  chave$media <- as.numeric(
+    media[
+      as.character(
+        chave$grupo
+      )
+    ]
+  )
+
+  chave$sd <- as.numeric(
+    desvio[
+      as.character(
+        chave$grupo
+      )
+    ]
+  )
+
+  chave$n <- as.integer(
+    n[
+      as.character(
+        chave$grupo
+      )
+    ]
+  )
+
+  chave$grupo <- NULL
+
+  chave
+}
+```
+
+## 7.1 Correlação
+
+```{r resumo-r}
+resumo_r <- resumir_variavel(
+  resultados,
+  "r_true_g"
+)
+
+names(resumo_r)[
+  names(resumo_r) == "media"
+] <- "media_r"
+
+names(resumo_r)[
+  names(resumo_r) == "sd"
+] <- "sd_r"
+```
+
+## 7.2 RMSE
+
+```{r resumo-rmse}
+resumo_rmse <- resumir_variavel(
+  resultados,
+  "rmse_true_g"
+)
+
+names(resumo_rmse)[
+  names(resumo_rmse) == "media"
+] <- "media_rmse"
+
+names(resumo_rmse)[
+  names(resumo_rmse) == "sd"
+] <- "sd_rmse"
+```
+
+## 7.3 Delta de correlação
+
+```{r resumo-delta-r}
+resumo_delta_r <- resumir_variavel(
+  resultados,
+  "delta_r"
+)
+
+names(resumo_delta_r)[
+  names(resumo_delta_r) == "media"
+] <- "media_delta_r"
+
+names(resumo_delta_r)[
+  names(resumo_delta_r) == "sd"
+] <- "sd_delta_r"
+```
+
+## 7.4 Delta de RMSE
+
+```{r resumo-delta-rmse}
+resumo_delta_rmse <- resumir_variavel(
+  resultados,
+  "delta_rmse"
+)
+
+names(resumo_delta_rmse)[
+  names(resumo_delta_rmse) == "media"
+] <- "media_delta_rmse"
+
+names(resumo_delta_rmse)[
+  names(resumo_delta_rmse) == "sd"
+] <- "sd_delta_rmse"
+```
+
+# 8. Tabela integrada de resultados
+
+```{r tabela-resumo-integrada}
+resumo <- merge(
+  resumo_r,
+  resumo_rmse,
+  by = c(
+    "cenario",
+    "metodo",
+    "percentual_p"
+  ),
+  suffixes = c(
+    "_r",
+    "_rmse"
+  )
+)
+
+resumo <- merge(
+  resumo,
+  resumo_delta_r,
+  by = c(
+    "cenario",
+    "metodo",
+    "percentual_p"
+  )
+)
+
+resumo <- merge(
+  resumo,
+  resumo_delta_rmse,
+  by = c(
+    "cenario",
+    "metodo",
+    "percentual_p"
+  )
+)
+
+resumo <- resumo[
+  order(
+    resumo$cenario,
+    resumo$metodo,
+    -resumo$percentual_p
+  ),
+]
+
+rownames(resumo) <- NULL
+
+stopifnot(
+  nrow(resumo) == 216L,
+  all(
+    resumo$n_r == 5L
+  )
+)
+```
+
+Existem
+
+$$
+6
+\times
+6
+\times
+6
+=
+216
+$$
+
+combinações resumidas de cenário, método e nível de `p`.
+
+# 9. Desempenho com o painel completo
+
+O primeiro contraste descreve a capacidade preditiva dos métodos antes da
+redução de marcadores.
+
+```{r tabela-p100}
+tabela_p100 <- resumo[
+  resumo$percentual_p == 100L,
+  c(
+    "cenario",
+    "metodo",
+    "media_r",
+    "sd_r",
+    "media_rmse",
+    "sd_rmse"
+  )
+]
+
+tabela_p100 <- tabela_p100[
+  order(
+    tabela_p100$cenario,
+    -tabela_p100$media_r
+  ),
+]
+
+knitr::kable(
+  tabela_p100,
+  digits = 4,
+  caption = "Desempenho médio com 100% dos marcadores",
+  row.names = FALSE
+)
+```
+
+# 10. Melhor método no painel completo
+
+A identificação do maior valor médio de correlação é descritiva e não substitui
+a avaliação conjunta dos cinco folds.
+
+```{r melhor-metodo-p100}
+melhor_p100 <- do.call(
+  rbind,
+  lapply(
+    split(
+      tabela_p100,
+      tabela_p100$cenario
+    ),
+    function(z) {
+
+      z[
+        which.max(
+          z$media_r
+        ),
+        ,
+        drop = FALSE
+      ]
+    }
+  )
+)
+
+rownames(melhor_p100) <- NULL
+
+knitr::kable(
+  melhor_p100,
+  digits = 4,
+  caption = "Método com maior correlação média no painel completo",
+  row.names = FALSE
+)
+```
+
+# 11. Curvas de capacidade preditiva
+
+A comparação ao longo de `p` permite avaliar simultaneamente o nível de
+desempenho e a sensibilidade à redução de marcadores.
+
+```{r figura-r-p, fig.width=10, fig.height=8}
+stopifnot(
+  requireNamespace(
+    "ggplot2",
+    quietly = TRUE
+  )
+)
+
+graf_r <- resumo[
+  ,
+  c(
+    "cenario",
+    "metodo",
+    "percentual_p",
+    "media_r",
+    "sd_r"
+  )
+]
+
+graf_r$percentual_p_fator <- factor(
+  graf_r$percentual_p,
+  levels = c(
+    100,
+    50,
+    25,
+    10,
+    5,
+    1
+  ),
+  ordered = TRUE
+)
+
+ggplot2::ggplot(
+  graf_r,
+  ggplot2::aes(
+    x = percentual_p_fator,
+    y = media_r,
+    group = metodo,
+    linetype = metodo,
+    shape = metodo
+  )
+) +
+  ggplot2::geom_line() +
+  ggplot2::geom_point() +
+  ggplot2::facet_wrap(
+    ~ cenario,
+    ncol = 2
+  ) +
+  ggplot2::labs(
+    x = "Marcadores mantidos (%)",
+    y = "Correlação média com o valor genético verdadeiro",
+    linetype = "Método",
+    shape = "Método"
+  ) +
+  ggplot2::theme_bw()
+```
+
+# 12. Robustez medida por delta de correlação
+
+```{r figura-delta-r, fig.width=10, fig.height=8}
+graf_delta <- resumo[
+  resumo$percentual_p < 100L,
+  c(
+    "cenario",
+    "metodo",
+    "percentual_p",
+    "media_delta_r",
+    "sd_delta_r"
+  )
+]
+
+graf_delta$percentual_p_fator <- factor(
+  graf_delta$percentual_p,
+  levels = c(
+    50,
+    25,
+    10,
+    5,
+    1
+  ),
+  ordered = TRUE
+)
+
+ggplot2::ggplot(
+  graf_delta,
+  ggplot2::aes(
+    x = percentual_p_fator,
+    y = media_delta_r,
+    group = metodo,
+    linetype = metodo,
+    shape = metodo
+  )
+) +
+  ggplot2::geom_hline(
+    yintercept = 0
+  ) +
+  ggplot2::geom_line() +
+  ggplot2::geom_point() +
+  ggplot2::facet_wrap(
+    ~ cenario,
+    ncol = 2
+  ) +
+  ggplot2::labs(
+    x = "Marcadores mantidos (%)",
+    y = expression(Delta * r),
+    linetype = "Método",
+    shape = "Método"
+  ) +
+  ggplot2::theme_bw()
+```
+
+Valores próximos de zero indicam maior estabilidade em relação ao painel
+completo. Valores positivos indicam perda de correlação. Valores negativos
+indicam que a redução produziu correlação superior à do painel completo.
+
+# 13. Robustez medida por delta de RMSE
+
+```{r figura-delta-rmse, fig.width=10, fig.height=8}
+graf_delta_rmse <- resumo[
+  resumo$percentual_p < 100L,
+  c(
+    "cenario",
+    "metodo",
+    "percentual_p",
+    "media_delta_rmse",
+    "sd_delta_rmse"
+  )
+]
+
+graf_delta_rmse$percentual_p_fator <- factor(
+  graf_delta_rmse$percentual_p,
+  levels = c(
+    50,
+    25,
+    10,
+    5,
+    1
+  ),
+  ordered = TRUE
+)
+
+ggplot2::ggplot(
+  graf_delta_rmse,
+  ggplot2::aes(
+    x = percentual_p_fator,
+    y = media_delta_rmse,
+    group = metodo,
+    linetype = metodo,
+    shape = metodo
+  )
+) +
+  ggplot2::geom_hline(
+    yintercept = 0
+  ) +
+  ggplot2::geom_line() +
+  ggplot2::geom_point() +
+  ggplot2::facet_wrap(
+    ~ cenario,
+    ncol = 2
+  ) +
+  ggplot2::labs(
+    x = "Marcadores mantidos (%)",
+    y = expression(Delta * RMSE),
+    linetype = "Método",
+    shape = "Método"
+  ) +
+  ggplot2::theme_bw()
+```
+
+# 14. Arquitetura genética e robustez
+
+Os seis cenários diferem em número de QTL e herdabilidade.
+
+```{r tabela-cenarios}
+arquitetura <- data.frame(
+  cenario = paste0(
+    "C",
+    1:6
+  ),
+  n_qtl = c(
+    8L,
+    40L,
+    80L,
+    120L,
+    240L,
+    480L
+  ),
+  h2 = c(
+    0.7,
+    0.7,
+    0.5,
+    0.5,
+    0.3,
+    0.3
+  )
+)
+
+knitr::kable(
+  arquitetura,
+  caption = "Arquitetura genética dos seis cenários",
+  row.names = FALSE
+)
+```
+
+Essa estrutura permite verificar se a sensibilidade à redução de marcadores se
+modifica ao longo de arquiteturas com diferentes números de QTL e
+herdabilidades.
+
+O desenho não é fatorial completo: número de QTL e herdabilidade variam em
+conjunto entre grupos de cenários. Portanto, diferenças entre C1--C6 não devem
+ser interpretadas como estimativas independentes dos efeitos causais de
+poligenicidade e herdabilidade. Comparações dentro dos pares com mesma
+herdabilidade (C1--C2, C3--C4 e C5--C6) ajudam a descrever o efeito associado ao
+aumento do número de QTL, mas permanecem descritivas.
+
+A interpretação deve separar dois efeitos:
+
+- mudança do desempenho absoluto entre cenários;
+- mudança da perda relativa ao painel completo dentro de cada cenário.
+
+O uso de $\Delta r$ é particularmente importante para essa segunda questão.
+
+# 15. Robustez preditiva e estabilidade relativa
+
+Robustez não deve ser reduzida a uma única medida de perda em relação ao próprio
+baseline.
+
+Um método com desempenho inicial baixo pode apresentar $\Delta r$ próximo de
+zero simplesmente porque seu nível de predição muda pouco. Por isso, esta fase
+separa duas dimensões:
+
+1. **robustez preditiva global:** desempenho absoluto médio nos cinco painéis
+   reduzidos;
+2. **estabilidade relativa:** perda média de correlação em relação ao próprio
+   painel completo.
+
+A robustez preditiva global é uma **síntese descritiva operacional** deste
+estudo. Para cada método, ela atribui peso igual às 150 células
+cenário × fold × painel reduzido (6 cenários × 5 folds × 5 níveis de `p`).
+Ela não representa um teste estatístico de superioridade entre métodos.
+
+## 15.1 Resumo conjunto por método
+
+```{r ranking-robustez}
+reduzidos <- resultados[
+  resultados$percentual_p < 100L,
+  ,
+  drop = FALSE
+]
+
+desempenho_reduzido <- aggregate(
+  r_true_g ~ metodo,
+  data = reduzidos,
+  FUN = mean
+)
+
+names(desempenho_reduzido)[
+  names(desempenho_reduzido) == "r_true_g"
+] <- "media_r_reduzido"
+
+estabilidade_relativa <- aggregate(
+  delta_r ~ metodo,
+  data = reduzidos,
+  FUN = mean
+)
+
+names(estabilidade_relativa)[
+  names(estabilidade_relativa) == "delta_r"
+] <- "perda_media_r"
+
+baseline_metodo <- aggregate(
+  r_true_g ~ metodo,
+  data = resultados[
+    resultados$percentual_p == 100L,
+    ,
+    drop = FALSE
+  ],
+  FUN = mean
+)
+
+names(baseline_metodo)[
+  names(baseline_metodo) == "r_true_g"
+] <- "media_r_baseline"
+
+robustez_metodo <- merge(
+  desempenho_reduzido,
+  estabilidade_relativa,
+  by = "metodo"
+)
+
+robustez_metodo <- merge(
+  robustez_metodo,
+  baseline_metodo,
+  by = "metodo"
+)
+
+robustez_metodo$rank_robustez_preditiva <- rank(
+  -robustez_metodo$media_r_reduzido,
+  ties.method = "min"
+)
+
+robustez_metodo$rank_estabilidade_relativa <- rank(
+  robustez_metodo$perda_media_r,
+  ties.method = "min"
+)
+
+robustez_metodo <- robustez_metodo[
+  order(
+    robustez_metodo$rank_robustez_preditiva,
+    robustez_metodo$rank_estabilidade_relativa
+  ),
+]
+
+rownames(robustez_metodo) <- NULL
+
+knitr::kable(
+  robustez_metodo,
+  digits = 4,
+  caption = paste(
+    "Resumo descritivo do desempenho sob redução e da estabilidade relativa.",
+    "O ranking principal usa a correlação média nos painéis reduzidos;",
+    "a perda média é apresentada separadamente."
+  ),
+  row.names = FALSE
+)
+```
+
+O `rank_robustez_preditiva` responde qual método mantém **maior capacidade
+preditiva absoluta** quando `p` é reduzido. O `rank_estabilidade_relativa`
+responde qual método muda menos em relação ao seu próprio baseline.
+
+Esses rankings não são intercambiáveis. Em particular, um método pode ser muito
+estável porque já utiliza efetivamente poucos marcadores, sem apresentar a maior
+correlação absoluta.
+
+Não é construído um escore composto arbitrário entre as duas dimensões.
+
+## 15.2 Auditoria da invariância de MARS e TREE
+
+A estabilidade incomum observada em MARS e, parcialmente, em TREE foi auditada
+diretamente nos checkpoints.
+
+```{r auditoria-invariancia-mars-tree}
+auditar_invariancia <- function(modelo) {
+
+  linhas <- vector(
+    "list",
+    length(cenarios) * length(folds)
+  )
+
+  k <- 0L
+
+  for (cenario in cenarios) {
+
+    for (fold in folds) {
+
+      k <- k + 1L
+
+      d <- file.path(
+        root_grid,
+        cenario,
+        sprintf(
+          "fold%02d",
+          fold
+        ),
+        modelo
+      )
+
+      ranking <- readRDS(
+        file.path(
+          d,
+          "ranking.rds"
+        )
+      )
+
+      p100 <- readRDS(
+        file.path(
+          d,
+          "p100.rds"
+        )
+      )
+
+      p10 <- readRDS(
+        file.path(
+          d,
+          "p010.rds"
+        )
+      )
+
+      p1 <- readRDS(
+        file.path(
+          d,
+          "p001.rds"
+        )
+      )
+
+      stopifnot(
+        nrow(ranking) == 4010L,
+        is.null(
+          p100$selected_marker_indices
+        ),
+        length(
+          p10$selected_marker_indices
+        ) == 401L,
+        length(
+          p1$selected_marker_indices
+        ) == 40L,
+        identical(
+          as.integer(
+            p10$selected_marker_indices
+          ),
+          as.integer(
+            ranking$marker_index[
+              seq_len(401L)
+            ]
+          )
+        ),
+        identical(
+          as.integer(
+            p1$selected_marker_indices
+          ),
+          as.integer(
+            ranking$marker_index[
+              seq_len(40L)
+            ]
+          )
+        )
+      )
+
+      imp_pos <- ranking$importance_raw > 0
+
+      n_pos <- sum(
+        imp_pos,
+        na.rm = TRUE
+      )
+
+      max_rank_pos <- if (n_pos > 0L) {
+        max(
+          ranking$rank[
+            imp_pos
+          ]
+        )
+      } else {
+        NA_integer_
+      }
+
+      pred100 <- p100$predictions$predicted_value
+      pred10 <- p10$predictions$predicted_value
+      pred1 <- p1$predictions$predicted_value
+
+      stopifnot(
+        length(pred100) == 200L,
+        length(pred10) == 200L,
+        length(pred1) == 200L
+      )
+
+      diff10 <- max(
+        abs(
+          pred100 - pred10
+        )
+      )
+
+      diff1 <- max(
+        abs(
+          pred100 - pred1
+        )
+      )
+
+      linhas[[k]] <- data.frame(
+        modelo = modelo,
+        cenario = cenario,
+        fold = fold,
+        importancia_positiva = n_pos,
+        maior_rank_importancia_positiva = max_rank_pos,
+        maxdiff_pred_100_10 = diff10,
+        maxdiff_pred_100_1 = diff1,
+        pred_100_10_identica = diff10 < 1e-12,
+        pred_100_1_identica = diff1 < 1e-12,
+        stringsAsFactors = FALSE
+      )
+    }
+  }
+
+  do.call(
+    rbind,
+    linhas
+  )
+}
+
+auditoria_invariancia <- rbind(
+  auditar_invariancia(
+    "MARS"
+  ),
+  auditar_invariancia(
+    "TREE"
+  )
+)
+
+resumo_invariancia <- do.call(
+  rbind,
+  lapply(
+    split(
+      auditoria_invariancia,
+      auditoria_invariancia$modelo
+    ),
+    function(z) {
+
+      data.frame(
+        modelo = z$modelo[1L],
+        combinacoes = nrow(z),
+        importancia_positiva_min =
+          min(z$importancia_positiva),
+        importancia_positiva_max =
+          max(z$importancia_positiva),
+        maior_rank_positivo_max =
+          max(
+            z$maior_rank_importancia_positiva,
+            na.rm = TRUE
+          ),
+        pred_100_10_identica =
+          sum(z$pred_100_10_identica),
+        pred_100_1_identica =
+          sum(z$pred_100_1_identica),
+        stringsAsFactors = FALSE
+      )
+    }
+  )
+)
+
+rownames(resumo_invariancia) <- NULL
+
+knitr::kable(
+  resumo_invariancia,
+  caption = "Auditoria de invariância de MARS e TREE nas 30 combinações cenário × fold",
+  row.names = FALSE
+)
+```
+
+Para o MARS, a auditoria mostra que apenas 10 SNPs apresentam importância
+positiva em cada combinação e todos estão dentro do top 40. Assim, mesmo o
+painel de 1% preserva integralmente o subconjunto utilizado pelo modelo, o que
+explica a identidade das predições.
+
+Para TREE, o número de SNPs com importância positiva é maior que 40. A
+invariância é apenas parcial em 10% e desaparece em 1%, comportamento compatível
+com o reajuste da árvore em painéis progressivamente menores.
+
+A convenção `selected_marker_indices = NULL` em 100% também é auditada
+explicitamente e não deve ser interpretada como painel vazio.
+
+# 16. Tabela compacta para comunicação dos resultados
+
+Para resumos e apresentações, os níveis de 100%, 10% e 1% fornecem uma
+representação compacta do painel completo, de uma redução intermediária forte e
+da redução extrema.
+
+```{r tabela-compacta}
+tabela_compacta <- resumo[
+  resumo$percentual_p %in%
+    c(
+      100L,
+      10L,
+      1L
+    ),
+  c(
+    "cenario",
+    "metodo",
+    "percentual_p",
+    "media_r",
+    "sd_r",
+    "media_delta_r",
+    "media_rmse",
+    "media_delta_rmse"
+  )
+]
+
+tabela_compacta <- tabela_compacta[
+  order(
+    tabela_compacta$cenario,
+    tabela_compacta$metodo,
+    -tabela_compacta$percentual_p
+  ),
+]
+
+knitr::kable(
+  tabela_compacta,
+  digits = 4,
+  caption = "Resumo compacto para 100%, 10% e 1% dos marcadores",
+  row.names = FALSE
+)
+```
+
+# 17. Tempos computacionais
+
+O tempo de execução não é a métrica científica principal, mas pode ajudar a
+interpretar o custo computacional relativo dos métodos.
+
+```{r tempo-computacional}
+tempo_metodo <- aggregate(
+  runtime_seconds ~ metodo,
+  data = resultados,
+  FUN = function(x) {
+    c(
+      media = mean(x),
+      mediana = stats::median(x),
+      total = sum(x)
+    )
+  }
+)
+
+tempo_metodo <- data.frame(
+  metodo = tempo_metodo$metodo,
+  media_segundos =
+    tempo_metodo$runtime_seconds[
+      ,
+      "media"
+    ],
+  mediana_segundos =
+    tempo_metodo$runtime_seconds[
+      ,
+      "mediana"
+    ],
+  total_segundos =
+    tempo_metodo$runtime_seconds[
+      ,
+      "total"
+    ]
+)
+
+knitr::kable(
+  tempo_metodo,
+  digits = 2,
+  caption = "Tempo computacional registrado no grid",
+  row.names = FALSE
+)
+```
+
+Esses tempos descrevem a execução realizada e não devem ser interpretados como
+benchmark independente de hardware.
+
+# 18. Produtos oficiais da Fase 1
+
+Após a auditoria, o consolidado é salvo fora de `.local/`.
+
+Os produtos oficiais de M02, M03 e M04 mantêm contratos explícitos. Isso evita
+que a consolidação final produza objetos menos informativos do que os módulos
+que os originaram.
+
+## 18.1 Diretórios oficiais
+
+```{r criar-diretorios-oficiais}
+dir.create(
+  "output/comparacao_robustez",
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+
+dir.create(
+  "output/gblup",
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+
+dir.create(
+  "output/aprendizado_maquina",
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+```
+
+## 18.2 Objeto oficial do M02
+
+O produto do M02 contém somente os 180 resultados do GBLUP, mas preserva o
+protocolo metodológico congelado para esse método.
+
+```{r construir-m02-oficial}
+objeto_m02 <- list(
+  versao = "M02-p-v1",
+  fase = "reducao_p_com_n_1000",
+  metodo = "GBLUP",
+  dimensoes = list(
+    cenarios = 6L,
+    folds = 5L,
+    metodos = 1L,
+    niveis_p = 6L,
+    resultados = 180L
+  ),
+  protocolo = list(
+    modelo = "GBLUP aditivo",
+    pacote = "sommer",
+    matriz_relacionamento = "sommer::A.mat",
+    ajuste = "sommer::mmes",
+    nIters = 20L,
+    fenotipo_teste_no_ajuste = FALSE,
+    genotipos_teste_disponiveis = TRUE,
+    matriz_G_transdutiva = TRUE,
+    importancia_gblup =
+      "beta_SNP^2 via pseudoinversa de Moore-Penrose",
+    paineis_aninhados = TRUE,
+    valor_genetico_somente_avaliacao = TRUE,
+    metrica_principal = "r_true_g",
+    delta_r = "r_100 - r_q",
+    delta_rmse = "RMSE_q - RMSE_100"
+  ),
+  resultados = resultados[
+    resultados$metodo == "GBLUP",
+    ,
+    drop = FALSE
+  ],
+  resumo = resumo[
+    resumo$metodo == "GBLUP",
+    ,
+    drop = FALSE
+  ]
+)
+
+stopifnot(
+  nrow(objeto_m02$resultados) == 180L,
+  nrow(objeto_m02$resumo) == 36L
+)
+```
+
+## 18.3 Objeto oficial do M03
+
+O produto do M03 contém os 900 resultados dos cinco métodos de aprendizado de
+máquina e registra as configurações metodológicas que foram auditadas nos
+objetos reais do grid.
+
+```{r construir-m03-oficial}
+objeto_m03 <- list(
+  versao = "M03-p-v1",
+  fase = "reducao_p_com_n_1000",
+  metodos = c(
+    "MARS",
+    "TREE",
+    "BAGGING",
+    "RF",
+    "BOOSTING"
+  ),
+  dimensoes = list(
+    cenarios = 6L,
+    folds = 5L,
+    metodos = 5L,
+    niveis_p = 6L,
+    resultados = 900L
+  ),
+  protocolo = list(
+    configuracoes = list(
+      MARS = list(
+        pacote = "earth",
+        degree = 1L,
+        nk = "earth_default",
+        fast_k = "earth_default",
+        importancia = "caret::varImp(..., value = 'rss')"
+      ),
+      TREE = list(
+        pacote = "rpart",
+        method = "anova",
+        importancia = "caret::varImp(..., value = 'rss')"
+      ),
+      BAGGING = list(
+        pacote = "randomForest",
+        ntree = 500L,
+        mtry = "p",
+        importancia = "%IncMSE via caret::varImp.randomForest"
+      ),
+      RF = list(
+        pacote = "randomForest",
+        ntree = 500L,
+        mtry = "max(1, floor(p/3))",
+        importancia = "%IncMSE via caret::varImp.randomForest"
+      ),
+      BOOSTING = list(
+        pacote = "gbm",
+        n_trees = 500L,
+        interaction_depth = 2L,
+        shrinkage = 0.01,
+        importancia = "caret::varImp(..., numTrees = 500)"
+      )
+    ),
+    ranking_somente_treinamento = TRUE,
+    selected_marker_indices =
+      "NULL em p=100%; top-p explícito e ordenado pelo ranking em p<100%",
+    importancia_padronizada_0_10 = TRUE,
+    desempate_deterministico = TRUE,
+    paineis_aninhados = TRUE,
+    valor_genetico_somente_avaliacao = TRUE,
+    metrica_principal = "r_true_g",
+    delta_r = "r_100 - r_q",
+    delta_rmse = "RMSE_q - RMSE_100"
+  ),
+  resultados = resultados[
+    resultados$metodo != "GBLUP",
+    ,
+    drop = FALSE
+  ],
+  resumo = resumo[
+    resumo$metodo != "GBLUP",
+    ,
+    drop = FALSE
+  ]
+)
+
+stopifnot(
+  nrow(objeto_m03$resultados) == 900L,
+  nrow(objeto_m03$resumo) == 180L
+)
+```
+
+## 18.4 Objeto oficial do M04
+
+O M04 integra os 180 resultados do GBLUP e os 900 resultados de aprendizado de
+máquina:
+
+$$
+180 + 900 = 1080.
+$$
+
+```{r construir-m04-oficial}
+objeto_m04 <- list(
+  versao = "M04-p-v1",
+  fase = "reducao_p_com_n_1000",
+  fontes = list(
+    M01 = "desenho_analise.rds",
+    M02 = "M02-p-v1",
+    M03 = "M03-p-v1"
+  ),
+  dimensoes = list(
+    cenarios = 6L,
+    folds = 5L,
+    metodos = 6L,
+    niveis_p = 6L,
+    resultados_gblup = 180L,
+    resultados_ml = 900L,
+    resultados = 1080L
+  ),
+  protocolo = list(
+    n_fixo = 1000L,
+    reducao_n = FALSE,
+    reducao_p = TRUE,
+    paineis_p = c(
+      `100` = 4010L,
+      `50` = 2005L,
+      `25` = 1003L,
+      `10` = 401L,
+      `5` = 201L,
+      `1` = 40L
+    ),
+    metrica_principal = "r_true_g",
+    metricas_secundarias = c(
+      "rmse_true_g",
+      "mae_true_g",
+      "bias_true_g",
+      "slope_true_g",
+      "r2_true_g"
+    ),
+    delta_r = "r_100 - r_q",
+    delta_rmse = "RMSE_q - RMSE_100",
+    resumo_folds = "media e desvio-padrao entre 5 folds"
+  ),
+  resultados = resultados,
+  resumo = resumo,
+  baseline_p100 = tabela_p100,
+  melhor_p100 = melhor_p100,
+  robustez_metodo = robustez_metodo,
+  auditoria_invariancia = auditoria_invariancia,
+  resumo_invariancia = resumo_invariancia,
+  tabela_compacta = tabela_compacta,
+  tempo_metodo = tempo_metodo
+)
+
+stopifnot(
+  nrow(objeto_m04$resultados) == 1080L,
+  nrow(objeto_m04$resumo) == 216L,
+  objeto_m04$dimensoes$resultados_gblup +
+    objeto_m04$dimensoes$resultados_ml ==
+    objeto_m04$dimensoes$resultados
+)
+```
+
+## 18.5 Gravação dos produtos
+
+```{r salvar-produtos}
+saveRDS(
+  objeto_m02,
+  "output/gblup/module02_gblup_results.rds",
+  compress = "gzip"
+)
+
+saveRDS(
+  objeto_m03,
+  "output/aprendizado_maquina/module03_ml_results.rds",
+  compress = "gzip"
+)
+
+saveRDS(
+  objeto_m04,
+  "output/comparacao_robustez/module04_comparacao_p_results.rds",
+  compress = "gzip"
+)
+
+utils::write.csv(
+  resultados,
+  "output/comparacao_robustez/resultados_grid_p.csv",
+  row.names = FALSE
+)
+
+utils::write.csv(
+  resumo,
+  "output/comparacao_robustez/resumo_grid_p.csv",
+  row.names = FALSE
+)
+
+utils::write.csv(
+  tabela_compacta,
+  "output/comparacao_robustez/tabela_compacta_p.csv",
+  row.names = FALSE
+)
+
+utils::write.csv(
+  auditoria_invariancia,
+  "output/comparacao_robustez/auditoria_invariancia_mars_tree.csv",
+  row.names = FALSE
+)
+
+cat(
+  "M02:",
+  nrow(objeto_m02$resultados),
+  "resultados\n"
+)
+
+cat(
+  "M03:",
+  nrow(objeto_m03$resultados),
+  "resultados\n"
+)
+
+cat(
+  "M04:",
+  nrow(objeto_m04$resultados),
+  "resultados\n"
+)
+
+cat(
+  "PRODUTOS OFICIAIS: PASS\n"
+)
+```
+
+# 19. Auditoria dos produtos oficiais
+
+```{r auditar-produtos-oficiais}
+arquivos_oficiais <- c(
+  "output/gblup/module02_gblup_results.rds",
+  "output/aprendizado_maquina/module03_ml_results.rds",
+  "output/comparacao_robustez/module04_comparacao_p_results.rds",
+  "output/comparacao_robustez/resultados_grid_p.csv",
+  "output/comparacao_robustez/resumo_grid_p.csv",
+  "output/comparacao_robustez/tabela_compacta_p.csv",
+  "output/comparacao_robustez/auditoria_invariancia_mars_tree.csv"
+)
+
+stopifnot(
+  all(
+    file.exists(
+      arquivos_oficiais
+    )
+  )
+)
+
+m02 <- readRDS(
+  arquivos_oficiais[1L]
+)
+
+m03 <- readRDS(
+  arquivos_oficiais[2L]
+)
+
+m04 <- readRDS(
+  arquivos_oficiais[3L]
+)
+
+stopifnot(
+  identical(
+    m02$versao,
+    "M02-p-v1"
+  ),
+  identical(
+    m03$versao,
+    "M03-p-v1"
+  ),
+  identical(
+    m04$versao,
+    "M04-p-v1"
+  ),
+
+  m02$dimensoes$resultados == 180L,
+  m03$dimensoes$resultados == 900L,
+  m04$dimensoes$resultados == 1080L,
+
+  nrow(m02$resultados) == 180L,
+  nrow(m03$resultados) == 900L,
+  nrow(m04$resultados) == 1080L,
+
+  nrow(m02$resumo) == 36L,
+  nrow(m03$resumo) == 180L,
+  nrow(m04$resumo) == 216L,
+
+  identical(
+    m02$protocolo$importancia_gblup,
+    "beta_SNP^2 via pseudoinversa de Moore-Penrose"
+  ),
+  identical(
+    m03$protocolo$configuracoes$BAGGING$importancia,
+    "%IncMSE via caret::varImp.randomForest"
+  ),
+  identical(
+    m03$protocolo$configuracoes$RF$importancia,
+    "%IncMSE via caret::varImp.randomForest"
+  ),
+
+  m04$dimensoes$resultados_gblup == 180L,
+  m04$dimensoes$resultados_ml == 900L,
+  m04$dimensoes$resultados_gblup +
+    m04$dimensoes$resultados_ml ==
+    m04$dimensoes$resultados,
+
+  nrow(m04$auditoria_invariancia) == 60L,
+  nrow(m04$resumo_invariancia) == 2L,
+
+  all(
+    c(
+      "rank_robustez_preditiva",
+      "rank_estabilidade_relativa"
+    ) %in% names(
+      m04$robustez_metodo
+    )
+  )
+)
+
+cat(
+  "M02 oficial:",
+  nrow(m02$resultados),
+  "resultados e",
+  nrow(m02$resumo),
+  "linhas resumidas\n"
+)
+
+cat(
+  "M03 oficial:",
+  nrow(m03$resultados),
+  "resultados e",
+  nrow(m03$resumo),
+  "linhas resumidas\n"
+)
+
+cat(
+  "M04 oficial:",
+  nrow(m04$resultados),
+  "resultados e",
+  nrow(m04$resumo),
+  "linhas resumidas\n"
+)
+
+cat(
+  "180 GBLUP + 900 ML =",
+  m04$dimensoes$resultados,
+  "\n"
+)
+
+cat(
+  "AUDITORIA DOS PRODUTOS OFICIAIS: PASS\n"
+)
+```
+
+# 20. Interpretação dos resultados
+
+Os resultados mostram que o método com maior correlação média depende
+conjuntamente da arquitetura genética e da densidade de marcadores.
+
+Com o painel completo, Boosting apresenta a maior correlação média em C1
+(0,9130), Random Forest em C2 (0,7736) e GBLUP em C3, C4, C5 e C6, com
+correlações médias de 0,8056, 0,8506, 0,8577 e 0,8930, respectivamente.
+
+Ao considerar conjuntamente os cinco painéis reduzidos, o ranking descritivo
+de robustez preditiva é:
+
+1. Boosting, com correlação média de 0,80628;
+2. Bagging, com 0,79063;
+3. Random Forest, com 0,78655;
+4. GBLUP, com 0,73752;
+5. MARS, com 0,63717;
+6. árvore de regressão, com 0,43600.
+
+Esse ranking deve ser distinguido da estabilidade relativa em relação ao
+próprio baseline. O MARS apresenta perda média de correlação igual a zero e,
+portanto, ocupa a primeira posição em estabilidade relativa, mas apenas a quinta
+posição em robustez preditiva. A auditoria mostrou que essa invariância decorre
+de exatamente 10 SNPs com importância positiva, todos preservados até o painel
+mínimo de 40 marcadores.
+
+A redução extrema para 1% evidencia a mudança de comportamento entre os
+métodos. Boosting apresenta a maior correlação média nos seis cenários nesse
+nível de `p`, variando de 0,6515 em C2 a 0,9277 em C1. Em contraste, o GBLUP
+apresenta maior sensibilidade à redução severa, especialmente nas arquiteturas
+mais poligênicas. Em C6, a correlação diminui de 0,8930 no painel completo para
+0,5784 com 1% dos marcadores.
+
+Também ocorrem mudanças do método com maior correlação média ao longo da
+trajetória de redução. O GBLUP apresenta a maior média principalmente em C3--C6
+sob alta densidade, enquanto Boosting passa a apresentar a maior média em mais
+cenários à medida que a redução se torna severa. Em C2, Random Forest apresenta
+a maior média no painel completo e em 50%, Bagging nos níveis intermediários e
+Boosting em 1%.
+
+Essas classificações são descritivas; não foram realizados testes formais de
+diferença entre métodos. Portanto, expressões como “maior correlação média”
+referem-se aos valores observados entre os cinco folds e não implicam
+superioridade estatística.
+
+Assim, robustez deve ser interpretada conjuntamente em termos de:
+
+- desempenho absoluto nos painéis reduzidos;
+- perda relativa em relação ao próprio baseline;
+- arquitetura genética;
+- intensidade da redução de `p`;
+- variabilidade entre folds.
+
+# 21. Síntese da Fase 1
+
+Na Fase 1, nenhum método apresenta a maior correlação média em todas as
+combinações de arquitetura genética e densidade de marcadores.
+
+Com alta densidade, o GBLUP apresenta as maiores médias em C3--C6, enquanto
+Boosting apresenta a maior média em C1. À medida que o número de marcadores
+diminui, Boosting passa a ocupar a primeira posição em um número crescente de
+cenários e apresenta a maior robustez preditiva global segundo a síntese
+descritiva adotada neste estudo.
+
+No nível mais extremo de redução, com apenas 40 dos 4.010 SNPs originais,
+Boosting apresenta a maior correlação média em todos os seis cenários. Esse
+resultado mostra, nestes dados simulados e sob o protocolo adotado, que a
+seleção de marcadores orientada pelo método pode preservar informação preditiva
+relevante mesmo sob reduções muito intensas de `p`.
+
+A estabilidade relativa não deve ser confundida com desempenho preditivo.
+MARS ilustra essa distinção: permanece numericamente invariável porque utiliza
+um subconjunto muito pequeno de SNPs, porém apresenta desempenho absoluto
+inferior ao de Boosting, Bagging, Random Forest e, em vários cenários, GBLUP.
+
+Os resultados desta fase estabelecem o protocolo e a referência para as etapas
+posteriores de redução de `n` e da combinação `n × p`. Essas etapas devem
+preservar:
+
+- partições treino-teste rigorosamente definidas;
+- ausência de fenótipos e valores genéticos verdadeiros do teste no ajuste e no
+  ranking;
+- uso explícito e documentado dos genótipos do teste quando o método for
+  transdutivo, como no GBLUP;
+- validação cruzada comum entre métodos;
+- painéis aninhados;
+- métricas de desempenho e robustez previamente definidas;
+- consolidação em objetos versionáveis e auditáveis.

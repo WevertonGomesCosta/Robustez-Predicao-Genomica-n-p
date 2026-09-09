@@ -11,7 +11,7 @@
 
 <meta name="author" content="Weverton Gomes da Costa" />
 
-<meta name="date" content="2026-09-08" />
+<meta name="date" content="2026-09-09" />
 
 <title>Aprendizado de Máquina</title>
 
@@ -376,7 +376,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Aprendizado de Máquina</h1>
 <h4 class="author">Weverton Gomes da Costa</h4>
-<h4 class="date">2026-09-08</h4>
+<h4 class="date">2026-09-09</h4>
 
 </div>
 
@@ -384,7 +384,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -395,8 +395,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -405,13 +405,13 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-09-08
+<strong>Last updated:</strong> 2026-09-09
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong>
@@ -435,18 +435,21 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
@@ -537,15 +540,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreeef0d40d017891608c78ca653ca690411eccfdb57targetblankef0d40da">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptree6b24a8bbccca2d6628ae9045afc72dfc1e3aa44ftargetblank6b24a8ba">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/ef0d40d017891608c78ca653ca690411eccfdb57" target="_blank">ef0d40d</a>
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/6b24a8bbccca2d6628ae9045afc72dfc1e3aa44f" target="_blank">6b24a8b</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreeef0d40d017891608c78ca653ca690411eccfdb57targetblankef0d40da"
+id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptree6b24a8bbccca2d6628ae9045afc72dfc1e3aa44ftargetblank6b24a8ba"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -555,7 +558,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/ef0d40d017891608c78ca653ca690411eccfdb57" target="_blank">ef0d40d</a>.
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/6b24a8bbccca2d6628ae9045afc72dfc1e3aa44f" target="_blank">6b24a8b</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -571,7 +574,19 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
+    Ignored:    .local/
     Ignored:    renv/library/
+    Ignored:    renv/staging/
+
+Untracked files:
+    Untracked:  output/aprendizado_maquina/
+    Untracked:  output/comparacao_robustez/
+    Untracked:  output/gblup/
+
+Unstaged changes:
+    Modified:   analysis/02_gblup.Rmd
+    Modified:   analysis/03_aprendizado_maquina.Rmd
+    Modified:   analysis/04_comparacao_robustez.Rmd
 
 </code></pre>
 <p>
@@ -617,6 +632,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/c8bee6d642f6b8d85e88b4f86a69ef7badb97362/docs/03_aprendizado_maquina.html" target="_blank">c8bee6d</a>
+</td>
+<td>
+WevertonGomesCosta
+</td>
+<td>
+2026-09-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -677,8 +709,9 @@ Configure initial tutorial structure and simulated data
 </div>
 <div id="objetivo" class="section level1">
 <h1>Objetivo</h1>
-<p>Apresentar e aplicar os métodos de aprendizado de máquina
-considerados neste projeto:</p>
+<p>Apresentar os cinco métodos de aprendizado de máquina utilizados para
+avaliar a robustez da predição genômica à redução do número de
+marcadores:</p>
 <ul>
 <li>MARS;</li>
 <li>árvore de regressão;</li>
@@ -686,38 +719,1283 @@ considerados neste projeto:</p>
 <li>Random Forest;</li>
 <li>Boosting.</li>
 </ul>
-<p>Para cada método, cenário e fold, a importância dos marcadores será
-calculada exclusivamente com o conjunto de treinamento e armazenada em
-uma estrutura comum. Os escores serão posteriormente padronizados para a
-escala de 0 a 10.</p>
-<p>Todos os marcadores do painel corrente permanecerão disponíveis como
-candidatos ao ajuste. Não será aplicada uma pré-seleção arbitrária de um
-pequeno número de marcadores antes da estimação da importância pelo
-próprio método.</p>
+<p>O módulo utiliza o mesmo desenho definido em
+<code>01_dados_desenho.Rmd</code> e a mesma lógica de avaliação adotada
+no GBLUP. Para cada combinação de cenário, método e fold, o modelo é
+inicialmente ajustado com os 4.010 SNPs. A importância dos marcadores é
+calculada usando exclusivamente informação do conjunto de treinamento. O
+ranking resultante define painéis aninhados contendo 50%, 25%, 10%, 5% e
+1% dos marcadores, e o mesmo método é reajustado em cada painel.</p>
+<p>Nesta primeira etapa, todos os 1.000 indivíduos são mantidos. A
+dimensão investigada é somente o número de marcadores
+(<code>p</code>).</p>
+</div>
+<div id="objeto-analítico-comum" class="section level1">
+<h1>1. Objeto analítico comum</h1>
+<p>Os métodos utilizam o objeto produzido pelo M01.</p>
+<pre class="r"><code>arquivo_m01 &lt;- &quot;output/dados_desenho/desenho_analise.rds&quot;
+
+stopifnot(
+  file.exists(arquivo_m01)
+)
+
+dados &lt;- readRDS(
+  arquivo_m01
+)
+
+stopifnot(
+  identical(dim(dados$genotipo), c(1000L, 4010L)),
+  identical(dim(dados$fenotipo), c(1000L, 6L)),
+  identical(dim(dados$valor_genetico), c(1000L, 6L)),
+  length(dados$folds) == 5L
+)</code></pre>
+<p>Para cada cenário, o fenótipo é a resposta utilizada no treinamento.
+Os genótipos constituem os preditores. Os valores genéticos verdadeiros
+são utilizados somente depois da predição, para avaliar o desempenho nos
+indivíduos de teste.</p>
+</div>
+<div id="validação-cruzada" class="section level1">
+<h1>2. Validação cruzada</h1>
+<p>A validação cruzada é a mesma para todos os métodos e cenários.</p>
+<p>Em cada fold:</p>
+<ul>
+<li>800 indivíduos são utilizados para treinamento;</li>
+<li>200 indivíduos são mantidos fora do treinamento;</li>
+<li>a importância dos marcadores é calculada somente com os 800
+indivíduos de treinamento;</li>
+<li>os 200 indivíduos de teste são utilizados somente para predição e
+avaliação;</li>
+<li>os valores genéticos verdadeiros não participam do ajuste nem do
+ranking.</li>
+</ul>
+<pre class="r"><code>resumo_folds &lt;- data.frame(
+  Fold = seq_along(dados$folds),
+  Treinamento = vapply(
+    dados$folds,
+    function(x) length(x$treino),
+    integer(1)
+  ),
+  Teste = vapply(
+    dados$folds,
+    function(x) length(x$teste),
+    integer(1)
+  )
+)
+
+stopifnot(
+  all(resumo_folds$Treinamento == 800L),
+  all(resumo_folds$Teste == 200L)
+)
+
+knitr::kable(
+  resumo_folds,
+  caption = &quot;Partição fixa utilizada por todos os métodos&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Partição fixa utilizada por todos os métodos</caption>
+<thead>
+<tr class="header">
+<th align="right">Fold</th>
+<th align="right">Treinamento</th>
+<th align="right">Teste</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="regra-comum-de-redução-de-p" class="section level1">
+<h1>3. Regra comum de redução de p</h1>
+<p>O painel completo contém 4.010 SNPs. Os painéis reduzidos foram
+definidos no M01:</p>
+<pre class="r"><code>knitr::kable(
+  dados$niveis_p,
+  caption = &quot;Níveis de redução do número de marcadores&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Níveis de redução do número de marcadores</caption>
+<thead>
+<tr class="header">
+<th align="right">proporcao</th>
+<th align="left">percentual</th>
+<th align="right">n_marcadores</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1.00</td>
+<td align="left">100%</td>
+<td align="right">4010</td>
+</tr>
+<tr class="even">
+<td align="right">0.50</td>
+<td align="left">50%</td>
+<td align="right">2005</td>
+</tr>
+<tr class="odd">
+<td align="right">0.25</td>
+<td align="left">25%</td>
+<td align="right">1003</td>
+</tr>
+<tr class="even">
+<td align="right">0.10</td>
+<td align="left">10%</td>
+<td align="right">401</td>
+</tr>
+<tr class="odd">
+<td align="right">0.05</td>
+<td align="left">5%</td>
+<td align="right">201</td>
+</tr>
+<tr class="even">
+<td align="right">0.01</td>
+<td align="left">1%</td>
+<td align="right">40</td>
+</tr>
+</tbody>
+</table>
+<p>Os tamanhos são</p>
+<p><span class="math display">\[
+4010,\ 2005,\ 1003,\ 401,\ 201,\ 40.
+\]</span></p>
+<p>Para cada combinação de cenário, método e fold, o ranking é obtido
+uma única vez a partir do ajuste com 4.010 SNPs. Os painéis reduzidos
+são então formados pelos primeiros marcadores desse ranking.</p>
+<p>Assim,</p>
+<p><span class="math display">\[
+P_{1\%}
+\subset
+P_{5\%}
+\subset
+P_{10\%}
+\subset
+P_{25\%}
+\subset
+P_{50\%}
+\subset
+P_{100\%}.
+\]</span></p>
+<p>O ranking de um método não é transferido para outro método. Portanto,
+MARS, Tree, Bagging, Random Forest e Boosting podem selecionar conjuntos
+diferentes de SNPs para a mesma combinação de cenário e fold.</p>
+<div id="convenção-de-armazenamento-dos-painéis" class="section level2">
+<h2>3.1 Convenção de armazenamento dos painéis</h2>
+<p>Nos checkpoints computacionais, o painel completo e os painéis
+reduzidos usam uma convenção distinta para
+<code>selected_marker_indices</code>.</p>
+<p>Para <code>p = 100%</code>, o ajuste é realizado diretamente com a
+matriz completa <code>X_full</code>, contendo os 4.010 SNPs, e</p>
+<pre class="text"><code>selected_marker_indices = NULL</code></pre>
+<p>indica explicitamente que nenhuma subamostragem de colunas foi
+necessária.</p>
+<p>Para <code>p &lt; 100%</code>, <code>selected_marker_indices</code>
+contém os índices dos SNPs selecionados, na própria ordem do ranking de
+importância. Assim, um vetor não ordenado numericamente é esperado e não
+representa erro: sua ordem corresponde à prioridade estabelecida pelo
+ranking.</p>
+</div>
+</div>
 <div id="regra-de-disponibilidade-dos-marcadores"
-class="section level2">
-<h2>Regra de disponibilidade dos marcadores</h2>
-<p>Para cada nível de <code>p</code>, o conjunto completo de marcadores
-daquele painel será fornecido ao método. Quando um algoritmo possuir um
-parâmetro que imponha um limite global ao número máximo de variáveis ou
-termos considerados, esse limite será definido em função do próprio
-<code>p</code>, evitando restringir previamente o espaço de busca a um
-pequeno subconjunto de marcadores.</p>
-<p>No MARS, o número máximo de termos na etapa forward será definido
-por</p>
-<p><code>nk = p + 1</code>,</p>
-<p>incluindo o intercepto. Dessa forma, um valor fixo pequeno de
-<code>nk</code> não limitará artificialmente a quantidade de marcadores
-que podem contribuir para o modelo antes da estimação das
-importâncias.</p>
-<p>No Bagging será utilizado <code>mtry = p</code>. No Random Forest,
-<code>mtry</code> continuará sendo definido em função de <code>p</code>
-em cada divisão das árvores; essa amostragem não constitui uma
-pré-seleção global de marcadores, pois todos os marcadores do painel
-permanecem elegíveis ao longo do ensemble.</p>
-<p>A seleção dos painéis reduzidos ocorrerá somente depois do ajuste com
-todos os marcadores disponíveis e da obtenção do ranking de importância
-no conjunto de treinamento.</p>
+class="section level1">
+<h1>4. Regra de disponibilidade dos marcadores</h1>
+<p>Todos os marcadores pertencentes ao painel corrente são fornecidos ao
+método como variáveis candidatas.</p>
+<p>Não é realizada uma etapa externa de pré-seleção antes do ajuste de
+referência com 4.010 SNPs.</p>
+<p>Essa regra precisa ser distinguida dos mecanismos internos de cada
+algoritmo. Por exemplo:</p>
+<ul>
+<li>MARS seleciona termos durante o próprio ajuste;</li>
+<li>uma árvore escolhe variáveis ao construir divisões;</li>
+<li>Bagging usa todos os preditores como candidatos em cada divisão
+quando <code>mtry = p</code>;</li>
+<li>Random Forest sorteia subconjuntos de variáveis em cada
+divisão;</li>
+<li>Boosting seleciona variáveis sequencialmente ao construir suas
+árvores.</li>
+</ul>
+<p>Esses mecanismos fazem parte dos próprios algoritmos e não constituem
+uma pré-seleção global de SNPs antes da estimação da importância.</p>
+</div>
+<div id="mars" class="section level1">
+<h1>5. MARS</h1>
+<div id="conceito" class="section level2">
+<h2>5.1 Conceito</h2>
+<p>MARS, <em>Multivariate Adaptive Regression Splines</em>, representa a
+resposta por uma combinação de funções base construídas
+adaptativamente.</p>
+<p>Uma representação simplificada é</p>
+<p><span class="math display">\[
+\widehat y
+=
+\beta_0
++
+\sum_{m=1}^{M}
+\beta_m B_m(\mathbf{x}),
+\]</span></p>
+<p>onde <span class="math inline">\(B_m(\mathbf{x})\)</span> representa
+uma função base selecionada durante o ajuste.</p>
+<p>As funções <em>hinge</em> permitem mudanças de inclinação em pontos
+definidos pelo algoritmo. Neste projeto é utilizado grau 1, de modo que
+não são introduzidas interações entre funções base.</p>
+</div>
+<div id="ajuste" class="section level2">
+<h2>5.2 Ajuste</h2>
+<p>O modelo é ajustado com <code>earth::earth()</code>:</p>
+<pre class="r"><code>ajustar_mars &lt;- function(
+  X_treino,
+  y_treino,
+  X_teste
+) {
+
+  fit &lt;- earth::earth(
+    x = X_treino,
+    y = y_treino,
+    degree = 1L
+  )
+
+  pred &lt;- as.numeric(
+    predict(
+      fit,
+      X_teste
+    )
+  )
+
+  list(
+    ajuste = fit,
+    predicao = pred
+  )
+}</code></pre>
+<p>O parâmetro <code>nk</code> não é imposto explicitamente. Essa
+decisão evita a alocação excessiva de memória observada quando se tentou
+forçar um número muito elevado de termos e mantém o ajuste na forma
+utilizada no repositório metodológico de referência.</p>
+<p>Todos os 4.010 SNPs continuam sendo fornecidos em <code>x</code> no
+painel completo.</p>
+</div>
+<div id="importância" class="section level2">
+<h2>5.3 Importância</h2>
+<p>A importância do MARS é obtida por</p>
+<pre class="r"><code>imp_mars &lt;- caret::varImp(
+  ajuste_mars,
+  value = &quot;rss&quot;
+)</code></pre>
+<p>O critério <code>rss</code> quantifica a contribuição das variáveis
+para a redução da soma de quadrados residual dentro da estrutura
+ajustada pelo MARS.</p>
+<p>Marcadores não retornados pela função recebem importância zero antes
+da padronização e da construção do ranking.</p>
+</div>
+<div id="esparsidade-e-invariância-observadas" class="section level2">
+<h2>5.4 Esparsidade e invariância observadas</h2>
+<p>A auditoria final das 30 combinações de cenário × fold mostrou que o
+MARS atribuiu importância positiva a exatamente 10 SNPs em todas as
+combinações. Esses SNPs ocuparam as dez primeiras posições do ranking e,
+portanto, ficaram contidos até mesmo no painel mínimo de 40
+marcadores.</p>
+<p>Como consequência, as 200 predições do conjunto de teste foram
+numericamente idênticas entre <code>p = 100%</code> e
+<code>p = 10%</code> nas 30 combinações e também entre
+<code>p = 100%</code> e <code>p = 1%</code> nas 30 combinações.</p>
+<p>Essa invariância não representa reutilização acidental de resultados.
+Os painéis reduzidos são fisicamente distintos; o comportamento decorre
+da esparsidade do modelo ajustado e da preservação integral dos SNPs
+efetivamente utilizados pelo MARS.</p>
+</div>
+</div>
+<div id="árvore-de-regressão" class="section level1">
+<h1>6. Árvore de regressão</h1>
+<div id="conceito-1" class="section level2">
+<h2>6.1 Conceito</h2>
+<p>A árvore de regressão particiona recursivamente o espaço dos
+preditores. Em cada nó, uma variável e um ponto de corte são
+selecionados para formar subconjuntos mais homogêneos em relação à
+resposta.</p>
+<p>A predição final de um indivíduo corresponde ao valor associado ao nó
+terminal em que ele é classificado.</p>
+<p>Esse mecanismo pode representar relações não lineares e interações
+sem exigir que elas sejam especificadas previamente.</p>
+</div>
+<div id="ajuste-1" class="section level2">
+<h2>6.2 Ajuste</h2>
+<p>É utilizado <code>rpart</code> com o método de regressão
+<code>anova</code>.</p>
+<pre class="r"><code>ajustar_tree &lt;- function(
+  X_treino,
+  y_treino,
+  X_teste
+) {
+
+  treino_df &lt;- data.frame(
+    y = y_treino,
+    X_treino,
+    check.names = FALSE
+  )
+
+  teste_df &lt;- data.frame(
+    X_teste,
+    check.names = FALSE
+  )
+
+  fit &lt;- rpart::rpart(
+    y ~ .,
+    data = treino_df,
+    method = &quot;anova&quot;
+  )
+
+  pred &lt;- as.numeric(
+    predict(
+      fit,
+      newdata = teste_df
+    )
+  )
+
+  list(
+    ajuste = fit,
+    predicao = pred
+  )
+}</code></pre>
+<p>Nesta etapa inicial não é realizada uma busca ampla de
+hiperparâmetros. O objetivo é comparar a robustez dos métodos sob um
+protocolo fixo de redução de <code>p</code>, e não otimizar
+separadamente cada combinação de cenário e painel.</p>
+</div>
+<div id="importância-1" class="section level2">
+<h2>6.3 Importância</h2>
+<p>A importância da árvore é obtida por</p>
+<pre class="r"><code>imp_tree &lt;- caret::varImp(
+  ajuste_tree,
+  value = &quot;rss&quot;
+)</code></pre>
+<p>Marcadores omitidos pelo resultado de <code>varImp()</code> recebem
+importância zero.</p>
+</div>
+<div id="invariância-parcial-observada" class="section level2">
+<h2>6.4 Invariância parcial observada</h2>
+<p>Na auditoria final, a árvore apresentou entre 65 e 116 SNPs com
+importância positiva nas 30 combinações de cenário × fold.</p>
+<p>Com 10% dos marcadores (<code>p = 401</code>), as predições do painel
+completo foram reproduzidas numericamente em 21 das 30 combinações. Nas
+nove restantes, o reajuste com o painel reduzido produziu uma árvore
+diferente.</p>
+<p>Com 1% dos marcadores (<code>p = 40</code>), nenhuma das 30
+combinações reproduziu exatamente as predições do painel completo. Esse
+comportamento é coerente com o fato de o número de SNPs com importância
+positiva no ajuste completo ser sempre superior a 40.</p>
+<p>A preservação dos SNPs importantes do ajuste completo não implica que
+uma nova árvore ajustada em um conjunto reduzido de candidatos tenha de
+reproduzir exatamente a mesma sequência de divisões.</p>
+</div>
+</div>
+<div id="bagging" class="section level1">
+<h1>7. Bagging</h1>
+<div id="conceito-2" class="section level2">
+<h2>7.1 Conceito</h2>
+<p>Bagging combina várias árvores construídas a partir de amostras
+bootstrap do conjunto de treinamento.</p>
+<p>Se <span class="math inline">\(\widehat f_b(\mathbf{x})\)</span> é a
+predição da árvore <span class="math inline">\(b\)</span>, a predição do
+ensemble é</p>
+<p><span class="math display">\[
+\widehat f_{\mathrm{bag}}(\mathbf{x})
+=
+\frac{1}{B}
+\sum_{b=1}^{B}
+\widehat f_b(\mathbf{x}).
+\]</span></p>
+<p>A média entre árvores reduz a variância associada a uma única
+árvore.</p>
+</div>
+<div id="ajuste-2" class="section level2">
+<h2>7.2 Ajuste</h2>
+<p>São utilizadas 500 árvores. No Bagging,</p>
+<p><span class="math display">\[
+mtry=p,
+\]</span></p>
+<p>de modo que todos os marcadores do painel corrente ficam disponíveis
+como candidatos em cada divisão.</p>
+<pre class="r"><code>ajustar_bagging &lt;- function(
+  X_treino,
+  y_treino,
+  X_teste,
+  seed
+) {
+
+  set.seed(seed)
+
+  p_atual &lt;- ncol(
+    X_treino
+  )
+
+  fit &lt;- randomForest::randomForest(
+    x = X_treino,
+    y = y_treino,
+    mtry = p_atual,
+    ntree = 500L,
+    importance = TRUE
+  )
+
+  pred &lt;- as.numeric(
+    predict(
+      fit,
+      X_teste
+    )
+  )
+
+  list(
+    ajuste = fit,
+    predicao = pred
+  )
+}</code></pre>
+</div>
+<div id="importância-2" class="section level2">
+<h2>7.3 Importância</h2>
+<p>A importância é obtida com <code>caret::varImp()</code>:</p>
+<pre class="r"><code>imp_bagging &lt;- caret::varImp(
+  ajuste_bagging
+)</code></pre>
+<p>Como o modelo é de regressão, foi ajustado com
+<code>randomForest</code> e utiliza <code>importance = TRUE</code>, a
+coluna <code>Overall</code> retornada pelo método
+<code>caret::varImp.randomForest()</code> corresponde ao escore
+<code>%IncMSE</code>.</p>
+<p>Esse escore é uma medida de importância por permutação: para cada
+marcador, avalia-se quanto o erro de predição aumenta quando os valores
+desse marcador são permutados, quebrando sua associação com a resposta
+enquanto as demais variáveis permanecem inalteradas.</p>
+<p>Quanto maior o <code>%IncMSE</code>, maior a contribuição preditiva
+atribuída ao marcador pelo ensemble ajustado.</p>
+<p>Todos os SNPs ausentes da tabela retornada são completados com
+importância zero antes da padronização e da construção do ranking.</p>
+</div>
+</div>
+<div id="random-forest" class="section level1">
+<h1>8. Random Forest</h1>
+<div id="conceito-3" class="section level2">
+<h2>8.1 Conceito</h2>
+<p>Random Forest combina bootstrap e aleatorização dos preditores
+disponíveis em cada divisão das árvores.</p>
+<p>A diferença principal em relação ao Bagging é que, em cada nó, apenas
+um subconjunto de marcadores é disponibilizado para a escolha da melhor
+divisão.</p>
+<p>Isso reduz a correlação entre árvores e pode aumentar a eficiência do
+ensemble.</p>
+</div>
+<div id="ajuste-3" class="section level2">
+<h2>8.2 Ajuste</h2>
+<p>São utilizadas 500 árvores. Para um painel com <span
+class="math inline">\(p\)</span> marcadores,</p>
+<p><span class="math display">\[
+mtry
+=
+\left\lfloor
+\frac{p}{3}
+\right\rfloor,
+\]</span></p>
+<p>com mínimo igual a 1.</p>
+<pre class="r"><code>ajustar_rf &lt;- function(
+  X_treino,
+  y_treino,
+  X_teste,
+  seed
+) {
+
+  set.seed(seed)
+
+  p_atual &lt;- ncol(
+    X_treino
+  )
+
+  mtry_atual &lt;- max(
+    1L,
+    floor(
+      p_atual / 3L
+    )
+  )
+
+  fit &lt;- randomForest::randomForest(
+    x = X_treino,
+    y = y_treino,
+    mtry = mtry_atual,
+    ntree = 500L,
+    importance = TRUE
+  )
+
+  pred &lt;- as.numeric(
+    predict(
+      fit,
+      X_teste
+    )
+  )
+
+  list(
+    ajuste = fit,
+    predicao = pred
+  )
+}</code></pre>
+<p>O sorteio de variáveis em cada nó não corresponde a uma seleção fixa
+anterior ao ajuste. Ao longo das árvores, todos os marcadores do painel
+permanecem elegíveis.</p>
+</div>
+<div id="importância-3" class="section level2">
+<h2>8.3 Importância</h2>
+<p>A importância é calculada por</p>
+<pre class="r"><code>imp_rf &lt;- caret::varImp(
+  ajuste_rf
+)</code></pre>
+<p>Assim como no Bagging, o modelo é de regressão, foi ajustado com
+<code>randomForest</code> e utiliza <code>importance = TRUE</code>.
+Nessa configuração, <code>caret::varImp.randomForest()</code> utiliza a
+coluna <code>%IncMSE</code> como escore <code>Overall</code>.</p>
+<p>O <code>%IncMSE</code> representa a importância por permutação:
+valores maiores indicam maior aumento do erro de predição quando o
+marcador é permutado e, portanto, maior contribuição preditiva atribuída
+ao marcador pelo Random Forest.</p>
+<p>Marcadores não retornados recebem importância zero antes da
+padronização e da construção do ranking.</p>
+</div>
+</div>
+<div id="boosting" class="section level1">
+<h1>9. Boosting</h1>
+<div id="conceito-4" class="section level2">
+<h2>9.1 Conceito</h2>
+<p>Boosting constrói árvores sequencialmente. Cada nova árvore busca
+melhorar o ajuste obtido pelo conjunto de árvores anteriores.</p>
+<p>Uma representação simplificada é</p>
+<p><span class="math display">\[
+\widehat f_M(\mathbf{x})
+=
+\sum_{m=1}^{M}
+\nu
+\widehat h_m(\mathbf{x}),
+\]</span></p>
+<p>onde <span class="math inline">\(\widehat h_m\)</span> é a árvore
+adicionada na etapa <span class="math inline">\(m\)</span> e <span
+class="math inline">\(\nu\)</span> é a taxa de aprendizado.</p>
+</div>
+<div id="ajuste-4" class="section level2">
+<h2>9.2 Ajuste</h2>
+<p>A implementação utiliza:</p>
+<ul>
+<li>distribuição gaussiana;</li>
+<li>500 árvores;</li>
+<li>profundidade de interação igual a 2;</li>
+<li><code>shrinkage = 0.01</code>.</li>
+</ul>
+<pre class="r"><code>ajustar_boosting &lt;- function(
+  X_treino,
+  y_treino,
+  X_teste,
+  seed
+) {
+
+  treino_df &lt;- data.frame(
+    y = y_treino,
+    X_treino,
+    check.names = FALSE
+  )
+
+  teste_df &lt;- data.frame(
+    X_teste,
+    check.names = FALSE
+  )
+
+  set.seed(seed)
+
+  fit &lt;- gbm::gbm(
+    y ~ .,
+    data = treino_df,
+    distribution = &quot;gaussian&quot;,
+    n.trees = 500L,
+    interaction.depth = 2L,
+    shrinkage = 0.01,
+    verbose = FALSE
+  )
+
+  pred &lt;- as.numeric(
+    predict(
+      fit,
+      newdata = teste_df,
+      n.trees = 500L
+    )
+  )
+
+  list(
+    ajuste = fit,
+    predicao = pred
+  )
+}</code></pre>
+</div>
+<div id="importância-4" class="section level2">
+<h2>9.3 Importância</h2>
+<p>A importância é obtida por</p>
+<pre class="r"><code>imp_boosting &lt;- caret::varImp(
+  ajuste_boosting,
+  numTrees = 500L
+)</code></pre>
+<p>Marcadores não retornados recebem importância zero.</p>
+</div>
+</div>
+<div id="estrutura-comum-da-importância" class="section level1">
+<h1>10. Estrutura comum da importância</h1>
+<p>Os cinco métodos podem retornar tabelas de importância com estruturas
+diferentes. Para permitir a construção de um ranking comum, o resultado
+é convertido para um vetor nomeado contendo todos os marcadores do
+painel.</p>
+<pre class="r"><code>completar_importancia &lt;- function(
+  importancia,
+  nomes_marcadores
+) {
+
+  importancia &lt;- as.data.frame(
+    importancia
+  )
+
+  bruto &lt;- setNames(
+    rep(
+      0,
+      length(nomes_marcadores)
+    ),
+    nomes_marcadores
+  )
+
+  if (nrow(importancia) == 0L) {
+    return(
+      bruto
+    )
+  }
+
+  if (&quot;Overall&quot; %in% colnames(importancia)) {
+
+    valores &lt;- importancia$Overall
+
+  } else {
+
+    colunas_numericas &lt;- which(
+      vapply(
+        importancia,
+        is.numeric,
+        logical(1)
+      )
+    )
+
+    stopifnot(
+      length(colunas_numericas) &gt; 0L
+    )
+
+    valores &lt;- importancia[[
+      colunas_numericas[1L]
+    ]]
+  }
+
+  nomes_imp &lt;- rownames(
+    importancia
+  )
+
+  comuns &lt;- intersect(
+    nomes_imp,
+    nomes_marcadores
+  )
+
+  if (length(comuns) &gt; 0L) {
+
+    bruto[comuns] &lt;- valores[
+      match(
+        comuns,
+        nomes_imp
+      )
+    ]
+  }
+
+  bruto[
+    !is.finite(bruto)
+  ] &lt;- 0
+
+  bruto
+}</code></pre>
+<p>Essa etapa garante que a ausência de um SNP na saída de importância
+não seja interpretada como ausência do marcador no painel. O SNP
+participou como candidato ao ajuste, mas recebeu importância zero
+segundo o modelo ajustado.</p>
+</div>
+<div id="padronização-dos-escores" class="section level1">
+<h1>11. Padronização dos escores</h1>
+<p>Para cada combinação de cenário, método e fold, os escores brutos são
+reescalonados para o intervalo 0–10:</p>
+<p><span class="math display">\[
+I_j^{(0-10)}
+=
+10
+\frac{
+I_j-\min(I)
+}{
+\max(I)-\min(I)
+}.
+\]</span></p>
+<p>A transformação é monotônica e não altera o ranking quando existem
+escores distintos.</p>
+<pre class="r"><code>padronizar_importancia &lt;- function(
+  importancia
+) {
+
+  lo &lt;- min(importancia)
+  hi &lt;- max(importancia)
+
+  if (hi &gt; lo) {
+
+    10 *
+      (
+        importancia - lo
+      ) /
+      (
+        hi - lo
+      )
+
+  } else {
+
+    rep(
+      0,
+      length(importancia)
+    )
+  }
+}</code></pre>
+</div>
+<div id="desempates-e-reprodutibilidade" class="section level1">
+<h1>12. Desempates e reprodutibilidade</h1>
+<p>Métodos como MARS e árvore de regressão podem atribuir importância
+zero a muitos marcadores. Se os empates fossem resolvidos pela ordem
+original das colunas, a posição física dos SNPs na matriz poderia
+influenciar artificialmente os painéis reduzidos.</p>
+<p>Para evitar isso, os empates são resolvidos com uma ordem
+pseudoaleatória determinística.</p>
+<pre class="r"><code>criar_ranking &lt;- function(
+  importancia,
+  nomes_marcadores,
+  seed
+) {
+
+  importancia &lt;- as.numeric(
+    importancia
+  )
+
+  names(importancia) &lt;-
+    nomes_marcadores
+
+  importancia[
+    !is.finite(importancia)
+  ] &lt;- 0
+
+  importancia_0_10 &lt;-
+    padronizar_importancia(
+      importancia
+    )
+
+  set.seed(seed)
+
+  ordem_aleatoria &lt;- sample(
+    seq_along(importancia)
+  )
+
+  chave_desempate &lt;- integer(
+    length(importancia)
+  )
+
+  chave_desempate[
+    ordem_aleatoria
+  ] &lt;- seq_along(
+    importancia
+  )
+
+  ordem &lt;- order(
+    -importancia_0_10,
+    chave_desempate
+  )
+
+  data.frame(
+    marcador = nomes_marcadores[ordem],
+    marker_index = ordem,
+    importancia_bruta = importancia[ordem],
+    importancia_0_10 = importancia_0_10[ordem],
+    rank = seq_along(ordem),
+    tie_key = chave_desempate[ordem],
+    stringsAsFactors = FALSE
+  )
+}</code></pre>
+<p>A semente é específica para a combinação de cenário, fold e
+método.</p>
+<p>O desempate não utiliza:</p>
+<ul>
+<li>fenótipos de teste;</li>
+<li>valores genéticos verdadeiros;</li>
+<li>posições dos QTL;</li>
+<li>posição física do SNP como critério de preferência.</li>
+</ul>
+</div>
+<div id="construção-dos-painéis-reduzidos" class="section level1">
+<h1>13. Construção dos painéis reduzidos</h1>
+<p>A partir do ranking completo, os painéis são definidos pelos
+primeiros <span class="math inline">\(p_q\)</span> marcadores.</p>
+<pre class="r"><code>selecionar_painel &lt;- function(
+  ranking,
+  n_marcadores
+) {
+
+  stopifnot(
+    nrow(ranking) &gt;= n_marcadores,
+    !anyDuplicated(
+      ranking$marker_index
+    )
+  )
+
+  ranking$marker_index[
+    seq_len(n_marcadores)
+  ]
+}</code></pre>
+<p>O mesmo ranking é utilizado para todos os níveis de redução dentro da
+combinação de cenário, método e fold.</p>
+<p>Depois de formado o painel, o método é ajustado novamente usando
+somente os marcadores selecionados.</p>
+</div>
+<div id="métricas-de-desempenho" class="section level1">
+<h1>14. Métricas de desempenho</h1>
+<p>A métrica principal é a correlação de Pearson entre o valor genético
+verdadeiro e a predição:</p>
+<p><span class="math display">\[
+r
+=
+\operatorname{cor}
+\left(
+\mathbf{g},
+\widehat{\mathbf{g}}
+\right).
+\]</span></p>
+<p>Também são registradas:</p>
+<ul>
+<li>RMSE;</li>
+<li>MAE;</li>
+<li>viés;</li>
+<li>inclinação de calibração;</li>
+<li><span class="math inline">\(R^2\)</span> preditivo.</li>
+</ul>
+<p>O <span class="math inline">\(R^2\)</span> utilizado no pipeline é
+definido por</p>
+<p><span class="math display">\[
+R^2
+=
+1
+-
+\frac{
+\sum_i
+(g_i-\widehat g_i)^2
+}{
+\sum_i
+(g_i-\bar g)^2
+}.
+\]</span></p>
+<p>Essa definição representa desempenho preditivo em relação à média
+observada e não deve ser confundida com o quadrado da correlação de
+Pearson.</p>
+<pre class="r"><code>calcular_metricas &lt;- function(
+  observado,
+  predito
+) {
+
+  observado &lt;- as.numeric(
+    observado
+  )
+
+  predito &lt;- as.numeric(
+    predito
+  )
+
+  stopifnot(
+    length(observado) == length(predito),
+    all(is.finite(observado)),
+    all(is.finite(predito))
+  )
+
+  r &lt;- if (
+    sd(observado) &gt; 0 &amp;&amp;
+    sd(predito) &gt; 0
+  ) {
+
+    cor(
+      observado,
+      predito
+    )
+
+  } else {
+
+    NA_real_
+  }
+
+  slope &lt;- if (
+    sd(predito) &gt; 0
+  ) {
+
+    as.numeric(
+      coef(
+        lm(
+          observado ~ predito
+        )
+      )[2L]
+    )
+
+  } else {
+
+    NA_real_
+  }
+
+  denominador &lt;- sum(
+    (
+      observado -
+        mean(observado)
+    )^2
+  )
+
+  r2 &lt;- if (
+    denominador &gt; 0
+  ) {
+
+    1 -
+      sum(
+        (
+          observado -
+            predito
+        )^2
+      ) /
+      denominador
+
+  } else {
+
+    NA_real_
+  }
+
+  data.frame(
+    r = r,
+    RMSE = sqrt(
+      mean(
+        (
+          observado -
+            predito
+        )^2
+      )
+    ),
+    MAE = mean(
+      abs(
+        observado -
+          predito
+      )
+    ),
+    Bias = mean(
+      predito -
+        observado
+    ),
+    Slope = slope,
+    R2 = r2
+  )
+}</code></pre>
+</div>
+<div id="robustez-à-redução-de-marcadores" class="section level1">
+<h1>15. Robustez à redução de marcadores</h1>
+<p>Dentro de cada combinação de cenário, método e fold, o painel com
+4.010 marcadores é a referência.</p>
+<p>Para a correlação:</p>
+<p><span class="math display">\[
+\Delta r_q
+=
+r_{100\%}
+-
+r_q.
+\]</span></p>
+<p>Assim:</p>
+<ul>
+<li><span class="math inline">\(\Delta r_q &gt; 0\)</span>: perda de
+capacidade preditiva;</li>
+<li><span class="math inline">\(\Delta r_q = 0\)</span>: manutenção do
+desempenho;</li>
+<li><span class="math inline">\(\Delta r_q &lt; 0\)</span>: desempenho
+superior ao painel completo.</li>
+</ul>
+<p>Para o RMSE:</p>
+<p><span class="math display">\[
+\Delta RMSE_q
+=
+RMSE_q
+-
+RMSE_{100\%}.
+\]</span></p>
+<p>Valores positivos indicam aumento do erro.</p>
+</div>
+<div id="fluxo-completo-por-método" class="section level1">
+<h1>16. Fluxo completo por método</h1>
+<p>A unidade básica da análise é</p>
+<p><span class="math display">\[
+\text{cenário}
+\times
+\text{método}
+\times
+\text{fold}.
+\]</span></p>
+<p>O procedimento é:</p>
+<ol style="list-style-type: decimal">
+<li>obter treinamento e teste do fold;</li>
+<li>ajustar o método com os 4.010 SNPs;</li>
+<li>predizer os 200 indivíduos de teste;</li>
+<li>calcular a importância usando somente o treinamento;</li>
+<li>completar com zero os SNPs ausentes da saída de importância;</li>
+<li>padronizar os escores para 0–10;</li>
+<li>aplicar o desempate determinístico;</li>
+<li>formar os painéis aninhados;</li>
+<li>reajustar o mesmo método em cada painel;</li>
+<li>predizer os mesmos indivíduos de teste;</li>
+<li>calcular as métricas;</li>
+<li>comparar cada painel ao respectivo painel de 100%.</li>
+</ol>
+<pre class="r"><code>for (cenario in colnames(dados$fenotipo)) {
+
+  for (metodo in c(
+    &quot;MARS&quot;,
+    &quot;TREE&quot;,
+    &quot;BAGGING&quot;,
+    &quot;RF&quot;,
+    &quot;BOOSTING&quot;
+  )) {
+
+    for (fold in seq_along(dados$folds)) {
+
+      treino &lt;- dados$folds[[fold]]$treino
+      teste &lt;- dados$folds[[fold]]$teste
+
+      X_treino &lt;- dados$genotipo[
+        treino,
+        ,
+        drop = FALSE
+      ]
+
+      X_teste &lt;- dados$genotipo[
+        teste,
+        ,
+        drop = FALSE
+      ]
+
+      y_treino &lt;- dados$fenotipo[
+        treino,
+        cenario
+      ]
+
+      # ajuste completo
+      # predição do teste
+      # importância no treinamento
+      # ranking
+      # painéis aninhados
+      # reajustes reduzidos
+      # métricas
+    }
+  }
+}</code></pre>
+</div>
+<div id="configuração-dos-cinco-métodos" class="section level1">
+<h1>17. Configuração dos cinco métodos</h1>
+<p>A configuração inicial utilizada no estudo é resumida abaixo.</p>
+<pre class="r"><code>configuracao &lt;- data.frame(
+  Metodo = c(
+    &quot;MARS&quot;,
+    &quot;Tree&quot;,
+    &quot;Bagging&quot;,
+    &quot;Random Forest&quot;,
+    &quot;Boosting&quot;
+  ),
+  Pacote = c(
+    &quot;earth&quot;,
+    &quot;rpart&quot;,
+    &quot;randomForest&quot;,
+    &quot;randomForest&quot;,
+    &quot;gbm&quot;
+  ),
+  Configuracao = c(
+    &quot;degree = 1; demais controles do earth na configuração padrão&quot;,
+    &quot;method = &#39;anova&#39;&quot;,
+    &quot;ntree = 500; mtry = p; importância = %IncMSE&quot;,
+    &quot;ntree = 500; mtry = max(1, floor(p/3)); importância = %IncMSE&quot;,
+    &quot;n.trees = 500; depth = 2; shrinkage = 0.01&quot;
+  ),
+  stringsAsFactors = FALSE
+)
+
+knitr::kable(
+  configuracao,
+  caption = &quot;Configuração inicial dos métodos de aprendizado de máquina&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Configuração inicial dos métodos de aprendizado de
+máquina</caption>
+<colgroup>
+<col width="15%" />
+<col width="14%" />
+<col width="69%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Metodo</th>
+<th align="left">Pacote</th>
+<th align="left">Configuracao</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">MARS</td>
+<td align="left">earth</td>
+<td align="left">degree = 1; demais controles do earth na configuração
+padrão</td>
+</tr>
+<tr class="even">
+<td align="left">Tree</td>
+<td align="left">rpart</td>
+<td align="left">method = ‘anova’</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">randomForest</td>
+<td align="left">ntree = 500; mtry = p; importância = %IncMSE</td>
+</tr>
+<tr class="even">
+<td align="left">Random Forest</td>
+<td align="left">randomForest</td>
+<td align="left">ntree = 500; mtry = max(1, floor(p/3)); importância =
+%IncMSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Boosting</td>
+<td align="left">gbm</td>
+<td align="left">n.trees = 500; depth = 2; shrinkage = 0.01</td>
+</tr>
+</tbody>
+</table>
+<p>Não é realizada uma busca ampla de hiperparâmetros nesta fase. Isso
+mantém o protocolo transparente e reduz o risco de otimização específica
+para cada cenário, fold ou nível de <code>p</code>.</p>
+</div>
+<div id="estrutura-do-resultado-oficial" class="section level1">
+<h1>18. Estrutura do resultado oficial</h1>
+<p>Os resultados temporários da execução paralela são armazenados em
+<code>.local/</code>. Depois de concluídos e auditados, eles são
+consolidados em:</p>
+<pre class="text"><code>output/aprendizado_maquina/module03_ml_results.rds</code></pre>
+<p>O contrato oficial do objeto é:</p>
+<pre class="r"><code>module03_ml_results &lt;- list(
+  versao = &quot;M03-p-v1&quot;,
+  fase = &quot;reducao_p_com_n_1000&quot;,
+  metodos = c(
+    &quot;MARS&quot;,
+    &quot;TREE&quot;,
+    &quot;BAGGING&quot;,
+    &quot;RF&quot;,
+    &quot;BOOSTING&quot;
+  ),
+  dimensoes = list(
+    cenarios = 6L,
+    folds = 5L,
+    metodos = 5L,
+    niveis_p = 6L,
+    resultados = 900L
+  ),
+  protocolo = list(
+    ranking_somente_treinamento = TRUE,
+    paineis_aninhados = TRUE,
+    selected_marker_indices =
+      &quot;NULL em p=100%; top-p explícito e ordenado pelo ranking em p&lt;100%&quot;,
+    importancia_padronizada_0_10 = TRUE,
+    importancia_randomForest =
+      &quot;%IncMSE via caret::varImp.randomForest&quot;,
+    desempate_deterministico = TRUE,
+    valor_genetico_somente_avaliacao = TRUE
+  ),
+  resultados = resultados,
+  resumo = resumo
+)</code></pre>
+<p>Para os cinco métodos de aprendizado de máquina, o objeto contém</p>
+<p><span class="math display">\[
+6
+\times
+5
+\times
+5
+\times
+6
+=
+900
+\]</span></p>
+<p>resultados individuais e 180 combinações resumidas de cenário ×
+método × nível de <code>p</code>.</p>
+</div>
+<div id="resultados" class="section level1">
+<h1>19. Resultados</h1>
+<p>A execução computacional foi concluída para as 150 combinações de
+cenário × fold × método, totalizando 900 resultados nos seis níveis de
+<code>p</code>.</p>
+<p>As auditorias específicas mostraram dois comportamentos que precisam
+ser considerados na interpretação:</p>
+<ul>
+<li><strong>MARS:</strong> exatamente 10 SNPs com importância positiva
+em cada uma das 30 combinações cenário × fold; todos permaneceram dentro
+do top 40 e as predições foram idênticas entre 100% e 10% e entre 100% e
+1% em 30/30 combinações;</li>
+<li><strong>TREE:</strong> entre 65 e 116 SNPs com importância positiva;
+as predições foram idênticas entre 100% e 10% em 21/30 combinações e
+entre 100% e 1% em 0/30.</li>
+</ul>
+<p>Esses resultados confirmam que estabilidade relativa e capacidade
+preditiva absoluta são propriedades distintas. A comparação conjunta com
+o GBLUP é realizada em <code>04_comparacao_robustez.Rmd</code>.</p>
+</div>
+<div id="interpretação" class="section level1">
+<h1>20. Interpretação</h1>
+<p>A interpretação dos métodos considera duas dimensões distintas:</p>
+<ol style="list-style-type: decimal">
+<li>desempenho absoluto;</li>
+<li>estabilidade desse desempenho à redução de <code>p</code>.</li>
+</ol>
+<p>Os resultados mostram que essas dimensões não são equivalentes. O
+MARS é o caso mais claro: suas predições permanecem invariantes até o
+painel de 1%, mas essa estabilidade decorre da forte esparsidade do
+modelo e não representa, isoladamente, superioridade preditiva.</p>
+<p>A árvore de regressão também apresenta estabilidade parcial em 10%,
+mas perde essa invariância quando o painel é reduzido para 1%. Bagging,
+Random Forest e Boosting apresentam correlações médias maiores que MARS
+e TREE em grande parte dos cenários, sendo a comparação conjunta com
+GBLUP apresentada no M04. Essa comparação é descritiva e se baseia nas
+médias observadas entre folds.</p>
+<p>As conclusões são baseadas no conjunto dos cinco folds de cada
+cenário, e não em resultados isolados de um único fold.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -754,12 +2032,12 @@ loaded via a namespace (and not attached):
  [9] processx_3.8.6    renv_1.2.4        promises_1.5.0    jsonlite_2.0.0   
 [13] glue_1.8.0        rprojroot_2.1.1   git2r_0.36.2      htmltools_0.5.9  
 [17] httpuv_1.6.16     ps_1.9.1          sass_0.4.10       rmarkdown_2.30   
-[21] jquerylib_0.1.4   evaluate_1.0.5    fastmap_1.2.0     yaml_2.3.12      
-[25] lifecycle_1.0.5   whisker_0.4.1     stringr_1.6.0     compiler_4.5.1   
-[29] fs_1.6.6          Rcpp_1.1.2        rstudioapi_0.17.1 later_1.4.4      
-[33] digest_0.6.39     R6_2.6.1          callr_3.7.6       magrittr_2.0.4   
-[37] bslib_0.9.0       tools_4.5.1       cachem_1.1.0      getPass_0.2-4    </code></pre>
-</div>
+[21] jquerylib_0.1.4   tibble_3.3.1      evaluate_1.0.5    fastmap_1.2.0    
+[25] yaml_2.3.12       lifecycle_1.0.5   whisker_0.4.1     stringr_1.6.0    
+[29] compiler_4.5.1    fs_1.6.6          pkgconfig_2.0.3   Rcpp_1.1.2       
+[33] rstudioapi_0.17.1 later_1.4.4       digest_0.6.39     R6_2.6.1         
+[37] pillar_1.11.1     callr_3.7.6       magrittr_2.0.4    bslib_0.9.0      
+[41] tools_4.5.1       cachem_1.1.0      getPass_0.2-4    </code></pre>
 </div>
 </div>
 </div>

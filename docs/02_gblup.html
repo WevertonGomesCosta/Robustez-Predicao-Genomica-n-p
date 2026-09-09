@@ -11,7 +11,7 @@
 
 <meta name="author" content="Weverton Gomes da Costa" />
 
-<meta name="date" content="2026-09-08" />
+<meta name="date" content="2026-09-09" />
 
 <title>GBLUP Aditivo</title>
 
@@ -376,7 +376,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">GBLUP Aditivo</h1>
 <h4 class="author">Weverton Gomes da Costa</h4>
-<h4 class="date">2026-09-08</h4>
+<h4 class="date">2026-09-09</h4>
 
 </div>
 
@@ -384,7 +384,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -395,8 +395,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -405,13 +405,13 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-09-08
+<strong>Last updated:</strong> 2026-09-09
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong>
@@ -435,18 +435,21 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
@@ -537,15 +540,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreeef0d40d017891608c78ca653ca690411eccfdb57targetblankef0d40da">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptree6b24a8bbccca2d6628ae9045afc72dfc1e3aa44ftargetblank6b24a8ba">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/ef0d40d017891608c78ca653ca690411eccfdb57" target="_blank">ef0d40d</a>
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/6b24a8bbccca2d6628ae9045afc72dfc1e3aa44f" target="_blank">6b24a8b</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreeef0d40d017891608c78ca653ca690411eccfdb57targetblankef0d40da"
+id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptree6b24a8bbccca2d6628ae9045afc72dfc1e3aa44ftargetblank6b24a8ba"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -555,7 +558,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/ef0d40d017891608c78ca653ca690411eccfdb57" target="_blank">ef0d40d</a>.
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/6b24a8bbccca2d6628ae9045afc72dfc1e3aa44f" target="_blank">6b24a8b</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -571,7 +574,19 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
+    Ignored:    .local/
     Ignored:    renv/library/
+    Ignored:    renv/staging/
+
+Untracked files:
+    Untracked:  output/aprendizado_maquina/
+    Untracked:  output/comparacao_robustez/
+    Untracked:  output/gblup/
+
+Unstaged changes:
+    Modified:   analysis/02_gblup.Rmd
+    Modified:   analysis/03_aprendizado_maquina.Rmd
+    Modified:   analysis/04_comparacao_robustez.Rmd
 
 </code></pre>
 <p>
@@ -616,6 +631,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/c8bee6d642f6b8d85e88b4f86a69ef7badb97362/docs/02_gblup.html" target="_blank">c8bee6d</a>
+</td>
+<td>
+WevertonGomesCosta
+</td>
+<td>
+2026-09-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -676,14 +708,1226 @@ Configure initial tutorial structure and simulated data
 </div>
 <div id="objetivo" class="section level1">
 <h1>Objetivo</h1>
-<p>Apresentar e aplicar o GBLUP aditivo (GBLUP-A), ajustado com o pacote
-<code>sommer</code>, como modelo estatístico de referência para a
-predição genômica.</p>
-<p>Na etapa inicial, o modelo será ajustado com os 4.010 marcadores e
-com os painéis reduzidos definidos a partir do ranking de importância
-obtido exclusivamente no conjunto de treinamento. A matriz de
-relacionamento genômico utilizada pelo modelo será somente a matriz
-aditiva.</p>
+<p>Apresentar o GBLUP aditivo (GBLUP-A) como modelo estatístico de
+referência para avaliar a robustez da predição genômica à redução do
+número de marcadores.</p>
+<p>O módulo utiliza o desenho definido em
+<code>01_dados_desenho.Rmd</code>. Para cada cenário genético e fold de
+validação, o GBLUP é inicialmente ajustado com os 4.010 marcadores. A
+partir desse ajuste é obtido um ranking de importância dos SNPs. A
+informação fenotípica do conjunto de teste não participa do ajuste nem
+do ranking. O mesmo ranking define painéis aninhados contendo 50%, 25%,
+10%, 5% e 1% dos marcadores, e o modelo é reajustado em cada painel.</p>
+<p>Nesta primeira etapa do projeto, o número de indivíduos permanece
+fixo em 1.000. A dimensão investigada é somente o número de marcadores
+(<code>p</code>).</p>
+</div>
+<div id="gblup-aditivo" class="section level1">
+<h1>1. GBLUP aditivo</h1>
+<p>O GBLUP descreve o efeito genético aditivo dos indivíduos por meio de
+uma matriz de relacionamento genômico construída a partir dos
+marcadores.</p>
+<p>O modelo pode ser escrito como</p>
+<p><span class="math display">\[
+\mathbf{y}
+=
+\mathbf{1}\mu
++
+\mathbf{Z}\mathbf{u}
++
+\mathbf{e},
+\]</span></p>
+<p>em que:</p>
+<ul>
+<li><span class="math inline">\(\mathbf{y}\)</span> é o vetor de
+fenótipos;</li>
+<li><span class="math inline">\(\mu\)</span> é a média geral;</li>
+<li><span class="math inline">\(\mathbf{Z}\)</span> é a matriz de
+incidência que associa cada observação ao efeito genético do
+indivíduo;</li>
+<li><span class="math inline">\(\mathbf{u}\)</span> é o vetor de valores
+genéticos aditivos preditos;</li>
+<li><span class="math inline">\(\mathbf{e}\)</span> é o vetor de
+resíduos.</li>
+</ul>
+<p>Assume-se</p>
+<p><span class="math display">\[
+\mathbf{u}
+\sim
+N\left(
+\mathbf{0},
+\mathbf{G}\sigma_g^2
+\right),
+\]</span></p>
+<p>e</p>
+<p><span class="math display">\[
+\mathbf{e}
+\sim
+N\left(
+\mathbf{0},
+\mathbf{I}\sigma_e^2
+\right),
+\]</span></p>
+<p>onde <span class="math inline">\(\mathbf{G}\)</span> é a matriz de
+relacionamento genômico aditivo, <span
+class="math inline">\(\sigma_g^2\)</span> é a variância genética aditiva
+e <span class="math inline">\(\sigma_e^2\)</span> é a variância
+residual.</p>
+<p>A matriz <span class="math inline">\(\mathbf{G}\)</span> resume a
+semelhança genômica entre os indivíduos. Neste projeto, ela é construída
+com <code>sommer::A.mat()</code> a partir da matriz de marcadores
+correspondente ao painel em análise.</p>
+</div>
+<div id="objeto-analítico-do-m01" class="section level1">
+<h1>2. Objeto analítico do M01</h1>
+<p>O módulo anterior concentra os dados e o desenho experimental em um
+único objeto reproduzível.</p>
+<pre class="r"><code>arquivo_m01 &lt;- &quot;output/dados_desenho/desenho_analise.rds&quot;
+
+stopifnot(
+  file.exists(arquivo_m01)
+)
+
+dados &lt;- readRDS(
+  arquivo_m01
+)
+
+stopifnot(
+  identical(dim(dados$genotipo), c(1000L, 4010L)),
+  identical(dim(dados$fenotipo), c(1000L, 6L)),
+  identical(dim(dados$valor_genetico), c(1000L, 6L)),
+  length(dados$folds) == 5L
+)</code></pre>
+<p>Os principais objetos utilizados pelo GBLUP são:</p>
+<pre class="r"><code>resumo_objetos &lt;- data.frame(
+  Objeto = c(
+    &quot;Fenótipos&quot;,
+    &quot;Valores genéticos verdadeiros&quot;,
+    &quot;Genótipos&quot;,
+    &quot;Folds&quot;
+  ),
+  Estrutura = c(
+    paste(dim(dados$fenotipo), collapse = &quot; x &quot;),
+    paste(dim(dados$valor_genetico), collapse = &quot; x &quot;),
+    paste(dim(dados$genotipo), collapse = &quot; x &quot;),
+    paste0(length(dados$folds), &quot; folds&quot;)
+  ),
+  Uso = c(
+    &quot;Resposta no treinamento&quot;,
+    &quot;Avaliação após a predição&quot;,
+    &quot;Construção da matriz genômica e seleção de marcadores&quot;,
+    &quot;Separação fixa entre treinamento e teste&quot;
+  ),
+  stringsAsFactors = FALSE
+)
+
+knitr::kable(
+  resumo_objetos,
+  caption = &quot;Objetos herdados do M01&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Objetos herdados do M01</caption>
+<colgroup>
+<col width="31%" />
+<col width="12%" />
+<col width="56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Objeto</th>
+<th align="left">Estrutura</th>
+<th align="left">Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fenótipos</td>
+<td align="left">1000 x 6</td>
+<td align="left">Resposta no treinamento</td>
+</tr>
+<tr class="even">
+<td align="left">Valores genéticos verdadeiros</td>
+<td align="left">1000 x 6</td>
+<td align="left">Avaliação após a predição</td>
+</tr>
+<tr class="odd">
+<td align="left">Genótipos</td>
+<td align="left">1000 x 4010</td>
+<td align="left">Construção da matriz genômica e seleção de
+marcadores</td>
+</tr>
+<tr class="even">
+<td align="left">Folds</td>
+<td align="left">5 folds</td>
+<td align="left">Separação fixa entre treinamento e teste</td>
+</tr>
+</tbody>
+</table>
+<p>Os valores genéticos verdadeiros não participam do ajuste, da
+formação dos folds ou da seleção de marcadores. Eles são utilizados
+somente após a predição, para medir a capacidade do modelo de recuperar
+o sinal genético simulado.</p>
+</div>
+<div id="validação-cruzada" class="section level1">
+<h1>3. Validação cruzada</h1>
+<p>O desenho utiliza uma única validação cruzada de cinco folds, comum a
+todos os métodos.</p>
+<p>Em cada fold:</p>
+<ul>
+<li>800 indivíduos compõem o conjunto de treinamento;</li>
+<li>200 indivíduos compõem o conjunto de teste;</li>
+<li>o fenótipo dos indivíduos de teste não é utilizado no ajuste;</li>
+<li>o valor genético verdadeiro dos indivíduos de teste é utilizado
+somente para avaliação.</li>
+</ul>
+<pre class="r"><code>resumo_folds &lt;- data.frame(
+  Fold = seq_along(dados$folds),
+  Treinamento = vapply(
+    dados$folds,
+    function(x) length(x$treino),
+    integer(1)
+  ),
+  Teste = vapply(
+    dados$folds,
+    function(x) length(x$teste),
+    integer(1)
+  )
+)
+
+stopifnot(
+  all(resumo_folds$Treinamento == 800L),
+  all(resumo_folds$Teste == 200L)
+)
+
+knitr::kable(
+  resumo_folds,
+  caption = &quot;Partição fixa utilizada na validação cruzada&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Partição fixa utilizada na validação cruzada</caption>
+<thead>
+<tr class="header">
+<th align="right">Fold</th>
+<th align="right">Treinamento</th>
+<th align="right">Teste</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+</tbody>
+</table>
+<div id="genótipos-dos-indivíduos-de-teste" class="section level2">
+<h2>3.1 Genótipos dos indivíduos de teste</h2>
+<p>Os indivíduos do conjunto de teste são considerados previamente
+genotipados. Por isso, seus perfis de marcadores podem participar da
+matriz de relacionamento genômico, embora seus fenótipos sejam ocultados
+durante o ajuste.</p>
+<p>A implementação representa essa condição substituindo por
+<code>NA</code> os fenótipos dos indivíduos do fold de teste. Assim, a
+informação fenotípica utilizada pelo modelo é exclusivamente a dos 800
+indivíduos de treinamento.</p>
+<p>Essa configuração corresponde ao problema prático em que candidatos
+já genotipados precisam receber valores genéticos preditos antes da
+obtenção de seus fenótipos.</p>
+<p>Consequentemente, o GBLUP é <strong>transdutivo em relação aos
+genótipos</strong>: a matriz de relacionamento genômico inclui os
+indivíduos de treinamento e de teste, todos previamente genotipados.
+Entretanto, os fenótipos do teste permanecem ocultos. Essa
+característica é específica do GBLUP e deve ser distinguida da forma
+como os métodos de aprendizado de máquina utilizam os preditores no
+treinamento.</p>
+</div>
+</div>
+<div id="níveis-de-redução-de-p" class="section level1">
+<h1>4. Níveis de redução de p</h1>
+<p>Os tamanhos dos painéis foram fixados no M01.</p>
+<pre class="r"><code>niveis_p &lt;- dados$niveis_p
+
+knitr::kable(
+  niveis_p,
+  caption = &quot;Painéis de marcadores avaliados pelo GBLUP&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Painéis de marcadores avaliados pelo GBLUP</caption>
+<thead>
+<tr class="header">
+<th align="right">proporcao</th>
+<th align="left">percentual</th>
+<th align="right">n_marcadores</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1.00</td>
+<td align="left">100%</td>
+<td align="right">4010</td>
+</tr>
+<tr class="even">
+<td align="right">0.50</td>
+<td align="left">50%</td>
+<td align="right">2005</td>
+</tr>
+<tr class="odd">
+<td align="right">0.25</td>
+<td align="left">25%</td>
+<td align="right">1003</td>
+</tr>
+<tr class="even">
+<td align="right">0.10</td>
+<td align="left">10%</td>
+<td align="right">401</td>
+</tr>
+<tr class="odd">
+<td align="right">0.05</td>
+<td align="left">5%</td>
+<td align="right">201</td>
+</tr>
+<tr class="even">
+<td align="right">0.01</td>
+<td align="left">1%</td>
+<td align="right">40</td>
+</tr>
+</tbody>
+</table>
+<p>Os tamanhos utilizados são:</p>
+<p><span class="math display">\[
+4010,\ 2005,\ 1003,\ 401,\ 201,\ 40.
+\]</span></p>
+<p>O painel completo corresponde a 100% dos SNPs. Os demais
+correspondem, respectivamente, a 50%, 25%, 10%, 5% e 1%.</p>
+<p>Para cada combinação de cenário e fold, os painéis reduzidos são
+aninhados:</p>
+<p><span class="math display">\[
+P_{1\%}
+\subset
+P_{5\%}
+\subset
+P_{10\%}
+\subset
+P_{25\%}
+\subset
+P_{50\%}
+\subset
+P_{100\%}.
+\]</span></p>
+</div>
+<div id="construção-da-matriz-de-relacionamento-genômico"
+class="section level1">
+<h1>5. Construção da matriz de relacionamento genômico</h1>
+<p>Para um painel contendo <span class="math inline">\(p_q\)</span>
+marcadores, seja</p>
+<p><span class="math display">\[
+\mathbf{X}_q
+\]</span></p>
+<p>a matriz genotípica dos 1.000 indivíduos para os SNPs pertencentes ao
+painel.</p>
+<p>A matriz de relacionamento genômico aditivo é construída por</p>
+<pre class="r"><code>G &lt;- sommer::A.mat(
+  X_q
+)</code></pre>
+<p>O painel completo possui uma única matriz <span
+class="math inline">\(\mathbf{G}\)</span> para os 4.010 marcadores.
+Quando <code>p</code> é reduzido, a matriz de relacionamento é
+reconstruída usando apenas os marcadores selecionados para aquele
+painel.</p>
+<p>Portanto, a redução de <code>p</code> não altera somente o conjunto
+de variáveis disponíveis: ela altera também a estrutura de similaridade
+genômica utilizada pelo GBLUP.</p>
+</div>
+<div id="ajuste-do-gblup" class="section level1">
+<h1>6. Ajuste do GBLUP</h1>
+<p>A implementação usa <code>sommer::mmes()</code>.</p>
+<p>A função abaixo reúne apenas o núcleo do ajuste do GBLUP-A. Ela não
+realiza a seleção de marcadores.</p>
+<pre class="r"><code>ajustar_gblup &lt;- function(
+  X,
+  y,
+  treino,
+  teste,
+  G = NULL,
+  n_iter = 20L
+) {
+
+  stopifnot(
+    nrow(X) == length(y),
+    length(intersect(treino, teste)) == 0L
+  )
+
+  if (is.null(G)) {
+    G &lt;- sommer::A.mat(X)
+  }
+
+  ids &lt;- rownames(X)
+
+  rownames(G) &lt;- ids
+  colnames(G) &lt;- ids
+
+  dados_modelo &lt;- data.frame(
+    y = as.numeric(y),
+    id = factor(
+      ids,
+      levels = ids
+    )
+  )
+
+  dados_modelo$y[teste] &lt;- NA_real_
+
+  ajuste &lt;- sommer::mmes(
+    y ~ 1,
+    random = ~
+      vsm(
+        ism(id),
+        Gu = G
+      ),
+    rcov = ~ units,
+    nIters = n_iter,
+    data = dados_modelo,
+    verbose = FALSE,
+    dateWarning = FALSE
+  )
+
+  efeito_individuo &lt;- as.matrix(
+    ajuste$uList[[1L]]
+  )
+
+  Z_id &lt;- model.matrix(
+    ~ id - 1,
+    data = dados_modelo
+  )
+
+  valor_aditivo &lt;- as.numeric(
+    Z_id %*%
+      efeito_individuo[
+        ,
+        1L,
+        drop = FALSE
+      ]
+  )
+
+  intercepto &lt;- as.numeric(
+    ajuste$b
+  )[1L]
+
+  predicao &lt;- intercepto + valor_aditivo
+
+  list(
+    ajuste = ajuste,
+    G = G,
+    valor_aditivo = valor_aditivo,
+    predicao = predicao,
+    predicao_teste = predicao[teste]
+  )
+}</code></pre>
+<p>A função recebe a matriz genotípica do painel que está sendo
+avaliado. O fenótipo dos indivíduos de teste é ocultado antes do ajuste
+e as predições correspondentes são extraídas depois da estimação do
+modelo.</p>
+</div>
+<div id="predição-dos-indivíduos-de-teste" class="section level1">
+<h1>7. Predição dos indivíduos de teste</h1>
+<p>Para cada combinação de cenário, fold e painel de marcadores, o
+modelo gera</p>
+<p><span class="math display">\[
+\widehat{\mathbf{g}}_{\mathrm{teste}},
+\]</span></p>
+<p>um vetor com 200 valores genéticos preditos.</p>
+<p>O vetor é comparado ao valor genético verdadeiro simulado</p>
+<p><span class="math display">\[
+\mathbf{g}_{\mathrm{teste}},
+\]</span></p>
+<p>somente depois que o ajuste foi concluído.</p>
+<p>Essa separação é importante porque o valor genético verdadeiro é
+conhecido apenas por se tratar de um estudo com dados simulados. Ele
+funciona como referência de avaliação, e não como informação disponível
+para treinamento.</p>
+</div>
+<div id="métricas-de-desempenho" class="section level1">
+<h1>8. Métricas de desempenho</h1>
+<p>A métrica principal é a correlação de Pearson entre o valor genético
+verdadeiro e o valor genético predito:</p>
+<p><span class="math display">\[
+r
+=
+\operatorname{cor}
+\left(
+\mathbf{g},
+\widehat{\mathbf{g}}
+\right).
+\]</span></p>
+<p>Também são registradas métricas complementares:</p>
+<ul>
+<li>RMSE;</li>
+<li>MAE;</li>
+<li>viés médio;</li>
+<li>inclinação de calibração;</li>
+<li><span class="math inline">\(R^2\)</span>.</li>
+</ul>
+<pre class="r"><code>calcular_metricas &lt;- function(
+  observado,
+  predito
+) {
+
+  observado &lt;- as.numeric(observado)
+  predito &lt;- as.numeric(predito)
+
+  stopifnot(
+    length(observado) == length(predito),
+    all(is.finite(observado)),
+    all(is.finite(predito))
+  )
+
+  r &lt;- if (
+    sd(observado) &gt; 0 &amp;&amp;
+    sd(predito) &gt; 0
+  ) {
+    cor(
+      observado,
+      predito
+    )
+  } else {
+    NA_real_
+  }
+
+  slope &lt;- if (
+    sd(predito) &gt; 0
+  ) {
+    as.numeric(
+      coef(
+        lm(
+          observado ~ predito
+        )
+      )[2L]
+    )
+  } else {
+    NA_real_
+  }
+
+  denominador_r2 &lt;- sum(
+    (
+      observado -
+        mean(observado)
+    )^2
+  )
+
+  r2 &lt;- if (
+    denominador_r2 &gt; 0
+  ) {
+    1 -
+      sum(
+        (
+          observado -
+            predito
+        )^2
+      ) /
+      denominador_r2
+  } else {
+    NA_real_
+  }
+
+  data.frame(
+    r = r,
+    RMSE = sqrt(
+      mean(
+        (
+          observado -
+            predito
+        )^2
+      )
+    ),
+    MAE = mean(
+      abs(
+        observado -
+          predito
+      )
+    ),
+    Bias = mean(
+      predito -
+        observado
+    ),
+    Slope = slope,
+    R2 = r2
+  )
+}</code></pre>
+</div>
+<div id="robustez-à-redução-de-marcadores" class="section level1">
+<h1>9. Robustez à redução de marcadores</h1>
+<p>O desempenho com todos os marcadores é a referência dentro de cada
+cenário e fold.</p>
+<p>Para a correlação, define-se</p>
+<p><span class="math display">\[
+\Delta r_q
+=
+r_{100\%}
+-
+r_q.
+\]</span></p>
+<p>Logo:</p>
+<ul>
+<li><span class="math inline">\(\Delta r_q &gt; 0\)</span>: houve perda
+de capacidade preditiva após reduzir <code>p</code>;</li>
+<li><span class="math inline">\(\Delta r_q = 0\)</span>: o desempenho
+foi preservado;</li>
+<li><span class="math inline">\(\Delta r_q &lt; 0\)</span>: o painel
+reduzido superou o painel completo.</li>
+</ul>
+<p>Para o RMSE, define-se</p>
+<p><span class="math display">\[
+\Delta RMSE_q
+=
+RMSE_q
+-
+RMSE_{100\%}.
+\]</span></p>
+<p>Nesse caso:</p>
+<ul>
+<li>valores positivos indicam aumento do erro;</li>
+<li>valores negativos indicam redução do erro.</li>
+</ul>
+<p>Essas diferenças são calculadas dentro da mesma combinação de
+cenário, método e fold.</p>
+</div>
+<div id="importância-dos-marcadores-no-gblup" class="section level1">
+<h1>10. Importância dos marcadores no GBLUP</h1>
+<p>O ajuste com 4.010 SNPs produz, para cada combinação de cenário e
+fold, os valores genéticos aditivos preditos dos indivíduos. Para
+transformar essa predição em um escore de importância por marcador, os
+efeitos dos SNPs são recuperados a partir dos BLUPs obtidos no conjunto
+de treinamento.</p>
+<p>Seja</p>
+<p><span class="math display">\[
+\mathbf{M}_T
+=
+\mathbf{X}_T
+-
+\mathbf{1}\bar{\mathbf{x}}_T&#39;,
+\]</span></p>
+<p>a matriz de marcadores dos indivíduos de treinamento centralizada
+pelas médias dos marcadores calculadas no próprio treinamento.</p>
+<p>Seja ainda</p>
+<p><span class="math display">\[
+\widehat{\mathbf{u}}_T
+\]</span></p>
+<p>o vetor de valores genéticos aditivos preditos para os indivíduos de
+treinamento. Esses valores provêm do ajuste transdutivo descrito na
+Seção 3.1, no qual a matriz de relacionamento utiliza os genótipos dos
+1.000 indivíduos, mas somente os 800 fenótipos de treinamento.</p>
+<p>Os efeitos dos marcadores são recuperados por</p>
+<p><span class="math display">\[
+\widehat{\boldsymbol{\beta}}
+=
+\mathbf{M}_T&#39;
+\left(
+\mathbf{M}_T\mathbf{M}_T&#39;
+\right)^+
+\widehat{\mathbf{u}}_T,
+\]</span></p>
+<p>onde o símbolo <span class="math inline">\(+\)</span> representa a
+pseudoinversa de Moore–Penrose.</p>
+<div id="por-que-utilizar-a-pseudoinversa" class="section level2">
+<h2>10.1 Por que utilizar a pseudoinversa?</h2>
+<p>Como as colunas de <span class="math inline">\(\mathbf{M}_T\)</span>
+são centralizadas, vale</p>
+<p><span class="math display">\[
+\mathbf{1}&#39;\mathbf{M}_T
+=
+\mathbf{0}&#39;.
+\]</span></p>
+<p>Consequentemente, a matriz</p>
+<p><span class="math display">\[
+\mathbf{M}_T\mathbf{M}_T&#39;
+\]</span></p>
+<p>é singular por construção.</p>
+<p>Neste projeto, cada fold possui 800 indivíduos de treinamento. A
+auditoria numérica mostrou posto 799 em todas as 30 combinações de
+cenário e fold, resultado compatível com a dependência linear
+introduzida pela centralização.</p>
+<p>Por isso, a inversa comum não é apropriada. A pseudoinversa fornece a
+solução de norma mínima compatível com os valores genéticos preditos
+pelo GBLUP.</p>
+<p>A recuperação pode ser implementada por decomposição espectral:</p>
+<pre class="r"><code>obter_importancia_gblup &lt;- function(
+  X_treino,
+  u_treino
+) {
+
+  M &lt;- sweep(
+    X_treino,
+    2L,
+    colMeans(X_treino),
+    FUN = &quot;-&quot;
+  )
+
+  MMt &lt;- tcrossprod(M)
+
+  eig &lt;- eigen(
+    MMt,
+    symmetric = TRUE
+  )
+
+  tolerancia &lt;- max(dim(MMt)) *
+    max(eig$values) *
+    .Machine$double.eps
+
+  manter &lt;- eig$values &gt; tolerancia
+
+  alpha &lt;- eig$vectors[
+    ,
+    manter,
+    drop = FALSE
+  ] %*% (
+    crossprod(
+      eig$vectors[
+        ,
+        manter,
+        drop = FALSE
+      ],
+      u_treino
+    ) /
+      eig$values[manter]
+  )
+
+  beta &lt;- as.numeric(
+    crossprod(
+      M,
+      alpha
+    )
+  )
+
+  names(beta) &lt;- colnames(
+    X_treino
+  )
+
+  importancia &lt;- beta^2
+
+  names(importancia) &lt;- names(beta)
+
+  importancia
+}</code></pre>
+<p>Como <span class="math inline">\(\mathbf{M}_T\)</span> é
+centralizada, adicionar ou remover uma constante de <span
+class="math inline">\(\widehat{\mathbf{u}}_T\)</span> não altera os
+efeitos recuperados. Assim, a expressão é equivalente à utilização de
+<span
+class="math inline">\(\widehat{\mathbf{u}}_T-\bar{\widehat{\mathbf{u}}}_T\)</span>.</p>
+</div>
+<div id="escore-de-importância" class="section level2">
+<h2>10.2 Escore de importância</h2>
+<p>Para o marcador <span class="math inline">\(j\)</span>, o escore
+bruto é definido por</p>
+<p><span class="math display">\[
+I_j
+=
+\widehat{\beta}_j^2.
+\]</span></p>
+<p>O quadrado do efeito fornece uma medida não negativa de magnitude. A
+ordenação por <span class="math inline">\(I_j\)</span> é equivalente à
+ordenação por <span
+class="math inline">\(|\widehat{\beta}_j|\)</span>.</p>
+<p>Para facilitar a comparação interna dos escores, eles são
+reescalonados para o intervalo de 0 a 10:</p>
+<p><span class="math display">\[
+I_j^{(0-10)}
+=
+10
+\frac{
+I_j-\min(I)
+}{
+\max(I)-\min(I)
+}.
+\]</span></p>
+<p>Esse reescalonamento não altera a ordem dos marcadores.</p>
+<pre class="r"><code>padronizar_importancia &lt;- function(
+  importancia
+) {
+
+  lo &lt;- min(importancia)
+  hi &lt;- max(importancia)
+
+  if (hi &gt; lo) {
+
+    10 *
+      (
+        importancia - lo
+      ) /
+      (
+        hi - lo
+      )
+
+  } else {
+
+    rep(
+      0,
+      length(importancia)
+    )
+  }
+}</code></pre>
+</div>
+<div id="desempates-e-reprodutibilidade" class="section level2">
+<h2>10.3 Desempates e reprodutibilidade</h2>
+<p>Marcadores com exatamente o mesmo escore de importância não devem ser
+ordenados implicitamente pela posição em que aparecem na matriz
+genotípica.</p>
+<p>Por isso, os empates são resolvidos por uma ordem pseudoaleatória
+determinística, com semente específica para cada combinação de cenário,
+fold e método.</p>
+<p>Essa regra:</p>
+<ul>
+<li>não utiliza fenótipos dos indivíduos de teste;</li>
+<li>não utiliza valores genéticos verdadeiros;</li>
+<li>não utiliza posições reais de QTL;</li>
+<li>evita favorecer a ordem física dos marcadores;</li>
+<li>produz o mesmo ranking em execuções repetidas.</li>
+</ul>
+<p>O ranking final é, portanto, específico para</p>
+<p><span class="math display">\[
+\text{cenário}
+\times
+\text{fold}
+\times
+\text{GBLUP}.
+\]</span></p>
+</div>
+<div id="validação-da-recuperação-dos-efeitos" class="section level2">
+<h2>10.4 Validação da recuperação dos efeitos</h2>
+<p>A formulação por Moore–Penrose foi auditada nas 30 combinações de
+cenário e fold.</p>
+<p>Em todas elas:</p>
+<ul>
+<li><span
+class="math inline">\(\operatorname{rank}(\mathbf{M}_T\mathbf{M}_T&#39;)=799\)</span>;</li>
+<li>a correlação entre <span
+class="math inline">\(\widehat{\mathbf{u}}_T\)</span> e <span
+class="math inline">\(\mathbf{M}_T\widehat{\boldsymbol{\beta}}\)</span>
+foi numericamente igual a 1;</li>
+<li>o erro de reconstrução permaneceu na ordem de <span
+class="math inline">\(10^{-14}\)</span>.</li>
+</ul>
+<p>Esses resultados confirmam que a transformação recupera os efeitos
+dos marcadores de forma numericamente consistente com os valores
+aditivos preditos pelo GBLUP. # 11. Construção dos painéis reduzidos</p>
+<p>Depois de obtido o ranking do ajuste completo, os painéis são
+definidos pelos primeiros <span class="math inline">\(p_q\)</span>
+marcadores.</p>
+<p>Se</p>
+<p><span class="math display">\[
+m_{(1)},m_{(2)},\ldots,m_{(4010)}
+\]</span></p>
+<p>representam os marcadores ordenados da maior para a menor
+importância, então o painel com <span class="math inline">\(p_q\)</span>
+marcadores é</p>
+<p><span class="math display">\[
+P_q
+=
+\left\{
+m_{(1)},
+m_{(2)},
+\ldots,
+m_{(p_q)}
+\right\}.
+\]</span></p>
+<p>O mesmo ranking é usado para todos os níveis de redução dentro da
+combinação de cenário e fold.</p>
+<pre class="r"><code>selecionar_painel &lt;- function(
+  ranking,
+  n_marcadores
+) {
+
+  stopifnot(
+    nrow(ranking) &gt;= n_marcadores,
+    !anyDuplicated(ranking$marcador)
+  )
+
+  ranking$marcador[
+    seq_len(n_marcadores)
+  ]
+}</code></pre>
+<p>Após a seleção, o GBLUP é reajustado do início utilizando apenas os
+marcadores do painel. A matriz de relacionamento genômico é, portanto,
+reconstruída para cada nível de <code>p</code>.</p>
+</div>
+</div>
+<div id="fluxo-completo-por-cenário-e-fold" class="section level1">
+<h1>12. Fluxo completo por cenário e fold</h1>
+<p>A unidade conceitual da análise é</p>
+<p><span class="math display">\[
+\text{cenário}
+\times
+\text{fold}.
+\]</span></p>
+<p>Dentro de cada unidade, o fluxo é:</p>
+<ol style="list-style-type: decimal">
+<li>ajustar o GBLUP com os 4.010 SNPs;</li>
+<li>obter o ranking de importância usando somente o treinamento;</li>
+<li>avaliar o modelo completo no fold de teste;</li>
+<li>selecionar os 2.005 marcadores mais importantes;</li>
+<li>reconstruir a matriz genômica e reajustar o GBLUP;</li>
+<li>repetir para 1.003, 401, 201 e 40 marcadores;</li>
+<li>calcular as métricas em cada painel;</li>
+<li>calcular as perdas de desempenho em relação ao painel completo.</li>
+</ol>
+<pre class="r"><code>for (cenario in colnames(dados$fenotipo)) {
+
+  y &lt;- dados$fenotipo[, cenario]
+  g &lt;- dados$valor_genetico[, cenario]
+
+  for (k in seq_along(dados$folds)) {
+
+    treino &lt;- dados$folds[[k]]$treino
+    teste &lt;- dados$folds[[k]]$teste
+
+    X &lt;- dados$genotipo
+
+    ajuste_completo &lt;- ajustar_gblup(
+      X = X,
+      y = y,
+      treino = treino,
+      teste = teste
+    )
+
+    # ranking &lt;- obter_importancia_gblup(...)
+    # ranking &lt;- ordenar_importancia(...)
+
+    for (p_q in dados$niveis_p$n_marcadores) {
+
+      # selecionar painel aninhado
+      # reconstruir G
+      # reajustar GBLUP
+      # predizer os 200 indivíduos de teste
+      # calcular métricas
+      # armazenar resultados
+    }
+  }
+}</code></pre>
+<p>O pseudocódigo explicita a lógica do módulo sem executar novamente a
+análise completa durante a construção da página.</p>
+</div>
+<div id="estrutura-do-resultado-oficial" class="section level1">
+<h1>13. Estrutura do resultado oficial</h1>
+<p>Os checkpoints computacionais são armazenados em
+<code>.local/</code>, enquanto o produto científico consolidado do
+módulo é versionável e armazenado em:</p>
+<pre class="text"><code>output/gblup/module02_gblup_results.rds</code></pre>
+<p>O contrato oficial utilizado no projeto é:</p>
+<pre class="r"><code>module02_gblup_results &lt;- list(
+  versao = &quot;M02-p-v1&quot;,
+  fase = &quot;reducao_p_com_n_1000&quot;,
+  metodo = &quot;GBLUP&quot;,
+  dimensoes = list(
+    cenarios = 6L,
+    folds = 5L,
+    metodos = 1L,
+    niveis_p = 6L,
+    resultados = 180L
+  ),
+  protocolo = list(
+    modelo = &quot;GBLUP aditivo&quot;,
+    pacote = &quot;sommer&quot;,
+    matriz_relacionamento = &quot;sommer::A.mat&quot;,
+    ajuste = &quot;sommer::mmes&quot;,
+    nIters = 20L,
+    fenotipo_teste_no_ajuste = FALSE,
+    genotipos_teste_disponiveis = TRUE,
+    matriz_G_transdutiva = TRUE,
+    importancia_gblup =
+      &quot;beta_SNP^2 via pseudoinversa de Moore-Penrose&quot;,
+    paineis_aninhados = TRUE,
+    valor_genetico_somente_avaliacao = TRUE,
+    metrica_principal = &quot;r_true_g&quot;,
+    delta_r = &quot;r_100 - r_q&quot;,
+    delta_rmse = &quot;RMSE_q - RMSE_100&quot;
+  ),
+  resultados = resultados,
+  resumo = resumo
+)</code></pre>
+<p>A tabela <code>resultados</code> possui uma linha por</p>
+<p><span class="math display">\[
+\text{cenário}
+\times
+\text{fold}
+\times
+\text{nível de }p.
+\]</span></p>
+<p>Logo,</p>
+<p><span class="math display">\[
+6
+\times
+5
+\times
+6
+=
+180
+\]</span></p>
+<p>resultados individuais são armazenados, além de 36 combinações
+resumidas de cenário × nível de <code>p</code>.</p>
+</div>
+<div id="resultados" class="section level1">
+<h1>14. Resultados</h1>
+<p>A execução foi concluída para os seis cenários, cinco folds e seis
+níveis de <code>p</code>, totalizando 180 resultados individuais do
+GBLUP. A tabela abaixo resume os níveis de 100%, 10% e 1% dos
+marcadores, que representam o painel completo, uma redução intermediária
+forte e a redução mais extrema.</p>
+<pre class="r"><code>resultados_gblup_principais &lt;- data.frame(
+  cenario = rep(
+    paste0(
+      &quot;C&quot;,
+      1:6
+    ),
+    each = 3L
+  ),
+  percentual_p = rep(
+    c(
+      100L,
+      10L,
+      1L
+    ),
+    times = 6L
+  ),
+  p = rep(
+    c(
+      4010L,
+      401L,
+      40L
+    ),
+    times = 6L
+  ),
+  media_r = c(
+    0.6364, 0.6540, 0.6068,
+    0.7480, 0.7364, 0.4721,
+    0.8056, 0.7767, 0.6165,
+    0.8506, 0.8184, 0.6319,
+    0.8577, 0.8227, 0.6003,
+    0.8930, 0.8402, 0.5784
+  ),
+  media_delta_r = c(
+    0.0000, -0.0176, 0.0296,
+    0.0000,  0.0116, 0.2759,
+    0.0000,  0.0290, 0.1891,
+    0.0000,  0.0322, 0.2187,
+    0.0000,  0.0350, 0.2574,
+    0.0000,  0.0528, 0.3146
+  )
+)
+
+knitr::kable(
+  resultados_gblup_principais,
+  digits = 4,
+  caption = paste(
+    &quot;Desempenho médio do GBLUP com 100%, 10% e 1%&quot;,
+    &quot;dos marcadores&quot;
+  ),
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Desempenho médio do GBLUP com 100%, 10% e 1% dos
+marcadores</caption>
+<thead>
+<tr class="header">
+<th align="left">cenario</th>
+<th align="right">percentual_p</th>
+<th align="right">p</th>
+<th align="right">media_r</th>
+<th align="right">media_delta_r</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="right">100</td>
+<td align="right">4010</td>
+<td align="right">0.6364</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="right">10</td>
+<td align="right">401</td>
+<td align="right">0.6540</td>
+<td align="right">-0.0176</td>
+</tr>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="right">1</td>
+<td align="right">40</td>
+<td align="right">0.6068</td>
+<td align="right">0.0296</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="right">100</td>
+<td align="right">4010</td>
+<td align="right">0.7480</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="right">10</td>
+<td align="right">401</td>
+<td align="right">0.7364</td>
+<td align="right">0.0116</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="right">1</td>
+<td align="right">40</td>
+<td align="right">0.4721</td>
+<td align="right">0.2759</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="right">100</td>
+<td align="right">4010</td>
+<td align="right">0.8056</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="right">10</td>
+<td align="right">401</td>
+<td align="right">0.7767</td>
+<td align="right">0.0290</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="right">1</td>
+<td align="right">40</td>
+<td align="right">0.6165</td>
+<td align="right">0.1891</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="right">100</td>
+<td align="right">4010</td>
+<td align="right">0.8506</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="right">10</td>
+<td align="right">401</td>
+<td align="right">0.8184</td>
+<td align="right">0.0322</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="right">1</td>
+<td align="right">40</td>
+<td align="right">0.6319</td>
+<td align="right">0.2187</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="right">100</td>
+<td align="right">4010</td>
+<td align="right">0.8577</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="right">10</td>
+<td align="right">401</td>
+<td align="right">0.8227</td>
+<td align="right">0.0350</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="right">1</td>
+<td align="right">40</td>
+<td align="right">0.6003</td>
+<td align="right">0.2574</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="right">100</td>
+<td align="right">4010</td>
+<td align="right">0.8930</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="right">10</td>
+<td align="right">401</td>
+<td align="right">0.8402</td>
+<td align="right">0.0528</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="right">1</td>
+<td align="right">40</td>
+<td align="right">0.5784</td>
+<td align="right">0.3146</td>
+</tr>
+</tbody>
+</table>
+<p>Com o painel completo, a correlação média aumenta de 0,6364 em C1
+para 0,8930 em C6. Em C1, a redução para 10% dos marcadores não
+prejudica o desempenho e a correlação aumenta para 0,6540. Nos cenários
+mais poligênicos, a sensibilidade à redução é progressivamente
+maior.</p>
+<p>A redução extrema para 1% dos marcadores produz perdas mais
+acentuadas. Em C6, por exemplo,</p>
+<p><span class="math display">\[
+r_{100\%}=0{,}8930
+\]</span></p>
+<p>e</p>
+<p><span class="math display">\[
+r_{1\%}=0{,}5784,
+\]</span></p>
+<p>correspondendo a</p>
+<p><span class="math display">\[
+\Delta r=0{,}3146.
+\]</span></p>
+<p>A comparação com os cinco métodos de aprendizado de máquina é
+apresentada em <code>04_comparacao_robustez.Rmd</code>.</p>
+</div>
+<div id="interpretação" class="section level1">
+<h1>15. Interpretação</h1>
+<p>Os resultados mostram que a robustez do GBLUP à redução do número de
+marcadores depende da arquitetura genética.</p>
+<p>Em C1, cenário com poucos QTL, a redução moderada do painel pode
+preservar ou até aumentar a correlação, indicando que a remoção de
+marcadores pouco informativos não necessariamente reduz a capacidade
+preditiva.</p>
+<p>À medida que a arquitetura se torna mais poligênica, a densidade de
+marcadores passa a ser mais importante. Esse padrão é particularmente
+evidente em C5 e C6, nos quais a redução extrema para 40 SNPs produz
+perdas substanciais de correlação.</p>
+<p>Portanto, para o GBLUP, devem ser consideradas conjuntamente:</p>
+<ol style="list-style-type: decimal">
+<li>a capacidade preditiva absoluta com o painel completo;</li>
+<li>a perda de desempenho ao longo da redução de <code>p</code>;</li>
+<li>a arquitetura genética do cenário.</li>
+</ol>
+<p>As conclusões deste módulo são baseadas nas médias dos cinco folds e
+integram a comparação global apresentada em
+<code>04_comparacao_robustez.Rmd</code>.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -720,11 +1964,12 @@ loaded via a namespace (and not attached):
  [9] processx_3.8.6    renv_1.2.4        promises_1.5.0    jsonlite_2.0.0   
 [13] glue_1.8.0        rprojroot_2.1.1   git2r_0.36.2      htmltools_0.5.9  
 [17] httpuv_1.6.16     ps_1.9.1          sass_0.4.10       rmarkdown_2.30   
-[21] jquerylib_0.1.4   evaluate_1.0.5    fastmap_1.2.0     yaml_2.3.12      
-[25] lifecycle_1.0.5   whisker_0.4.1     stringr_1.6.0     compiler_4.5.1   
-[29] fs_1.6.6          Rcpp_1.1.2        rstudioapi_0.17.1 later_1.4.4      
-[33] digest_0.6.39     R6_2.6.1          callr_3.7.6       magrittr_2.0.4   
-[37] bslib_0.9.0       tools_4.5.1       cachem_1.1.0      getPass_0.2-4    </code></pre>
+[21] jquerylib_0.1.4   tibble_3.3.1      evaluate_1.0.5    fastmap_1.2.0    
+[25] yaml_2.3.12       lifecycle_1.0.5   whisker_0.4.1     stringr_1.6.0    
+[29] compiler_4.5.1    fs_1.6.6          pkgconfig_2.0.3   Rcpp_1.1.2       
+[33] rstudioapi_0.17.1 later_1.4.4       digest_0.6.39     R6_2.6.1         
+[37] pillar_1.11.1     callr_3.7.6       magrittr_2.0.4    bslib_0.9.0      
+[41] tools_4.5.1       cachem_1.1.0      getPass_0.2-4    </code></pre>
 </div>
 </div>
 </div>

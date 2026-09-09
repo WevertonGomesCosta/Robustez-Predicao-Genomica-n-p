@@ -11,9 +11,9 @@
 
 <meta name="author" content="Weverton Gomes da Costa" />
 
-<meta name="date" content="2026-09-08" />
+<meta name="date" content="2026-09-09" />
 
-<title>Comparação dos Métodos e Robustez</title>
+<title>Comparação dos Métodos e Robustez à Redução de Marcadores</title>
 
 <script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -374,9 +374,10 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Comparação dos Métodos e Robustez</h1>
+<h1 class="title toc-ignore">Comparação dos Métodos e Robustez à Redução
+de Marcadores</h1>
 <h4 class="author">Weverton Gomes da Costa</h4>
-<h4 class="date">2026-09-08</h4>
+<h4 class="date">2026-09-09</h4>
 
 </div>
 
@@ -384,7 +385,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -395,8 +396,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -405,13 +406,13 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-09-08
+<strong>Last updated:</strong> 2026-09-09
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong>
@@ -435,18 +436,21 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
@@ -537,15 +541,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreeef0d40d017891608c78ca653ca690411eccfdb57targetblankef0d40da">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptree6b24a8bbccca2d6628ae9045afc72dfc1e3aa44ftargetblank6b24a8ba">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/ef0d40d017891608c78ca653ca690411eccfdb57" target="_blank">ef0d40d</a>
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/6b24a8bbccca2d6628ae9045afc72dfc1e3aa44f" target="_blank">6b24a8b</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreeef0d40d017891608c78ca653ca690411eccfdb57targetblankef0d40da"
+id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptree6b24a8bbccca2d6628ae9045afc72dfc1e3aa44ftargetblank6b24a8ba"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -555,7 +559,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/ef0d40d017891608c78ca653ca690411eccfdb57" target="_blank">ef0d40d</a>.
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/6b24a8bbccca2d6628ae9045afc72dfc1e3aa44f" target="_blank">6b24a8b</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -571,7 +575,19 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
+    Ignored:    .local/
     Ignored:    renv/library/
+    Ignored:    renv/staging/
+
+Untracked files:
+    Untracked:  output/aprendizado_maquina/
+    Untracked:  output/comparacao_robustez/
+    Untracked:  output/gblup/
+
+Unstaged changes:
+    Modified:   analysis/02_gblup.Rmd
+    Modified:   analysis/03_aprendizado_maquina.Rmd
+    Modified:   analysis/04_comparacao_robustez.Rmd
 
 </code></pre>
 <p>
@@ -622,6 +638,23 @@ Message
 html
 </td>
 <td>
+<a href="https://rawcdn.githack.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/c8bee6d642f6b8d85e88b4f86a69ef7badb97362/docs/04_comparacao_robustez.html" target="_blank">c8bee6d</a>
+</td>
+<td>
+WevertonGomesCosta
+</td>
+<td>
+2026-09-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
 <a href="https://rawcdn.githack.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/73e1863dc63ce63d3b04042d353be9555da4f8f4/docs/04_comparacao_robustez.html" target="_blank">73e1863</a>
 </td>
 <td>
@@ -660,9 +693,3639 @@ Configure initial tutorial structure and simulated data
 </div>
 <div id="objetivo" class="section level1">
 <h1>Objetivo</h1>
-<p>Comparar o desempenho preditivo dos métodos e avaliar sua robustez
-diante da redução do número de indivíduos (<code>n</code>), do número de
-marcadores (<code>p</code>) e de ambos simultaneamente.</p>
+<p>Comparar o desempenho preditivo dos seis métodos considerados no
+projeto e avaliar sua robustez à redução do número de marcadores
+(<code>p</code>), mantendo fixo o número total de 1.000 indivíduos.</p>
+<p>Nesta primeira fase são comparados:</p>
+<ul>
+<li>GBLUP aditivo;</li>
+<li>MARS;</li>
+<li>árvore de regressão;</li>
+<li>Bagging;</li>
+<li>Random Forest;</li>
+<li>Boosting.</li>
+</ul>
+<p>Para cada cenário, método e fold, o painel completo com 4.010 SNPs é
+utilizado como referência. O desempenho dos painéis contendo 50%, 25%,
+10%, 5% e 1% dos marcadores é comparado ao respectivo desempenho com
+100% dos SNPs.</p>
+<p>A redução do número de indivíduos (<code>n</code>) e a avaliação
+conjunta de <code>n</code> e <code>p</code> constituem fases posteriores
+do projeto e não são analisadas neste módulo.</p>
+</div>
+<div id="escopo-da-fase-1" class="section level1">
+<h1>1. Escopo da Fase 1</h1>
+<p>A análise desta página responde a duas perguntas principais:</p>
+<ol style="list-style-type: decimal">
+<li>qual método apresenta maior capacidade preditiva em cada
+cenário?</li>
+<li>quanto dessa capacidade é preservada quando o número de marcadores é
+reduzido?</li>
+</ol>
+<p>O desenho permanece fixo em</p>
+<p><span class="math display">\[
+n = 1000
+\]</span></p>
+<p>indivíduos e seis níveis de <code>p</code>:</p>
+<p><span class="math display">\[
+p \in
+\{
+4010,\ 2005,\ 1003,\ 401,\ 201,\ 40
+\}.
+\]</span></p>
+<p>Os níveis correspondem, respectivamente, a</p>
+<p><span class="math display">\[
+100\%,\ 50\%,\ 25\%,\ 10\%,\ 5\%,\ 1\%.
+\]</span></p>
+</div>
+<div id="desenho-comum-da-comparação" class="section level1">
+<h1>2. Desenho comum da comparação</h1>
+<p>O desenho experimental e as partições de validação cruzada foram
+definidos em <code>01_dados_desenho.Rmd</code>.</p>
+<pre class="r"><code>arquivo_m01 &lt;- &quot;output/dados_desenho/desenho_analise.rds&quot;
+
+stopifnot(
+  file.exists(arquivo_m01)
+)
+
+desenho &lt;- readRDS(
+  arquivo_m01
+)
+
+stopifnot(
+  identical(
+    dim(desenho$genotipo),
+    c(1000L, 4010L)
+  ),
+  length(desenho$folds) == 5L
+)</code></pre>
+<p>Todos os métodos utilizam os mesmos cinco folds. Em cada fold:</p>
+<ul>
+<li>800 indivíduos possuem fenótipos disponíveis para treinamento;</li>
+<li>200 indivíduos possuem fenótipos ocultos e são utilizados no
+teste;</li>
+<li>nos métodos de aprendizado de máquina, o ranking de marcadores é
+construído apenas com os indivíduos de treinamento;</li>
+<li>no GBLUP, os 1.000 indivíduos são considerados previamente
+genotipados e a matriz de relacionamento genômico é construída de forma
+transdutiva, enquanto os fenótipos dos 200 indivíduos de teste
+permanecem ocultos;</li>
+<li>os valores genéticos verdadeiros são utilizados somente para
+avaliação.</li>
+</ul>
+<p>Assim, todos os métodos compartilham exatamente as mesmas partições
+treino-teste, embora o GBLUP utilize os genótipos dos indivíduos de
+teste na matriz de relacionamento, conforme documentado em
+<code>02_gblup.Rmd</code>.</p>
+</div>
+<div id="resultados-computacionais-utilizados" class="section level1">
+<h1>3. Resultados computacionais utilizados</h1>
+<p>Os ajustes completos foram executados previamente e armazenados em
+<code>.local/grid_p/tasks/</code>.</p>
+<p>O grid esperado contém</p>
+<p><span class="math display">\[
+6
+\times
+5
+\times
+6
+\times
+6
+=
+1080
+\]</span></p>
+<p>células científicas, correspondentes a:</p>
+<ul>
+<li>6 cenários;</li>
+<li>5 folds;</li>
+<li>6 métodos;</li>
+<li>6 níveis de <code>p</code>.</li>
+</ul>
+<p>Essas 1.080 células são decompostas em</p>
+<p><span class="math display">\[
+180_{\mathrm{GBLUP}}
++
+900_{\mathrm{ML}}
+=
+1080,
+\]</span></p>
+<p>pois o GBLUP contribui com</p>
+<p><span class="math display">\[
+6
+\times
+5
+\times
+1
+\times
+6
+=
+180
+\]</span></p>
+<p>resultados, enquanto os cinco métodos de aprendizado de máquina
+contribuem com</p>
+<p><span class="math display">\[
+6
+\times
+5
+\times
+5
+\times
+6
+=
+900
+\]</span></p>
+<p>resultados.</p>
+<p>Os arquivos de <code>.local/</code> são checkpoints computacionais.
+Nesta página eles são lidos, auditados e consolidados em objetos
+oficiais versionáveis.</p>
+</div>
+<div id="consolidação-dos-1.080-resultados" class="section level1">
+<h1>4. Consolidação dos 1.080 resultados</h1>
+<div id="definições-do-grid" class="section level2">
+<h2>4.1 Definições do grid</h2>
+<pre class="r"><code>root_grid &lt;- &quot;.local/grid_p/tasks&quot;
+
+cenarios &lt;- paste0(
+  &quot;C&quot;,
+  1:6
+)
+
+folds &lt;- 1:5
+
+metodos &lt;- c(
+  &quot;GBLUP&quot;,
+  &quot;MARS&quot;,
+  &quot;TREE&quot;,
+  &quot;BAGGING&quot;,
+  &quot;RF&quot;,
+  &quot;BOOSTING&quot;
+)
+
+p_files &lt;- c(
+  `100` = &quot;p100.rds&quot;,
+  `50`  = &quot;p050.rds&quot;,
+  `25`  = &quot;p025.rds&quot;,
+  `10`  = &quot;p010.rds&quot;,
+  `5`   = &quot;p005.rds&quot;,
+  `1`   = &quot;p001.rds&quot;
+)
+
+p_esperado &lt;- c(
+  `100` = 4010L,
+  `50`  = 2005L,
+  `25`  = 1003L,
+  `10`  = 401L,
+  `5`   = 201L,
+  `1`   = 40L
+)
+
+stopifnot(
+  dir.exists(root_grid)
+)</code></pre>
+</div>
+<div id="função-de-leitura" class="section level2">
+<h2>4.2 Função de leitura</h2>
+<p>Cada arquivo <code>p*.rds</code> contém metadados, configuração do
+método, métricas, predições e a informação necessária para identificar o
+painel utilizado.</p>
+<p>No painel completo (<code>p = 100%</code>),
+<code>selected_marker_indices = NULL</code> é a convenção do worker para
+indicar uso direto dos 4.010 SNPs de <code>X_full</code>. Nos painéis
+reduzidos, <code>selected_marker_indices</code> contém explicitamente os
+índices dos SNPs selecionados, na ordem do ranking de importância.</p>
+<p>Para a comparação global, as métricas e os principais metadados são
+transformados em uma tabela única.</p>
+<pre class="r"><code>ler_resultado_grid &lt;- function(
+  cenario,
+  fold,
+  metodo,
+  pct
+) {
+
+  arquivo &lt;- file.path(
+    root_grid,
+    cenario,
+    sprintf(
+      &quot;fold%02d&quot;,
+      fold
+    ),
+    metodo,
+    p_files[[pct]]
+  )
+
+  if (!file.exists(arquivo)) {
+    stop(
+      &quot;Arquivo ausente: &quot;,
+      arquivo
+    )
+  }
+
+  x &lt;- readRDS(
+    arquivo
+  )
+
+  stopifnot(
+    is.list(x),
+    all(
+      c(
+        &quot;meta&quot;,
+        &quot;config&quot;,
+        &quot;metrics&quot;,
+        &quot;predictions&quot;,
+        &quot;selected_marker_indices&quot;
+      ) %in% names(x)
+    )
+  )
+
+  m &lt;- x$metrics
+
+  data.frame(
+    cenario = cenario,
+    fold = as.integer(fold),
+    metodo = metodo,
+    percentual_p = as.integer(pct),
+    p = as.integer(
+      x$meta$p
+    ),
+    n_treino = as.integer(
+      x$meta$n_train
+    ),
+    n_teste = as.integer(
+      x$meta$n_test
+    ),
+    seed = as.integer(
+      x$meta$seed
+    ),
+    runtime_seconds = as.numeric(
+      x$meta$runtime_seconds
+    ),
+    r_true_g = as.numeric(
+      m$r_true_g
+    ),
+    rmse_true_g = as.numeric(
+      m$rmse_true_g
+    ),
+    mae_true_g = as.numeric(
+      m$mae_true_g
+    ),
+    bias_true_g = as.numeric(
+      m$bias_true_g
+    ),
+    slope_true_g = as.numeric(
+      m$slope_true_g
+    ),
+    r2_true_g = as.numeric(
+      m$r2_true_g
+    ),
+    r_phenotype = as.numeric(
+      m$r_phenotype
+    ),
+    rmse_phenotype = as.numeric(
+      m$rmse_phenotype
+    ),
+    stringsAsFactors = FALSE
+  )
+}</code></pre>
+</div>
+<div id="leitura-completa" class="section level2">
+<h2>4.3 Leitura completa</h2>
+<pre class="r"><code>linhas &lt;- vector(
+  &quot;list&quot;,
+  length(cenarios) *
+    length(folds) *
+    length(metodos) *
+    length(p_files)
+)
+
+k &lt;- 0L
+
+for (cenario in cenarios) {
+
+  for (fold in folds) {
+
+    for (metodo in metodos) {
+
+      for (pct in names(p_files)) {
+
+        k &lt;- k + 1L
+
+        linhas[[k]] &lt;- ler_resultado_grid(
+          cenario = cenario,
+          fold = fold,
+          metodo = metodo,
+          pct = pct
+        )
+      }
+    }
+  }
+}
+
+resultados &lt;- do.call(
+  rbind,
+  linhas
+)
+
+rownames(resultados) &lt;- NULL
+
+stopifnot(
+  nrow(resultados) == 1080L
+)</code></pre>
+</div>
+</div>
+<div id="auditoria-do-consolidado" class="section level1">
+<h1>5. Auditoria do consolidado</h1>
+<p>A consolidação somente é aceita se todas as combinações esperadas
+estiverem presentes uma única vez e se as dimensões e métricas forem
+válidas.</p>
+<pre class="r"><code>chave &lt;- paste(
+  resultados$cenario,
+  resultados$fold,
+  resultados$metodo,
+  resultados$percentual_p,
+  sep = &quot;::&quot;
+)
+
+stopifnot(
+  !anyDuplicated(chave),
+  nrow(resultados) == 1080L,
+  all(resultados$n_treino == 800L),
+  all(resultados$n_teste == 200L),
+  all(
+    resultados$p ==
+      unname(
+        p_esperado[
+          as.character(
+            resultados$percentual_p
+          )
+        ]
+      )
+  )
+)
+
+metricas_numericas &lt;- c(
+  &quot;r_true_g&quot;,
+  &quot;rmse_true_g&quot;,
+  &quot;mae_true_g&quot;,
+  &quot;bias_true_g&quot;,
+  &quot;slope_true_g&quot;,
+  &quot;r2_true_g&quot;,
+  &quot;r_phenotype&quot;,
+  &quot;rmse_phenotype&quot;
+)
+
+stopifnot(
+  all(
+    vapply(
+      resultados[
+        metricas_numericas
+      ],
+      function(z) all(is.finite(z)),
+      logical(1)
+    )
+  )
+)
+
+contagem_metodo &lt;- table(
+  resultados$metodo
+)
+
+contagem_cenario &lt;- table(
+  resultados$cenario
+)
+
+contagem_p &lt;- table(
+  resultados$p
+)
+
+stopifnot(
+  all(contagem_metodo == 180L),
+  all(contagem_cenario == 180L),
+  all(contagem_p == 180L)
+)
+
+cat(
+  &quot;Resultados consolidados:&quot;,
+  nrow(resultados),
+  &quot;\n&quot;
+)</code></pre>
+<pre><code>Resultados consolidados: 1080 </code></pre>
+<pre class="r"><code>cat(
+  &quot;Chaves duplicadas:&quot;,
+  anyDuplicated(chave),
+  &quot;\n&quot;
+)</code></pre>
+<pre><code>Chaves duplicadas: 0 </code></pre>
+<pre class="r"><code>cat(
+  &quot;AUDITORIA DO CONSOLIDADO: PASS\n&quot;
+)</code></pre>
+<pre><code>AUDITORIA DO CONSOLIDADO: PASS</code></pre>
+</div>
+<div id="métricas-de-robustez" class="section level1">
+<h1>6. Métricas de robustez</h1>
+<p>A correlação entre o valor genético verdadeiro e a predição é a
+métrica principal:</p>
+<p><span class="math display">\[
+r
+=
+\operatorname{cor}
+\left(
+\mathbf{g},
+\widehat{\mathbf{g}}
+\right).
+\]</span></p>
+<p>Para cada combinação de cenário, método e fold, o painel com 4.010
+SNPs é a referência.</p>
+<p>A perda em correlação é definida por</p>
+<p><span class="math display">\[
+\Delta r_q
+=
+r_{100\%}
+-
+r_q.
+\]</span></p>
+<p>A interpretação é:</p>
+<ul>
+<li><span class="math inline">\(\Delta r_q &gt; 0\)</span>: redução de
+desempenho;</li>
+<li><span class="math inline">\(\Delta r_q = 0\)</span>: manutenção do
+desempenho;</li>
+<li><span class="math inline">\(\Delta r_q &lt; 0\)</span>: desempenho
+superior ao painel completo.</li>
+</ul>
+<p>Para o RMSE:</p>
+<p><span class="math display">\[
+\Delta RMSE_q
+=
+RMSE_q
+-
+RMSE_{100\%}.
+\]</span></p>
+<p>Valores positivos indicam aumento do erro.</p>
+<div id="cálculo-dentro-de-cenário-método-fold" class="section level2">
+<h2>6.1 Cálculo dentro de cenário × método × fold</h2>
+<pre class="r"><code>baseline &lt;- resultados[
+  resultados$percentual_p == 100L,
+  c(
+    &quot;cenario&quot;,
+    &quot;fold&quot;,
+    &quot;metodo&quot;,
+    &quot;r_true_g&quot;,
+    &quot;rmse_true_g&quot;
+  )
+]
+
+names(baseline)[
+  names(baseline) == &quot;r_true_g&quot;
+] &lt;- &quot;r_baseline&quot;
+
+names(baseline)[
+  names(baseline) == &quot;rmse_true_g&quot;
+] &lt;- &quot;rmse_baseline&quot;
+
+resultados &lt;- merge(
+  resultados,
+  baseline,
+  by = c(
+    &quot;cenario&quot;,
+    &quot;fold&quot;,
+    &quot;metodo&quot;
+  ),
+  all.x = TRUE,
+  sort = FALSE
+)
+
+stopifnot(
+  nrow(resultados) == 1080L,
+  all(is.finite(resultados$r_baseline)),
+  all(is.finite(resultados$rmse_baseline))
+)
+
+resultados$delta_r &lt;-
+  resultados$r_baseline -
+  resultados$r_true_g
+
+resultados$delta_rmse &lt;-
+  resultados$rmse_true_g -
+  resultados$rmse_baseline
+
+stopifnot(
+  all(
+    abs(
+      resultados$delta_r[
+        resultados$percentual_p == 100L
+      ]
+    ) &lt; 1e-12
+  ),
+  all(
+    abs(
+      resultados$delta_rmse[
+        resultados$percentual_p == 100L
+      ]
+    ) &lt; 1e-12
+  )
+)</code></pre>
+</div>
+</div>
+<div id="resumo-entre-folds" class="section level1">
+<h1>7. Resumo entre folds</h1>
+<p>Os resultados finais são sintetizados entre os cinco folds. O fold
+permanece a unidade de replicação da validação cruzada.</p>
+<pre class="r"><code>media_segura &lt;- function(x) {
+  mean(
+    x,
+    na.rm = TRUE
+  )
+}
+
+sd_seguro &lt;- function(x) {
+  stats::sd(
+    x,
+    na.rm = TRUE
+  )
+}
+
+resumir_variavel &lt;- function(
+  dados,
+  variavel
+) {
+
+  grupos &lt;- interaction(
+    dados$cenario,
+    dados$metodo,
+    dados$percentual_p,
+    drop = TRUE,
+    lex.order = TRUE
+  )
+
+  media &lt;- tapply(
+    dados[[variavel]],
+    grupos,
+    media_segura
+  )
+
+  desvio &lt;- tapply(
+    dados[[variavel]],
+    grupos,
+    sd_seguro
+  )
+
+  n &lt;- tapply(
+    dados[[variavel]],
+    grupos,
+    length
+  )
+
+  chave &lt;- unique(
+    dados[
+      ,
+      c(
+        &quot;cenario&quot;,
+        &quot;metodo&quot;,
+        &quot;percentual_p&quot;
+      )
+    ]
+  )
+
+  chave$grupo &lt;- interaction(
+    chave$cenario,
+    chave$metodo,
+    chave$percentual_p,
+    drop = TRUE,
+    lex.order = TRUE
+  )
+
+  chave$media &lt;- as.numeric(
+    media[
+      as.character(
+        chave$grupo
+      )
+    ]
+  )
+
+  chave$sd &lt;- as.numeric(
+    desvio[
+      as.character(
+        chave$grupo
+      )
+    ]
+  )
+
+  chave$n &lt;- as.integer(
+    n[
+      as.character(
+        chave$grupo
+      )
+    ]
+  )
+
+  chave$grupo &lt;- NULL
+
+  chave
+}</code></pre>
+<div id="correlação" class="section level2">
+<h2>7.1 Correlação</h2>
+<pre class="r"><code>resumo_r &lt;- resumir_variavel(
+  resultados,
+  &quot;r_true_g&quot;
+)
+
+names(resumo_r)[
+  names(resumo_r) == &quot;media&quot;
+] &lt;- &quot;media_r&quot;
+
+names(resumo_r)[
+  names(resumo_r) == &quot;sd&quot;
+] &lt;- &quot;sd_r&quot;</code></pre>
+</div>
+<div id="rmse" class="section level2">
+<h2>7.2 RMSE</h2>
+<pre class="r"><code>resumo_rmse &lt;- resumir_variavel(
+  resultados,
+  &quot;rmse_true_g&quot;
+)
+
+names(resumo_rmse)[
+  names(resumo_rmse) == &quot;media&quot;
+] &lt;- &quot;media_rmse&quot;
+
+names(resumo_rmse)[
+  names(resumo_rmse) == &quot;sd&quot;
+] &lt;- &quot;sd_rmse&quot;</code></pre>
+</div>
+<div id="delta-de-correlação" class="section level2">
+<h2>7.3 Delta de correlação</h2>
+<pre class="r"><code>resumo_delta_r &lt;- resumir_variavel(
+  resultados,
+  &quot;delta_r&quot;
+)
+
+names(resumo_delta_r)[
+  names(resumo_delta_r) == &quot;media&quot;
+] &lt;- &quot;media_delta_r&quot;
+
+names(resumo_delta_r)[
+  names(resumo_delta_r) == &quot;sd&quot;
+] &lt;- &quot;sd_delta_r&quot;</code></pre>
+</div>
+<div id="delta-de-rmse" class="section level2">
+<h2>7.4 Delta de RMSE</h2>
+<pre class="r"><code>resumo_delta_rmse &lt;- resumir_variavel(
+  resultados,
+  &quot;delta_rmse&quot;
+)
+
+names(resumo_delta_rmse)[
+  names(resumo_delta_rmse) == &quot;media&quot;
+] &lt;- &quot;media_delta_rmse&quot;
+
+names(resumo_delta_rmse)[
+  names(resumo_delta_rmse) == &quot;sd&quot;
+] &lt;- &quot;sd_delta_rmse&quot;</code></pre>
+</div>
+</div>
+<div id="tabela-integrada-de-resultados" class="section level1">
+<h1>8. Tabela integrada de resultados</h1>
+<pre class="r"><code>resumo &lt;- merge(
+  resumo_r,
+  resumo_rmse,
+  by = c(
+    &quot;cenario&quot;,
+    &quot;metodo&quot;,
+    &quot;percentual_p&quot;
+  ),
+  suffixes = c(
+    &quot;_r&quot;,
+    &quot;_rmse&quot;
+  )
+)
+
+resumo &lt;- merge(
+  resumo,
+  resumo_delta_r,
+  by = c(
+    &quot;cenario&quot;,
+    &quot;metodo&quot;,
+    &quot;percentual_p&quot;
+  )
+)
+
+resumo &lt;- merge(
+  resumo,
+  resumo_delta_rmse,
+  by = c(
+    &quot;cenario&quot;,
+    &quot;metodo&quot;,
+    &quot;percentual_p&quot;
+  )
+)
+
+resumo &lt;- resumo[
+  order(
+    resumo$cenario,
+    resumo$metodo,
+    -resumo$percentual_p
+  ),
+]
+
+rownames(resumo) &lt;- NULL
+
+stopifnot(
+  nrow(resumo) == 216L,
+  all(
+    resumo$n_r == 5L
+  )
+)</code></pre>
+<p>Existem</p>
+<p><span class="math display">\[
+6
+\times
+6
+\times
+6
+=
+216
+\]</span></p>
+<p>combinações resumidas de cenário, método e nível de
+<code>p</code>.</p>
+</div>
+<div id="desempenho-com-o-painel-completo" class="section level1">
+<h1>9. Desempenho com o painel completo</h1>
+<p>O primeiro contraste descreve a capacidade preditiva dos métodos
+antes da redução de marcadores.</p>
+<pre class="r"><code>tabela_p100 &lt;- resumo[
+  resumo$percentual_p == 100L,
+  c(
+    &quot;cenario&quot;,
+    &quot;metodo&quot;,
+    &quot;media_r&quot;,
+    &quot;sd_r&quot;,
+    &quot;media_rmse&quot;,
+    &quot;sd_rmse&quot;
+  )
+]
+
+tabela_p100 &lt;- tabela_p100[
+  order(
+    tabela_p100$cenario,
+    -tabela_p100$media_r
+  ),
+]
+
+knitr::kable(
+  tabela_p100,
+  digits = 4,
+  caption = &quot;Desempenho médio com 100% dos marcadores&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Desempenho médio com 100% dos marcadores</caption>
+<thead>
+<tr class="header">
+<th align="left">cenario</th>
+<th align="left">metodo</th>
+<th align="right">media_r</th>
+<th align="right">sd_r</th>
+<th align="right">media_rmse</th>
+<th align="right">sd_rmse</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">BOOSTING</td>
+<td align="right">0.9130</td>
+<td align="right">0.0120</td>
+<td align="right">0.9646</td>
+<td align="right">0.0541</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="left">BAGGING</td>
+<td align="right">0.8792</td>
+<td align="right">0.0141</td>
+<td align="right">0.9500</td>
+<td align="right">0.0609</td>
+</tr>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">RF</td>
+<td align="right">0.8789</td>
+<td align="right">0.0141</td>
+<td align="right">0.9543</td>
+<td align="right">0.0651</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="left">MARS</td>
+<td align="right">0.8154</td>
+<td align="right">0.0296</td>
+<td align="right">1.1265</td>
+<td align="right">0.0937</td>
+</tr>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">TREE</td>
+<td align="right">0.8010</td>
+<td align="right">0.0370</td>
+<td align="right">1.1777</td>
+<td align="right">0.1305</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="left">GBLUP</td>
+<td align="right">0.6364</td>
+<td align="right">0.0199</td>
+<td align="right">1.5069</td>
+<td align="right">0.0173</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="left">RF</td>
+<td align="right">0.7736</td>
+<td align="right">0.0132</td>
+<td align="right">0.6775</td>
+<td align="right">0.0238</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">BAGGING</td>
+<td align="right">0.7695</td>
+<td align="right">0.0132</td>
+<td align="right">0.6806</td>
+<td align="right">0.0221</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="left">BOOSTING</td>
+<td align="right">0.7555</td>
+<td align="right">0.0132</td>
+<td align="right">0.6960</td>
+<td align="right">0.0254</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">GBLUP</td>
+<td align="right">0.7480</td>
+<td align="right">0.0287</td>
+<td align="right">0.6351</td>
+<td align="right">0.0256</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="left">MARS</td>
+<td align="right">0.5427</td>
+<td align="right">0.0598</td>
+<td align="right">0.8150</td>
+<td align="right">0.0464</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">TREE</td>
+<td align="right">0.3424</td>
+<td align="right">0.0645</td>
+<td align="right">0.9595</td>
+<td align="right">0.0581</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">GBLUP</td>
+<td align="right">0.8056</td>
+<td align="right">0.0204</td>
+<td align="right">0.4140</td>
+<td align="right">0.0234</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="left">RF</td>
+<td align="right">0.7822</td>
+<td align="right">0.0363</td>
+<td align="right">0.4793</td>
+<td align="right">0.0343</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">BAGGING</td>
+<td align="right">0.7810</td>
+<td align="right">0.0350</td>
+<td align="right">0.4794</td>
+<td align="right">0.0332</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="left">BOOSTING</td>
+<td align="right">0.7759</td>
+<td align="right">0.0273</td>
+<td align="right">0.4840</td>
+<td align="right">0.0302</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">MARS</td>
+<td align="right">0.5688</td>
+<td align="right">0.0353</td>
+<td align="right">0.5937</td>
+<td align="right">0.0303</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="left">TREE</td>
+<td align="right">0.3581</td>
+<td align="right">0.0612</td>
+<td align="right">0.7252</td>
+<td align="right">0.0365</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="left">GBLUP</td>
+<td align="right">0.8506</td>
+<td align="right">0.0159</td>
+<td align="right">0.3099</td>
+<td align="right">0.0112</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">RF</td>
+<td align="right">0.8399</td>
+<td align="right">0.0125</td>
+<td align="right">0.3650</td>
+<td align="right">0.0163</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="left">BAGGING</td>
+<td align="right">0.8362</td>
+<td align="right">0.0133</td>
+<td align="right">0.3663</td>
+<td align="right">0.0155</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">BOOSTING</td>
+<td align="right">0.8267</td>
+<td align="right">0.0172</td>
+<td align="right">0.3722</td>
+<td align="right">0.0145</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="left">MARS</td>
+<td align="right">0.6229</td>
+<td align="right">0.0447</td>
+<td align="right">0.4795</td>
+<td align="right">0.0292</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">TREE</td>
+<td align="right">0.4222</td>
+<td align="right">0.0257</td>
+<td align="right">0.6137</td>
+<td align="right">0.0317</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">GBLUP</td>
+<td align="right">0.8577</td>
+<td align="right">0.0151</td>
+<td align="right">0.2426</td>
+<td align="right">0.0102</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="left">BOOSTING</td>
+<td align="right">0.8364</td>
+<td align="right">0.0167</td>
+<td align="right">0.2790</td>
+<td align="right">0.0229</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">BAGGING</td>
+<td align="right">0.8324</td>
+<td align="right">0.0206</td>
+<td align="right">0.2872</td>
+<td align="right">0.0230</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="left">RF</td>
+<td align="right">0.8276</td>
+<td align="right">0.0129</td>
+<td align="right">0.2879</td>
+<td align="right">0.0196</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">MARS</td>
+<td align="right">0.6177</td>
+<td align="right">0.0532</td>
+<td align="right">0.4003</td>
+<td align="right">0.0372</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="left">TREE</td>
+<td align="right">0.3735</td>
+<td align="right">0.0662</td>
+<td align="right">0.5375</td>
+<td align="right">0.0257</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="left">GBLUP</td>
+<td align="right">0.8930</td>
+<td align="right">0.0097</td>
+<td align="right">0.1873</td>
+<td align="right">0.0109</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">BOOSTING</td>
+<td align="right">0.8754</td>
+<td align="right">0.0164</td>
+<td align="right">0.2252</td>
+<td align="right">0.0188</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="left">RF</td>
+<td align="right">0.8531</td>
+<td align="right">0.0229</td>
+<td align="right">0.2354</td>
+<td align="right">0.0204</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">BAGGING</td>
+<td align="right">0.8525</td>
+<td align="right">0.0163</td>
+<td align="right">0.2353</td>
+<td align="right">0.0193</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="left">MARS</td>
+<td align="right">0.6555</td>
+<td align="right">0.0478</td>
+<td align="right">0.3363</td>
+<td align="right">0.0260</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">TREE</td>
+<td align="right">0.4084</td>
+<td align="right">0.1190</td>
+<td align="right">0.4425</td>
+<td align="right">0.0356</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="melhor-método-no-painel-completo" class="section level1">
+<h1>10. Melhor método no painel completo</h1>
+<p>A identificação do maior valor médio de correlação é descritiva e não
+substitui a avaliação conjunta dos cinco folds.</p>
+<pre class="r"><code>melhor_p100 &lt;- do.call(
+  rbind,
+  lapply(
+    split(
+      tabela_p100,
+      tabela_p100$cenario
+    ),
+    function(z) {
+
+      z[
+        which.max(
+          z$media_r
+        ),
+        ,
+        drop = FALSE
+      ]
+    }
+  )
+)
+
+rownames(melhor_p100) &lt;- NULL
+
+knitr::kable(
+  melhor_p100,
+  digits = 4,
+  caption = &quot;Método com maior correlação média no painel completo&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Método com maior correlação média no painel completo</caption>
+<thead>
+<tr class="header">
+<th align="left">cenario</th>
+<th align="left">metodo</th>
+<th align="right">media_r</th>
+<th align="right">sd_r</th>
+<th align="right">media_rmse</th>
+<th align="right">sd_rmse</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">BOOSTING</td>
+<td align="right">0.9130</td>
+<td align="right">0.0120</td>
+<td align="right">0.9646</td>
+<td align="right">0.0541</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">RF</td>
+<td align="right">0.7736</td>
+<td align="right">0.0132</td>
+<td align="right">0.6775</td>
+<td align="right">0.0238</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">GBLUP</td>
+<td align="right">0.8056</td>
+<td align="right">0.0204</td>
+<td align="right">0.4140</td>
+<td align="right">0.0234</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">GBLUP</td>
+<td align="right">0.8506</td>
+<td align="right">0.0159</td>
+<td align="right">0.3099</td>
+<td align="right">0.0112</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">GBLUP</td>
+<td align="right">0.8577</td>
+<td align="right">0.0151</td>
+<td align="right">0.2426</td>
+<td align="right">0.0102</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">GBLUP</td>
+<td align="right">0.8930</td>
+<td align="right">0.0097</td>
+<td align="right">0.1873</td>
+<td align="right">0.0109</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="curvas-de-capacidade-preditiva" class="section level1">
+<h1>11. Curvas de capacidade preditiva</h1>
+<p>A comparação ao longo de <code>p</code> permite avaliar
+simultaneamente o nível de desempenho e a sensibilidade à redução de
+marcadores.</p>
+<pre class="r"><code>stopifnot(
+  requireNamespace(
+    &quot;ggplot2&quot;,
+    quietly = TRUE
+  )
+)
+
+graf_r &lt;- resumo[
+  ,
+  c(
+    &quot;cenario&quot;,
+    &quot;metodo&quot;,
+    &quot;percentual_p&quot;,
+    &quot;media_r&quot;,
+    &quot;sd_r&quot;
+  )
+]
+
+graf_r$percentual_p_fator &lt;- factor(
+  graf_r$percentual_p,
+  levels = c(
+    100,
+    50,
+    25,
+    10,
+    5,
+    1
+  ),
+  ordered = TRUE
+)
+
+ggplot2::ggplot(
+  graf_r,
+  ggplot2::aes(
+    x = percentual_p_fator,
+    y = media_r,
+    group = metodo,
+    linetype = metodo,
+    shape = metodo
+  )
+) +
+  ggplot2::geom_line() +
+  ggplot2::geom_point() +
+  ggplot2::facet_wrap(
+    ~ cenario,
+    ncol = 2
+  ) +
+  ggplot2::labs(
+    x = &quot;Marcadores mantidos (%)&quot;,
+    y = &quot;Correlação média com o valor genético verdadeiro&quot;,
+    linetype = &quot;Método&quot;,
+    shape = &quot;Método&quot;
+  ) +
+  ggplot2::theme_bw()</code></pre>
+<p><img src="figure/04_comparacao_robustez.Rmd/figura-r-p-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="robustez-medida-por-delta-de-correlação"
+class="section level1">
+<h1>12. Robustez medida por delta de correlação</h1>
+<pre class="r"><code>graf_delta &lt;- resumo[
+  resumo$percentual_p &lt; 100L,
+  c(
+    &quot;cenario&quot;,
+    &quot;metodo&quot;,
+    &quot;percentual_p&quot;,
+    &quot;media_delta_r&quot;,
+    &quot;sd_delta_r&quot;
+  )
+]
+
+graf_delta$percentual_p_fator &lt;- factor(
+  graf_delta$percentual_p,
+  levels = c(
+    50,
+    25,
+    10,
+    5,
+    1
+  ),
+  ordered = TRUE
+)
+
+ggplot2::ggplot(
+  graf_delta,
+  ggplot2::aes(
+    x = percentual_p_fator,
+    y = media_delta_r,
+    group = metodo,
+    linetype = metodo,
+    shape = metodo
+  )
+) +
+  ggplot2::geom_hline(
+    yintercept = 0
+  ) +
+  ggplot2::geom_line() +
+  ggplot2::geom_point() +
+  ggplot2::facet_wrap(
+    ~ cenario,
+    ncol = 2
+  ) +
+  ggplot2::labs(
+    x = &quot;Marcadores mantidos (%)&quot;,
+    y = expression(Delta * r),
+    linetype = &quot;Método&quot;,
+    shape = &quot;Método&quot;
+  ) +
+  ggplot2::theme_bw()</code></pre>
+<p><img src="figure/04_comparacao_robustez.Rmd/figura-delta-r-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>Valores próximos de zero indicam maior estabilidade em relação ao
+painel completo. Valores positivos indicam perda de correlação. Valores
+negativos indicam que a redução produziu correlação superior à do painel
+completo.</p>
+</div>
+<div id="robustez-medida-por-delta-de-rmse" class="section level1">
+<h1>13. Robustez medida por delta de RMSE</h1>
+<pre class="r"><code>graf_delta_rmse &lt;- resumo[
+  resumo$percentual_p &lt; 100L,
+  c(
+    &quot;cenario&quot;,
+    &quot;metodo&quot;,
+    &quot;percentual_p&quot;,
+    &quot;media_delta_rmse&quot;,
+    &quot;sd_delta_rmse&quot;
+  )
+]
+
+graf_delta_rmse$percentual_p_fator &lt;- factor(
+  graf_delta_rmse$percentual_p,
+  levels = c(
+    50,
+    25,
+    10,
+    5,
+    1
+  ),
+  ordered = TRUE
+)
+
+ggplot2::ggplot(
+  graf_delta_rmse,
+  ggplot2::aes(
+    x = percentual_p_fator,
+    y = media_delta_rmse,
+    group = metodo,
+    linetype = metodo,
+    shape = metodo
+  )
+) +
+  ggplot2::geom_hline(
+    yintercept = 0
+  ) +
+  ggplot2::geom_line() +
+  ggplot2::geom_point() +
+  ggplot2::facet_wrap(
+    ~ cenario,
+    ncol = 2
+  ) +
+  ggplot2::labs(
+    x = &quot;Marcadores mantidos (%)&quot;,
+    y = expression(Delta * RMSE),
+    linetype = &quot;Método&quot;,
+    shape = &quot;Método&quot;
+  ) +
+  ggplot2::theme_bw()</code></pre>
+<p><img src="figure/04_comparacao_robustez.Rmd/figura-delta-rmse-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="arquitetura-genética-e-robustez" class="section level1">
+<h1>14. Arquitetura genética e robustez</h1>
+<p>Os seis cenários diferem em número de QTL e herdabilidade.</p>
+<pre class="r"><code>arquitetura &lt;- data.frame(
+  cenario = paste0(
+    &quot;C&quot;,
+    1:6
+  ),
+  n_qtl = c(
+    8L,
+    40L,
+    80L,
+    120L,
+    240L,
+    480L
+  ),
+  h2 = c(
+    0.7,
+    0.7,
+    0.5,
+    0.5,
+    0.3,
+    0.3
+  )
+)
+
+knitr::kable(
+  arquitetura,
+  caption = &quot;Arquitetura genética dos seis cenários&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Arquitetura genética dos seis cenários</caption>
+<thead>
+<tr class="header">
+<th align="left">cenario</th>
+<th align="right">n_qtl</th>
+<th align="right">h2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="right">8</td>
+<td align="right">0.7</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="right">40</td>
+<td align="right">0.7</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="right">80</td>
+<td align="right">0.5</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="right">120</td>
+<td align="right">0.5</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="right">240</td>
+<td align="right">0.3</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="right">480</td>
+<td align="right">0.3</td>
+</tr>
+</tbody>
+</table>
+<p>Essa estrutura permite verificar se a sensibilidade à redução de
+marcadores se modifica ao longo de arquiteturas com diferentes números
+de QTL e herdabilidades.</p>
+<p>O desenho não é fatorial completo: número de QTL e herdabilidade
+variam em conjunto entre grupos de cenários. Portanto, diferenças entre
+C1–C6 não devem ser interpretadas como estimativas independentes dos
+efeitos causais de poligenicidade e herdabilidade. Comparações dentro
+dos pares com mesma herdabilidade (C1–C2, C3–C4 e C5–C6) ajudam a
+descrever o efeito associado ao aumento do número de QTL, mas permanecem
+descritivas.</p>
+<p>A interpretação deve separar dois efeitos:</p>
+<ul>
+<li>mudança do desempenho absoluto entre cenários;</li>
+<li>mudança da perda relativa ao painel completo dentro de cada
+cenário.</li>
+</ul>
+<p>O uso de <span class="math inline">\(\Delta r\)</span> é
+particularmente importante para essa segunda questão.</p>
+</div>
+<div id="robustez-preditiva-e-estabilidade-relativa"
+class="section level1">
+<h1>15. Robustez preditiva e estabilidade relativa</h1>
+<p>Robustez não deve ser reduzida a uma única medida de perda em relação
+ao próprio baseline.</p>
+<p>Um método com desempenho inicial baixo pode apresentar <span
+class="math inline">\(\Delta r\)</span> próximo de zero simplesmente
+porque seu nível de predição muda pouco. Por isso, esta fase separa duas
+dimensões:</p>
+<ol style="list-style-type: decimal">
+<li><strong>robustez preditiva global:</strong> desempenho absoluto
+médio nos cinco painéis reduzidos;</li>
+<li><strong>estabilidade relativa:</strong> perda média de correlação em
+relação ao próprio painel completo.</li>
+</ol>
+<p>A robustez preditiva global é uma <strong>síntese descritiva
+operacional</strong> deste estudo. Para cada método, ela atribui peso
+igual às 150 células cenário × fold × painel reduzido (6 cenários × 5
+folds × 5 níveis de <code>p</code>). Ela não representa um teste
+estatístico de superioridade entre métodos.</p>
+<div id="resumo-conjunto-por-método" class="section level2">
+<h2>15.1 Resumo conjunto por método</h2>
+<pre class="r"><code>reduzidos &lt;- resultados[
+  resultados$percentual_p &lt; 100L,
+  ,
+  drop = FALSE
+]
+
+desempenho_reduzido &lt;- aggregate(
+  r_true_g ~ metodo,
+  data = reduzidos,
+  FUN = mean
+)
+
+names(desempenho_reduzido)[
+  names(desempenho_reduzido) == &quot;r_true_g&quot;
+] &lt;- &quot;media_r_reduzido&quot;
+
+estabilidade_relativa &lt;- aggregate(
+  delta_r ~ metodo,
+  data = reduzidos,
+  FUN = mean
+)
+
+names(estabilidade_relativa)[
+  names(estabilidade_relativa) == &quot;delta_r&quot;
+] &lt;- &quot;perda_media_r&quot;
+
+baseline_metodo &lt;- aggregate(
+  r_true_g ~ metodo,
+  data = resultados[
+    resultados$percentual_p == 100L,
+    ,
+    drop = FALSE
+  ],
+  FUN = mean
+)
+
+names(baseline_metodo)[
+  names(baseline_metodo) == &quot;r_true_g&quot;
+] &lt;- &quot;media_r_baseline&quot;
+
+robustez_metodo &lt;- merge(
+  desempenho_reduzido,
+  estabilidade_relativa,
+  by = &quot;metodo&quot;
+)
+
+robustez_metodo &lt;- merge(
+  robustez_metodo,
+  baseline_metodo,
+  by = &quot;metodo&quot;
+)
+
+robustez_metodo$rank_robustez_preditiva &lt;- rank(
+  -robustez_metodo$media_r_reduzido,
+  ties.method = &quot;min&quot;
+)
+
+robustez_metodo$rank_estabilidade_relativa &lt;- rank(
+  robustez_metodo$perda_media_r,
+  ties.method = &quot;min&quot;
+)
+
+robustez_metodo &lt;- robustez_metodo[
+  order(
+    robustez_metodo$rank_robustez_preditiva,
+    robustez_metodo$rank_estabilidade_relativa
+  ),
+]
+
+rownames(robustez_metodo) &lt;- NULL
+
+knitr::kable(
+  robustez_metodo,
+  digits = 4,
+  caption = paste(
+    &quot;Resumo descritivo do desempenho sob redução e da estabilidade relativa.&quot;,
+    &quot;O ranking principal usa a correlação média nos painéis reduzidos;&quot;,
+    &quot;a perda média é apresentada separadamente.&quot;
+  ),
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Resumo descritivo do desempenho sob redução e da estabilidade
+relativa. O ranking principal usa a correlação média nos painéis
+reduzidos; a perda média é apresentada separadamente.</caption>
+<colgroup>
+<col width="8%" />
+<col width="15%" />
+<col width="12%" />
+<col width="15%" />
+<col width="22%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">metodo</th>
+<th align="right">media_r_reduzido</th>
+<th align="right">perda_media_r</th>
+<th align="right">media_r_baseline</th>
+<th align="right">rank_robustez_preditiva</th>
+<th align="right">rank_estabilidade_relativa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">BOOSTING</td>
+<td align="right">0.8063</td>
+<td align="right">0.0242</td>
+<td align="right">0.8305</td>
+<td align="right">1</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">BAGGING</td>
+<td align="right">0.7906</td>
+<td align="right">0.0345</td>
+<td align="right">0.8251</td>
+<td align="right">2</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">RF</td>
+<td align="right">0.7866</td>
+<td align="right">0.0393</td>
+<td align="right">0.8259</td>
+<td align="right">3</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">GBLUP</td>
+<td align="right">0.7375</td>
+<td align="right">0.0610</td>
+<td align="right">0.7985</td>
+<td align="right">4</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">MARS</td>
+<td align="right">0.6372</td>
+<td align="right">0.0000</td>
+<td align="right">0.6372</td>
+<td align="right">5</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">TREE</td>
+<td align="right">0.4360</td>
+<td align="right">0.0149</td>
+<td align="right">0.4509</td>
+<td align="right">6</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+<p>O <code>rank_robustez_preditiva</code> responde qual método mantém
+<strong>maior capacidade preditiva absoluta</strong> quando
+<code>p</code> é reduzido. O <code>rank_estabilidade_relativa</code>
+responde qual método muda menos em relação ao seu próprio baseline.</p>
+<p>Esses rankings não são intercambiáveis. Em particular, um método pode
+ser muito estável porque já utiliza efetivamente poucos marcadores, sem
+apresentar a maior correlação absoluta.</p>
+<p>Não é construído um escore composto arbitrário entre as duas
+dimensões.</p>
+</div>
+<div id="auditoria-da-invariância-de-mars-e-tree"
+class="section level2">
+<h2>15.2 Auditoria da invariância de MARS e TREE</h2>
+<p>A estabilidade incomum observada em MARS e, parcialmente, em TREE foi
+auditada diretamente nos checkpoints.</p>
+<pre class="r"><code>auditar_invariancia &lt;- function(modelo) {
+
+  linhas &lt;- vector(
+    &quot;list&quot;,
+    length(cenarios) * length(folds)
+  )
+
+  k &lt;- 0L
+
+  for (cenario in cenarios) {
+
+    for (fold in folds) {
+
+      k &lt;- k + 1L
+
+      d &lt;- file.path(
+        root_grid,
+        cenario,
+        sprintf(
+          &quot;fold%02d&quot;,
+          fold
+        ),
+        modelo
+      )
+
+      ranking &lt;- readRDS(
+        file.path(
+          d,
+          &quot;ranking.rds&quot;
+        )
+      )
+
+      p100 &lt;- readRDS(
+        file.path(
+          d,
+          &quot;p100.rds&quot;
+        )
+      )
+
+      p10 &lt;- readRDS(
+        file.path(
+          d,
+          &quot;p010.rds&quot;
+        )
+      )
+
+      p1 &lt;- readRDS(
+        file.path(
+          d,
+          &quot;p001.rds&quot;
+        )
+      )
+
+      stopifnot(
+        nrow(ranking) == 4010L,
+        is.null(
+          p100$selected_marker_indices
+        ),
+        length(
+          p10$selected_marker_indices
+        ) == 401L,
+        length(
+          p1$selected_marker_indices
+        ) == 40L,
+        identical(
+          as.integer(
+            p10$selected_marker_indices
+          ),
+          as.integer(
+            ranking$marker_index[
+              seq_len(401L)
+            ]
+          )
+        ),
+        identical(
+          as.integer(
+            p1$selected_marker_indices
+          ),
+          as.integer(
+            ranking$marker_index[
+              seq_len(40L)
+            ]
+          )
+        )
+      )
+
+      imp_pos &lt;- ranking$importance_raw &gt; 0
+
+      n_pos &lt;- sum(
+        imp_pos,
+        na.rm = TRUE
+      )
+
+      max_rank_pos &lt;- if (n_pos &gt; 0L) {
+        max(
+          ranking$rank[
+            imp_pos
+          ]
+        )
+      } else {
+        NA_integer_
+      }
+
+      pred100 &lt;- p100$predictions$predicted_value
+      pred10 &lt;- p10$predictions$predicted_value
+      pred1 &lt;- p1$predictions$predicted_value
+
+      stopifnot(
+        length(pred100) == 200L,
+        length(pred10) == 200L,
+        length(pred1) == 200L
+      )
+
+      diff10 &lt;- max(
+        abs(
+          pred100 - pred10
+        )
+      )
+
+      diff1 &lt;- max(
+        abs(
+          pred100 - pred1
+        )
+      )
+
+      linhas[[k]] &lt;- data.frame(
+        modelo = modelo,
+        cenario = cenario,
+        fold = fold,
+        importancia_positiva = n_pos,
+        maior_rank_importancia_positiva = max_rank_pos,
+        maxdiff_pred_100_10 = diff10,
+        maxdiff_pred_100_1 = diff1,
+        pred_100_10_identica = diff10 &lt; 1e-12,
+        pred_100_1_identica = diff1 &lt; 1e-12,
+        stringsAsFactors = FALSE
+      )
+    }
+  }
+
+  do.call(
+    rbind,
+    linhas
+  )
+}
+
+auditoria_invariancia &lt;- rbind(
+  auditar_invariancia(
+    &quot;MARS&quot;
+  ),
+  auditar_invariancia(
+    &quot;TREE&quot;
+  )
+)
+
+resumo_invariancia &lt;- do.call(
+  rbind,
+  lapply(
+    split(
+      auditoria_invariancia,
+      auditoria_invariancia$modelo
+    ),
+    function(z) {
+
+      data.frame(
+        modelo = z$modelo[1L],
+        combinacoes = nrow(z),
+        importancia_positiva_min =
+          min(z$importancia_positiva),
+        importancia_positiva_max =
+          max(z$importancia_positiva),
+        maior_rank_positivo_max =
+          max(
+            z$maior_rank_importancia_positiva,
+            na.rm = TRUE
+          ),
+        pred_100_10_identica =
+          sum(z$pred_100_10_identica),
+        pred_100_1_identica =
+          sum(z$pred_100_1_identica),
+        stringsAsFactors = FALSE
+      )
+    }
+  )
+)
+
+rownames(resumo_invariancia) &lt;- NULL
+
+knitr::kable(
+  resumo_invariancia,
+  caption = &quot;Auditoria de invariância de MARS e TREE nas 30 combinações cenário × fold&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Auditoria de invariância de MARS e TREE nas 30 combinações
+cenário × fold</caption>
+<colgroup>
+<col width="5%" />
+<col width="8%" />
+<col width="18%" />
+<col width="18%" />
+<col width="17%" />
+<col width="15%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">modelo</th>
+<th align="right">combinacoes</th>
+<th align="right">importancia_positiva_min</th>
+<th align="right">importancia_positiva_max</th>
+<th align="right">maior_rank_positivo_max</th>
+<th align="right">pred_100_10_identica</th>
+<th align="right">pred_100_1_identica</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">MARS</td>
+<td align="right">30</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">30</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="left">TREE</td>
+<td align="right">30</td>
+<td align="right">65</td>
+<td align="right">116</td>
+<td align="right">116</td>
+<td align="right">21</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p>Para o MARS, a auditoria mostra que apenas 10 SNPs apresentam
+importância positiva em cada combinação e todos estão dentro do top 40.
+Assim, mesmo o painel de 1% preserva integralmente o subconjunto
+utilizado pelo modelo, o que explica a identidade das predições.</p>
+<p>Para TREE, o número de SNPs com importância positiva é maior que 40.
+A invariância é apenas parcial em 10% e desaparece em 1%, comportamento
+compatível com o reajuste da árvore em painéis progressivamente
+menores.</p>
+<p>A convenção <code>selected_marker_indices = NULL</code> em 100%
+também é auditada explicitamente e não deve ser interpretada como painel
+vazio.</p>
+</div>
+</div>
+<div id="tabela-compacta-para-comunicação-dos-resultados"
+class="section level1">
+<h1>16. Tabela compacta para comunicação dos resultados</h1>
+<p>Para resumos e apresentações, os níveis de 100%, 10% e 1% fornecem
+uma representação compacta do painel completo, de uma redução
+intermediária forte e da redução extrema.</p>
+<pre class="r"><code>tabela_compacta &lt;- resumo[
+  resumo$percentual_p %in%
+    c(
+      100L,
+      10L,
+      1L
+    ),
+  c(
+    &quot;cenario&quot;,
+    &quot;metodo&quot;,
+    &quot;percentual_p&quot;,
+    &quot;media_r&quot;,
+    &quot;sd_r&quot;,
+    &quot;media_delta_r&quot;,
+    &quot;media_rmse&quot;,
+    &quot;media_delta_rmse&quot;
+  )
+]
+
+tabela_compacta &lt;- tabela_compacta[
+  order(
+    tabela_compacta$cenario,
+    tabela_compacta$metodo,
+    -tabela_compacta$percentual_p
+  ),
+]
+
+knitr::kable(
+  tabela_compacta,
+  digits = 4,
+  caption = &quot;Resumo compacto para 100%, 10% e 1% dos marcadores&quot;,
+  row.names = FALSE
+)</code></pre>
+<table style="width:100%;">
+<caption>Resumo compacto para 100%, 10% e 1% dos marcadores</caption>
+<colgroup>
+<col width="9%" />
+<col width="10%" />
+<col width="14%" />
+<col width="9%" />
+<col width="8%" />
+<col width="16%" />
+<col width="12%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">cenario</th>
+<th align="left">metodo</th>
+<th align="right">percentual_p</th>
+<th align="right">media_r</th>
+<th align="right">sd_r</th>
+<th align="right">media_delta_r</th>
+<th align="right">media_rmse</th>
+<th align="right">media_delta_rmse</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">BAGGING</td>
+<td align="right">100</td>
+<td align="right">0.8792</td>
+<td align="right">0.0141</td>
+<td align="right">0.0000</td>
+<td align="right">0.9500</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="left">BAGGING</td>
+<td align="right">10</td>
+<td align="right">0.8877</td>
+<td align="right">0.0109</td>
+<td align="right">-0.0086</td>
+<td align="right">0.9085</td>
+<td align="right">-0.0415</td>
+</tr>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">BAGGING</td>
+<td align="right">1</td>
+<td align="right">0.8861</td>
+<td align="right">0.0453</td>
+<td align="right">-0.0069</td>
+<td align="right">0.9015</td>
+<td align="right">-0.0485</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="left">BOOSTING</td>
+<td align="right">100</td>
+<td align="right">0.9130</td>
+<td align="right">0.0120</td>
+<td align="right">0.0000</td>
+<td align="right">0.9646</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">BOOSTING</td>
+<td align="right">10</td>
+<td align="right">0.9153</td>
+<td align="right">0.0131</td>
+<td align="right">-0.0022</td>
+<td align="right">0.9499</td>
+<td align="right">-0.0147</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="left">BOOSTING</td>
+<td align="right">1</td>
+<td align="right">0.9277</td>
+<td align="right">0.0155</td>
+<td align="right">-0.0146</td>
+<td align="right">0.8635</td>
+<td align="right">-0.1011</td>
+</tr>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">GBLUP</td>
+<td align="right">100</td>
+<td align="right">0.6364</td>
+<td align="right">0.0199</td>
+<td align="right">0.0000</td>
+<td align="right">1.5069</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="left">GBLUP</td>
+<td align="right">10</td>
+<td align="right">0.6540</td>
+<td align="right">0.0235</td>
+<td align="right">-0.0176</td>
+<td align="right">1.4822</td>
+<td align="right">-0.0247</td>
+</tr>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">GBLUP</td>
+<td align="right">1</td>
+<td align="right">0.6068</td>
+<td align="right">0.0850</td>
+<td align="right">0.0296</td>
+<td align="right">1.5417</td>
+<td align="right">0.0348</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="left">MARS</td>
+<td align="right">100</td>
+<td align="right">0.8154</td>
+<td align="right">0.0296</td>
+<td align="right">0.0000</td>
+<td align="right">1.1265</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">MARS</td>
+<td align="right">10</td>
+<td align="right">0.8154</td>
+<td align="right">0.0296</td>
+<td align="right">0.0000</td>
+<td align="right">1.1265</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="left">MARS</td>
+<td align="right">1</td>
+<td align="right">0.8154</td>
+<td align="right">0.0296</td>
+<td align="right">0.0000</td>
+<td align="right">1.1265</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">RF</td>
+<td align="right">100</td>
+<td align="right">0.8789</td>
+<td align="right">0.0141</td>
+<td align="right">0.0000</td>
+<td align="right">0.9543</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="left">RF</td>
+<td align="right">10</td>
+<td align="right">0.8976</td>
+<td align="right">0.0098</td>
+<td align="right">-0.0187</td>
+<td align="right">0.8694</td>
+<td align="right">-0.0849</td>
+</tr>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">RF</td>
+<td align="right">1</td>
+<td align="right">0.8566</td>
+<td align="right">0.0538</td>
+<td align="right">0.0224</td>
+<td align="right">1.0074</td>
+<td align="right">0.0531</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="left">TREE</td>
+<td align="right">100</td>
+<td align="right">0.8010</td>
+<td align="right">0.0370</td>
+<td align="right">0.0000</td>
+<td align="right">1.1777</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="left">TREE</td>
+<td align="right">10</td>
+<td align="right">0.8003</td>
+<td align="right">0.0366</td>
+<td align="right">0.0007</td>
+<td align="right">1.1795</td>
+<td align="right">0.0018</td>
+</tr>
+<tr class="even">
+<td align="left">C1</td>
+<td align="left">TREE</td>
+<td align="right">1</td>
+<td align="right">0.6669</td>
+<td align="right">0.0708</td>
+<td align="right">0.1341</td>
+<td align="right">1.4446</td>
+<td align="right">0.2670</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="left">BAGGING</td>
+<td align="right">100</td>
+<td align="right">0.7695</td>
+<td align="right">0.0132</td>
+<td align="right">0.0000</td>
+<td align="right">0.6806</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">BAGGING</td>
+<td align="right">10</td>
+<td align="right">0.7566</td>
+<td align="right">0.0248</td>
+<td align="right">0.0129</td>
+<td align="right">0.6784</td>
+<td align="right">-0.0022</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="left">BAGGING</td>
+<td align="right">1</td>
+<td align="right">0.5968</td>
+<td align="right">0.0253</td>
+<td align="right">0.1727</td>
+<td align="right">0.7686</td>
+<td align="right">0.0880</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">BOOSTING</td>
+<td align="right">100</td>
+<td align="right">0.7555</td>
+<td align="right">0.0132</td>
+<td align="right">0.0000</td>
+<td align="right">0.6960</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="left">BOOSTING</td>
+<td align="right">10</td>
+<td align="right">0.7432</td>
+<td align="right">0.0144</td>
+<td align="right">0.0124</td>
+<td align="right">0.7034</td>
+<td align="right">0.0074</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">BOOSTING</td>
+<td align="right">1</td>
+<td align="right">0.6515</td>
+<td align="right">0.0330</td>
+<td align="right">0.1040</td>
+<td align="right">0.7471</td>
+<td align="right">0.0511</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="left">GBLUP</td>
+<td align="right">100</td>
+<td align="right">0.7480</td>
+<td align="right">0.0287</td>
+<td align="right">0.0000</td>
+<td align="right">0.6351</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">GBLUP</td>
+<td align="right">10</td>
+<td align="right">0.7364</td>
+<td align="right">0.0245</td>
+<td align="right">0.0116</td>
+<td align="right">0.6486</td>
+<td align="right">0.0134</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="left">GBLUP</td>
+<td align="right">1</td>
+<td align="right">0.4721</td>
+<td align="right">0.0606</td>
+<td align="right">0.2759</td>
+<td align="right">0.8465</td>
+<td align="right">0.2113</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">MARS</td>
+<td align="right">100</td>
+<td align="right">0.5427</td>
+<td align="right">0.0598</td>
+<td align="right">0.0000</td>
+<td align="right">0.8150</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="left">MARS</td>
+<td align="right">10</td>
+<td align="right">0.5427</td>
+<td align="right">0.0598</td>
+<td align="right">0.0000</td>
+<td align="right">0.8150</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">MARS</td>
+<td align="right">1</td>
+<td align="right">0.5427</td>
+<td align="right">0.0598</td>
+<td align="right">0.0000</td>
+<td align="right">0.8150</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="left">RF</td>
+<td align="right">100</td>
+<td align="right">0.7736</td>
+<td align="right">0.0132</td>
+<td align="right">0.0000</td>
+<td align="right">0.6775</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">RF</td>
+<td align="right">10</td>
+<td align="right">0.7544</td>
+<td align="right">0.0255</td>
+<td align="right">0.0193</td>
+<td align="right">0.6774</td>
+<td align="right">-0.0001</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="left">RF</td>
+<td align="right">1</td>
+<td align="right">0.5719</td>
+<td align="right">0.0586</td>
+<td align="right">0.2018</td>
+<td align="right">0.7829</td>
+<td align="right">0.1054</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">TREE</td>
+<td align="right">100</td>
+<td align="right">0.3424</td>
+<td align="right">0.0645</td>
+<td align="right">0.0000</td>
+<td align="right">0.9595</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C2</td>
+<td align="left">TREE</td>
+<td align="right">10</td>
+<td align="right">0.3449</td>
+<td align="right">0.0641</td>
+<td align="right">-0.0025</td>
+<td align="right">0.9607</td>
+<td align="right">0.0012</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="left">TREE</td>
+<td align="right">1</td>
+<td align="right">0.3165</td>
+<td align="right">0.0302</td>
+<td align="right">0.0259</td>
+<td align="right">0.9322</td>
+<td align="right">-0.0274</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">BAGGING</td>
+<td align="right">100</td>
+<td align="right">0.7810</td>
+<td align="right">0.0350</td>
+<td align="right">0.0000</td>
+<td align="right">0.4794</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="left">BAGGING</td>
+<td align="right">10</td>
+<td align="right">0.7665</td>
+<td align="right">0.0462</td>
+<td align="right">0.0144</td>
+<td align="right">0.4793</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">BAGGING</td>
+<td align="right">1</td>
+<td align="right">0.6467</td>
+<td align="right">0.0682</td>
+<td align="right">0.1342</td>
+<td align="right">0.5328</td>
+<td align="right">0.0534</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="left">BOOSTING</td>
+<td align="right">100</td>
+<td align="right">0.7759</td>
+<td align="right">0.0273</td>
+<td align="right">0.0000</td>
+<td align="right">0.4840</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">BOOSTING</td>
+<td align="right">10</td>
+<td align="right">0.7705</td>
+<td align="right">0.0327</td>
+<td align="right">0.0054</td>
+<td align="right">0.4852</td>
+<td align="right">0.0013</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="left">BOOSTING</td>
+<td align="right">1</td>
+<td align="right">0.6646</td>
+<td align="right">0.0482</td>
+<td align="right">0.1113</td>
+<td align="right">0.5313</td>
+<td align="right">0.0473</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">GBLUP</td>
+<td align="right">100</td>
+<td align="right">0.8056</td>
+<td align="right">0.0204</td>
+<td align="right">0.0000</td>
+<td align="right">0.4140</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="left">GBLUP</td>
+<td align="right">10</td>
+<td align="right">0.7767</td>
+<td align="right">0.0267</td>
+<td align="right">0.0290</td>
+<td align="right">0.4442</td>
+<td align="right">0.0302</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">GBLUP</td>
+<td align="right">1</td>
+<td align="right">0.6165</td>
+<td align="right">0.0429</td>
+<td align="right">0.1891</td>
+<td align="right">0.5584</td>
+<td align="right">0.1444</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="left">MARS</td>
+<td align="right">100</td>
+<td align="right">0.5688</td>
+<td align="right">0.0353</td>
+<td align="right">0.0000</td>
+<td align="right">0.5937</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">MARS</td>
+<td align="right">10</td>
+<td align="right">0.5688</td>
+<td align="right">0.0353</td>
+<td align="right">0.0000</td>
+<td align="right">0.5937</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="left">MARS</td>
+<td align="right">1</td>
+<td align="right">0.5688</td>
+<td align="right">0.0353</td>
+<td align="right">0.0000</td>
+<td align="right">0.5937</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">RF</td>
+<td align="right">100</td>
+<td align="right">0.7822</td>
+<td align="right">0.0363</td>
+<td align="right">0.0000</td>
+<td align="right">0.4793</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="left">RF</td>
+<td align="right">10</td>
+<td align="right">0.7711</td>
+<td align="right">0.0446</td>
+<td align="right">0.0111</td>
+<td align="right">0.4771</td>
+<td align="right">-0.0022</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">RF</td>
+<td align="right">1</td>
+<td align="right">0.6114</td>
+<td align="right">0.0626</td>
+<td align="right">0.1708</td>
+<td align="right">0.5536</td>
+<td align="right">0.0743</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="left">TREE</td>
+<td align="right">100</td>
+<td align="right">0.3581</td>
+<td align="right">0.0612</td>
+<td align="right">0.0000</td>
+<td align="right">0.7252</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="left">TREE</td>
+<td align="right">10</td>
+<td align="right">0.3563</td>
+<td align="right">0.0573</td>
+<td align="right">0.0018</td>
+<td align="right">0.7269</td>
+<td align="right">0.0017</td>
+</tr>
+<tr class="even">
+<td align="left">C3</td>
+<td align="left">TREE</td>
+<td align="right">1</td>
+<td align="right">0.3121</td>
+<td align="right">0.0848</td>
+<td align="right">0.0460</td>
+<td align="right">0.6886</td>
+<td align="right">-0.0366</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="left">BAGGING</td>
+<td align="right">100</td>
+<td align="right">0.8362</td>
+<td align="right">0.0133</td>
+<td align="right">0.0000</td>
+<td align="right">0.3663</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">BAGGING</td>
+<td align="right">10</td>
+<td align="right">0.8285</td>
+<td align="right">0.0110</td>
+<td align="right">0.0076</td>
+<td align="right">0.3630</td>
+<td align="right">-0.0033</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="left">BAGGING</td>
+<td align="right">1</td>
+<td align="right">0.7003</td>
+<td align="right">0.0188</td>
+<td align="right">0.1358</td>
+<td align="right">0.4209</td>
+<td align="right">0.0546</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">BOOSTING</td>
+<td align="right">100</td>
+<td align="right">0.8267</td>
+<td align="right">0.0172</td>
+<td align="right">0.0000</td>
+<td align="right">0.3722</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="left">BOOSTING</td>
+<td align="right">10</td>
+<td align="right">0.8111</td>
+<td align="right">0.0182</td>
+<td align="right">0.0156</td>
+<td align="right">0.3782</td>
+<td align="right">0.0060</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">BOOSTING</td>
+<td align="right">1</td>
+<td align="right">0.7261</td>
+<td align="right">0.0266</td>
+<td align="right">0.1007</td>
+<td align="right">0.4136</td>
+<td align="right">0.0414</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="left">GBLUP</td>
+<td align="right">100</td>
+<td align="right">0.8506</td>
+<td align="right">0.0159</td>
+<td align="right">0.0000</td>
+<td align="right">0.3099</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">GBLUP</td>
+<td align="right">10</td>
+<td align="right">0.8184</td>
+<td align="right">0.0152</td>
+<td align="right">0.0321</td>
+<td align="right">0.3448</td>
+<td align="right">0.0349</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="left">GBLUP</td>
+<td align="right">1</td>
+<td align="right">0.6319</td>
+<td align="right">0.0459</td>
+<td align="right">0.2187</td>
+<td align="right">0.4667</td>
+<td align="right">0.1568</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">MARS</td>
+<td align="right">100</td>
+<td align="right">0.6229</td>
+<td align="right">0.0447</td>
+<td align="right">0.0000</td>
+<td align="right">0.4795</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="left">MARS</td>
+<td align="right">10</td>
+<td align="right">0.6229</td>
+<td align="right">0.0447</td>
+<td align="right">0.0000</td>
+<td align="right">0.4795</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">MARS</td>
+<td align="right">1</td>
+<td align="right">0.6229</td>
+<td align="right">0.0447</td>
+<td align="right">0.0000</td>
+<td align="right">0.4795</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="left">RF</td>
+<td align="right">100</td>
+<td align="right">0.8399</td>
+<td align="right">0.0125</td>
+<td align="right">0.0000</td>
+<td align="right">0.3650</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">RF</td>
+<td align="right">10</td>
+<td align="right">0.8182</td>
+<td align="right">0.0101</td>
+<td align="right">0.0217</td>
+<td align="right">0.3698</td>
+<td align="right">0.0049</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="left">RF</td>
+<td align="right">1</td>
+<td align="right">0.7018</td>
+<td align="right">0.0233</td>
+<td align="right">0.1381</td>
+<td align="right">0.4210</td>
+<td align="right">0.0561</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">TREE</td>
+<td align="right">100</td>
+<td align="right">0.4222</td>
+<td align="right">0.0257</td>
+<td align="right">0.0000</td>
+<td align="right">0.6137</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C4</td>
+<td align="left">TREE</td>
+<td align="right">10</td>
+<td align="right">0.4263</td>
+<td align="right">0.0236</td>
+<td align="right">-0.0041</td>
+<td align="right">0.6116</td>
+<td align="right">-0.0021</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="left">TREE</td>
+<td align="right">1</td>
+<td align="right">0.3217</td>
+<td align="right">0.0312</td>
+<td align="right">0.1005</td>
+<td align="right">0.5742</td>
+<td align="right">-0.0395</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">BAGGING</td>
+<td align="right">100</td>
+<td align="right">0.8324</td>
+<td align="right">0.0206</td>
+<td align="right">0.0000</td>
+<td align="right">0.2872</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="left">BAGGING</td>
+<td align="right">10</td>
+<td align="right">0.8073</td>
+<td align="right">0.0209</td>
+<td align="right">0.0251</td>
+<td align="right">0.2917</td>
+<td align="right">0.0044</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">BAGGING</td>
+<td align="right">1</td>
+<td align="right">0.6676</td>
+<td align="right">0.0592</td>
+<td align="right">0.1648</td>
+<td align="right">0.3531</td>
+<td align="right">0.0659</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="left">BOOSTING</td>
+<td align="right">100</td>
+<td align="right">0.8364</td>
+<td align="right">0.0167</td>
+<td align="right">0.0000</td>
+<td align="right">0.2790</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">BOOSTING</td>
+<td align="right">10</td>
+<td align="right">0.8220</td>
+<td align="right">0.0186</td>
+<td align="right">0.0144</td>
+<td align="right">0.2836</td>
+<td align="right">0.0046</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="left">BOOSTING</td>
+<td align="right">1</td>
+<td align="right">0.7301</td>
+<td align="right">0.0182</td>
+<td align="right">0.1063</td>
+<td align="right">0.3240</td>
+<td align="right">0.0450</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">GBLUP</td>
+<td align="right">100</td>
+<td align="right">0.8577</td>
+<td align="right">0.0151</td>
+<td align="right">0.0000</td>
+<td align="right">0.2426</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="left">GBLUP</td>
+<td align="right">10</td>
+<td align="right">0.8227</td>
+<td align="right">0.0182</td>
+<td align="right">0.0350</td>
+<td align="right">0.2775</td>
+<td align="right">0.0349</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">GBLUP</td>
+<td align="right">1</td>
+<td align="right">0.6003</td>
+<td align="right">0.0275</td>
+<td align="right">0.2574</td>
+<td align="right">0.3917</td>
+<td align="right">0.1491</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="left">MARS</td>
+<td align="right">100</td>
+<td align="right">0.6177</td>
+<td align="right">0.0532</td>
+<td align="right">0.0000</td>
+<td align="right">0.4003</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">MARS</td>
+<td align="right">10</td>
+<td align="right">0.6177</td>
+<td align="right">0.0532</td>
+<td align="right">0.0000</td>
+<td align="right">0.4003</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="left">MARS</td>
+<td align="right">1</td>
+<td align="right">0.6177</td>
+<td align="right">0.0532</td>
+<td align="right">0.0000</td>
+<td align="right">0.4003</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">RF</td>
+<td align="right">100</td>
+<td align="right">0.8276</td>
+<td align="right">0.0129</td>
+<td align="right">0.0000</td>
+<td align="right">0.2879</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="left">RF</td>
+<td align="right">10</td>
+<td align="right">0.8064</td>
+<td align="right">0.0090</td>
+<td align="right">0.0212</td>
+<td align="right">0.2939</td>
+<td align="right">0.0060</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">RF</td>
+<td align="right">1</td>
+<td align="right">0.6867</td>
+<td align="right">0.0146</td>
+<td align="right">0.1410</td>
+<td align="right">0.3432</td>
+<td align="right">0.0553</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="left">TREE</td>
+<td align="right">100</td>
+<td align="right">0.3735</td>
+<td align="right">0.0662</td>
+<td align="right">0.0000</td>
+<td align="right">0.5375</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="left">TREE</td>
+<td align="right">10</td>
+<td align="right">0.3726</td>
+<td align="right">0.0663</td>
+<td align="right">0.0008</td>
+<td align="right">0.5377</td>
+<td align="right">0.0002</td>
+</tr>
+<tr class="even">
+<td align="left">C5</td>
+<td align="left">TREE</td>
+<td align="right">1</td>
+<td align="right">0.3112</td>
+<td align="right">0.0556</td>
+<td align="right">0.0623</td>
+<td align="right">0.4691</td>
+<td align="right">-0.0684</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="left">BAGGING</td>
+<td align="right">100</td>
+<td align="right">0.8525</td>
+<td align="right">0.0163</td>
+<td align="right">0.0000</td>
+<td align="right">0.2353</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">BAGGING</td>
+<td align="right">10</td>
+<td align="right">0.8292</td>
+<td align="right">0.0307</td>
+<td align="right">0.0233</td>
+<td align="right">0.2404</td>
+<td align="right">0.0051</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="left">BAGGING</td>
+<td align="right">1</td>
+<td align="right">0.6858</td>
+<td align="right">0.0518</td>
+<td align="right">0.1667</td>
+<td align="right">0.3021</td>
+<td align="right">0.0669</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">BOOSTING</td>
+<td align="right">100</td>
+<td align="right">0.8754</td>
+<td align="right">0.0164</td>
+<td align="right">0.0000</td>
+<td align="right">0.2252</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="left">BOOSTING</td>
+<td align="right">10</td>
+<td align="right">0.8599</td>
+<td align="right">0.0209</td>
+<td align="right">0.0155</td>
+<td align="right">0.2298</td>
+<td align="right">0.0047</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">BOOSTING</td>
+<td align="right">1</td>
+<td align="right">0.7732</td>
+<td align="right">0.0139</td>
+<td align="right">0.1022</td>
+<td align="right">0.2648</td>
+<td align="right">0.0397</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="left">GBLUP</td>
+<td align="right">100</td>
+<td align="right">0.8930</td>
+<td align="right">0.0097</td>
+<td align="right">0.0000</td>
+<td align="right">0.1873</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">GBLUP</td>
+<td align="right">10</td>
+<td align="right">0.8402</td>
+<td align="right">0.0129</td>
+<td align="right">0.0528</td>
+<td align="right">0.2314</td>
+<td align="right">0.0440</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="left">GBLUP</td>
+<td align="right">1</td>
+<td align="right">0.5784</td>
+<td align="right">0.0464</td>
+<td align="right">0.3146</td>
+<td align="right">0.3444</td>
+<td align="right">0.1570</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">MARS</td>
+<td align="right">100</td>
+<td align="right">0.6555</td>
+<td align="right">0.0478</td>
+<td align="right">0.0000</td>
+<td align="right">0.3363</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="left">MARS</td>
+<td align="right">10</td>
+<td align="right">0.6555</td>
+<td align="right">0.0478</td>
+<td align="right">0.0000</td>
+<td align="right">0.3363</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">MARS</td>
+<td align="right">1</td>
+<td align="right">0.6555</td>
+<td align="right">0.0478</td>
+<td align="right">0.0000</td>
+<td align="right">0.3363</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="left">RF</td>
+<td align="right">100</td>
+<td align="right">0.8531</td>
+<td align="right">0.0229</td>
+<td align="right">0.0000</td>
+<td align="right">0.2354</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">RF</td>
+<td align="right">10</td>
+<td align="right">0.8213</td>
+<td align="right">0.0324</td>
+<td align="right">0.0318</td>
+<td align="right">0.2427</td>
+<td align="right">0.0074</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="left">RF</td>
+<td align="right">1</td>
+<td align="right">0.6752</td>
+<td align="right">0.0684</td>
+<td align="right">0.1778</td>
+<td align="right">0.3069</td>
+<td align="right">0.0716</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">TREE</td>
+<td align="right">100</td>
+<td align="right">0.4084</td>
+<td align="right">0.1190</td>
+<td align="right">0.0000</td>
+<td align="right">0.4425</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">C6</td>
+<td align="left">TREE</td>
+<td align="right">10</td>
+<td align="right">0.4084</td>
+<td align="right">0.1190</td>
+<td align="right">0.0000</td>
+<td align="right">0.4425</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="left">TREE</td>
+<td align="right">1</td>
+<td align="right">0.3169</td>
+<td align="right">0.0536</td>
+<td align="right">0.0915</td>
+<td align="right">0.4070</td>
+<td align="right">-0.0355</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tempos-computacionais" class="section level1">
+<h1>17. Tempos computacionais</h1>
+<p>O tempo de execução não é a métrica científica principal, mas pode
+ajudar a interpretar o custo computacional relativo dos métodos.</p>
+<pre class="r"><code>tempo_metodo &lt;- aggregate(
+  runtime_seconds ~ metodo,
+  data = resultados,
+  FUN = function(x) {
+    c(
+      media = mean(x),
+      mediana = stats::median(x),
+      total = sum(x)
+    )
+  }
+)
+
+tempo_metodo &lt;- data.frame(
+  metodo = tempo_metodo$metodo,
+  media_segundos =
+    tempo_metodo$runtime_seconds[
+      ,
+      &quot;media&quot;
+    ],
+  mediana_segundos =
+    tempo_metodo$runtime_seconds[
+      ,
+      &quot;mediana&quot;
+    ],
+  total_segundos =
+    tempo_metodo$runtime_seconds[
+      ,
+      &quot;total&quot;
+    ]
+)
+
+knitr::kable(
+  tempo_metodo,
+  digits = 2,
+  caption = &quot;Tempo computacional registrado no grid&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Tempo computacional registrado no grid</caption>
+<thead>
+<tr class="header">
+<th align="left">metodo</th>
+<th align="right">media_segundos</th>
+<th align="right">mediana_segundos</th>
+<th align="right">total_segundos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">BAGGING</td>
+<td align="right">173.16</td>
+<td align="right">71.40</td>
+<td align="right">31169.45</td>
+</tr>
+<tr class="even">
+<td align="left">BOOSTING</td>
+<td align="right">13.37</td>
+<td align="right">7.17</td>
+<td align="right">2406.94</td>
+</tr>
+<tr class="odd">
+<td align="left">GBLUP</td>
+<td align="right">15.56</td>
+<td align="right">15.64</td>
+<td align="right">2800.73</td>
+</tr>
+<tr class="even">
+<td align="left">MARS</td>
+<td align="right">9.65</td>
+<td align="right">1.89</td>
+<td align="right">1737.73</td>
+</tr>
+<tr class="odd">
+<td align="left">RF</td>
+<td align="right">67.83</td>
+<td align="right">34.63</td>
+<td align="right">12209.67</td>
+</tr>
+<tr class="even">
+<td align="left">TREE</td>
+<td align="right">3.04</td>
+<td align="right">1.24</td>
+<td align="right">547.32</td>
+</tr>
+</tbody>
+</table>
+<p>Esses tempos descrevem a execução realizada e não devem ser
+interpretados como benchmark independente de hardware.</p>
+</div>
+<div id="produtos-oficiais-da-fase-1" class="section level1">
+<h1>18. Produtos oficiais da Fase 1</h1>
+<p>Após a auditoria, o consolidado é salvo fora de
+<code>.local/</code>.</p>
+<p>Os produtos oficiais de M02, M03 e M04 mantêm contratos explícitos.
+Isso evita que a consolidação final produza objetos menos informativos
+do que os módulos que os originaram.</p>
+<div id="diretórios-oficiais" class="section level2">
+<h2>18.1 Diretórios oficiais</h2>
+<pre class="r"><code>dir.create(
+  &quot;output/comparacao_robustez&quot;,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+
+dir.create(
+  &quot;output/gblup&quot;,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+
+dir.create(
+  &quot;output/aprendizado_maquina&quot;,
+  recursive = TRUE,
+  showWarnings = FALSE
+)</code></pre>
+</div>
+<div id="objeto-oficial-do-m02" class="section level2">
+<h2>18.2 Objeto oficial do M02</h2>
+<p>O produto do M02 contém somente os 180 resultados do GBLUP, mas
+preserva o protocolo metodológico congelado para esse método.</p>
+<pre class="r"><code>objeto_m02 &lt;- list(
+  versao = &quot;M02-p-v1&quot;,
+  fase = &quot;reducao_p_com_n_1000&quot;,
+  metodo = &quot;GBLUP&quot;,
+  dimensoes = list(
+    cenarios = 6L,
+    folds = 5L,
+    metodos = 1L,
+    niveis_p = 6L,
+    resultados = 180L
+  ),
+  protocolo = list(
+    modelo = &quot;GBLUP aditivo&quot;,
+    pacote = &quot;sommer&quot;,
+    matriz_relacionamento = &quot;sommer::A.mat&quot;,
+    ajuste = &quot;sommer::mmes&quot;,
+    nIters = 20L,
+    fenotipo_teste_no_ajuste = FALSE,
+    genotipos_teste_disponiveis = TRUE,
+    matriz_G_transdutiva = TRUE,
+    importancia_gblup =
+      &quot;beta_SNP^2 via pseudoinversa de Moore-Penrose&quot;,
+    paineis_aninhados = TRUE,
+    valor_genetico_somente_avaliacao = TRUE,
+    metrica_principal = &quot;r_true_g&quot;,
+    delta_r = &quot;r_100 - r_q&quot;,
+    delta_rmse = &quot;RMSE_q - RMSE_100&quot;
+  ),
+  resultados = resultados[
+    resultados$metodo == &quot;GBLUP&quot;,
+    ,
+    drop = FALSE
+  ],
+  resumo = resumo[
+    resumo$metodo == &quot;GBLUP&quot;,
+    ,
+    drop = FALSE
+  ]
+)
+
+stopifnot(
+  nrow(objeto_m02$resultados) == 180L,
+  nrow(objeto_m02$resumo) == 36L
+)</code></pre>
+</div>
+<div id="objeto-oficial-do-m03" class="section level2">
+<h2>18.3 Objeto oficial do M03</h2>
+<p>O produto do M03 contém os 900 resultados dos cinco métodos de
+aprendizado de máquina e registra as configurações metodológicas que
+foram auditadas nos objetos reais do grid.</p>
+<pre class="r"><code>objeto_m03 &lt;- list(
+  versao = &quot;M03-p-v1&quot;,
+  fase = &quot;reducao_p_com_n_1000&quot;,
+  metodos = c(
+    &quot;MARS&quot;,
+    &quot;TREE&quot;,
+    &quot;BAGGING&quot;,
+    &quot;RF&quot;,
+    &quot;BOOSTING&quot;
+  ),
+  dimensoes = list(
+    cenarios = 6L,
+    folds = 5L,
+    metodos = 5L,
+    niveis_p = 6L,
+    resultados = 900L
+  ),
+  protocolo = list(
+    configuracoes = list(
+      MARS = list(
+        pacote = &quot;earth&quot;,
+        degree = 1L,
+        nk = &quot;earth_default&quot;,
+        fast_k = &quot;earth_default&quot;,
+        importancia = &quot;caret::varImp(..., value = &#39;rss&#39;)&quot;
+      ),
+      TREE = list(
+        pacote = &quot;rpart&quot;,
+        method = &quot;anova&quot;,
+        importancia = &quot;caret::varImp(..., value = &#39;rss&#39;)&quot;
+      ),
+      BAGGING = list(
+        pacote = &quot;randomForest&quot;,
+        ntree = 500L,
+        mtry = &quot;p&quot;,
+        importancia = &quot;%IncMSE via caret::varImp.randomForest&quot;
+      ),
+      RF = list(
+        pacote = &quot;randomForest&quot;,
+        ntree = 500L,
+        mtry = &quot;max(1, floor(p/3))&quot;,
+        importancia = &quot;%IncMSE via caret::varImp.randomForest&quot;
+      ),
+      BOOSTING = list(
+        pacote = &quot;gbm&quot;,
+        n_trees = 500L,
+        interaction_depth = 2L,
+        shrinkage = 0.01,
+        importancia = &quot;caret::varImp(..., numTrees = 500)&quot;
+      )
+    ),
+    ranking_somente_treinamento = TRUE,
+    selected_marker_indices =
+      &quot;NULL em p=100%; top-p explícito e ordenado pelo ranking em p&lt;100%&quot;,
+    importancia_padronizada_0_10 = TRUE,
+    desempate_deterministico = TRUE,
+    paineis_aninhados = TRUE,
+    valor_genetico_somente_avaliacao = TRUE,
+    metrica_principal = &quot;r_true_g&quot;,
+    delta_r = &quot;r_100 - r_q&quot;,
+    delta_rmse = &quot;RMSE_q - RMSE_100&quot;
+  ),
+  resultados = resultados[
+    resultados$metodo != &quot;GBLUP&quot;,
+    ,
+    drop = FALSE
+  ],
+  resumo = resumo[
+    resumo$metodo != &quot;GBLUP&quot;,
+    ,
+    drop = FALSE
+  ]
+)
+
+stopifnot(
+  nrow(objeto_m03$resultados) == 900L,
+  nrow(objeto_m03$resumo) == 180L
+)</code></pre>
+</div>
+<div id="objeto-oficial-do-m04" class="section level2">
+<h2>18.4 Objeto oficial do M04</h2>
+<p>O M04 integra os 180 resultados do GBLUP e os 900 resultados de
+aprendizado de máquina:</p>
+<p><span class="math display">\[
+180 + 900 = 1080.
+\]</span></p>
+<pre class="r"><code>objeto_m04 &lt;- list(
+  versao = &quot;M04-p-v1&quot;,
+  fase = &quot;reducao_p_com_n_1000&quot;,
+  fontes = list(
+    M01 = &quot;desenho_analise.rds&quot;,
+    M02 = &quot;M02-p-v1&quot;,
+    M03 = &quot;M03-p-v1&quot;
+  ),
+  dimensoes = list(
+    cenarios = 6L,
+    folds = 5L,
+    metodos = 6L,
+    niveis_p = 6L,
+    resultados_gblup = 180L,
+    resultados_ml = 900L,
+    resultados = 1080L
+  ),
+  protocolo = list(
+    n_fixo = 1000L,
+    reducao_n = FALSE,
+    reducao_p = TRUE,
+    paineis_p = c(
+      `100` = 4010L,
+      `50` = 2005L,
+      `25` = 1003L,
+      `10` = 401L,
+      `5` = 201L,
+      `1` = 40L
+    ),
+    metrica_principal = &quot;r_true_g&quot;,
+    metricas_secundarias = c(
+      &quot;rmse_true_g&quot;,
+      &quot;mae_true_g&quot;,
+      &quot;bias_true_g&quot;,
+      &quot;slope_true_g&quot;,
+      &quot;r2_true_g&quot;
+    ),
+    delta_r = &quot;r_100 - r_q&quot;,
+    delta_rmse = &quot;RMSE_q - RMSE_100&quot;,
+    resumo_folds = &quot;media e desvio-padrao entre 5 folds&quot;
+  ),
+  resultados = resultados,
+  resumo = resumo,
+  baseline_p100 = tabela_p100,
+  melhor_p100 = melhor_p100,
+  robustez_metodo = robustez_metodo,
+  auditoria_invariancia = auditoria_invariancia,
+  resumo_invariancia = resumo_invariancia,
+  tabela_compacta = tabela_compacta,
+  tempo_metodo = tempo_metodo
+)
+
+stopifnot(
+  nrow(objeto_m04$resultados) == 1080L,
+  nrow(objeto_m04$resumo) == 216L,
+  objeto_m04$dimensoes$resultados_gblup +
+    objeto_m04$dimensoes$resultados_ml ==
+    objeto_m04$dimensoes$resultados
+)</code></pre>
+</div>
+<div id="gravação-dos-produtos" class="section level2">
+<h2>18.5 Gravação dos produtos</h2>
+<pre class="r"><code>saveRDS(
+  objeto_m02,
+  &quot;output/gblup/module02_gblup_results.rds&quot;,
+  compress = &quot;gzip&quot;
+)
+
+saveRDS(
+  objeto_m03,
+  &quot;output/aprendizado_maquina/module03_ml_results.rds&quot;,
+  compress = &quot;gzip&quot;
+)
+
+saveRDS(
+  objeto_m04,
+  &quot;output/comparacao_robustez/module04_comparacao_p_results.rds&quot;,
+  compress = &quot;gzip&quot;
+)
+
+utils::write.csv(
+  resultados,
+  &quot;output/comparacao_robustez/resultados_grid_p.csv&quot;,
+  row.names = FALSE
+)
+
+utils::write.csv(
+  resumo,
+  &quot;output/comparacao_robustez/resumo_grid_p.csv&quot;,
+  row.names = FALSE
+)
+
+utils::write.csv(
+  tabela_compacta,
+  &quot;output/comparacao_robustez/tabela_compacta_p.csv&quot;,
+  row.names = FALSE
+)
+
+utils::write.csv(
+  auditoria_invariancia,
+  &quot;output/comparacao_robustez/auditoria_invariancia_mars_tree.csv&quot;,
+  row.names = FALSE
+)
+
+cat(
+  &quot;M02:&quot;,
+  nrow(objeto_m02$resultados),
+  &quot;resultados\n&quot;
+)</code></pre>
+<pre><code>M02: 180 resultados</code></pre>
+<pre class="r"><code>cat(
+  &quot;M03:&quot;,
+  nrow(objeto_m03$resultados),
+  &quot;resultados\n&quot;
+)</code></pre>
+<pre><code>M03: 900 resultados</code></pre>
+<pre class="r"><code>cat(
+  &quot;M04:&quot;,
+  nrow(objeto_m04$resultados),
+  &quot;resultados\n&quot;
+)</code></pre>
+<pre><code>M04: 1080 resultados</code></pre>
+<pre class="r"><code>cat(
+  &quot;PRODUTOS OFICIAIS: PASS\n&quot;
+)</code></pre>
+<pre><code>PRODUTOS OFICIAIS: PASS</code></pre>
+</div>
+</div>
+<div id="auditoria-dos-produtos-oficiais" class="section level1">
+<h1>19. Auditoria dos produtos oficiais</h1>
+<pre class="r"><code>arquivos_oficiais &lt;- c(
+  &quot;output/gblup/module02_gblup_results.rds&quot;,
+  &quot;output/aprendizado_maquina/module03_ml_results.rds&quot;,
+  &quot;output/comparacao_robustez/module04_comparacao_p_results.rds&quot;,
+  &quot;output/comparacao_robustez/resultados_grid_p.csv&quot;,
+  &quot;output/comparacao_robustez/resumo_grid_p.csv&quot;,
+  &quot;output/comparacao_robustez/tabela_compacta_p.csv&quot;,
+  &quot;output/comparacao_robustez/auditoria_invariancia_mars_tree.csv&quot;
+)
+
+stopifnot(
+  all(
+    file.exists(
+      arquivos_oficiais
+    )
+  )
+)
+
+m02 &lt;- readRDS(
+  arquivos_oficiais[1L]
+)
+
+m03 &lt;- readRDS(
+  arquivos_oficiais[2L]
+)
+
+m04 &lt;- readRDS(
+  arquivos_oficiais[3L]
+)
+
+stopifnot(
+  identical(
+    m02$versao,
+    &quot;M02-p-v1&quot;
+  ),
+  identical(
+    m03$versao,
+    &quot;M03-p-v1&quot;
+  ),
+  identical(
+    m04$versao,
+    &quot;M04-p-v1&quot;
+  ),
+
+  m02$dimensoes$resultados == 180L,
+  m03$dimensoes$resultados == 900L,
+  m04$dimensoes$resultados == 1080L,
+
+  nrow(m02$resultados) == 180L,
+  nrow(m03$resultados) == 900L,
+  nrow(m04$resultados) == 1080L,
+
+  nrow(m02$resumo) == 36L,
+  nrow(m03$resumo) == 180L,
+  nrow(m04$resumo) == 216L,
+
+  identical(
+    m02$protocolo$importancia_gblup,
+    &quot;beta_SNP^2 via pseudoinversa de Moore-Penrose&quot;
+  ),
+  identical(
+    m03$protocolo$configuracoes$BAGGING$importancia,
+    &quot;%IncMSE via caret::varImp.randomForest&quot;
+  ),
+  identical(
+    m03$protocolo$configuracoes$RF$importancia,
+    &quot;%IncMSE via caret::varImp.randomForest&quot;
+  ),
+
+  m04$dimensoes$resultados_gblup == 180L,
+  m04$dimensoes$resultados_ml == 900L,
+  m04$dimensoes$resultados_gblup +
+    m04$dimensoes$resultados_ml ==
+    m04$dimensoes$resultados,
+
+  nrow(m04$auditoria_invariancia) == 60L,
+  nrow(m04$resumo_invariancia) == 2L,
+
+  all(
+    c(
+      &quot;rank_robustez_preditiva&quot;,
+      &quot;rank_estabilidade_relativa&quot;
+    ) %in% names(
+      m04$robustez_metodo
+    )
+  )
+)
+
+cat(
+  &quot;M02 oficial:&quot;,
+  nrow(m02$resultados),
+  &quot;resultados e&quot;,
+  nrow(m02$resumo),
+  &quot;linhas resumidas\n&quot;
+)</code></pre>
+<pre><code>M02 oficial: 180 resultados e 36 linhas resumidas</code></pre>
+<pre class="r"><code>cat(
+  &quot;M03 oficial:&quot;,
+  nrow(m03$resultados),
+  &quot;resultados e&quot;,
+  nrow(m03$resumo),
+  &quot;linhas resumidas\n&quot;
+)</code></pre>
+<pre><code>M03 oficial: 900 resultados e 180 linhas resumidas</code></pre>
+<pre class="r"><code>cat(
+  &quot;M04 oficial:&quot;,
+  nrow(m04$resultados),
+  &quot;resultados e&quot;,
+  nrow(m04$resumo),
+  &quot;linhas resumidas\n&quot;
+)</code></pre>
+<pre><code>M04 oficial: 1080 resultados e 216 linhas resumidas</code></pre>
+<pre class="r"><code>cat(
+  &quot;180 GBLUP + 900 ML =&quot;,
+  m04$dimensoes$resultados,
+  &quot;\n&quot;
+)</code></pre>
+<pre><code>180 GBLUP + 900 ML = 1080 </code></pre>
+<pre class="r"><code>cat(
+  &quot;AUDITORIA DOS PRODUTOS OFICIAIS: PASS\n&quot;
+)</code></pre>
+<pre><code>AUDITORIA DOS PRODUTOS OFICIAIS: PASS</code></pre>
+</div>
+<div id="interpretação-dos-resultados" class="section level1">
+<h1>20. Interpretação dos resultados</h1>
+<p>Os resultados mostram que o método com maior correlação média depende
+conjuntamente da arquitetura genética e da densidade de marcadores.</p>
+<p>Com o painel completo, Boosting apresenta a maior correlação média em
+C1 (0,9130), Random Forest em C2 (0,7736) e GBLUP em C3, C4, C5 e C6,
+com correlações médias de 0,8056, 0,8506, 0,8577 e 0,8930,
+respectivamente.</p>
+<p>Ao considerar conjuntamente os cinco painéis reduzidos, o ranking
+descritivo de robustez preditiva é:</p>
+<ol style="list-style-type: decimal">
+<li>Boosting, com correlação média de 0,80628;</li>
+<li>Bagging, com 0,79063;</li>
+<li>Random Forest, com 0,78655;</li>
+<li>GBLUP, com 0,73752;</li>
+<li>MARS, com 0,63717;</li>
+<li>árvore de regressão, com 0,43600.</li>
+</ol>
+<p>Esse ranking deve ser distinguido da estabilidade relativa em relação
+ao próprio baseline. O MARS apresenta perda média de correlação igual a
+zero e, portanto, ocupa a primeira posição em estabilidade relativa, mas
+apenas a quinta posição em robustez preditiva. A auditoria mostrou que
+essa invariância decorre de exatamente 10 SNPs com importância positiva,
+todos preservados até o painel mínimo de 40 marcadores.</p>
+<p>A redução extrema para 1% evidencia a mudança de comportamento entre
+os métodos. Boosting apresenta a maior correlação média nos seis
+cenários nesse nível de <code>p</code>, variando de 0,6515 em C2 a
+0,9277 em C1. Em contraste, o GBLUP apresenta maior sensibilidade à
+redução severa, especialmente nas arquiteturas mais poligênicas. Em C6,
+a correlação diminui de 0,8930 no painel completo para 0,5784 com 1% dos
+marcadores.</p>
+<p>Também ocorrem mudanças do método com maior correlação média ao longo
+da trajetória de redução. O GBLUP apresenta a maior média principalmente
+em C3–C6 sob alta densidade, enquanto Boosting passa a apresentar a
+maior média em mais cenários à medida que a redução se torna severa. Em
+C2, Random Forest apresenta a maior média no painel completo e em 50%,
+Bagging nos níveis intermediários e Boosting em 1%.</p>
+<p>Essas classificações são descritivas; não foram realizados testes
+formais de diferença entre métodos. Portanto, expressões como “maior
+correlação média” referem-se aos valores observados entre os cinco folds
+e não implicam superioridade estatística.</p>
+<p>Assim, robustez deve ser interpretada conjuntamente em termos de:</p>
+<ul>
+<li>desempenho absoluto nos painéis reduzidos;</li>
+<li>perda relativa em relação ao próprio baseline;</li>
+<li>arquitetura genética;</li>
+<li>intensidade da redução de <code>p</code>;</li>
+<li>variabilidade entre folds.</li>
+</ul>
+</div>
+<div id="síntese-da-fase-1" class="section level1">
+<h1>21. Síntese da Fase 1</h1>
+<p>Na Fase 1, nenhum método apresenta a maior correlação média em todas
+as combinações de arquitetura genética e densidade de marcadores.</p>
+<p>Com alta densidade, o GBLUP apresenta as maiores médias em C3–C6,
+enquanto Boosting apresenta a maior média em C1. À medida que o número
+de marcadores diminui, Boosting passa a ocupar a primeira posição em um
+número crescente de cenários e apresenta a maior robustez preditiva
+global segundo a síntese descritiva adotada neste estudo.</p>
+<p>No nível mais extremo de redução, com apenas 40 dos 4.010 SNPs
+originais, Boosting apresenta a maior correlação média em todos os seis
+cenários. Esse resultado mostra, nestes dados simulados e sob o
+protocolo adotado, que a seleção de marcadores orientada pelo método
+pode preservar informação preditiva relevante mesmo sob reduções muito
+intensas de <code>p</code>.</p>
+<p>A estabilidade relativa não deve ser confundida com desempenho
+preditivo. MARS ilustra essa distinção: permanece numericamente
+invariável porque utiliza um subconjunto muito pequeno de SNPs, porém
+apresenta desempenho absoluto inferior ao de Boosting, Bagging, Random
+Forest e, em vários cenários, GBLUP.</p>
+<p>Os resultados desta fase estabelecem o protocolo e a referência para
+as etapas posteriores de redução de <code>n</code> e da combinação
+<code>n × p</code>. Essas etapas devem preservar:</p>
+<ul>
+<li>partições treino-teste rigorosamente definidas;</li>
+<li>ausência de fenótipos e valores genéticos verdadeiros do teste no
+ajuste e no ranking;</li>
+<li>uso explícito e documentado dos genótipos do teste quando o método
+for transdutivo, como no GBLUP;</li>
+<li>validação cruzada comum entre métodos;</li>
+<li>painéis aninhados;</li>
+<li>métricas de desempenho e robustez previamente definidas;</li>
+<li>consolidação em objetos versionáveis e auditáveis.</li>
+</ul>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -694,16 +4357,20 @@ other attached packages:
 [1] workflowr_1.7.2
 
 loaded via a namespace (and not attached):
- [1] vctrs_0.7.1       httr_1.4.7        cli_3.6.5         knitr_1.50       
- [5] rlang_1.1.7       xfun_0.54         stringi_1.8.7     otel_0.2.0       
- [9] processx_3.8.6    renv_1.2.4        promises_1.5.0    jsonlite_2.0.0   
-[13] glue_1.8.0        rprojroot_2.1.1   git2r_0.36.2      htmltools_0.5.9  
-[17] httpuv_1.6.16     ps_1.9.1          sass_0.4.10       rmarkdown_2.30   
-[21] jquerylib_0.1.4   evaluate_1.0.5    fastmap_1.2.0     yaml_2.3.12      
-[25] lifecycle_1.0.5   whisker_0.4.1     stringr_1.6.0     compiler_4.5.1   
-[29] fs_1.6.6          Rcpp_1.1.2        rstudioapi_0.17.1 later_1.4.4      
-[33] digest_0.6.39     R6_2.6.1          callr_3.7.6       magrittr_2.0.4   
-[37] bslib_0.9.0       tools_4.5.1       cachem_1.1.0      getPass_0.2-4    </code></pre>
+ [1] gtable_0.3.6       jsonlite_2.0.0     dplyr_1.2.1        compiler_4.5.1    
+ [5] renv_1.2.4         promises_1.5.0     tidyselect_1.2.1   Rcpp_1.1.2        
+ [9] stringr_1.6.0      git2r_0.36.2       callr_3.7.6        later_1.4.4       
+[13] jquerylib_0.1.4    scales_1.4.0       yaml_2.3.12        fastmap_1.2.0     
+[17] ggplot2_4.0.3      R6_2.6.1           labeling_0.4.3     generics_0.1.4    
+[21] knitr_1.50         tibble_3.3.1       rprojroot_2.1.1    RColorBrewer_1.1-3
+[25] bslib_0.9.0        pillar_1.11.1      rlang_1.1.7        cachem_1.1.0      
+[29] stringi_1.8.7      httpuv_1.6.16      xfun_0.54          S7_0.2.2          
+[33] getPass_0.2-4      fs_1.6.6           sass_0.4.10        otel_0.2.0        
+[37] cli_3.6.5          withr_3.0.3        magrittr_2.0.4     ps_1.9.1          
+[41] grid_4.5.1         digest_0.6.39      processx_3.8.6     rstudioapi_0.17.1 
+[45] lifecycle_1.0.5    vctrs_0.7.1        evaluate_1.0.5     glue_1.8.0        
+[49] farver_2.1.2       whisker_0.4.1      rmarkdown_2.30     httr_1.4.7        
+[53] tools_4.5.1        pkgconfig_2.0.3    htmltools_0.5.9   </code></pre>
 </div>
 </div>
 </div>
