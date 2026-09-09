@@ -341,7 +341,7 @@ div.tocify {
   <a href="01_dados_desenho.html">Dados e desenho</a>
 </li>
 <li>
-  <a href="02_gblup.html">GBLUP-ADE</a>
+  <a href="02_gblup.html">GBLUP</a>
 </li>
 <li>
   <a href="03_aprendizado_maquina.html">Aprendizado de máquina</a>
@@ -537,15 +537,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreedc0e603ea582b51c12bec01831b651961ff4d183targetblankdc0e603a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreeef0d40d017891608c78ca653ca690411eccfdb57targetblankef0d40da">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/dc0e603ea582b51c12bec01831b651961ff4d183" target="_blank">dc0e603</a>
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/ef0d40d017891608c78ca653ca690411eccfdb57" target="_blank">ef0d40d</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreedc0e603ea582b51c12bec01831b651961ff4d183targetblankdc0e603a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreeef0d40d017891608c78ca653ca690411eccfdb57targetblankef0d40da"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -555,7 +555,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/dc0e603ea582b51c12bec01831b651961ff4d183" target="_blank">dc0e603</a>.
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/ef0d40d017891608c78ca653ca690411eccfdb57" target="_blank">ef0d40d</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -622,6 +622,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/blob/ef0d40d017891608c78ca653ca690411eccfdb57/analysis/03_aprendizado_maquina.Rmd" target="_blank">ef0d40d</a>
+</td>
+<td>
+WevertonGomesCosta
+</td>
+<td>
+2026-09-08
+</td>
+<td>
+Define initial marker reduction design
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/73e1863dc63ce63d3b04042d353be9555da4f8f4/docs/03_aprendizado_maquina.html" target="_blank">73e1863</a>
+</td>
+<td>
+WevertonGomesCosta
+</td>
+<td>
+2026-09-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/blob/7307330d14a537ef863a53970e53abcea0f122f2/analysis/03_aprendizado_maquina.Rmd" target="_blank">7307330</a>
 </td>
 <td>
@@ -652,6 +686,38 @@ considerados neste projeto:</p>
 <li>Random Forest;</li>
 <li>Boosting.</li>
 </ul>
+<p>Para cada método, cenário e fold, a importância dos marcadores será
+calculada exclusivamente com o conjunto de treinamento e armazenada em
+uma estrutura comum. Os escores serão posteriormente padronizados para a
+escala de 0 a 10.</p>
+<p>Todos os marcadores do painel corrente permanecerão disponíveis como
+candidatos ao ajuste. Não será aplicada uma pré-seleção arbitrária de um
+pequeno número de marcadores antes da estimação da importância pelo
+próprio método.</p>
+<div id="regra-de-disponibilidade-dos-marcadores"
+class="section level2">
+<h2>Regra de disponibilidade dos marcadores</h2>
+<p>Para cada nível de <code>p</code>, o conjunto completo de marcadores
+daquele painel será fornecido ao método. Quando um algoritmo possuir um
+parâmetro que imponha um limite global ao número máximo de variáveis ou
+termos considerados, esse limite será definido em função do próprio
+<code>p</code>, evitando restringir previamente o espaço de busca a um
+pequeno subconjunto de marcadores.</p>
+<p>No MARS, o número máximo de termos na etapa forward será definido
+por</p>
+<p><code>nk = p + 1</code>,</p>
+<p>incluindo o intercepto. Dessa forma, um valor fixo pequeno de
+<code>nk</code> não limitará artificialmente a quantidade de marcadores
+que podem contribuir para o modelo antes da estimação das
+importâncias.</p>
+<p>No Bagging será utilizado <code>mtry = p</code>. No Random Forest,
+<code>mtry</code> continuará sendo definido em função de <code>p</code>
+em cada divisão das árvores; essa amostragem não constitui uma
+pré-seleção global de marcadores, pois todos os marcadores do painel
+permanecem elegíveis ao longo do ensemble.</p>
+<p>A seleção dos painéis reduzidos ocorrerá somente depois do ajuste com
+todos os marcadores disponíveis e da obtenção do ranking de importância
+no conjunto de treinamento.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -693,6 +759,7 @@ loaded via a namespace (and not attached):
 [29] fs_1.6.6          Rcpp_1.1.2        rstudioapi_0.17.1 later_1.4.4      
 [33] digest_0.6.39     R6_2.6.1          callr_3.7.6       magrittr_2.0.4   
 [37] bslib_0.9.0       tools_4.5.1       cachem_1.1.0      getPass_0.2-4    </code></pre>
+</div>
 </div>
 </div>
 </div>
