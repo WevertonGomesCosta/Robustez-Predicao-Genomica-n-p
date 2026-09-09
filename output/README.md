@@ -6,9 +6,9 @@ desnecessárias.
 
 A organização seguirá os quatro módulos da análise:
 
-- `dados_desenho/` — objetos preparados e desenho das combinações de `n` e `p`;
-- `gblup/` — predições e resultados do GBLUP-ADE;
-- `aprendizado_maquina/` — predições e resultados dos métodos de aprendizado de máquina;
+- `dados_desenho/` — dados preparados, partições e desenho das reduções de `n` e `p`;
+- `gblup/` — predições, importâncias e resultados do GBLUP aditivo;
+- `aprendizado_maquina/` — predições, importâncias e resultados dos métodos de aprendizado de máquina;
 - `comparacao/` — resultados comparativos e medidas de robustez.
 
 As pastas serão criadas somente quando os respectivos módulos produzirem seus

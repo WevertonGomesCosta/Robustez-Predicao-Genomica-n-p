@@ -11,7 +11,7 @@ navbar:
   - text: "Dados e desenho"
     href: 01_dados_desenho.html
 
-  - text: "GBLUP-ADE"
+  - text: "GBLUP"
     href: 02_gblup.html
 
   - text: "Aprendizado de máquina"

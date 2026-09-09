@@ -22,3 +22,36 @@ projeto:
 - Bagging;
 - Random Forest;
 - Boosting.
+
+Para cada método, cenário e fold, a importância dos marcadores será calculada
+exclusivamente com o conjunto de treinamento e armazenada em uma estrutura
+comum. Os escores serão posteriormente padronizados para a escala de 0 a 10.
+
+Todos os marcadores do painel corrente permanecerão disponíveis como candidatos
+ao ajuste. Não será aplicada uma pré-seleção arbitrária de um pequeno número de
+marcadores antes da estimação da importância pelo próprio método.
+
+## Regra de disponibilidade dos marcadores
+
+Para cada nível de `p`, o conjunto completo de marcadores daquele painel será
+fornecido ao método. Quando um algoritmo possuir um parâmetro que imponha um
+limite global ao número máximo de variáveis ou termos considerados, esse limite
+será definido em função do próprio `p`, evitando restringir previamente o espaço
+de busca a um pequeno subconjunto de marcadores.
+
+No MARS, o número máximo de termos na etapa forward será definido por
+
+`nk = p + 1`,
+
+incluindo o intercepto. Dessa forma, um valor fixo pequeno de `nk` não limitará
+artificialmente a quantidade de marcadores que podem contribuir para o modelo
+antes da estimação das importâncias.
+
+No Bagging será utilizado `mtry = p`. No Random Forest, `mtry` continuará sendo
+definido em função de `p` em cada divisão das árvores; essa amostragem não
+constitui uma pré-seleção global de marcadores, pois todos os marcadores do
+painel permanecem elegíveis ao longo do ensemble.
+
+A seleção dos painéis reduzidos ocorrerá somente depois do ajuste com todos os
+marcadores disponíveis e da obtenção do ranking de importância no conjunto de
+treinamento.

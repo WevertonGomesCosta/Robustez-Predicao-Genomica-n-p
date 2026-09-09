@@ -1,5 +1,5 @@
 ---
-title: "GBLUP-ADE"
+title: "GBLUP Aditivo"
 author:
   - Weverton Gomes da Costa
 date: "`r Sys.Date()`"
@@ -14,5 +14,10 @@ editor_options:
 
 # Objetivo
 
-Apresentar e aplicar o GBLUP-ADE como modelo estatístico de referência para a
-predição genômica nos diferentes cenários de `n` e `p`.
+Apresentar e aplicar o GBLUP aditivo (GBLUP-A), ajustado com o pacote `sommer`,
+como modelo estatístico de referência para a predição genômica.
+
+Na etapa inicial, o modelo será ajustado com os 4.010 marcadores e com os painéis
+reduzidos definidos a partir do ranking de importância obtido exclusivamente no
+conjunto de treinamento. A matriz de relacionamento genômico utilizada pelo
+modelo será somente a matriz aditiva.

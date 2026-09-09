@@ -28,9 +28,14 @@ O objetivo é determinar como a redução de indivíduos e marcadores afeta o
 desempenho preditivo dos métodos e identificar quais abordagens mantêm maior
 estabilidade quando a quantidade de informação disponível diminui.
 
+A primeira etapa mantém os 1.000 indivíduos disponíveis e avalia a redução de
+`p` a partir da importância dos marcadores. A redução de `n` será incorporada
+posteriormente para completar o desenho `n x p`.
+
 ## Métodos
 
-O **GBLUP-ADE** será utilizado como modelo estatístico de referência.
+O **GBLUP aditivo (GBLUP-A)**, ajustado com `sommer`, será utilizado como modelo
+estatístico de referência.
 
 O bloco de **aprendizado de máquina** será composto por:
 
@@ -40,12 +45,17 @@ O bloco de **aprendizado de máquina** será composto por:
 - Random Forest;
 - Boosting.
 
+Na etapa inicial, cada método produzirá seu próprio ranking de importância
+utilizando apenas os indivíduos de treinamento. As importâncias dos métodos de
+aprendizado de máquina serão padronizadas para uma escala comum de 0 a 10 antes
+da consolidação dos resultados.
+
 ## Fluxo do tutorial
 
 A análise é organizada em quatro módulos:
 
 1. [Dados e desenho](01_dados_desenho.html)
-2. [GBLUP-ADE](02_gblup.html)
+2. [GBLUP](02_gblup.html)
 3. [Aprendizado de máquina](03_aprendizado_maquina.html)
 4. [Comparação e robustez](04_comparacao_robustez.html)
 
