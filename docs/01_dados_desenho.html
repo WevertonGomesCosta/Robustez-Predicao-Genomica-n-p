@@ -537,15 +537,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreeef0d40d017891608c78ca653ca690411eccfdb57targetblankef0d40da">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptree716ee8bce025045ae4fe47f3a720085370648a30targetblank716ee8ba">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/ef0d40d017891608c78ca653ca690411eccfdb57" target="_blank">ef0d40d</a>
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/716ee8bce025045ae4fe47f3a720085370648a30" target="_blank">716ee8b</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptreeef0d40d017891608c78ca653ca690411eccfdb57targetblankef0d40da"
+id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaRobustezPredicaoGenomicanptree716ee8bce025045ae4fe47f3a720085370648a30targetblank716ee8ba"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -555,7 +555,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/ef0d40d017891608c78ca653ca690411eccfdb57" target="_blank">ef0d40d</a>.
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/tree/716ee8bce025045ae4fe47f3a720085370648a30" target="_blank">716ee8b</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -618,6 +618,40 @@ Message
 <tbody>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/blob/716ee8bce025045ae4fe47f3a720085370648a30/analysis/01_dados_desenho.Rmd" target="_blank">716ee8b</a>
+</td>
+<td>
+WevertonGomesCosta
+</td>
+<td>
+2026-09-08
+</td>
+<td>
+Implement M01 data and validation design
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/WevertonGomesCosta/Robustez-Predicao-Genomica-n-p/c8bee6d642f6b8d85e88b4f86a69ef7badb97362/docs/01_dados_desenho.html" target="_blank">c8bee6d</a>
+</td>
+<td>
+WevertonGomesCosta
+</td>
+<td>
+2026-09-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
@@ -659,11 +693,856 @@ Configure initial tutorial structure and simulated data
 </div>
 <div id="objetivo" class="section level1">
 <h1>Objetivo</h1>
-<p>Apresentar os dados simulados e definir o desenho utilizado para
-avaliar a redução do número de indivíduos (<code>n</code>) e do número
-de marcadores (<code>p</code>).</p>
-<p>Este módulo será desenvolvido antes do ajuste dos modelos
-preditivos.</p>
+<p>Apresentar os dados simulados utilizados no projeto e definir o
+desenho comum que será empregado pelos métodos de predição genômica.</p>
+<p>A primeira etapa do projeto mantém os 1.000 indivíduos disponíveis e
+avalia a redução do número de marcadores (<code>p</code>). Os
+subconjuntos de marcadores serão definidos posteriormente a partir dos
+rankings de importância produzidos pelos modelos usando exclusivamente
+os indivíduos de treinamento.</p>
+<p>Neste módulo são definidos:</p>
+<ul>
+<li>os dados fenotípicos e genotípicos;</li>
+<li>os valores genéticos verdadeiros;</li>
+<li>os seis cenários simulados;</li>
+<li>o mapa genético;</li>
+<li>os níveis de redução de <code>p</code>;</li>
+<li>uma única validação cruzada de cinco folds, fixa e comum a todos os
+métodos.</li>
+</ul>
+</div>
+<div id="dados-simulados" class="section level1">
+<h1>1. Dados simulados</h1>
+<p>Os dados foram previamente simulados no software GENES para uma
+população F2 com 1.000 indivíduos e 4.010 marcadores distribuídos em 10
+grupos de ligação.</p>
+<p>Cinco arquivos são utilizados diretamente nesta análise:</p>
+<ul>
+<li><code>DG#gen_F2_Vfen.txt</code>: fenótipos;</li>
+<li><code>DG#gen_F2_Vgen.dat</code>: valores genéticos verdadeiros;</li>
+<li><code>genoma_mapa.txt</code>: genótipos;</li>
+<li><code>genoma.txt</code>: mapa genético;</li>
+<li><code>controlegenetico#1.dat</code>: parâmetros dos seis cenários e
+posições dos QTL.</li>
+</ul>
+<p>Os demais arquivos originais são preservados em
+<code>data/dados_simulados/</code>, mas não são necessários para
+construir o objeto analítico utilizado pelos modelos.</p>
+<div id="fenótipos-valores-genéticos-e-genótipos"
+class="section level2">
+<h2>1.1 Fenótipos, valores genéticos e genótipos</h2>
+<pre class="r"><code>dados_dir &lt;- &quot;data/dados_simulados&quot;
+
+fenotipo &lt;- as.matrix(
+  read.table(
+    file.path(dados_dir, &quot;DG#gen_F2_Vfen.txt&quot;),
+    header = FALSE
+  )
+)
+
+valor_genetico &lt;- as.matrix(
+  read.table(
+    file.path(dados_dir, &quot;DG#gen_F2_Vgen.dat&quot;),
+    header = FALSE
+  )
+)
+
+colnames(fenotipo) &lt;- paste0(&quot;C&quot;, seq_len(ncol(fenotipo)))
+colnames(valor_genetico) &lt;- colnames(fenotipo)
+
+n_individuos &lt;- nrow(fenotipo)
+n_marcadores &lt;- 4010L
+
+valores_genotipos &lt;- scan(
+  file.path(dados_dir, &quot;genoma_mapa.txt&quot;),
+  what = integer(),
+  quiet = TRUE
+)
+
+stopifnot(
+  n_individuos == 1000L,
+  ncol(fenotipo) == 6L,
+  identical(dim(fenotipo), dim(valor_genetico)),
+  !anyNA(fenotipo),
+  !anyNA(valor_genetico),
+  length(valores_genotipos) == n_marcadores * n_individuos
+)
+
+genotipo_012 &lt;- matrix(
+  valores_genotipos,
+  nrow = n_marcadores,
+  ncol = n_individuos,
+  byrow = TRUE
+)
+
+genotipo_012 &lt;- t(genotipo_012)
+
+stopifnot(
+  identical(dim(genotipo_012), c(1000L, 4010L)),
+  identical(sort(unique(as.vector(genotipo_012))), 0:2)
+)
+
+genotipo &lt;- genotipo_012 - 1L
+
+ids &lt;- seq_len(n_individuos)
+id_individuo &lt;- sprintf(&quot;ID%04d&quot;, ids)
+id_marcador &lt;- paste0(&quot;M&quot;, seq_len(n_marcadores))
+
+rownames(fenotipo) &lt;- id_individuo
+rownames(valor_genetico) &lt;- id_individuo
+rownames(genotipo) &lt;- id_individuo
+colnames(genotipo) &lt;- id_marcador
+
+rm(valores_genotipos, genotipo_012)
+invisible(gc())</code></pre>
+<p>A matriz genotípica original apresenta os estados <code>0</code>,
+<code>1</code> e <code>2</code>. Para a modelagem, esses estados são
+recodificados como <code>-1</code>, <code>0</code> e <code>1</code>.</p>
+<pre class="r"><code>resumo_dados &lt;- data.frame(
+  Objeto = c(
+    &quot;Fenótipos&quot;,
+    &quot;Valores genéticos verdadeiros&quot;,
+    &quot;Genótipos&quot;
+  ),
+  Individuos = c(
+    nrow(fenotipo),
+    nrow(valor_genetico),
+    nrow(genotipo)
+  ),
+  Colunas = c(
+    ncol(fenotipo),
+    ncol(valor_genetico),
+    ncol(genotipo)
+  ),
+  Uso = c(
+    &quot;Resposta utilizada no treinamento&quot;,
+    &quot;Avaliação preditiva após a predição&quot;,
+    &quot;Preditores genômicos&quot;
+  )
+)
+
+knitr::kable(
+  resumo_dados,
+  caption = &quot;Estrutura dos principais objetos analíticos&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Estrutura dos principais objetos analíticos</caption>
+<colgroup>
+<col width="35%" />
+<col width="12%" />
+<col width="9%" />
+<col width="42%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Objeto</th>
+<th align="right">Individuos</th>
+<th align="right">Colunas</th>
+<th align="left">Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fenótipos</td>
+<td align="right">1000</td>
+<td align="right">6</td>
+<td align="left">Resposta utilizada no treinamento</td>
+</tr>
+<tr class="even">
+<td align="left">Valores genéticos verdadeiros</td>
+<td align="right">1000</td>
+<td align="right">6</td>
+<td align="left">Avaliação preditiva após a predição</td>
+</tr>
+<tr class="odd">
+<td align="left">Genótipos</td>
+<td align="right">1000</td>
+<td align="right">4010</td>
+<td align="left">Preditores genômicos</td>
+</tr>
+</tbody>
+</table>
+<p>O valor genético verdadeiro não será utilizado na formação dos folds,
+na seleção de marcadores ou no ajuste dos modelos. Ele será acessado
+somente para avaliar as predições produzidas para indivíduos mantidos
+fora do treinamento.</p>
+</div>
+</div>
+<div id="mapa-genético" class="section level1">
+<h1>2. Mapa genético</h1>
+<p>O mapa genético é lido diretamente do arquivo produzido pelo GENES. A
+ordem das linhas corresponde à ordem dos marcadores da matriz
+genotípica.</p>
+<pre class="r"><code>mapa_bruto &lt;- read.table(
+  file.path(dados_dir, &quot;genoma.txt&quot;),
+  header = FALSE,
+  sep = &quot;,&quot;,
+  skip = 12,
+  fill = TRUE,
+  strip.white = TRUE,
+  fileEncoding = &quot;latin1&quot;,
+  stringsAsFactors = FALSE
+)
+
+mapa_bruto &lt;- mapa_bruto[, 1:5]
+
+mapa &lt;- data.frame(
+  marcador = seq_len(nrow(mapa_bruto)),
+  id_marcador = paste0(&quot;M&quot;, seq_len(nrow(mapa_bruto))),
+  LG = as.integer(mapa_bruto[, 1]),
+  marcador_no_LG = as.integer(mapa_bruto[, 2]),
+  posicao_cM = as.numeric(mapa_bruto[, 5]),
+  stringsAsFactors = FALSE
+)
+
+stopifnot(
+  nrow(mapa) == n_marcadores,
+  identical(sort(unique(mapa$LG)), 1:10),
+  all(table(mapa$LG) == 401L)
+)
+
+resumo_mapa &lt;- do.call(
+  rbind,
+  lapply(
+    split(mapa, mapa$LG),
+    function(x) {
+      data.frame(
+        LG = x$LG[1],
+        Marcadores = nrow(x),
+        Inicio_cM = min(x$posicao_cM),
+        Fim_cM = max(x$posicao_cM),
+        Espacamento_cM = unique(diff(x$posicao_cM))[1]
+      )
+    }
+  )
+)
+
+rownames(resumo_mapa) &lt;- NULL
+
+knitr::kable(
+  resumo_mapa,
+  caption = &quot;Estrutura do mapa genético por grupo de ligação&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Estrutura do mapa genético por grupo de ligação</caption>
+<thead>
+<tr class="header">
+<th align="right">LG</th>
+<th align="right">Marcadores</th>
+<th align="right">Inicio_cM</th>
+<th align="right">Fim_cM</th>
+<th align="right">Espacamento_cM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">401</td>
+<td align="right">0</td>
+<td align="right">200</td>
+<td align="right">0.5</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">401</td>
+<td align="right">0</td>
+<td align="right">200</td>
+<td align="right">0.5</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">401</td>
+<td align="right">0</td>
+<td align="right">200</td>
+<td align="right">0.5</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">401</td>
+<td align="right">0</td>
+<td align="right">200</td>
+<td align="right">0.5</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">401</td>
+<td align="right">0</td>
+<td align="right">200</td>
+<td align="right">0.5</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">401</td>
+<td align="right">0</td>
+<td align="right">200</td>
+<td align="right">0.5</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">401</td>
+<td align="right">0</td>
+<td align="right">200</td>
+<td align="right">0.5</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">401</td>
+<td align="right">0</td>
+<td align="right">200</td>
+<td align="right">0.5</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">401</td>
+<td align="right">0</td>
+<td align="right">200</td>
+<td align="right">0.5</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="right">401</td>
+<td align="right">0</td>
+<td align="right">200</td>
+<td align="right">0.5</td>
+</tr>
+</tbody>
+</table>
+<p>Cada grupo de ligação contém 401 marcadores distribuídos de 0 a 200
+cM, com espaçamento de 0,5 cM, totalizando 4.010 marcadores.</p>
+</div>
+<div id="cenários-genéticos" class="section level1">
+<h1>3. Cenários genéticos</h1>
+<p>O arquivo de controle registra os parâmetros utilizados na simulação.
+Cada bloco corresponde a uma das seis características analisadas.</p>
+<pre class="r"><code>controle_linhas &lt;- readLines(
+  file.path(dados_dir, &quot;controlegenetico#1.dat&quot;),
+  warn = FALSE,
+  encoding = &quot;latin1&quot;
+)
+
+inicio_blocos &lt;- grep(&quot;^Variavel&quot;, controle_linhas)
+
+valor_campo &lt;- function(linha) {
+  partes &lt;- strsplit(linha, &quot;,&quot;, fixed = TRUE)[[1]]
+  as.numeric(trimws(partes[length(partes)]))
+}
+
+qtl_por_cenario &lt;- setNames(
+  lapply(
+    inicio_blocos,
+    function(inicio) {
+      scan(
+        text = controle_linhas[inicio + 3L],
+        what = integer(),
+        quiet = TRUE
+      )
+    }
+  ),
+  paste0(&quot;C&quot;, seq_along(inicio_blocos))
+)
+
+controle_cenarios &lt;- do.call(
+  rbind,
+  lapply(
+    seq_along(inicio_blocos),
+    function(i) {
+      inicio &lt;- inicio_blocos[i]
+
+      data.frame(
+        cenario = paste0(&quot;C&quot;, i),
+        variavel = as.integer(valor_campo(controle_linhas[inicio])),
+        total_loci = as.integer(valor_campo(controle_linhas[inicio + 1L])),
+        n_qtl = as.integer(valor_campo(controle_linhas[inicio + 2L])),
+        gmd = valor_campo(controle_linhas[inicio + 5L]),
+        modelo = as.integer(valor_campo(controle_linhas[inicio + 6L])),
+        h2 = valor_campo(controle_linhas[inicio + 7L]),
+        constante = valor_campo(controle_linhas[inicio + 8L]),
+        escala = valor_campo(controle_linhas[inicio + 9L]),
+        CV = valor_campo(controle_linhas[inicio + 10L])
+      )
+    }
+  )
+)
+
+rownames(controle_cenarios) &lt;- NULL
+
+stopifnot(
+  length(inicio_blocos) == 6L,
+  all(controle_cenarios$total_loci == 4010L),
+  all(controle_cenarios$n_qtl == lengths(qtl_por_cenario)),
+  all(unlist(qtl_por_cenario) %in% seq_len(n_marcadores))
+)
+
+knitr::kable(
+  controle_cenarios[
+    ,
+    c(
+      &quot;cenario&quot;,
+      &quot;n_qtl&quot;,
+      &quot;h2&quot;,
+      &quot;gmd&quot;,
+      &quot;modelo&quot;,
+      &quot;constante&quot;,
+      &quot;escala&quot;,
+      &quot;CV&quot;
+    )
+  ],
+  caption = &quot;Parâmetros dos seis cenários simulados&quot;,
+  row.names = FALSE,
+  digits = 2
+)</code></pre>
+<table>
+<caption>Parâmetros dos seis cenários simulados</caption>
+<thead>
+<tr class="header">
+<th align="left">cenario</th>
+<th align="right">n_qtl</th>
+<th align="right">h2</th>
+<th align="right">gmd</th>
+<th align="right">modelo</th>
+<th align="right">constante</th>
+<th align="right">escala</th>
+<th align="right">CV</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C1</td>
+<td align="right">8</td>
+<td align="right">0.7</td>
+<td align="right">0.5</td>
+<td align="right">2</td>
+<td align="right">100</td>
+<td align="right">1</td>
+<td align="right">12</td>
+</tr>
+<tr class="even">
+<td align="left">C2</td>
+<td align="right">40</td>
+<td align="right">0.7</td>
+<td align="right">0.5</td>
+<td align="right">2</td>
+<td align="right">100</td>
+<td align="right">1</td>
+<td align="right">12</td>
+</tr>
+<tr class="odd">
+<td align="left">C3</td>
+<td align="right">80</td>
+<td align="right">0.5</td>
+<td align="right">0.5</td>
+<td align="right">2</td>
+<td align="right">100</td>
+<td align="right">1</td>
+<td align="right">12</td>
+</tr>
+<tr class="even">
+<td align="left">C4</td>
+<td align="right">120</td>
+<td align="right">0.5</td>
+<td align="right">0.5</td>
+<td align="right">2</td>
+<td align="right">100</td>
+<td align="right">1</td>
+<td align="right">12</td>
+</tr>
+<tr class="odd">
+<td align="left">C5</td>
+<td align="right">240</td>
+<td align="right">0.3</td>
+<td align="right">0.5</td>
+<td align="right">2</td>
+<td align="right">100</td>
+<td align="right">1</td>
+<td align="right">12</td>
+</tr>
+<tr class="even">
+<td align="left">C6</td>
+<td align="right">480</td>
+<td align="right">0.3</td>
+<td align="right">0.5</td>
+<td align="right">2</td>
+<td align="right">100</td>
+<td align="right">1</td>
+<td align="right">12</td>
+</tr>
+</tbody>
+</table>
+<p>Os seis cenários combinam diferentes níveis de complexidade genética
+e herdabilidade:</p>
+<ul>
+<li>C1: 8 QTL e <span class="math inline">\(h^2=0{,}7\)</span>;</li>
+<li>C2: 40 QTL e <span class="math inline">\(h^2=0{,}7\)</span>;</li>
+<li>C3: 80 QTL e <span class="math inline">\(h^2=0{,}5\)</span>;</li>
+<li>C4: 120 QTL e <span class="math inline">\(h^2=0{,}5\)</span>;</li>
+<li>C5: 240 QTL e <span class="math inline">\(h^2=0{,}3\)</span>;</li>
+<li>C6: 480 QTL e <span class="math inline">\(h^2=0{,}3\)</span>.</li>
+</ul>
+<p>As posições verdadeiras dos QTL são armazenadas no objeto de desenho
+para avaliações posteriores, mas não participam da seleção de
+marcadores.</p>
+</div>
+<div id="redução-inicial-do-número-de-marcadores"
+class="section level1">
+<h1>4. Redução inicial do número de marcadores</h1>
+<p>Nesta primeira etapa do projeto, todos os 1.000 indivíduos são
+mantidos. A dimensão reduzida é apenas <code>p</code>.</p>
+<p>O conjunto completo de 4.010 marcadores representa a condição de
+referência. Os demais tamanhos correspondem aos percentuais de
+marcadores mais importantes segundo cada método.</p>
+<pre class="r"><code>proporcoes_p &lt;- c(1, 0.50, 0.25, 0.10, 0.05, 0.01)
+
+niveis_p &lt;- data.frame(
+  proporcao = proporcoes_p,
+  percentual = paste0(proporcoes_p * 100, &quot;%&quot;),
+  n_marcadores = floor(n_marcadores * proporcoes_p + 0.5),
+  stringsAsFactors = FALSE
+)
+
+stopifnot(
+  identical(
+    niveis_p$n_marcadores,
+    c(4010, 2005, 1003, 401, 201, 40)
+  )
+)
+
+knitr::kable(
+  niveis_p,
+  caption = &quot;Níveis de redução do número de marcadores&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Níveis de redução do número de marcadores</caption>
+<thead>
+<tr class="header">
+<th align="right">proporcao</th>
+<th align="left">percentual</th>
+<th align="right">n_marcadores</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1.00</td>
+<td align="left">100%</td>
+<td align="right">4010</td>
+</tr>
+<tr class="even">
+<td align="right">0.50</td>
+<td align="left">50%</td>
+<td align="right">2005</td>
+</tr>
+<tr class="odd">
+<td align="right">0.25</td>
+<td align="left">25%</td>
+<td align="right">1003</td>
+</tr>
+<tr class="even">
+<td align="right">0.10</td>
+<td align="left">10%</td>
+<td align="right">401</td>
+</tr>
+<tr class="odd">
+<td align="right">0.05</td>
+<td align="left">5%</td>
+<td align="right">201</td>
+</tr>
+<tr class="even">
+<td align="right">0.01</td>
+<td align="left">1%</td>
+<td align="right">40</td>
+</tr>
+</tbody>
+</table>
+<p>O M01 não seleciona marcadores. Para cada cenário, método e fold, o
+modelo será primeiro ajustado com os 4.010 marcadores disponíveis no
+treinamento. O ranking de importância produzido nesse ajuste definirá os
+painéis reduzidos.</p>
+<p>Assim, para um mesmo ranking:</p>
+<p><span class="math display">\[
+P_{1\%}
+\subset
+P_{5\%}
+\subset
+P_{10\%}
+\subset
+P_{25\%}
+\subset
+P_{50\%}
+\subset
+P_{100\%}.
+\]</span></p>
+<p>Os rankings serão específicos para cada combinação de cenário, método
+e fold.</p>
+</div>
+<div id="validação-cruzada-comum" class="section level1">
+<h1>5. Validação cruzada comum</h1>
+<p>Todos os métodos utilizarão a mesma partição dos indivíduos. Será
+empregada uma única validação cruzada de cinco folds.</p>
+<p>A formação dos folds depende somente do identificador dos indivíduos
+e de uma semente fixa. Fenótipos, valores genéticos verdadeiros,
+genótipos e posições de QTL não participam da geração das partições.</p>
+<pre class="r"><code>SEED_DESENHO &lt;- 20260908L
+N_FOLDS &lt;- 5L
+
+set.seed(SEED_DESENHO)
+
+ordem_individuos &lt;- sample(
+  ids,
+  size = length(ids),
+  replace = FALSE
+)
+
+fold_na_ordem &lt;- rep(
+  seq_len(N_FOLDS),
+  length.out = n_individuos
+)
+
+fold_individuo &lt;- integer(n_individuos)
+fold_individuo[ordem_individuos] &lt;- fold_na_ordem
+
+atribuicao_folds &lt;- data.frame(
+  id = ids,
+  individuo = id_individuo,
+  fold = fold_individuo,
+  stringsAsFactors = FALSE
+)
+
+folds &lt;- setNames(
+  lapply(
+    seq_len(N_FOLDS),
+    function(k) {
+      list(
+        fold = k,
+        treino = ids[fold_individuo != k],
+        teste = ids[fold_individuo == k]
+      )
+    }
+  ),
+  paste0(&quot;Fold&quot;, seq_len(N_FOLDS))
+)
+
+stopifnot(
+  all(table(atribuicao_folds$fold) == 200L),
+  all(vapply(folds, function(x) length(x$treino) == 800L, logical(1))),
+  all(vapply(folds, function(x) length(x$teste) == 200L, logical(1))),
+  all(vapply(
+    folds,
+    function(x) length(intersect(x$treino, x$teste)) == 0L,
+    logical(1)
+  ))
+)
+
+resumo_folds &lt;- data.frame(
+  Fold = seq_len(N_FOLDS),
+  Treinamento = vapply(folds, function(x) length(x$treino), integer(1)),
+  Teste = vapply(folds, function(x) length(x$teste), integer(1))
+)
+
+knitr::kable(
+  resumo_folds,
+  caption = &quot;Tamanho dos conjuntos de treinamento e teste&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Tamanho dos conjuntos de treinamento e teste</caption>
+<thead>
+<tr class="header">
+<th align="right">Fold</th>
+<th align="right">Treinamento</th>
+<th align="right">Teste</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">800</td>
+<td align="right">200</td>
+</tr>
+</tbody>
+</table>
+<p>Cada indivíduo participa uma vez do conjunto de teste e quatro vezes
+do conjunto de treinamento.</p>
+<p>Para qualquer cenário e método, o fold <span
+class="math inline">\(k\)</span> utilizará exatamente os mesmos 800
+indivíduos para treinamento e os mesmos 200 indivíduos para
+avaliação.</p>
+</div>
+<div id="preparação-para-a-futura-redução-de-n" class="section level1">
+<h1>6. Preparação para a futura redução de n</h1>
+<p>A redução de <code>n</code> não faz parte da etapa inicial.
+Entretanto, a permutação <code>ordem_individuos</code> é armazenada para
+que a expansão futura do projeto possa construir tamanhos amostrais
+aninhados sem gerar uma nova ordem de indivíduos.</p>
+<p>Dessa forma, a futura análise de <code>n x p</code> poderá reutilizar
+o mesmo desenho experimental em vez de redefinir as amostras após os
+primeiros resultados.</p>
+</div>
+<div id="objeto-canônico-do-desenho" class="section level1">
+<h1>7. Objeto canônico do desenho</h1>
+<p>Os objetos necessários aos módulos seguintes são reunidos em um único
+arquivo. O GBLUP e os métodos de aprendizado de máquina deverão ler este
+objeto em vez de repetir a preparação dos dados e a geração dos
+folds.</p>
+<pre class="r"><code>protocolo &lt;- list(
+  etapa = &quot;reducao_p_inicial&quot;,
+  seed_desenho = SEED_DESENHO,
+  n_individuos = n_individuos,
+  p_total = n_marcadores,
+  n_folds = N_FOLDS,
+  unidade_ranking = c(&quot;cenario&quot;, &quot;metodo&quot;, &quot;fold&quot;),
+  importancia_somente_treinamento = TRUE,
+  paineis_p_aninhados = TRUE,
+  valor_genetico_somente_avaliacao = TRUE
+)
+
+arquivos_fonte &lt;- c(
+  fenotipo = &quot;DG#gen_F2_Vfen.txt&quot;,
+  valor_genetico = &quot;DG#gen_F2_Vgen.dat&quot;,
+  genotipo = &quot;genoma_mapa.txt&quot;,
+  mapa = &quot;genoma.txt&quot;,
+  controle = &quot;controlegenetico#1.dat&quot;
+)
+
+desenho_analise &lt;- list(
+  versao = &quot;M01-p-v1&quot;,
+  protocolo = protocolo,
+  arquivos_fonte = arquivos_fonte,
+  fenotipo = fenotipo,
+  valor_genetico = valor_genetico,
+  genotipo = genotipo,
+  mapa = mapa,
+  controle_cenarios = controle_cenarios,
+  qtl_por_cenario = qtl_por_cenario,
+  niveis_p = niveis_p,
+  ordem_individuos = ordem_individuos,
+  atribuicao_folds = atribuicao_folds,
+  folds = folds
+)
+
+dir.create(
+  &quot;output/dados_desenho&quot;,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+
+arquivo_desenho &lt;- &quot;output/dados_desenho/desenho_analise.rds&quot;
+
+saveRDS(
+  desenho_analise,
+  arquivo_desenho,
+  compress = &quot;gzip&quot;
+)</code></pre>
+<p>O objeto salvo contém os dados preparados, o mapa, os cenários, os
+QTL verdadeiros, os níveis de <code>p</code> e a validação cruzada
+comum.</p>
+<pre class="r"><code>resumo_objeto &lt;- data.frame(
+  Componente = c(
+    &quot;Fenótipo&quot;,
+    &quot;Valor genético verdadeiro&quot;,
+    &quot;Genótipo&quot;,
+    &quot;Mapa&quot;,
+    &quot;Cenários&quot;,
+    &quot;Níveis de p&quot;,
+    &quot;Folds&quot;
+  ),
+  Estrutura = c(
+    paste(dim(desenho_analise$fenotipo), collapse = &quot; x &quot;),
+    paste(dim(desenho_analise$valor_genetico), collapse = &quot; x &quot;),
+    paste(dim(desenho_analise$genotipo), collapse = &quot; x &quot;),
+    paste(dim(desenho_analise$mapa), collapse = &quot; x &quot;),
+    nrow(desenho_analise$controle_cenarios),
+    nrow(desenho_analise$niveis_p),
+    length(desenho_analise$folds)
+  ),
+  stringsAsFactors = FALSE
+)
+
+knitr::kable(
+  resumo_objeto,
+  caption = &quot;Conteúdo principal do objeto canônico do M01&quot;,
+  row.names = FALSE
+)</code></pre>
+<table>
+<caption>Conteúdo principal do objeto canônico do M01</caption>
+<thead>
+<tr class="header">
+<th align="left">Componente</th>
+<th align="left">Estrutura</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fenótipo</td>
+<td align="left">1000 x 6</td>
+</tr>
+<tr class="even">
+<td align="left">Valor genético verdadeiro</td>
+<td align="left">1000 x 6</td>
+</tr>
+<tr class="odd">
+<td align="left">Genótipo</td>
+<td align="left">1000 x 4010</td>
+</tr>
+<tr class="even">
+<td align="left">Mapa</td>
+<td align="left">4010 x 5</td>
+</tr>
+<tr class="odd">
+<td align="left">Cenários</td>
+<td align="left">6</td>
+</tr>
+<tr class="even">
+<td align="left">Níveis de p</td>
+<td align="left">6</td>
+</tr>
+<tr class="odd">
+<td align="left">Folds</td>
+<td align="left">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="síntese-do-desenho-inicial" class="section level1">
+<h1>8. Síntese do desenho inicial</h1>
+<p>A etapa inicial do projeto fica definida por:</p>
+<p><span class="math display">\[
+n=1000
+\]</span></p>
+<p>e</p>
+<p><span class="math display">\[
+p\in\{4010,2005,1003,401,201,40\}.
+\]</span></p>
+<p>A avaliação será realizada por uma única validação cruzada de cinco
+folds, mantendo 800 indivíduos para treinamento e 200 para teste em cada
+fold.</p>
+<p>Os mesmos folds serão usados por todos os métodos e cenários. A
+seleção dos marcadores será realizada posteriormente dentro de cada
+conjunto de treinamento, sem acesso ao fenótipo do conjunto de teste, ao
+valor genético verdadeiro ou às posições conhecidas dos QTL.</p>
+<p>Esse objeto constitui a entrada comum dos módulos de GBLUP e
+aprendizado de máquina.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
