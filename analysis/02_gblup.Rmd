@@ -1,5 +1,5 @@
 ---
-title: "GBLUP Aditivo"
+title: "2. GBLUP Aditivo e Redução do Número de Marcadores"
 author:
   - Weverton Gomes da Costa
 date: "`r Sys.Date()`"
@@ -7,43 +7,58 @@ site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
     toc: true
+    toc_depth: 3
     toc_float: true
+    code_download: true
+    code_folding: show
 editor_options:
   chunk_output_type: console
 ---
-
-# Objetivo
-
-Apresentar o GBLUP aditivo (GBLUP-A) como modelo estatístico de referência para
-avaliar a robustez da predição genômica à redução do número de marcadores.
-
-O módulo utiliza o desenho definido em `01_dados_desenho.Rmd`. Para cada
-cenário genético e fold de validação, o GBLUP é inicialmente ajustado com os
-4.010 marcadores. A partir desse ajuste é obtido um ranking de importância dos SNPs. A
-informação fenotípica do conjunto de teste não participa do ajuste nem do
-ranking. O mesmo ranking define painéis aninhados contendo 50%, 25%, 10%, 5% e
-1% dos marcadores, e o modelo é reajustado em cada painel.
-
-Nesta primeira etapa do projeto, o número de indivíduos permanece fixo em
-1.000. A dimensão investigada é somente o número de marcadores (`p`).
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
   warning = FALSE,
   message = FALSE,
-  cache = FALSE
+  cache = FALSE,
+  fig.align = "center",
+  out.width = "100%"
 )
 
 options(stringsAsFactors = FALSE)
 ```
 
-# 1. GBLUP aditivo
+# Objetivo
 
-O GBLUP descreve o efeito genético aditivo dos indivíduos por meio de uma
-matriz de relacionamento genômico construída a partir dos marcadores.
+Este é o segundo módulo do tutorial. O objetivo é mostrar como o **GBLUP aditivo**
+é utilizado para predizer valores genéticos e como sua capacidade preditiva muda
+quando o número de marcadores, representado por `p`, é reduzido.
 
-O modelo pode ser escrito como
+O desenho experimental já foi fixado no Módulo 1. Nesta etapa:
+
+- os 1.000 indivíduos permanecem disponíveis;
+- os mesmos cinco folds são utilizados em todos os cenários;
+- os fenótipos dos indivíduos de teste permanecem ocultos durante o ajuste;
+- os genótipos dos indivíduos de teste podem participar da matriz de relacionamento
+  genômico;
+- o valor genético verdadeiro é utilizado somente depois da predição;
+- o painel completo possui 4.010 SNPs;
+- os painéis reduzidos possuem 2.005, 1.003, 401, 201 e 40 SNPs.
+
+O resultado científico oficial desta etapa está armazenado em
+`output/gblup/module02_gblup_results.rds` e segue o contrato `M02-p-v1`. O
+tutorial não altera esse objeto. Primeiro mostramos o procedimento com uma
+combinação de cenário e fold e, depois, utilizamos o objeto oficial para
+apresentar os resultados consolidados.
+
+# 1. Entendendo o GBLUP aditivo
+
+GBLUP significa *Genomic Best Linear Unbiased Prediction*. O método utiliza a
+semelhança genômica entre indivíduos para predizer seus efeitos genéticos.
+
+## 1.1 Modelo estatístico
+
+O modelo utilizado neste projeto pode ser escrito como
 
 $$
 \mathbf{y}
@@ -59,12 +74,11 @@ em que:
 
 - $\mathbf{y}$ é o vetor de fenótipos;
 - $\mu$ é a média geral;
-- $\mathbf{Z}$ é a matriz de incidência que associa cada observação ao efeito
-  genético do indivíduo;
-- $\mathbf{u}$ é o vetor de valores genéticos aditivos preditos;
+- $\mathbf{Z}$ associa cada observação ao efeito genético do indivíduo;
+- $\mathbf{u}$ é o vetor de efeitos genéticos aditivos;
 - $\mathbf{e}$ é o vetor de resíduos.
 
-Assume-se
+Os efeitos genéticos são modelados por
 
 $$
 \mathbf{u}
@@ -75,7 +89,7 @@ N\left(
 \right),
 $$
 
-e
+enquanto os resíduos seguem
 
 $$
 \mathbf{e}
@@ -83,323 +97,497 @@ $$
 N\left(
 \mathbf{0},
 \mathbf{I}\sigma_e^2
-\right),
+\right).
 $$
 
-onde $\mathbf{G}$ é a matriz de relacionamento genômico aditivo,
-$\sigma_g^2$ é a variância genética aditiva e $\sigma_e^2$ é a variância
+A matriz $\mathbf{G}$ é a matriz de relacionamento genômico. Ela resume a
+semelhança entre os indivíduos a partir dos SNPs. O parâmetro $\sigma_g^2$
+representa a variância genética aditiva e $\sigma_e^2$ representa a variância
 residual.
 
-A matriz $\mathbf{G}$ resume a semelhança genômica entre os indivíduos. Neste
-projeto, ela é construída com `sommer::A.mat()` a partir da matriz de
-marcadores correspondente ao painel em análise.
+## 1.2 O papel da matriz de relacionamento genômico
 
-# 2. Objeto analítico do M01
+Se dois indivíduos apresentam perfis genotípicos semelhantes, sua relação
+genômica tende a ser maior. O GBLUP utiliza essa estrutura para compartilhar
+informação entre indivíduos observados e candidatos à predição.
 
-O módulo anterior concentra os dados e o desenho experimental em um único
-objeto reproduzível.
+Neste projeto, $\mathbf{G}$ é construída com `sommer::A.mat()`. Quando o número
+de marcadores é reduzido, a matriz é reconstruída usando somente os SNPs do
+painel corrente. Portanto, reduzir `p` altera a própria estrutura de
+relacionamento fornecida ao modelo.
 
-```{r carregar-m01}
+## 1.3 Por que o GBLUP é transdutivo nesta análise?
+
+Os 1.000 indivíduos já são considerados genotipados antes da validação. Assim,
+os genótipos dos 800 indivíduos de treinamento e dos 200 indivíduos de teste
+podem participar de $\mathbf{G}$.
+
+Entretanto, o fenótipo dos 200 indivíduos de teste é substituído por `NA` antes
+do ajuste. Dessa forma:
+
+- os genótipos de treinamento e teste participam da matriz genômica;
+- somente os fenótipos dos indivíduos de treinamento informam o ajuste;
+- os valores genéticos verdadeiros não participam do ajuste.
+
+Essa é a condição transdutiva adotada para o GBLUP neste projeto. Ela deve ser
+distinguida da utilização indevida do fenótipo de teste: **nenhum fenótipo do
+conjunto de teste é fornecido ao modelo**.
+
+# 2. Carregando os objetos oficiais
+
+O Módulo 1 reuniu dados, níveis de redução de `p` e folds em um único objeto.
+Também carregamos o resultado oficial do M02, usado para validar o contrato,
+recuperar metadados da execução e apresentar os resultados consolidados.
+
+```{r carregar-objetos}
 arquivo_m01 <- "output/dados_desenho/desenho_analise.rds"
+arquivo_m02 <- "output/gblup/module02_gblup_results.rds"
 
 stopifnot(
-  file.exists(arquivo_m01)
+  file.exists(arquivo_m01),
+  file.exists(arquivo_m02)
 )
 
 dados <- readRDS(
   arquivo_m01
 )
 
+resultado_m02 <- readRDS(
+  arquivo_m02
+)
+
 stopifnot(
-  identical(dim(dados$genotipo), c(1000L, 4010L)),
-  identical(dim(dados$fenotipo), c(1000L, 6L)),
-  identical(dim(dados$valor_genetico), c(1000L, 6L)),
-  length(dados$folds) == 5L
+  identical(
+    dim(dados$genotipo),
+    c(1000L, 4010L)
+  ),
+  identical(
+    dim(dados$fenotipo),
+    c(1000L, 6L)
+  ),
+  identical(
+    dim(dados$valor_genetico),
+    c(1000L, 6L)
+  ),
+  length(dados$folds) == 5L,
+  identical(
+    resultado_m02$versao,
+    "M02-p-v1"
+  ),
+  nrow(resultado_m02$resultados) == 180L,
+  nrow(resultado_m02$resumo) == 36L
 )
 ```
 
-Os principais objetos utilizados pelo GBLUP são:
+As verificações garantem que o tutorial está usando exatamente o desenho do M01
+e o resultado científico congelado do M02.
 
-```{r objetos-m01}
+## 2.1 Resumindo os objetos utilizados
+
+A tabela abaixo separa o papel de cada componente antes de iniciar o ajuste.
+
+```{r tabela-objetos}
 resumo_objetos <- data.frame(
   Objeto = c(
     "Fenótipos",
     "Valores genéticos verdadeiros",
     "Genótipos",
-    "Folds"
+    "Folds",
+    "Resultado oficial M02"
   ),
   Estrutura = c(
-    paste(dim(dados$fenotipo), collapse = " x "),
-    paste(dim(dados$valor_genetico), collapse = " x "),
-    paste(dim(dados$genotipo), collapse = " x "),
-    paste0(length(dados$folds), " folds")
+    paste(
+      dim(dados$fenotipo),
+      collapse = " x "
+    ),
+    paste(
+      dim(dados$valor_genetico),
+      collapse = " x "
+    ),
+    paste(
+      dim(dados$genotipo),
+      collapse = " x "
+    ),
+    paste0(
+      length(dados$folds),
+      " folds"
+    ),
+    paste0(
+      nrow(resultado_m02$resultados),
+      " resultados"
+    )
   ),
   Uso = c(
-    "Resposta no treinamento",
+    "Resposta disponível somente no treinamento",
     "Avaliação após a predição",
-    "Construção da matriz genômica e seleção de marcadores",
-    "Separação fixa entre treinamento e teste"
-  ),
-  stringsAsFactors = FALSE
+    "Construção da matriz G",
+    "Separação fixa entre treino e teste",
+    "Resultados científicos consolidados"
+  )
 )
 
-knitr::kable(
+kableExtra::kbl(
   resumo_objetos,
-  caption = "Objetos herdados do M01",
-  row.names = FALSE
-)
+  caption = "Objetos utilizados no módulo de GBLUP",
+  align = c(
+    "l",
+    "l",
+    "l"
+  )
+) |>
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "striped",
+      "hover",
+      "condensed",
+      "responsive"
+    ),
+    full_width = FALSE
+  )
 ```
 
-Os valores genéticos verdadeiros não participam do ajuste, da formação dos
-folds ou da seleção de marcadores. Eles são utilizados somente após a predição,
-para medir a capacidade do modelo de recuperar o sinal genético simulado.
+Os fenótipos e os valores genéticos verdadeiros possuem seis colunas, uma para
+cada cenário. A matriz genotípica possui 4.010 colunas, uma para cada SNP. O
+objeto `resultado_m02` não é usado para treinar o exemplo; ele preserva o
+resultado oficial e os metadados da execução já concluída.
 
-# 3. Validação cruzada
+## 2.2 Conferindo os cinco folds
 
-O desenho utiliza uma única validação cruzada de cinco folds, comum a todos os
-métodos.
+Cada fold deve manter 800 indivíduos no treinamento e 200 no teste. Para deixar
+a lógica explícita, percorremos os cinco folds com um `for`.
 
-Em cada fold:
-
-- 800 indivíduos compõem o conjunto de treinamento;
-- 200 indivíduos compõem o conjunto de teste;
-- o fenótipo dos indivíduos de teste não é utilizado no ajuste;
-- o valor genético verdadeiro dos indivíduos de teste é utilizado somente para
-  avaliação.
-
-```{r conferir-folds}
+```{r tabela-folds}
 resumo_folds <- data.frame(
   Fold = seq_along(dados$folds),
-  Treinamento = vapply(
-    dados$folds,
-    function(x) length(x$treino),
-    integer(1)
+  Treinamento = integer(
+    length(dados$folds)
   ),
-  Teste = vapply(
-    dados$folds,
-    function(x) length(x$teste),
-    integer(1)
+  Teste = integer(
+    length(dados$folds)
+  ),
+  Sobreposicao = integer(
+    length(dados$folds)
   )
+)
+
+for (k in seq_along(dados$folds)) {
+
+  treino_k <- dados$folds[[k]]$treino
+  teste_k <- dados$folds[[k]]$teste
+
+  resumo_folds$Treinamento[k] <- length(
+    treino_k
+  )
+
+  resumo_folds$Teste[k] <- length(
+    teste_k
+  )
+
+  resumo_folds$Sobreposicao[k] <- length(
+    intersect(
+      treino_k,
+      teste_k
+    )
+  )
+}
+
+stopifnot(
+  all(
+    resumo_folds$Treinamento == 800L
+  ),
+  all(
+    resumo_folds$Teste == 200L
+  ),
+  all(
+    resumo_folds$Sobreposicao == 0L
+  )
+)
+
+kableExtra::kbl(
+  resumo_folds,
+  caption = "Partição fixa utilizada pelo GBLUP"
+) |>
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "striped",
+      "hover",
+      "condensed",
+      "responsive"
+    ),
+    full_width = FALSE
+  )
+```
+
+Todos os folds reproduzem a divisão 800/200 definida no M01 e apresentam
+sobreposição igual a zero. Portanto, nenhum indivíduo pertence simultaneamente
+ao conjunto de treinamento e ao conjunto de teste dentro do mesmo fold.
+
+## 2.3 Conferindo os níveis de redução de `p`
+
+Os seis tamanhos de painel também são herdados diretamente do M01.
+
+```{r tabela-niveis-p}
+niveis_p <- dados$niveis_p
+
+kableExtra::kbl(
+  niveis_p,
+  caption = "Níveis de redução do número de marcadores",
+  col.names = c(
+    "Proporção mantida",
+    "Marcadores mantidos",
+    "Número de SNPs"
+  )
+) |>
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "striped",
+      "hover",
+      "condensed",
+      "responsive"
+    ),
+    full_width = FALSE
+  )
+```
+
+O painel completo contém 4.010 SNPs. Os painéis reduzidos mantêm 50%, 25%, 10%,
+5% e 1% dos marcadores, correspondendo a 2.005, 1.003, 401, 201 e 40 SNPs,
+respectivamente.
+
+# 3. Exemplo didático: cenário C1 e Fold 1
+
+Para entender cada etapa sem esconder operações em funções auxiliares,
+utilizaremos como exemplo a combinação **C1 × Fold 1**. Os blocos de ajuste são
+mostrados integralmente, mas não são executados automaticamente durante a
+construção do site, pois o ajuste do GBLUP é computacionalmente mais pesado que
+a preparação dos dados.
+
+Quem quiser reproduzir o exemplo pode executar os blocos desta seção
+sequencialmente em uma sessão R com o ambiente `renv` do projeto restaurado.
+
+## 3.1 Selecionando cenário, treinamento e teste
+
+Primeiro escolhemos a coluna fenotípica de C1 e recuperamos os índices de treino
+e teste do Fold 1. A semente do exemplo é lida do resultado oficial para
+preservar o registro da execução correspondente.
+
+```{r exemplo-selecionar-dados, eval=FALSE}
+cenario_exemplo <- "C1"
+fold_exemplo <- 1L
+
+treino <- dados$folds[[fold_exemplo]]$treino
+teste <- dados$folds[[fold_exemplo]]$teste
+
+X_completo <- dados$genotipo
+
+y_exemplo <- dados$fenotipo[
+  ,
+  cenario_exemplo
+]
+
+g_verdadeiro <- dados$valor_genetico[
+  ,
+  cenario_exemplo
+]
+
+linha_seed <- resultado_m02$resultados[
+  resultado_m02$resultados$cenario ==
+    cenario_exemplo &
+    resultado_m02$resultados$fold ==
+      fold_exemplo &
+    resultado_m02$resultados$percentual_p ==
+      100,
+  ,
+  drop = FALSE
+]
+
+stopifnot(
+  nrow(linha_seed) == 1L
+)
+
+seed_exemplo <- as.integer(
+  linha_seed$seed
 )
 
 stopifnot(
-  all(resumo_folds$Treinamento == 800L),
-  all(resumo_folds$Teste == 200L)
-)
-
-knitr::kable(
-  resumo_folds,
-  caption = "Partição fixa utilizada na validação cruzada",
-  row.names = FALSE
-)
-```
-
-## 3.1 Genótipos dos indivíduos de teste
-
-Os indivíduos do conjunto de teste são considerados previamente genotipados.
-Por isso, seus perfis de marcadores podem participar da matriz de relacionamento
-genômico, embora seus fenótipos sejam ocultados durante o ajuste.
-
-A implementação representa essa condição substituindo por `NA` os fenótipos
-dos indivíduos do fold de teste. Assim, a informação fenotípica utilizada pelo
-modelo é exclusivamente a dos 800 indivíduos de treinamento.
-
-Essa configuração corresponde ao problema prático em que candidatos já
-genotipados precisam receber valores genéticos preditos antes da obtenção de
-seus fenótipos.
-
-Consequentemente, o GBLUP é **transdutivo em relação aos genótipos**: a matriz
-de relacionamento genômico inclui os indivíduos de treinamento e de teste,
-todos previamente genotipados. Entretanto, os fenótipos do teste permanecem
-ocultos. Essa característica é específica do GBLUP e deve ser distinguida da
-forma como os métodos de aprendizado de máquina utilizam os preditores no
-treinamento.
-
-# 4. Níveis de redução de p
-
-Os tamanhos dos painéis foram fixados no M01.
-
-```{r niveis-p}
-niveis_p <- dados$niveis_p
-
-knitr::kable(
-  niveis_p,
-  caption = "Painéis de marcadores avaliados pelo GBLUP",
-  row.names = FALSE
+  length(treino) == 800L,
+  length(teste) == 200L,
+  length(
+    intersect(
+      treino,
+      teste
+    )
+  ) == 0L,
+  nrow(X_completo) == 1000L,
+  ncol(X_completo) == 4010L
 )
 ```
 
-Os tamanhos utilizados são:
+Nesse ponto, `X_completo` contém os genótipos dos 1.000 indivíduos. Os vetores
+`treino` e `teste` apenas indicam quais fenótipos podem ser usados no ajuste e
+quais indivíduos serão reservados para avaliação.
 
-$$
-4010,\ 2005,\ 1003,\ 401,\ 201,\ 40.
-$$
+## 3.2 Construindo a matriz genômica completa
 
-O painel completo corresponde a 100% dos SNPs. Os demais correspondem,
-respectivamente, a 50%, 25%, 10%, 5% e 1%.
+A matriz de relacionamento é construída com os 4.010 SNPs. Como todos os
+indivíduos já são genotipados, as 1.000 linhas de `X_completo` participam dessa
+etapa.
 
-Para cada combinação de cenário e fold, os painéis reduzidos são
-aninhados:
-
-$$
-P_{1\%}
-\subset
-P_{5\%}
-\subset
-P_{10\%}
-\subset
-P_{25\%}
-\subset
-P_{50\%}
-\subset
-P_{100\%}.
-$$
-
-# 5. Construção da matriz de relacionamento genômico
-
-Para um painel contendo $p_q$ marcadores, seja
-
-$$
-\mathbf{X}_q
-$$
-
-a matriz genotípica dos 1.000 indivíduos para os SNPs pertencentes ao painel.
-
-A matriz de relacionamento genômico aditivo é construída por
-
-```{r exemplo-matriz-g, eval=FALSE}
-G <- sommer::A.mat(
-  X_q
+```{r exemplo-construir-g, eval=FALSE}
+G_completa <- sommer::A.mat(
+  X_completo
 )
-```
 
-O painel completo possui uma única matriz $\mathbf{G}$ para os 4.010
-marcadores. Quando `p` é reduzido, a matriz de relacionamento é reconstruída
-usando apenas os marcadores selecionados para aquele painel.
+rownames(G_completa) <- rownames(
+  X_completo
+)
 
-Portanto, a redução de `p` não altera somente o conjunto de variáveis
-disponíveis: ela altera também a estrutura de similaridade genômica utilizada
-pelo GBLUP.
+colnames(G_completa) <- rownames(
+  X_completo
+)
 
-# 6. Ajuste do GBLUP
-
-A implementação usa `sommer::mmes()`.
-
-A função abaixo reúne apenas o núcleo do ajuste do GBLUP-A. Ela não realiza a
-seleção de marcadores.
-
-```{r funcao-gblup}
-ajustar_gblup <- function(
-  X,
-  y,
-  treino,
-  teste,
-  G = NULL,
-  n_iter = 20L
-) {
-
-  stopifnot(
-    nrow(X) == length(y),
-    length(intersect(treino, teste)) == 0L
+stopifnot(
+  identical(
+    dim(G_completa),
+    c(1000L, 1000L)
+  ),
+  all(
+    is.finite(G_completa)
   )
+)
+```
 
-  if (is.null(G)) {
-    G <- sommer::A.mat(X)
-  }
+O resultado é uma matriz `1000 × 1000`. Cada elemento representa o
+relacionamento genômico estimado entre dois indivíduos a partir dos SNPs do
+painel completo.
 
-  ids <- rownames(X)
+## 3.3 Ocultando os fenótipos do conjunto de teste
 
-  rownames(G) <- ids
-  colnames(G) <- ids
+Agora montamos o `data.frame` fornecido ao `sommer`. A operação central é
+substituir por `NA` os 200 fenótipos correspondentes ao Fold 1 de teste.
 
-  dados_modelo <- data.frame(
-    y = as.numeric(y),
-    id = factor(
-      ids,
-      levels = ids
+```{r exemplo-ocultar-fenotipos, eval=FALSE}
+ids <- rownames(
+  X_completo
+)
+
+dados_modelo <- data.frame(
+  y = as.numeric(
+    y_exemplo
+  ),
+  id = factor(
+    ids,
+    levels = ids
+  )
+)
+
+dados_modelo$y[
+  teste
+] <- NA_real_
+
+stopifnot(
+  sum(
+    is.na(
+      dados_modelo$y
+    )
+  ) == 200L,
+  all(
+    is.finite(
+      dados_modelo$y[
+        treino
+      ]
     )
   )
-
-  dados_modelo$y[teste] <- NA_real_
-
-  ajuste <- sommer::mmes(
-    y ~ 1,
-    random = ~
-      vsm(
-        ism(id),
-        Gu = G
-      ),
-    rcov = ~ units,
-    nIters = n_iter,
-    data = dados_modelo,
-    verbose = FALSE,
-    dateWarning = FALSE
-  )
-
-  efeito_individuo <- as.matrix(
-    ajuste$uList[[1L]]
-  )
-
-  Z_id <- model.matrix(
-    ~ id - 1,
-    data = dados_modelo
-  )
-
-  valor_aditivo <- as.numeric(
-    Z_id %*%
-      efeito_individuo[
-        ,
-        1L,
-        drop = FALSE
-      ]
-  )
-
-  intercepto <- as.numeric(
-    ajuste$b
-  )[1L]
-
-  predicao <- intercepto + valor_aditivo
-
-  list(
-    ajuste = ajuste,
-    G = G,
-    valor_aditivo = valor_aditivo,
-    predicao = predicao,
-    predicao_teste = predicao[teste]
-  )
-}
+)
 ```
 
-A função recebe a matriz genotípica do painel que está sendo avaliado. O
-fenótipo dos indivíduos de teste é ocultado antes do ajuste e as predições
-correspondentes são extraídas depois da estimação do modelo.
+Essa é a separação essencial entre informação disponível e informação
+reservada. Os 200 indivíduos de teste continuam em `dados_modelo` para que seus
+níveis de `id` possam receber predições, mas seus fenótipos não informam o
+ajuste.
 
-# 7. Predição dos indivíduos de teste
+## 3.4 Ajustando o GBLUP com `sommer::mmes()`
 
-Para cada combinação de cenário, fold e painel de marcadores, o modelo gera
+Com `G_completa` e os fenótipos de teste ocultos, ajustamos o modelo aditivo. O
+protocolo congelado utiliza `nIters = 20`.
 
-$$
-\widehat{\mathbf{g}}_{\mathrm{teste}},
-$$
+```{r exemplo-ajustar-gblup, eval=FALSE}
+ajuste_completo <- sommer::mmes(
+  y ~ 1,
+  random = ~
+    vsm(
+      ism(id),
+      Gu = G_completa
+    ),
+  rcov = ~ units,
+  nIters = 20L,
+  data = dados_modelo,
+  verbose = FALSE,
+  dateWarning = FALSE
+)
+```
 
-um vetor com 200 valores genéticos preditos.
+O modelo estima a média geral, a variância genética, a variância residual e os
+efeitos aditivos associados aos 1.000 níveis de `id`.
 
-O vetor é comparado ao valor genético verdadeiro simulado
+## 3.5 Extraindo os valores genéticos preditos
 
-$$
-\mathbf{g}_{\mathrm{teste}},
-$$
+O componente `uList` contém os efeitos aleatórios preditos. Construímos a matriz
+de incidência dos indivíduos e recuperamos a contribuição aditiva de cada um.
 
-somente depois que o ajuste foi concluído.
+```{r exemplo-extrair-predicoes, eval=FALSE}
+efeito_individuo <- as.matrix(
+  ajuste_completo$uList[[1L]]
+)
 
-Essa separação é importante porque o valor genético verdadeiro é conhecido
-apenas por se tratar de um estudo com dados simulados. Ele funciona como
-referência de avaliação, e não como informação disponível para treinamento.
+Z_id <- model.matrix(
+  ~ id - 1,
+  data = dados_modelo
+)
 
-# 8. Métricas de desempenho
+valor_aditivo <- as.numeric(
+  Z_id %*%
+    efeito_individuo[
+      ,
+      1L,
+      drop = FALSE
+    ]
+)
 
-A métrica principal é a correlação de Pearson entre o valor genético verdadeiro
-e o valor genético predito:
+intercepto <- as.numeric(
+  ajuste_completo$b
+)[1L]
+
+predicao_completa <- intercepto +
+  valor_aditivo
+
+predicao_teste_completa <- predicao_completa[
+  teste
+]
+
+stopifnot(
+  length(
+    predicao_teste_completa
+  ) == 200L,
+  all(
+    is.finite(
+      predicao_teste_completa
+    )
+  )
+)
+```
+
+As 200 posições de `predicao_teste_completa` correspondem aos indivíduos cujo
+fenótipo foi ocultado antes do ajuste.
+
+# 4. Avaliando o painel completo
+
+Como os dados são simulados, conhecemos o valor genético verdadeiro dos
+indivíduos de teste. Ele é acessado somente agora, depois que o ajuste e as
+predições foram concluídos.
+
+## 4.1 Correlação de Pearson
+
+A métrica principal é
 
 $$
 r
@@ -408,112 +596,546 @@ r
 \left(
 \mathbf{g},
 \widehat{\mathbf{g}}
-\right).
+\right),
 $$
 
-Também são registradas métricas complementares:
+em que $\mathbf{g}$ contém os valores genéticos verdadeiros e
+$\widehat{\mathbf{g}}$ contém as predições.
 
-- RMSE;
-- MAE;
-- viés médio;
-- inclinação de calibração;
-- $R^2$.
+```{r exemplo-correlacao, eval=FALSE}
+observado <- as.numeric(
+  g_verdadeiro[
+    teste
+  ]
+)
 
-```{r funcao-metricas}
-calcular_metricas <- function(
+predito <- as.numeric(
+  predicao_teste_completa
+)
+
+r_completo <- cor(
   observado,
   predito
-) {
-
-  observado <- as.numeric(observado)
-  predito <- as.numeric(predito)
-
-  stopifnot(
-    length(observado) == length(predito),
-    all(is.finite(observado)),
-    all(is.finite(predito))
-  )
-
-  r <- if (
-    sd(observado) > 0 &&
-    sd(predito) > 0
-  ) {
-    cor(
-      observado,
-      predito
-    )
-  } else {
-    NA_real_
-  }
-
-  slope <- if (
-    sd(predito) > 0
-  ) {
-    as.numeric(
-      coef(
-        lm(
-          observado ~ predito
-        )
-      )[2L]
-    )
-  } else {
-    NA_real_
-  }
-
-  denominador_r2 <- sum(
-    (
-      observado -
-        mean(observado)
-    )^2
-  )
-
-  r2 <- if (
-    denominador_r2 > 0
-  ) {
-    1 -
-      sum(
-        (
-          observado -
-            predito
-        )^2
-      ) /
-      denominador_r2
-  } else {
-    NA_real_
-  }
-
-  data.frame(
-    r = r,
-    RMSE = sqrt(
-      mean(
-        (
-          observado -
-            predito
-        )^2
-      )
-    ),
-    MAE = mean(
-      abs(
-        observado -
-          predito
-      )
-    ),
-    Bias = mean(
-      predito -
-        observado
-    ),
-    Slope = slope,
-    R2 = r2
-  )
-}
+)
 ```
 
-# 9. Robustez à redução de marcadores
+Quanto maior `r_completo`, maior a associação linear entre o valor genético
+verdadeiro e a predição do modelo.
 
-O desempenho com todos os marcadores é a referência dentro de cada cenário e
-fold.
+## 4.2 Métricas complementares
 
-Para a correlação, define-se
+Também calculamos RMSE, MAE, viés, inclinação de calibração e $R^2$ preditivo.
+As fórmulas são escritas diretamente para que seu significado fique visível.
+
+```{r exemplo-metricas, eval=FALSE}
+rmse_completo <- sqrt(
+  mean(
+    (
+      observado -
+        predito
+    )^2
+  )
+)
+
+mae_completo <- mean(
+  abs(
+    observado -
+      predito
+  )
+)
+
+bias_completo <- mean(
+  predito -
+    observado
+)
+
+slope_completo <- as.numeric(
+  coef(
+    lm(
+      observado ~ predito
+    )
+  )[2L]
+)
+
+soma_quadrados_total <- sum(
+  (
+    observado -
+      mean(
+        observado
+      )
+  )^2
+)
+
+r2_completo <- 1 -
+  sum(
+    (
+      observado -
+        predito
+    )^2
+  ) /
+  soma_quadrados_total
+
+metricas_completo <- data.frame(
+  r = r_completo,
+  RMSE = rmse_completo,
+  MAE = mae_completo,
+  Bias = bias_completo,
+  Slope = slope_completo,
+  R2 = r2_completo
+)
+
+metricas_completo
+```
+
+A correlação mede associação linear; RMSE e MAE medem magnitude do erro; o viés
+mede deslocamento médio; a inclinação avalia calibração; e o $R^2$ preditivo
+compara o erro das predições com a variação dos valores verdadeiros.
+
+# 5. Recuperando a importância dos SNPs
+
+O GBLUP produz efeitos genéticos dos indivíduos, e não diretamente um
+coeficiente para cada SNP. Para criar um ranking de marcadores, recuperamos
+efeitos de SNP compatíveis com os valores aditivos preditos no conjunto de
+treinamento.
+
+## 5.1 Centralizando a matriz de treinamento
+
+Seja $\mathbf{X}_T$ a matriz dos 800 indivíduos de treinamento. Cada coluna é
+centralizada usando a média calculada nesses mesmos 800 indivíduos:
+
+$$
+\mathbf{M}_T
+=
+\mathbf{X}_T
+-
+\mathbf{1}\bar{\mathbf{x}}_T'.
+$$
+
+```{r exemplo-centralizar-marcadores, eval=FALSE}
+X_treino <- X_completo[
+  treino,
+  ,
+  drop = FALSE
+]
+
+M_treino <- sweep(
+  X_treino,
+  2L,
+  colMeans(
+    X_treino
+  ),
+  FUN = "-"
+)
+
+stopifnot(
+  nrow(M_treino) == 800L,
+  ncol(M_treino) == 4010L,
+  max(
+    abs(
+      colMeans(
+        M_treino
+      )
+    )
+  ) < 1e-12
+)
+```
+
+A centralização usa exclusivamente os indivíduos de treinamento. Nenhum valor
+genético verdadeiro e nenhum fenótipo de teste entra nessa operação.
+
+## 5.2 Por que aparece uma pseudoinversa?
+
+A centralização implica uma dependência linear entre as 800 linhas. Por isso,
+
+$$
+\mathbf{M}_T\mathbf{M}_T'
+$$
+
+é singular. Na análise congelada, o posto observado foi 799 nas 30 combinações
+de cenário e fold.
+
+Construímos essa matriz e sua decomposição espectral:
+
+```{r exemplo-decomposicao-espectral, eval=FALSE}
+MMt <- tcrossprod(
+  M_treino
+)
+
+decomposicao <- eigen(
+  MMt,
+  symmetric = TRUE
+)
+
+tolerancia <- max(
+  dim(MMt)
+) *
+  max(
+    decomposicao$values
+  ) *
+  .Machine$double.eps
+
+manter <- decomposicao$values >
+  tolerancia
+
+posto_MMt <- sum(
+  manter
+)
+
+stopifnot(
+  posto_MMt == 799L
+)
+```
+
+Autovalores menores que a tolerância numérica não são invertidos. Isso evita
+tentar calcular a inversa comum de uma matriz singular.
+
+## 5.3 Recuperando os efeitos dos marcadores
+
+O vetor de efeitos dos SNPs é obtido por
+
+$$
+\widehat{\boldsymbol{\beta}}
+=
+\mathbf{M}_T'
+\left(
+\mathbf{M}_T\mathbf{M}_T'
+\right)^+
+\widehat{\mathbf{u}}_T,
+$$
+
+em que $+$ indica a pseudoinversa de Moore--Penrose e
+$\widehat{\mathbf{u}}_T$ contém os efeitos aditivos preditos dos indivíduos de
+treinamento.
+
+```{r exemplo-moore-penrose, eval=FALSE}
+u_treino <- valor_aditivo[
+  treino
+]
+
+autovetores_validos <- decomposicao$vectors[
+  ,
+  manter,
+  drop = FALSE
+]
+
+autovalores_validos <- decomposicao$values[
+  manter
+]
+
+alpha <- autovetores_validos %*% (
+  crossprod(
+    autovetores_validos,
+    u_treino
+  ) /
+    autovalores_validos
+)
+
+beta_snp <- as.numeric(
+  crossprod(
+    M_treino,
+    alpha
+  )
+)
+
+names(beta_snp) <- colnames(
+  X_treino
+)
+
+stopifnot(
+  length(beta_snp) == 4010L,
+  all(
+    is.finite(
+      beta_snp
+    )
+  )
+)
+```
+
+A pseudoinversa fornece uma solução de norma mínima compatível com a parte dos
+efeitos aditivos que pertence ao espaço gerado pelos marcadores centralizados.
+
+## 5.4 Auditando a reconstrução
+
+Uma verificação útil é reconstruir os efeitos aditivos dos indivíduos de
+treinamento a partir dos efeitos recuperados dos SNPs.
+
+```{r exemplo-auditar-reconstrucao, eval=FALSE}
+u_reconstruido <- as.numeric(
+  M_treino %*%
+    beta_snp
+)
+
+u_treino_centralizado <- u_treino -
+  mean(
+    u_treino
+  )
+
+cor_reconstrucao <- cor(
+  u_treino_centralizado,
+  u_reconstruido
+)
+
+erro_reconstrucao <- max(
+  abs(
+    u_treino_centralizado -
+      u_reconstruido
+  )
+)
+
+cor_reconstrucao
+erro_reconstrucao
+```
+
+Na auditoria científica original, a correlação de reconstrução foi
+numericamente igual a 1 e os erros permaneceram na ordem de $10^{-14}$. Essa
+verificação confirma a consistência numérica da transformação utilizada para
+obter os efeitos dos SNPs.
+
+## 5.5 Convertendo os efeitos em importância
+
+Para o SNP $j$, a importância bruta é definida por
+
+$$
+I_j
+=
+\widehat{\beta}_j^2.
+$$
+
+O quadrado remove o sinal do efeito e mantém sua magnitude.
+
+```{r exemplo-importancia, eval=FALSE}
+importancia_bruta <- beta_snp^2
+
+names(
+  importancia_bruta
+) <- names(
+  beta_snp
+)
+
+min_importancia <- min(
+  importancia_bruta
+)
+
+max_importancia <- max(
+  importancia_bruta
+)
+
+if (
+  max_importancia >
+    min_importancia
+) {
+
+  importancia_0_10 <- 10 *
+    (
+      importancia_bruta -
+        min_importancia
+    ) /
+    (
+      max_importancia -
+        min_importancia
+    )
+
+} else {
+
+  importancia_0_10 <- rep(
+    0,
+    length(
+      importancia_bruta
+    )
+  )
+}
+
+names(
+  importancia_0_10
+) <- names(
+  importancia_bruta
+)
+```
+
+A transformação para a escala de 0 a 10 não altera a ordenação dos SNPs; ela
+apenas facilita a leitura dos escores.
+
+## 5.6 Construindo o ranking e tratando empates
+
+Marcadores com exatamente a mesma importância recebem uma chave de desempate
+pseudoaleatória. Para o exemplo utilizamos a semente registrada na combinação
+C1 × Fold 1 do resultado oficial.
+
+```{r exemplo-ranking, eval=FALSE}
+set.seed(
+  seed_exemplo
+)
+
+ordem_aleatoria <- sample(
+  seq_along(
+    importancia_0_10
+  )
+)
+
+chave_desempate <- integer(
+  length(
+    importancia_0_10
+  )
+)
+
+chave_desempate[
+  ordem_aleatoria
+] <- seq_along(
+  importancia_0_10
+)
+
+ordem_ranking <- order(
+  -importancia_0_10,
+  chave_desempate
+)
+
+ranking <- data.frame(
+  marcador = names(
+    importancia_0_10
+  )[
+    ordem_ranking
+  ],
+  marker_index = ordem_ranking,
+  importancia_bruta = importancia_bruta[
+    ordem_ranking
+  ],
+  importancia_0_10 = importancia_0_10[
+    ordem_ranking
+  ],
+  rank = seq_along(
+    ordem_ranking
+  ),
+  tie_key = chave_desempate[
+    ordem_ranking
+  ]
+)
+
+head(
+  ranking,
+  10L
+)
+```
+
+O ranking é específico para a combinação cenário × fold. Ele é calculado a
+partir do ajuste completo e, depois, reutilizado para formar todos os painéis
+reduzidos dessa mesma combinação.
+
+# 6. Construindo um painel reduzido
+
+Os painéis são aninhados. Isso significa que os 40 SNPs do painel de 1% estão
+contidos no painel de 5%, que está contido no painel de 10% e assim por diante.
+
+Como exemplo, construiremos o painel de 50%, contendo 2.005 SNPs.
+
+## 6.1 Selecionando os 2.005 primeiros SNPs do ranking
+
+A seleção usa somente a posição no ranking obtido com o painel completo.
+
+```{r exemplo-painel-50, eval=FALSE}
+n_marcadores_50 <- 2005L
+
+marcadores_50 <- ranking$marcador[
+  seq_len(
+    n_marcadores_50
+  )
+]
+
+X_50 <- X_completo[
+  ,
+  marcadores_50,
+  drop = FALSE
+]
+
+stopifnot(
+  nrow(X_50) == 1000L,
+  ncol(X_50) == 2005L,
+  !anyDuplicated(
+    marcadores_50
+  )
+)
+```
+
+Nenhum novo ranking é calculado para o painel de 50%. A mesma ordenação do
+ajuste completo determina todos os subconjuntos.
+
+## 6.2 Reconstruindo a matriz genômica
+
+Como o conjunto de SNPs mudou, $\mathbf{G}$ também precisa ser reconstruída.
+
+```{r exemplo-g-50, eval=FALSE}
+G_50 <- sommer::A.mat(
+  X_50
+)
+
+rownames(G_50) <- rownames(
+  X_50
+)
+
+colnames(G_50) <- rownames(
+  X_50
+)
+
+stopifnot(
+  identical(
+    dim(G_50),
+    c(1000L, 1000L)
+  )
+)
+```
+
+Portanto, a comparação entre 100% e 50% não reutiliza a matriz genômica do
+painel completo.
+
+## 6.3 Reajustando o GBLUP
+
+O modelo é ajustado novamente desde o início usando a nova matriz genômica. Os
+fenótipos de teste continuam ocultos.
+
+```{r exemplo-ajuste-50, eval=FALSE}
+ajuste_50 <- sommer::mmes(
+  y ~ 1,
+  random = ~
+    vsm(
+      ism(id),
+      Gu = G_50
+    ),
+  rcov = ~ units,
+  nIters = 20L,
+  data = dados_modelo,
+  verbose = FALSE,
+  dateWarning = FALSE
+)
+
+efeito_individuo_50 <- as.matrix(
+  ajuste_50$uList[[1L]]
+)
+
+valor_aditivo_50 <- as.numeric(
+  Z_id %*%
+    efeito_individuo_50[
+      ,
+      1L,
+      drop = FALSE
+    ]
+)
+
+intercepto_50 <- as.numeric(
+  ajuste_50$b
+)[1L]
+
+predicao_50 <- intercepto_50 +
+  valor_aditivo_50
+
+predicao_teste_50 <- predicao_50[
+  teste
+]
+```
+
+A mesma lógica é repetida para os painéis com 1.003, 401, 201 e 40 SNPs.
+
+## 6.4 Comparando o painel reduzido com o painel completo
+
+A perda de correlação é definida dentro do mesmo cenário e fold por
 
 $$
 \Delta r_q
@@ -523,13 +1145,445 @@ r_{100\%}
 r_q.
 $$
 
-Logo:
+Para o RMSE, utilizamos
 
-- $\Delta r_q > 0$: houve perda de capacidade preditiva após reduzir `p`;
-- $\Delta r_q = 0$: o desempenho foi preservado;
-- $\Delta r_q < 0$: o painel reduzido superou o painel completo.
+$$
+\Delta RMSE_q
+=
+RMSE_q
+-
+RMSE_{100\%}.
+$$
 
-Para o RMSE, define-se
+```{r exemplo-comparar-50, eval=FALSE}
+r_50 <- cor(
+  observado,
+  predicao_teste_50
+)
+
+rmse_50 <- sqrt(
+  mean(
+    (
+      observado -
+        predicao_teste_50
+    )^2
+  )
+)
+
+delta_r_50 <- r_completo -
+  r_50
+
+delta_rmse_50 <- rmse_50 -
+  rmse_completo
+
+comparacao_50 <- data.frame(
+  Painel = c(
+    "100%",
+    "50%"
+  ),
+  SNPs = c(
+    4010L,
+    2005L
+  ),
+  r = c(
+    r_completo,
+    r_50
+  ),
+  RMSE = c(
+    rmse_completo,
+    rmse_50
+  ),
+  Delta_r = c(
+    0,
+    delta_r_50
+  ),
+  Delta_RMSE = c(
+    0,
+    delta_rmse_50
+  )
+)
+
+comparacao_50
+```
+
+Valores positivos de `Delta_r` representam perda de correlação. Valores
+negativos indicam que o painel reduzido apresentou correlação maior que o
+painel completo naquela combinação específica.
+
+# 7. Como a análise completa é organizada
+
+O exemplo anterior mostrou uma única combinação. A análise científica completa
+repete a mesma lógica para
+
+$$
+6\ \text{cenários}
+\times
+5\ \text{folds}
+\times
+6\ \text{níveis de }p
+=
+180\ \text{resultados}.
+$$
+
+O ranking é construído uma vez para cada combinação cenário × fold a partir do
+painel de 4.010 SNPs. Depois, os cinco painéis reduzidos são formados pelos
+primeiros SNPs dessa mesma ordenação.
+
+O bloco abaixo mostra a estrutura externa da repetição. Ele permanece com
+`eval = FALSE` para que a construção do site não refaça automaticamente os 180
+ajustes. As operações internas são exatamente as apresentadas nas Seções 3 a 6.
+
+```{r fluxo-completo-gblup, eval=FALSE}
+resultados_reexecucao <- list()
+contador <- 1L
+
+for (
+  cenario_atual in
+    colnames(
+      dados$fenotipo
+    )
+) {
+
+  for (
+    fold_atual in
+      seq_along(
+        dados$folds
+      )
+  ) {
+
+    # 1. selecionar y, treino, teste e X completo
+    # 2. construir G com os 4.010 SNPs
+    # 3. ocultar os fenótipos de teste
+    # 4. ajustar sommer::mmes()
+    # 5. recuperar os efeitos aditivos dos indivíduos
+    # 6. calcular beta_SNP por Moore-Penrose
+    # 7. formar um único ranking de importância
+
+    for (
+      linha_p in
+        seq_len(
+          nrow(
+            dados$niveis_p
+          )
+        )
+    ) {
+
+      # 8. selecionar os primeiros p SNPs do ranking
+      # 9. reconstruir G para o painel atual
+      # 10. reajustar o GBLUP
+      # 11. predizer os 200 indivíduos de teste
+      # 12. calcular r, RMSE, MAE, Bias, Slope e R2
+      # 13. calcular Delta r e Delta RMSE
+      # 14. armazenar uma linha do resultado
+
+      contador <- contador + 1L
+    }
+  }
+}
+```
+
+Essa organização evita funções auxiliares no tutorial e deixa visível a unidade
+fundamental da análise: cenário × fold × nível de `p`.
+
+# 8. Validando o contrato científico `M02-p-v1`
+
+Agora voltamos ao objeto oficial, que contém os resultados já concluídos e
+auditados. A tabela abaixo resume os componentes centrais do protocolo.
+
+```{r tabela-protocolo}
+protocolo_m02 <- data.frame(
+  Item = c(
+    "Modelo",
+    "Pacote",
+    "Matriz genômica",
+    "Ajuste",
+    "Iterações",
+    "Fenótipo de teste no ajuste",
+    "Genótipos de teste disponíveis",
+    "Matriz G transdutiva",
+    "Importância dos SNPs",
+    "Painéis aninhados",
+    "Métrica principal"
+  ),
+  Valor = c(
+    resultado_m02$protocolo$modelo,
+    resultado_m02$protocolo$pacote,
+    resultado_m02$protocolo$matriz_relacionamento,
+    resultado_m02$protocolo$ajuste,
+    as.character(
+      resultado_m02$protocolo$nIters
+    ),
+    as.character(
+      resultado_m02$protocolo$fenotipo_teste_no_ajuste
+    ),
+    as.character(
+      resultado_m02$protocolo$genotipos_teste_disponiveis
+    ),
+    as.character(
+      resultado_m02$protocolo$matriz_G_transdutiva
+    ),
+    resultado_m02$protocolo$importancia_gblup,
+    as.character(
+      resultado_m02$protocolo$paineis_aninhados
+    ),
+    resultado_m02$protocolo$metrica_principal
+  )
+)
+
+kableExtra::kbl(
+  protocolo_m02,
+  caption = "Contrato científico congelado do M02"
+) |>
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "striped",
+      "hover",
+      "condensed",
+      "responsive"
+    ),
+    full_width = FALSE
+  )
+```
+
+O contrato confirma que o GBLUP utiliza `sommer::A.mat()`, `sommer::mmes()`, 20
+iterações, matriz genômica transdutiva e importância baseada em
+$\widehat{\beta}^2$ recuperado por Moore--Penrose. Essas definições não são
+alteradas pela conversão do documento em tutorial.
+
+## 8.1 Conferindo as dimensões do resultado
+
+O objeto deve conter 180 linhas individuais e 36 combinações resumidas de
+cenário × nível de `p`.
+
+```{r tabela-dimensoes-m02}
+dimensoes_m02 <- data.frame(
+  Componente = c(
+    "Cenários",
+    "Folds",
+    "Métodos",
+    "Níveis de p",
+    "Resultados individuais",
+    "Resumos cenário × p"
+  ),
+  Quantidade = c(
+    resultado_m02$dimensoes$cenarios,
+    resultado_m02$dimensoes$folds,
+    resultado_m02$dimensoes$metodos,
+    resultado_m02$dimensoes$niveis_p,
+    nrow(
+      resultado_m02$resultados
+    ),
+    nrow(
+      resultado_m02$resumo
+    )
+  )
+)
+
+kableExtra::kbl(
+  dimensoes_m02,
+  caption = "Dimensões do resultado oficial do GBLUP"
+) |>
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "striped",
+      "hover",
+      "condensed",
+      "responsive"
+    ),
+    full_width = FALSE
+  )
+```
+
+As 180 linhas resultam de $6 \times 5 \times 6$. Depois de resumir os cinco
+folds dentro de cada cenário e nível de `p`, restam $6 \times 6 = 36$
+combinações.
+
+# 9. Resultados do GBLUP
+
+As tabelas e figuras desta seção são construídas diretamente de
+`resultado_m02$resumo`. Nenhum valor de correlação ou perda é digitado
+manualmente no Rmd.
+
+## 9.1 Painel completo, 10% e 1%
+
+Para uma visão compacta, selecionamos três níveis: 100%, 10% e 1%. Eles
+representam o painel completo, uma redução forte e a redução mais extrema.
+
+```{r tabela-resultados-principais}
+resumo_principal <- resultado_m02$resumo[
+  resultado_m02$resumo$percentual_p %in%
+    c(
+      100,
+      10,
+      1
+    ),
+  c(
+    "cenario",
+    "percentual_p",
+    "media_r",
+    "sd_r",
+    "media_rmse",
+    "media_delta_r",
+    "media_delta_rmse"
+  ),
+  drop = FALSE
+]
+
+ordem_percentual <- match(
+  resumo_principal$percentual_p,
+  c(
+    100,
+    10,
+    1
+  )
+)
+
+resumo_principal <- resumo_principal[
+  order(
+    resumo_principal$cenario,
+    ordem_percentual
+  ),
+  ,
+  drop = FALSE
+]
+
+colnames(
+  resumo_principal
+) <- c(
+  "Cenário",
+  "Marcadores (%)",
+  "Correlação média",
+  "DP da correlação",
+  "RMSE médio",
+  "Delta r médio",
+  "Delta RMSE médio"
+)
+
+kableExtra::kbl(
+  resumo_principal,
+  caption = paste(
+    "Desempenho médio do GBLUP com",
+    "100%, 10% e 1% dos marcadores"
+  ),
+  digits = 4
+) |>
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "striped",
+      "hover",
+      "condensed",
+      "responsive"
+    ),
+    full_width = FALSE
+  )
+```
+
+A tabela mostra que a resposta à redução de `p` depende do cenário. Em C1, a
+redução para 10% pode preservar ou melhorar ligeiramente a correlação média,
+enquanto a redução extrema para 1% produz perdas mais claras em vários
+cenários. As maiores perdas sob 1% aparecem em cenários como C2, C5 e C6.
+
+Essas diferenças devem ser interpretadas de forma descritiva. O número de QTL e
+a herdabilidade não variam de forma independente entre todos os seis cenários;
+portanto, o desenho não permite atribuir causalmente as diferenças observadas a
+um único componente da arquitetura genética.
+
+## 9.2 Visualizando a robustez ao longo de todos os níveis de `p`
+
+A figura abaixo utiliza as 36 médias cenário × nível de `p`. Cada linha
+representa um cenário e mostra como a correlação média muda à medida que o
+painel é reduzido.
+
+```{r figura-correlacao-p, fig.height=5.2, fig.width=8.2, fig.cap="Correlação média do GBLUP ao longo dos seis níveis de redução do número de marcadores."}
+dados_figura <- resultado_m02$resumo[
+  ,
+  c(
+    "cenario",
+    "percentual_p",
+    "media_r"
+  )
+]
+
+dados_figura$cenario <- factor(
+  dados_figura$cenario,
+  levels = paste0(
+    "C",
+    1:6
+  )
+)
+
+figura_correlacao_p <- ggplot2::ggplot(
+  dados_figura,
+  ggplot2::aes(
+    x = percentual_p,
+    y = media_r,
+    color = cenario,
+    group = cenario
+  )
+) +
+  ggplot2::geom_line(
+    linewidth = 0.9
+  ) +
+  ggplot2::geom_point(
+    size = 2.2
+  ) +
+  ggplot2::scale_x_continuous(
+    breaks = c(
+      1,
+      5,
+      10,
+      25,
+      50,
+      100
+    )
+  ) +
+  ggthemes::scale_color_gdocs(
+    name = "Cenário"
+  ) +
+  ggplot2::labs(
+    title = "Robustez do GBLUP à redução de marcadores",
+    x = "Marcadores mantidos (%)",
+    y = "Correlação média com o valor genético verdadeiro"
+  ) +
+  ggthemes::theme_gdocs(
+    base_size = 12
+  ) +
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(
+      face = "bold"
+    )
+  )
+
+figura_correlacao_p
+```
+
+As curvas deixam evidente que o painel mínimo de 1% é a condição mais
+desafiadora para o GBLUP em vários cenários. Em reduções menos extremas, a perda
+pode ser pequena e, em algumas combinações, a média pode até superar a do painel
+completo.
+
+# 10. Interpretando `Delta r` e `Delta RMSE`
+
+A comparação com o painel completo é sempre feita dentro do mesmo cenário e
+fold.
+
+Para a correlação:
+
+$$
+\Delta r_q
+=
+r_{100\%}
+-
+r_q.
+$$
+
+Assim:
+
+- $\Delta r_q > 0$ indica perda de correlação;
+- $\Delta r_q = 0$ indica preservação da correlação;
+- $\Delta r_q < 0$ indica correlação maior no painel reduzido.
+
+Para o RMSE:
 
 $$
 \Delta RMSE_q
@@ -544,535 +1598,32 @@ Nesse caso:
 - valores positivos indicam aumento do erro;
 - valores negativos indicam redução do erro.
 
-Essas diferenças são calculadas dentro da mesma combinação de cenário,
-método e fold.
-
-# 10. Importância dos marcadores no GBLUP
-
-O ajuste com 4.010 SNPs produz, para cada combinação de cenário e fold, os
-valores genéticos aditivos preditos dos indivíduos. Para transformar essa
-predição em um escore de importância por marcador, os efeitos dos SNPs são
-recuperados a partir dos BLUPs obtidos no conjunto de treinamento.
-
-Seja
-
-$$
-\mathbf{M}_T
-=
-\mathbf{X}_T
--
-\mathbf{1}\bar{\mathbf{x}}_T',
-$$
-
-a matriz de marcadores dos indivíduos de treinamento centralizada pelas médias
-dos marcadores calculadas no próprio treinamento.
-
-Seja ainda
-
-$$
-\widehat{\mathbf{u}}_T
-$$
-
-o vetor de valores genéticos aditivos preditos para os indivíduos de
-treinamento. Esses valores provêm do ajuste transdutivo descrito na Seção 3.1,
-no qual a matriz de relacionamento utiliza os genótipos dos 1.000 indivíduos,
-mas somente os 800 fenótipos de treinamento.
-
-Os efeitos dos marcadores são recuperados por
-
-$$
-\widehat{\boldsymbol{\beta}}
-=
-\mathbf{M}_T'
-\left(
-\mathbf{M}_T\mathbf{M}_T'
-\right)^+
-\widehat{\mathbf{u}}_T,
-$$
-
-onde o símbolo $+$ representa a pseudoinversa de Moore--Penrose.
-
-## 10.1 Por que utilizar a pseudoinversa?
-
-Como as colunas de $\mathbf{M}_T$ são centralizadas, vale
-
-$$
-\mathbf{1}'\mathbf{M}_T
-=
-\mathbf{0}'.
-$$
-
-Consequentemente, a matriz
-
-$$
-\mathbf{M}_T\mathbf{M}_T'
-$$
-
-é singular por construção.
-
-Neste projeto, cada fold possui 800 indivíduos de treinamento. A auditoria
-numérica mostrou posto 799 em todas as 30 combinações de cenário e fold,
-resultado compatível com a dependência linear introduzida pela centralização.
-
-Por isso, a inversa comum não é apropriada. A pseudoinversa fornece a solução
-de norma mínima compatível com os valores genéticos preditos pelo GBLUP.
-
-A recuperação pode ser implementada por decomposição espectral:
-
-```{r importancia-gblup}
-obter_importancia_gblup <- function(
-  X_treino,
-  u_treino
-) {
-
-  M <- sweep(
-    X_treino,
-    2L,
-    colMeans(X_treino),
-    FUN = "-"
-  )
-
-  MMt <- tcrossprod(M)
-
-  eig <- eigen(
-    MMt,
-    symmetric = TRUE
-  )
-
-  tolerancia <- max(dim(MMt)) *
-    max(eig$values) *
-    .Machine$double.eps
-
-  manter <- eig$values > tolerancia
-
-  alpha <- eig$vectors[
-    ,
-    manter,
-    drop = FALSE
-  ] %*% (
-    crossprod(
-      eig$vectors[
-        ,
-        manter,
-        drop = FALSE
-      ],
-      u_treino
-    ) /
-      eig$values[manter]
-  )
-
-  beta <- as.numeric(
-    crossprod(
-      M,
-      alpha
-    )
-  )
-
-  names(beta) <- colnames(
-    X_treino
-  )
-
-  importancia <- beta^2
-
-  names(importancia) <- names(beta)
-
-  importancia
-}
-```
-
-Como $\mathbf{M}_T$ é centralizada, adicionar ou remover uma constante de
-$\widehat{\mathbf{u}}_T$ não altera os efeitos recuperados. Assim, a expressão
-é equivalente à utilização de
-$\widehat{\mathbf{u}}_T-\bar{\widehat{\mathbf{u}}}_T$.
-
-## 10.2 Escore de importância
-
-Para o marcador $j$, o escore bruto é definido por
-
-$$
-I_j
-=
-\widehat{\beta}_j^2.
-$$
-
-O quadrado do efeito fornece uma medida não negativa de magnitude. A ordenação
-por $I_j$ é equivalente à ordenação por
-$|\widehat{\beta}_j|$.
-
-Para facilitar a comparação interna dos escores, eles são reescalonados para o
-intervalo de 0 a 10:
-
-$$
-I_j^{(0-10)}
-=
-10
-\frac{
-I_j-\min(I)
-}{
-\max(I)-\min(I)
-}.
-$$
-
-Esse reescalonamento não altera a ordem dos marcadores.
-
-```{r padronizar-importancia}
-padronizar_importancia <- function(
-  importancia
-) {
-
-  lo <- min(importancia)
-  hi <- max(importancia)
-
-  if (hi > lo) {
-
-    10 *
-      (
-        importancia - lo
-      ) /
-      (
-        hi - lo
-      )
-
-  } else {
-
-    rep(
-      0,
-      length(importancia)
-    )
-  }
-}
-```
-
-## 10.3 Desempates e reprodutibilidade
-
-Marcadores com exatamente o mesmo escore de importância não devem ser
-ordenados implicitamente pela posição em que aparecem na matriz genotípica.
-
-Por isso, os empates são resolvidos por uma ordem pseudoaleatória
-determinística, com semente específica para cada combinação de cenário, fold e
-método.
-
-Essa regra:
-
-- não utiliza fenótipos dos indivíduos de teste;
-- não utiliza valores genéticos verdadeiros;
-- não utiliza posições reais de QTL;
-- evita favorecer a ordem física dos marcadores;
-- produz o mesmo ranking em execuções repetidas.
-
-O ranking final é, portanto, específico para
-
-$$
-\text{cenário}
-\times
-\text{fold}
-\times
-\text{GBLUP}.
-$$
-
-## 10.4 Validação da recuperação dos efeitos
-
-A formulação por Moore--Penrose foi auditada nas 30 combinações de cenário e
-fold.
-
-Em todas elas:
-
-- $\operatorname{rank}(\mathbf{M}_T\mathbf{M}_T')=799$;
-- a correlação entre
-  $\widehat{\mathbf{u}}_T$ e
-  $\mathbf{M}_T\widehat{\boldsymbol{\beta}}$
-  foi numericamente igual a 1;
-- o erro de reconstrução permaneceu na ordem de $10^{-14}$.
-
-Esses resultados confirmam que a transformação recupera os efeitos dos
-marcadores de forma numericamente consistente com os valores aditivos preditos
-pelo GBLUP.
-# 11. Construção dos painéis reduzidos
-
-Depois de obtido o ranking do ajuste completo, os painéis são definidos pelos
-primeiros $p_q$ marcadores.
-
-Se
-
-$$
-m_{(1)},m_{(2)},\ldots,m_{(4010)}
-$$
-
-representam os marcadores ordenados da maior para a menor importância, então o
-painel com $p_q$ marcadores é
-
-$$
-P_q
-=
-\left\{
-m_{(1)},
-m_{(2)},
-\ldots,
-m_{(p_q)}
-\right\}.
-$$
-
-O mesmo ranking é usado para todos os níveis de redução dentro da combinação de
-cenário e fold.
-
-```{r funcao-painel}
-selecionar_painel <- function(
-  ranking,
-  n_marcadores
-) {
-
-  stopifnot(
-    nrow(ranking) >= n_marcadores,
-    !anyDuplicated(ranking$marcador)
-  )
-
-  ranking$marcador[
-    seq_len(n_marcadores)
-  ]
-}
-```
-
-Após a seleção, o GBLUP é reajustado do início utilizando apenas os marcadores
-do painel. A matriz de relacionamento genômico é, portanto, reconstruída para
-cada nível de `p`.
-
-# 12. Fluxo completo por cenário e fold
-
-A unidade conceitual da análise é
-
-$$
-\text{cenário}
-\times
-\text{fold}.
-$$
-
-Dentro de cada unidade, o fluxo é:
-
-1. ajustar o GBLUP com os 4.010 SNPs;
-2. obter o ranking de importância usando somente o treinamento;
-3. avaliar o modelo completo no fold de teste;
-4. selecionar os 2.005 marcadores mais importantes;
-5. reconstruir a matriz genômica e reajustar o GBLUP;
-6. repetir para 1.003, 401, 201 e 40 marcadores;
-7. calcular as métricas em cada painel;
-8. calcular as perdas de desempenho em relação ao painel completo.
-
-```{r pseudocodigo-gblup, eval=FALSE}
-for (cenario in colnames(dados$fenotipo)) {
-
-  y <- dados$fenotipo[, cenario]
-  g <- dados$valor_genetico[, cenario]
-
-  for (k in seq_along(dados$folds)) {
-
-    treino <- dados$folds[[k]]$treino
-    teste <- dados$folds[[k]]$teste
-
-    X <- dados$genotipo
-
-    ajuste_completo <- ajustar_gblup(
-      X = X,
-      y = y,
-      treino = treino,
-      teste = teste
-    )
-
-    # ranking <- obter_importancia_gblup(...)
-    # ranking <- ordenar_importancia(...)
-
-    for (p_q in dados$niveis_p$n_marcadores) {
-
-      # selecionar painel aninhado
-      # reconstruir G
-      # reajustar GBLUP
-      # predizer os 200 indivíduos de teste
-      # calcular métricas
-      # armazenar resultados
-    }
-  }
-}
-```
-
-O pseudocódigo explicita a lógica do módulo sem executar novamente a análise
-completa durante a construção da página.
-
-# 13. Estrutura do resultado oficial
-
-Os checkpoints computacionais são armazenados em `.local/`, enquanto o produto
-científico consolidado do módulo é versionável e armazenado em:
-
-```text
-output/gblup/module02_gblup_results.rds
-```
-
-O contrato oficial utilizado no projeto é:
-
-```{r estrutura-saida, eval=FALSE}
-module02_gblup_results <- list(
-  versao = "M02-p-v1",
-  fase = "reducao_p_com_n_1000",
-  metodo = "GBLUP",
-  dimensoes = list(
-    cenarios = 6L,
-    folds = 5L,
-    metodos = 1L,
-    niveis_p = 6L,
-    resultados = 180L
-  ),
-  protocolo = list(
-    modelo = "GBLUP aditivo",
-    pacote = "sommer",
-    matriz_relacionamento = "sommer::A.mat",
-    ajuste = "sommer::mmes",
-    nIters = 20L,
-    fenotipo_teste_no_ajuste = FALSE,
-    genotipos_teste_disponiveis = TRUE,
-    matriz_G_transdutiva = TRUE,
-    importancia_gblup =
-      "beta_SNP^2 via pseudoinversa de Moore-Penrose",
-    paineis_aninhados = TRUE,
-    valor_genetico_somente_avaliacao = TRUE,
-    metrica_principal = "r_true_g",
-    delta_r = "r_100 - r_q",
-    delta_rmse = "RMSE_q - RMSE_100"
-  ),
-  resultados = resultados,
-  resumo = resumo
-)
-```
-
-A tabela `resultados` possui uma linha por
-
-$$
-\text{cenário}
-\times
-\text{fold}
-\times
-\text{nível de }p.
-$$
-
-Logo,
-
-$$
-6
-\times
-5
-\times
-6
-=
-180
-$$
-
-resultados individuais são armazenados, além de 36 combinações resumidas de
-cenário × nível de `p`.
-
-# 14. Resultados
-
-A execução foi concluída para os seis cenários, cinco folds e seis níveis de
-`p`, totalizando 180 resultados individuais do GBLUP. A tabela abaixo resume os
-níveis de 100%, 10% e 1% dos marcadores, que representam o painel completo, uma
-redução intermediária forte e a redução mais extrema.
-
-```{r resultados-gblup-principais}
-resultados_gblup_principais <- data.frame(
-  cenario = rep(
-    paste0(
-      "C",
-      1:6
-    ),
-    each = 3L
-  ),
-  percentual_p = rep(
-    c(
-      100L,
-      10L,
-      1L
-    ),
-    times = 6L
-  ),
-  p = rep(
-    c(
-      4010L,
-      401L,
-      40L
-    ),
-    times = 6L
-  ),
-  media_r = c(
-    0.6364, 0.6540, 0.6068,
-    0.7480, 0.7364, 0.4721,
-    0.8056, 0.7767, 0.6165,
-    0.8506, 0.8184, 0.6319,
-    0.8577, 0.8227, 0.6003,
-    0.8930, 0.8402, 0.5784
-  ),
-  media_delta_r = c(
-    0.0000, -0.0176, 0.0296,
-    0.0000,  0.0116, 0.2759,
-    0.0000,  0.0290, 0.1891,
-    0.0000,  0.0322, 0.2187,
-    0.0000,  0.0350, 0.2574,
-    0.0000,  0.0528, 0.3146
-  )
-)
-
-knitr::kable(
-  resultados_gblup_principais,
-  digits = 4,
-  caption = paste(
-    "Desempenho médio do GBLUP com 100%, 10% e 1%",
-    "dos marcadores"
-  ),
-  row.names = FALSE
-)
-```
-
-Com o painel completo, a correlação média aumenta de 0,6364 em C1 para 0,8930
-em C6. Em C1, a redução para 10% dos marcadores não prejudica o desempenho e a
-correlação aumenta para 0,6540. Nos cenários mais poligênicos, a sensibilidade à
-redução é progressivamente maior.
-
-A redução extrema para 1% dos marcadores produz perdas mais acentuadas. Em C6,
-por exemplo,
-
-$$
-r_{100\%}=0{,}8930
-$$
-
-e
-
-$$
-r_{1\%}=0{,}5784,
-$$
-
-correspondendo a
-
-$$
-\Delta r=0{,}3146.
-$$
-
-A comparação com os cinco métodos de aprendizado de máquina é apresentada em
-`04_comparacao_robustez.Rmd`.
-
-# 15. Interpretação
-
-Os resultados mostram que a robustez do GBLUP à redução do número de marcadores
-depende da arquitetura genética.
-
-Em C1, cenário com poucos QTL, a redução moderada do painel pode preservar ou
-até aumentar a correlação, indicando que a remoção de marcadores pouco
-informativos não necessariamente reduz a capacidade preditiva.
-
-À medida que a arquitetura se torna mais poligênica, a densidade de marcadores
-passa a ser mais importante. Esse padrão é particularmente evidente em C5 e
-C6, nos quais a redução extrema para 40 SNPs produz perdas substanciais de
-correlação.
-
-Portanto, para o GBLUP, devem ser consideradas conjuntamente:
-
-1. a capacidade preditiva absoluta com o painel completo;
-2. a perda de desempenho ao longo da redução de `p`;
-3. a arquitetura genética do cenário.
-
-As conclusões deste módulo são baseadas nas médias dos cinco folds e integram a
-comparação global apresentada em `04_comparacao_robustez.Rmd`.
+Essas duas diferenças possuem sinais interpretados em sentidos distintos
+porque correlação maior é desejável, enquanto RMSE menor é desejável.
+
+# 11. O que aprendemos neste módulo?
+
+O GBLUP desta análise pode ser resumido em cinco etapas:
+
+1. construir a matriz de relacionamento genômico com os indivíduos já
+   genotipados;
+2. ocultar os fenótipos dos indivíduos de teste;
+3. predizer seus valores genéticos pelo modelo aditivo;
+4. recuperar efeitos dos SNPs por Moore--Penrose para criar um ranking de
+   importância;
+5. reconstruir a matriz genômica e reajustar o modelo em painéis
+   progressivamente menores.
+
+O protocolo científico permanece `M02-p-v1`. A conversão desta página para
+formato tutorial altera somente a forma de apresentar e explicar o procedimento;
+os resultados oficiais continuam sendo lidos diretamente de
+`output/gblup/module02_gblup_results.rds`.
+
+A próxima página aplica o mesmo desenho de redução de `p` aos cinco métodos de
+aprendizado de máquina.
+
+---
+
+[← Página anterior: Dados e desenho](01_dados_desenho.html)
+|
+[Próxima página: Aprendizado de máquina →](03_aprendizado_maquina.html)
